@@ -77,7 +77,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="wireframe.jpg" width=600>
 
 ## Schema
 [This section will be completed in Unit 9]
