@@ -93,6 +93,27 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
    | groceryList   | List<GroceryItem> | List of grocery Objects to buy |
    
    
+   #### Grocery List
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | item      | int   | foreign key to grocery item |
+   | userID            | Int      | used to identify user who created the list |
+   | listID            | Int      | primary key for list |
+   | itemCount | Int | number of items on the list |
+   | createdAt   | Date | date the list was created |
+   
+   
+   #### Grocery Item
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | barcode      | Barcode   | Barcode object, primary key |
+   | barcodeType    | BarcodeFormat   | specific type of barcode |
+   | quantity            | Int      | how many servings of the object left |
+   | dateAdded        | Date     | date the item was added to the list |
+   
+   
 ### Networking
 - [Add list of network requests by screen]
 - [Create basic snippets for each Parse network request]
@@ -102,10 +123,6 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 https://github.com/zxing/zxing
 
-https://developers.google.com/ml-kit/vision/barcode-scanning/android - Google's ML library for scanning barcodes
+https://developers.google.com/ml-kit/vision/barcode-scanning/android
 
-https://barcodeapi.org/index.html#auto - Barcode Generator
-
-https://www.barcodespider.com/ - Barcode Lookup API
-
-https://jsoup.org/ - Java web scraping library
+https://barcodeapi.org/index.html#auto
