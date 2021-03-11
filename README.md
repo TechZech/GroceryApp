@@ -116,8 +116,23 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
    
    
 ### Networking
-- [Add list of network requests by screen]
-- [Create basic snippets for each Parse network request]
+* Registration Screen
+	* (Create) Create a new account
+
+* Login Screen
+	* (Read/GET) Query all user information 
+
+* Inventory Screen
+	* (Read/GET) Query inventory list of a user
+	* (Update) Update Grocery Items within inventory
+ 
+* Grocery List Screen
+	* (Read/GET) Query Grocery list of a user
+	* (Update) Update Grocery Items within Grocery List
+
+* Profile Screen 
+	* (Read/GET) Query logged in user object
+	* (Update/PUT) Update user profile image
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 
 ### Important Links
