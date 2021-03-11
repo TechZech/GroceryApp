@@ -80,9 +80,19 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 <img src="wireframe.jpg" width=600>
 
 ## Schema
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### User
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | username      | String   | username for login |
+   | password      | String   | password for login |
+   | iD            | Int      | Primary key for user |
+   | dateOB        | Date     | Birthday date |
+   | inventoryList | List<GroceryItem> | List of grocery Objects for inventory |
+   | groceryList   | List<GroceryItem> | List of grocery Objects to buy |
+   
+   
 ### Networking
 - [Add list of network requests by screen]
 - [Create basic snippets for each Parse network request]
