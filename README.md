@@ -123,6 +123,10 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 https://github.com/zxing/zxing
 
-https://developers.google.com/ml-kit/vision/barcode-scanning/android
+https://developers.google.com/ml-kit/vision/barcode-scanning/android - Google's ML library for scanning barcodes
 
-https://barcodeapi.org/index.html#auto
+https://barcodeapi.org/index.html#auto - Barcode Generator
+
+https://www.barcodespider.com/ - Barcode Lookup API
+
+https://jsoup.org/ - Java web scraping library
