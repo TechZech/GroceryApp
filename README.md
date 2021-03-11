@@ -105,3 +105,5 @@ https://github.com/zxing/zxing
 https://developers.google.com/ml-kit/vision/barcode-scanning/android
 
 https://barcodeapi.org/index.html#auto
+
+https://www.barcodespider.com/
