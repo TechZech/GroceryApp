@@ -89,6 +89,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
    | password      | String   | password for login |
    | iD            | Int      | Primary key for user |
    | dateOB        | Date     | Birthday date |
+   | pic       | Image     | Profile Picture |
    | inventoryList | List<GroceryItem> | List of grocery Objects for inventory |
    | groceryList   | List<GroceryItem> | List of grocery Objects to buy |
    
