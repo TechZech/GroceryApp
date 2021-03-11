@@ -110,7 +110,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
    | ------------- | -------- | ------------|
    | barcode      | Barcode   | Barcode object, primary key |
    | barcodeType    | BarcodeFormat   | specific type of barcode |
-   | quantity            | Int      | how many servings of the object left |
+   | quantity            | Int      | how many servings of the item left |
    | dateAdded        | Date     | date the item was added to the list |
    
    
