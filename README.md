@@ -146,3 +146,7 @@ https://barcodeapi.org/index.html#auto - Barcode Generator
 https://www.barcodespider.com/ - Barcode Lookup API
 
 https://jsoup.org/ - Java web scraping library
+
+https://www.youtube.com/watch?v=wfucGSKngq4 - Barcode Scanner Implementation
+
+https://www.youtube.com/watch?v=B4JVqKHsYzk&t=129s - How to get webcam used as Camera on Emulator
