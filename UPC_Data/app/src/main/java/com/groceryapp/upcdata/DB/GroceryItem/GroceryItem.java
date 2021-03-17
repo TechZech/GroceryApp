@@ -1,6 +1,6 @@
 package com.groceryapp.upcdata.DB.GroceryItem;
 
-public class GroceryList {
+public class GroceryItem {
     public int getId() {
         return id;
     }
@@ -28,7 +28,7 @@ public class GroceryList {
     private int id;
         private String title;
         private String upc;
-    public GroceryList(){
+    public GroceryItem(){
 
     }
 
@@ -41,7 +41,7 @@ public class GroceryList {
                 '}';
     }
 
-    public GroceryList(int id, String title, String upc) {
+    public GroceryItem(int id, String title, String upc) {
             this.id = id;
             this.title = title;
             this.upc = upc;
