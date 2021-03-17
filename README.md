@@ -1,5 +1,4 @@
-Original App Design Project - README Template
-===
+![Grocery App](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/glistappicon.png?raw=true)
 
 # Grocery List Tracker
 
