@@ -14,6 +14,11 @@ import com.groceryapp.upcdata.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    List<AuthUI.IdpConfig> providers  = Arrays.asList(
+            new AuthUI.IdpConfig.EmailBuilder().build()
+    );
+    private Firebase Auth mAuth;
+
     public static final String TAG = "LoginActivity";
 
     protected EditText etUsername;
@@ -26,7 +31,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     //    setContentView(findViewById(R.id.));
 
-        // if (current Firebase user != null) { goMainActivity(); }
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) { goMainActivity(); }
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
