@@ -1,5 +1,4 @@
-Original App Design Project - README Template
-===
+![Logo](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/glistappicon.png?raw=true)
 
 # Grocery List Tracker
 
@@ -76,8 +75,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
     * Click on a food item to learn more. Ex: bought date, initial size, how often bought
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="wireframe.jpg" width=600>
+![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
 
 ## Schema
 ### Models
