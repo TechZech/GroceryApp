@@ -26,17 +26,17 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 **Required Must-have Stories**
 
-* Barcode scanner
-* Current inventory
-* List of groceries you need to buy
+* [X] Barcode scanner
+* [ ] Current inventory
+* [ ] List of groceries you need to buy
 
 **Optional Nice-to-have Stories**
 
-* Grocery budget
-* Healthy foods tracker
-* Profile
-* Weigh food - package already has weight printed on it
-* Social media aspect?
+* [ ] Grocery budget
+* [ ] Healthy foods tracker
+* [ ] Profile
+* [ ] Weigh food - package already has weight printed on it
+* [ ] Social media aspect?
     * 
 
 ### 2. Screen Archetypes
