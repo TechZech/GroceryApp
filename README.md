@@ -135,7 +135,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 
 ### Gif Walkthrough Week 10
-<img src='walkthroughweek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Important Links
 
