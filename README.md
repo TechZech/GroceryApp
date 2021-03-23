@@ -133,6 +133,10 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 	* (Update/PUT) Update user profile image
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 
+
+###Gif Walkthrough Week 10
+<img src='walkthroughweek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ### Important Links
 
 https://github.com/zxing/zxing
