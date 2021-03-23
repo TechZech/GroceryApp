@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSignUp"
         android:layout_width="198dp"
         android:layout_height="44dp"
         android:layout_alignParentTop="true"
@@ -52,7 +52,7 @@
         android:layout_marginTop="422dp"
         android:layout_marginEnd="115dp"
         android:background="#FFFFFF"
-        android:text="LOG IN"
+        android:text="CREATE ACCOUNT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,12 +86,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvRegister"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="185dp"
-        android:text="Click Here to Create an Account"
+        android:text="Click Here to Login"
         android:clickable="true"/>
 </RelativeLayout>

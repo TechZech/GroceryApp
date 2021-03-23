@@ -2,6 +2,7 @@ package com.groceryapp.upcdata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -10,9 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.groceryapp.upcdata.LoginStuff.LoginActivity;
+
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button btnLogOut;
 
     EditText editTextName;
     Button btnClickHere;
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         wb.loadUrl("file:///android_asset/index.html");
         editTextName = (EditText) findViewById(R.id.upcData);
         btnClickHere = (Button) findViewById(R.id.sub);
+        btnLogOut = findViewById(R.id.btnLogOut);
         textName = (TextView) findViewById(R.id.retData);
         btnClickHere.setVisibility(View.INVISIBLE);
         btnClickHere.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +50,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogOut();
+            }
+        });
+    }
+
+    public void LogOut(){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 }
