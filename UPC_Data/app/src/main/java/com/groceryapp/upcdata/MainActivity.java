@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
         editTextName = (EditText) findViewById(R.id.upcData);
         btnClickHere = (Button) findViewById(R.id.sub);
         btnLogOut = findViewById(R.id.btnLogOut);
-        textName = (TextView) findViewById(R.id.retData);
-        btnClickHere.setVisibility(View.INVISIBLE);
+       // textName = (TextView) findViewById(R.id.retData);
+        //btnClickHere.setVisibility(View.INVISIBLE);
         btnClickHere.setOnClickListener(new View.OnClickListener() {
 
             @Override

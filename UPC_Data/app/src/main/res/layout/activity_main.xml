@@ -15,7 +15,7 @@
         android:layout_below="@+id/sub"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="97dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Enter a UPC Code"
         android:inputType="textPersonName"
@@ -29,50 +29,42 @@
         android:layout_below="@+id/webview"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="30dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcData" />
 
-    <TextView
-        android:id="@+id/retData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="153dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <WebView
         android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="407dp"
+        android:layout_height="307dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="0dp"></WebView>
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="0dp">
+
+        <FrameLayout
+            android:id="@+id/flContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_x="-1dp"
+            android:layout_y="1dp" />
+    </WebView>
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="57dp"
+        android:layout_below="@+id/upcData"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="155dp"
         android:text="Log Out" />
-
-    <FrameLayout
-        android:id="@+id/flContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation"
-        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
