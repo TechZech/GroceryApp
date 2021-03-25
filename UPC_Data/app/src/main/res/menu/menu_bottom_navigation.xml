@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_scanner"
-        android:icon="@android:drawable/ic_menu_camera"
+        android:icon="@drawable/instagram_camera_icon"
         android:title="Barcode Scanner"
         app:showAsAction="always" />
     <item
