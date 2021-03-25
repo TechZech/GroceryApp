@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_scanner"
-        android:icon="@drawable/instagram_camera_icon"
+        android:icon="@drawable/camera"
         android:title="Barcode Scanner"
         app:showAsAction="always" />
     <item
@@ -14,12 +14,12 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/action_inventory"
-        android:icon="@drawable/instagram_home_outline_24"
+        android:icon="@drawable/inventory"
         android:title="Inventory"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/instagram_user_outline_24"
+        android:icon="@drawable/settings"
         android:title="Settings"
         app:showAsAction="always" />
 </menu>
