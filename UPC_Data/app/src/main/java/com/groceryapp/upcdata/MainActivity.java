@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.fragments.BarcodeFragment;
 import com.groceryapp.upcdata.fragments.GroceryListFragment;
@@ -37,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
     Button btnClickHere;
     TextView textName;
     Scraper myScrap = new Scraper();
+    DBHelper mydb = new DBHelper(this);
+    User test = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mydb.addOne(test);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
