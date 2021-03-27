@@ -9,7 +9,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/action_groceryList"
-        android:icon="?android:attr/actionModeFindDrawable"
+        android:icon="@drawable/shoppingcart"
         android:title="Grocery List"
         app:showAsAction="always" />
     <item
