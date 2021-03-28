@@ -28,7 +28,7 @@ public class Scraper {
     String getCode() {
         return upcCode;
     }
-    String getUPCData(String query) throws IOException {
+    public String getUPCData(String query) throws IOException {
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
         //log(doc.html());
 
@@ -40,7 +40,7 @@ public class Scraper {
         return itemTitle.html();
 
     }
-    String getUPCDatatest() throws IOException{
+    public String getUPCDatatest() throws IOException{
         Document doc = Jsoup.connect("https://www.upc-search.org/?q=016000124790").get();
         Elements itemTitle = doc.select("div#head");
         System.out.println(doc.html());

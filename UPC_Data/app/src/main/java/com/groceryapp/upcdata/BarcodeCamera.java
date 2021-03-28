@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.groceryapp.upcdata.R;
 
 public class BarcodeCamera extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,7 +20,7 @@ public class BarcodeCamera extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_barcode_camera);
+        setContentView(R.layout.fragment_barcode_camera);
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
     }

@@ -29,22 +29,14 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogOut;
+
 
     // BOTTOM NAVIGATION:
     private BottomNavigationView bottomNavigationView;
 
-    EditText editTextName;
-    Button btnClickHere;
-    TextView textName;
-    Scraper myScrap = new Scraper();
-    DBHelper mydb = new DBHelper(this);
-    User test = new User();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mydb.addOne(test);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -88,38 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
         // END OF BOTTOM NAVIGATION SECTION
 
-        WebView wb = (WebView) findViewById(R.id.webview);
-        wb.loadUrl("file:///android_asset/index.html");
-        editTextName = (EditText) findViewById(R.id.upcData);
-        btnClickHere = (Button) findViewById(R.id.sub);
-        btnLogOut = findViewById(R.id.btnLogOut);
-       // textName = (TextView) findViewById(R.id.retData);
-        //btnClickHere.setVisibility(View.INVISIBLE);
-        btnClickHere.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                String upccode = editTextName.getText().toString();
-            //    textName.setText(name);
-                try {
-                    textName.setText(myScrap.getUPCData(upccode));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogOut();
-            }
-        });
-    }
-
-    public void LogOut(){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        finish();
     }
 }
