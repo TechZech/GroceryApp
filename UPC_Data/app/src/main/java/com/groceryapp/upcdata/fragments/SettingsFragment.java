@@ -4,36 +4,49 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.FitCenter;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthCredential;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 
+
 public class SettingsFragment extends Fragment {
+
+    public static final String TAG = "SettingsFragment";
 
     Activity context;
     Button btnLogOut;
-    ImageView ivProfile;
     TextView tvEmail;
+    TextView tvDisplayName;
+    Button btnSettings1;
+    Button btnSettings2;
+    Button btnSettings3;
+
+    private ImageView ivProfile;
+    private ImageView ivEditProfile;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String email = user.getEmail();
-    Uri photoUrl = user.getPhotoUrl();
+    Uri userphotoUrl = user.getPhotoUrl();
 
 
         @Nullable
@@ -47,9 +60,22 @@ public class SettingsFragment extends Fragment {
             super.onViewCreated(view, savedInstanceState);
             btnLogOut = view.findViewById(R.id.btnLogOut);
             ivProfile = view.findViewById(R.id.ivProfile);
+            ivEditProfile = view.findViewById(R.id.ivEditProfile);
             tvEmail = view.findViewById(R.id.tvEmail);
+            tvDisplayName = view.findViewById(R.id.tvDisplayName);
+            btnSettings1 = view.findViewById(R.id.btnSettings1);
+            btnSettings2 = view.findViewById(R.id.btnSettings2);
+            btnSettings3 = view.findViewById(R.id.btnSettings3);
 
             tvEmail.setText(email);
+
+            ivEditProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(openGalleryIntent, 1000);
+                }
+            });
 
             btnLogOut.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,16 +85,44 @@ public class SettingsFragment extends Fragment {
             });
 
             Glide.with(this)
-                    .load(photoUrl)
+                    .load(userphotoUrl)
                     .placeholder(R.drawable.download)
-                    .transform(new FitCenter(), new RoundedCorners(25))
                     .into(ivProfile);
-
         }
 
     public void LogOut(){
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(context.getApplicationContext(), LoginActivity.class));
         context.finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000){
+            if (resultCode == Activity.RESULT_OK){
+                Uri imageUri = data.getData();
+                ivProfile.setImageURI(imageUri);
+
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setPhotoUri(imageUri)
+                        .build();
+
+                user.updateProfile(profileUpdates)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Log.d(TAG, "User Profile Updated");
+                                }
+                            }
+                        });
+
+                userphotoUrl = imageUri;
+                Glide.with(this)
+                        .load(userphotoUrl)
+                        .into(ivProfile);
+            }
+        }
     }
 }

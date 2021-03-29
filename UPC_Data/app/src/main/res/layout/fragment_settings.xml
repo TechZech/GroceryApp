@@ -7,12 +7,13 @@
     android:layout_height="600dp">
 
     <RelativeLayout
+        android:id="@+id/rlUpper"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_weight="1"
-        android:background="#306600" >
+        android:background="#306600">
 
         <ImageView
             android:id="@+id/ivEditProfile"
@@ -30,10 +31,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="82dp"
             android:layout_marginBottom="50dp"
-            android:textColor="@color/white"
-            android:text="Display Name"
             android:gravity="center"
-            android:textSize="24sp"/>
+            android:text="Display Name"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvEmail"
@@ -47,13 +48,13 @@
             android:textSize="14sp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="125dp"
-        android:layout_height="113dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        tools:srcCompat="@tools:sample/avatars" />
+            android:id="@+id/ivProfile"
+            android:layout_width="125dp"
+            android:layout_height="113dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </RelativeLayout>
 
@@ -66,4 +67,48 @@
         android:layout_marginBottom="60dp"
         android:backgroundTint="#306600"
         android:text="Log Out" />
+
+    <Button
+        android:id="@+id/btnSettings1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/rlUpper"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginEnd="0dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/instagram_user_outline_24"
+        android:text="Edit Profile"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnSettings2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/btnSettings1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-9dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/instagram_home_outline_24"
+        android:text="Some other setting"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btnSettings3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/btnSettings2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-9dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/instagram_user_outline_24"
+        android:text="another setting "
+        android:textColor="@color/black"/>
+
+
+
 </RelativeLayout>

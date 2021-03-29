@@ -36,6 +36,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation fileTree(dir: 'S:\\Programming\\UPC_Data\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation files('libs\\jsoup-1.13.1.jar')
+    implementation 'com.google.firebase:firebase-firestore:22.1.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

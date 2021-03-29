@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="GroceryAppGreen">#306600</color>
     <color name="GroceryAppGreen_DARK">#214700</color>
+    <color name="light_gray">#D3D3D3</color>
 </resources>
