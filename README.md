@@ -35,7 +35,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 * [ ] Grocery budget
 * [ ] Healthy foods tracker
-* [ ] Profile
+* [X] Profile
 * [ ] Weigh food - package already has weight printed on it
 * [ ] Social media aspect?
     * 
@@ -140,6 +140,9 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 ### Gif Walkthrough Week 11
 <img src='walkthroughWeek11.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Gif Walkthrough Week 12
+<img src='walkthroughWeek12.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Important Links
 
