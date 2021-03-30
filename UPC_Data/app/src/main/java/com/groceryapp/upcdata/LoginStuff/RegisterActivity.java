@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     protected EditText etEmail;
     private EditText etPassword;
+    private EditText etUsername;
     private Button btnSignUp;
     private TextView tvLogin;
     private FirebaseAuth mAuth;
@@ -44,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
+        etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
@@ -55,15 +58,20 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
+                String username = etUsername.getText().toString();
 
                 if (email.isEmpty()){
-                    etEmail.setError("Email is Required.");
+                    etEmail.setError("Email is Required");
                     return;
                 }
                 if (password.isEmpty()){
-                    etPassword.setError("Password is required");
+                    etPassword.setError("Password is Required");
                     return;
                 }
+                if (username.isEmpty()){
+                    etUsername.setError("Username is Required");
+                }
+
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -71,6 +79,21 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username)
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                Log.d(TAG, "User Profile Updated");
+                                            }
+                                        }
+                                    });
+
                             goMainActivity();
                         }
                         else {

@@ -33,7 +33,7 @@ public class SettingsFragment extends Fragment {
 
     public static final String TAG = "SettingsFragment";
 
-    Activity context;
+    Activity context = getActivity();
     Button btnLogOut;
     TextView tvEmail;
     TextView tvDisplayName;
@@ -47,6 +47,7 @@ public class SettingsFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String email = user.getEmail();
     Uri userphotoUrl = user.getPhotoUrl();
+    String Username = user.getDisplayName();
 
 
         @Nullable
@@ -68,6 +69,7 @@ public class SettingsFragment extends Fragment {
             btnSettings3 = view.findViewById(R.id.btnSettings3);
 
             tvEmail.setText(email);
+            tvDisplayName.setText(Username);
 
             ivEditProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,16 +86,25 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
+            btnSettings1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
             Glide.with(this)
                     .load(userphotoUrl)
                     .placeholder(R.drawable.download)
                     .into(ivProfile);
+
+
         }
 
     public void LogOut(){
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(context.getApplicationContext(), LoginActivity.class));
-        context.finish();
+        startActivity(new Intent(getContext(), LoginActivity.class));
+        getActivity().finish();
     }
 
     @Override

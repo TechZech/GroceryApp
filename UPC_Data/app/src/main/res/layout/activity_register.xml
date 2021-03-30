@@ -18,11 +18,25 @@
         android:layout_marginBottom="453dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="327dp" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="266dp"
+        android:layout_height="82dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="372dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -33,7 +47,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="86dp"
-        android:layout_marginBottom="371dp"
+        android:layout_marginBottom="289dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -50,8 +64,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="122dp"
-        android:layout_marginBottom="285dp"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="200dp"
         android:text="CREATE ACCOUNT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -92,7 +105,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="129dp"
-        android:layout_marginBottom="245dp"
+        android:layout_marginBottom="175dp"
         android:clickable="true"
         android:text="Click Here to Login" />
 </RelativeLayout>
