@@ -41,6 +41,52 @@ public class BarcodeFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        scanBtn = view.findViewById(R.id.scanBtn);
+        scanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scanCode();
+            }
+        });
+    }
 
+    private void scanCode() {
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setCaptureActivity(CaptureAct.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        integrator.setPrompt("Scanning Code");
+        integrator.initiateScan();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null){
+            if(result.getContents() != null){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(result.getContents());
+                builder.setTitle("Scanning Result");
+                builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        scanCode();
+                    }
+                }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // CONNECT BARCODE SCANNER WITH SCRAPPER HERE
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else{
+                Toast.makeText(getContext(), "No Results Found", Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
