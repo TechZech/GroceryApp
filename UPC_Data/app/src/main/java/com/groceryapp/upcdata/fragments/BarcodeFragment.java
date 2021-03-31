@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,10 @@ import java.io.IOException;
 public class BarcodeFragment extends Fragment{
 
     Button scanBtn;
+    private String TAG = "BarcodeFragment";
+    int requestCode = 3;
+
+    // DO NOT TOUCH THE COMMENTED OUT CRAP. WILL FIX
 
     @Nullable
     @Override
@@ -52,19 +57,24 @@ public class BarcodeFragment extends Fragment{
 
     private void scanCode() {
         IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        //Intent intent = new Intent();
         integrator.setCaptureActivity(CaptureAct.class);
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scanning Code");
         integrator.initiateScan();
+        // startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
+        //super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        //Log.i(TAG, "OnActivityResult");
         if(result != null){
             if(result.getContents() != null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                //Log.i(TAG, "OnActivityResult");
                 builder.setMessage(result.getContents());
                 builder.setTitle("Scanning Result");
                 builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
