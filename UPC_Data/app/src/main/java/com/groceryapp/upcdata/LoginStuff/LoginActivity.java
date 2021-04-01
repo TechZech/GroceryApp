@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "User Logged In Successfully", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
-
+        //Here is where the recycler view should get populated with sqllite data
                     goMainActivity();
                 }
                 else {
