@@ -37,6 +37,7 @@ public class BarcodeCamera extends AppCompatActivity implements View.OnClickList
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scanning Code");
         integrator.initiateScan();
+        Intent intent = integrator.createScanIntent();
     }
 
     @Override
