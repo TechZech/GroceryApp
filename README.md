@@ -144,6 +144,9 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 ### Gif Walkthrough Week 12
 <img src='walkthroughWeek12.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+### Gif Walkthrough Week 13
+<img src='walkthroughWeek13.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ### Important Links
 
 https://github.com/zxing/zxing
