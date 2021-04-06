@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.groceryapp.upcdata.CaptureAct;
+import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 
 import androidx.appcompat.app.AlertDialog;
@@ -33,9 +34,7 @@ public class BarcodeFragment extends Fragment{
 
     Button scanBtn;
     private String TAG = "BarcodeFragment";
-    int requestCode = 3;
-
-    // DO NOT TOUCH THE COMMENTED OUT CRAP. WILL FIX
+    int reqCode = 3;
 
     @Nullable
     @Override
@@ -56,25 +55,23 @@ public class BarcodeFragment extends Fragment{
     }
 
     private void scanCode() {
-        IntentIntegrator integrator = new IntentIntegrator(getActivity());
-        //Intent intent = new Intent();
+        //IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        IntentIntegrator integrator = IntentIntegrator.forSupportFragment(BarcodeFragment.this);
         integrator.setCaptureActivity(CaptureAct.class);
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scanning Code");
         integrator.initiateScan();
-        // startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent intent = new Intent(this.getContext(), MainActivity.class);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        //Log.i(TAG, "OnActivityResult");
         if(result != null){
             if(result.getContents() != null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                //Log.i(TAG, "OnActivityResult");
                 builder.setMessage(result.getContents());
                 builder.setTitle("Scanning Result");
                 builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
@@ -85,7 +82,11 @@ public class BarcodeFragment extends Fragment{
                 }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // CONNECT BARCODE SCANNER WITH SCRAPPER HERE
+
+                        // TODO: CONNECT BARCODE SCANNER WITH SCRAPPER HERE
+                        // Note: to access the barcode number, use result.getContents()
+
+                        startActivityForResult(intent, reqCode);
                     }
                 });
                 AlertDialog dialog = builder.create();
