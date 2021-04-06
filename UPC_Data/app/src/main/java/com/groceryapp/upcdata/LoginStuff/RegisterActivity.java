@@ -2,16 +2,13 @@ package com.groceryapp.upcdata.LoginStuff;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
-
-
-import android.os.Bundle;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -77,9 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+
                             Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-
+                            DBHelper s = new DBHelper(RegisterActivity.this);
+                            User nUser = new User(user.getUid());
+                            s.createUser(nUser);
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username)
                                     .build();

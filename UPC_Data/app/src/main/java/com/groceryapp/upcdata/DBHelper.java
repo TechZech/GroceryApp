@@ -19,15 +19,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + USER_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_NAME + " TEXT  )";
-        db.execSQL(createTableStatement);
+
+        String createUserTable = "CREATE TABLE " + USER_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_NAME + " TEXT, " + " FOREIGN KEY(grocerylist) REFERENCES grocerylist(listid) )";
+        db.execSQL(createUserTable);
     }
     //this is called if the database version number changes. It prevents users apps from breaking when you change the database schema
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public void addOne(User user){
+    public void createGroceryListTable(SQLiteDatabase db, String USER_ID){
+        String createGroceryListTable = "CREATE TABLE " + USER_ID + " TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, ";
+        db.execSQL(createGroceryListTable);
+    }
+    public void createUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USER_NAME, user.getName());

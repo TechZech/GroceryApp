@@ -36,10 +36,10 @@ public class InventoryFragment extends Fragment {
         Button btnClickHere;
         TextView textName;
         Scraper myScrap = new Scraper();
-        DBHelper mydb = new DBHelper(getActivity());
-        User test = new User();
+     //   DBHelper mydb = new DBHelper(getActivity());
+       // User test = new User();
 
-        mydb.addOne(test);
+//        mydb.addOne(test);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
