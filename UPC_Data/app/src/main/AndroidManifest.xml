@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/glistappicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/glistappicon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UPC_Data">
         <activity android:name=".LoginStuff.RegisterActivity"></activity>
