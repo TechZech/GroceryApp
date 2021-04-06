@@ -38,7 +38,6 @@ public class BarcodeFragment extends Fragment{
 
     Button scanBtn;
     private String TAG = "BarcodeFragment";
-    int reqCode = 3;
 
     @Nullable
     @Override
@@ -59,7 +58,6 @@ public class BarcodeFragment extends Fragment{
     }
 
     private void scanCode() {
-        //IntentIntegrator integrator = new IntentIntegrator(getActivity());
         IntentIntegrator integrator = IntentIntegrator.forSupportFragment(BarcodeFragment.this);
         integrator.setCaptureActivity(CaptureAct.class);
         integrator.setOrientationLocked(false);
