@@ -17,6 +17,8 @@ import com.groceryapp.upcdata.R;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +29,8 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.groceryapp.upcdata.Scraper;
+import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.io.IOException;
 
@@ -67,7 +71,6 @@ public class BarcodeFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents() != null){
@@ -82,11 +85,22 @@ public class BarcodeFragment extends Fragment{
                 }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Scraper scraper = new Scraper();
+                        try {
+                            scraper.getUPCData(result.getContents());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                        // TODO: CONNECT BARCODE SCANNER WITH SCRAPPER HERE
-                        // Note: to access the barcode number, use result.getContents()
+                        // TODO: GET SCRAPER ADDED TO GROCERY LIST
 
-                        startActivityForResult(intent, reqCode);
+                        // sends user back to home screen
+                        Fragment fragment = new GroceryListFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.flContainer, fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
                     }
                 });
                 AlertDialog dialog = builder.create();
