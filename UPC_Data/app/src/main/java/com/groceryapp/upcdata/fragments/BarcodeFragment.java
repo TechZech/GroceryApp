@@ -11,7 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.groceryapp.upcdata.BarcodeCamera;
 import com.groceryapp.upcdata.CaptureAct;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 
@@ -37,6 +40,8 @@ import java.io.IOException;
 public class BarcodeFragment extends Fragment{
 
     Button scanBtn;
+    DBHelper DB;
+    Scraper scrap;
     private String TAG = "BarcodeFragment";
 
     @Nullable
@@ -49,6 +54,7 @@ public class BarcodeFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         scanBtn = view.findViewById(R.id.scanBtn);
+
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +77,9 @@ public class BarcodeFragment extends Fragment{
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
+
             if(result.getContents() != null){
+                DB = new DBHelper(getContext());
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(result.getContents());
                 builder.setTitle("Scanning Result");
@@ -83,15 +91,15 @@ public class BarcodeFragment extends Fragment{
                 }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Scraper scraper = new Scraper();
+                        // TODO: GET SCRAPER ADDED TO GROCERY LIST
+                        GroceryItem groceryItem = new GroceryItem();
+                        groceryItem.setUpc(result.getContents());
                         try {
-                            scraper.getUPCData(result.getContents());
+                            groceryItem.setTitle(scrap.getUPCData(groceryItem.getUpc()));
+                            DB.insertGroceryItemData(groceryItem);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-                        // TODO: GET SCRAPER ADDED TO GROCERY LIST
-
                         // sends user back to home screen
                         Fragment fragment = new GroceryListFragment();
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

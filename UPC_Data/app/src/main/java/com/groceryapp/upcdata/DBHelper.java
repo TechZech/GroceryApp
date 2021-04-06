@@ -2,40 +2,85 @@ package com.groceryapp.upcdata;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public final String USER_TABLE = "USER_TABLE";
-    public final String COLUMN_USER_NAME = "USER_NAME";
-    public DBHelper(@Nullable Context context) {
-        super(context, "User.db", null, 1);
+    public DBHelper(Context context) {
+        super(context, "Grocerylist.db", null, 1);
     }
-
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        String createUserTable = "CREATE TABLE " + USER_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_NAME + " TEXT, " + " FOREIGN KEY(grocerylist) REFERENCES grocerylist(listid) )";
-        db.execSQL(createUserTable);
+    public void onCreate(SQLiteDatabase DB) {
+        DB.execSQL("create Table Grocerylist(name TEXT primary key, count TEXT, upc TEXT)");
     }
-    //this is called if the database version number changes. It prevents users apps from breaking when you change the database schema
+
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
+        DB.execSQL("drop Table if exists Grocerylist");
+    }
+
+    public Boolean insertGroceryItemData(GroceryItem groceryItem)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", groceryItem.getTitle());
+        contentValues.put("count", 0);
+        contentValues.put("upc", groceryItem.getUpc());
+        long result=DB.insert("Grocerylist", null, contentValues);
+        if(result==-1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
+    public Boolean updateGroceryItemdata(String name, String count, String upc) {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("count", count);
+        contentValues.put("upc", upc);
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
+        if (cursor.getCount() > 0) {
+            long result = DB.update("Userdetails", contentValues, "name=?", new String[]{name});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }}
+
+
+    public Boolean deletedata (String name)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
+        if (cursor.getCount() > 0) {
+            long result = DB.delete("Userdetails", "name=?", new String[]{name});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
 
     }
-    public void createGroceryListTable(SQLiteDatabase db, String USER_ID){
-        String createGroceryListTable = "CREATE TABLE " + USER_ID + " TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, ";
-        db.execSQL(createGroceryListTable);
-    }
-    public void createUser(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_USER_NAME, user.getName());
-        db.insert(USER_TABLE, null, cv);
+
+    public Cursor getdata ()
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from Grocerylist", null);
+        return cursor;
+
     }
 }

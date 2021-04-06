@@ -12,17 +12,23 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+
+import java.io.IOException;
 
 public class BarcodeCamera extends AppCompatActivity implements View.OnClickListener{
 
     Button scanBtn;
-
+    DBHelper DB;
+    Scraper scrap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_barcode_camera);
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
+        DB = new DBHelper(this);
+        scrap = new Scraper();
     }
 
     @Override
@@ -45,8 +51,10 @@ public class BarcodeCamera extends AppCompatActivity implements View.OnClickList
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents() != null){
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(result.getContents());
+
                 builder.setTitle("Scanning Result");
                 builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
                     @Override

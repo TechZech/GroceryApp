@@ -1,5 +1,6 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -9,13 +10,17 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
+import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.Scraper;
 
@@ -32,10 +37,36 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DBHelper DB = new DBHelper(getContext());
         EditText editTextName;
-        Button btnClickHere;
+        Button btnClickHere = view.findViewById(R.id.btnView);
         TextView textName;
         Scraper myScrap = new Scraper();
+        GroceryItem groceryItem = new GroceryItem();
+        groceryItem.setTitle("Test");
+        groceryItem.setUpc("1234");
+        DB.insertGroceryItemData(groceryItem);
+        btnClickHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor res = DB.getdata();
+                if(res.getCount()==0){
+                    Toast.makeText(getContext(), "No Entry Exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                StringBuffer buffer = new StringBuffer();
+                while(res.moveToNext()){
+                    buffer.append("Name :"+res.getString(0)+"\n");
+                    buffer.append("Count :"+res.getString(1)+"\n");
+                    buffer.append("UPC :"+res.getString(2)+"\n\n");
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(true);
+                builder.setTitle("User Entries");
+                builder.setMessage(buffer.toString());
+                builder.show();
+            }        });
      //   DBHelper mydb = new DBHelper(getActivity());
        // User test = new User();
 
@@ -49,19 +80,6 @@ public class InventoryFragment extends Fragment {
         btnClickHere = (Button) view.findViewById(R.id.sub);
          textName = (TextView) view.findViewById(R.id.retData);
         //btnClickHere.setVisibility(View.INVISIBLE);
-        btnClickHere.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String upccode = editTextName.getText().toString();
-                //    textName.setText(name);
-                try {
-                    textName.setText(myScrap.getUPCData(upccode));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
     }
 }
