@@ -13,16 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,12 +40,14 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnSignUp;
     private TextView tvLogin;
     private FirebaseAuth mAuth;
+    FirebaseFirestore firestore;
     DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -74,27 +82,18 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            DB = new DBHelper(RegisterActivity.this);
+                            //DB = new DBHelper(RegisterActivity.this);
+                            FirebaseUser FirebaseUser = mAuth.getCurrentUser();
+                            updateAuthUserName(username, FirebaseUser);
+                            User newUser = new User(FirebaseUser.getUid(), username, FirebaseUser.getEmail());
+                            createNewFirebaseUserData(newUser, FirebaseUser);
+
                             Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+
 
 
                           //  User nUser = new User(user.getUid());
                             //s.createUser(nUser);
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(username)
-                                    .build();
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Log.d(TAG, "User Profile Updated");
-                                            }
-                                        }
-                                    });
-
                             goMainActivity();
                         }
                         else {
@@ -124,5 +123,40 @@ public class RegisterActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
         finish();
+    }
+
+    private void createNewFirebaseUserData(User user, FirebaseUser FirebaseUser){
+        DocumentReference documentReference = firestore.collection("users").document(FirebaseUser.getUid());
+        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "onSuccess: user data created for " + FirebaseUser.getUid());
+            }
+        });
+        documentReference.collection("Grocery List").document("GroceryItemTest")
+                .set(new GroceryItem("testid", "testname", "testupc"));
+        documentReference.collection("Grocery List").document("GroceryItemTest2")
+                .set(new GroceryItem("test2", "test2", "test2"));
+
+        documentReference.collection("Inventory").document("GroceryItemTest")
+                .set(new GroceryItem("testid","testname","testupc"));
+
+    }
+
+    private void updateAuthUserName(String username, FirebaseUser firebaseUser){
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(username)
+                .build();
+
+        firebaseUser.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Log.d(TAG, "User Profile Updated" + "username is now " + firebaseUser.getDisplayName());
+                        }
+                    }
+                });
+        firebaseUser.reload();
     }
 }
