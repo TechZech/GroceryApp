@@ -1,0 +1,89 @@
+// DBHelper DB = new DBHelper(getContext());
+          EditText editTextName;
+          Button btnClickHere = view.findViewById(R.id.btnView);
+          TextView textName;
+          Scraper myScrap = new Scraper();
+          GroceryItem groceryItem = new GroceryItem();
+          groceryItem.setTitle("Test");
+          groceryItem.setUpc("1234");
+          DB.insertGroceryItemData(groceryItem);
+          btnClickHere.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  Cursor res = DB.getdata();
+                  if(res.getCount()==0){
+                      Toast.makeText(getContext(), "No Entry Exists", Toast.LENGTH_SHORT).show();
+                      return;
+                  }
+                  StringBuffer buffer = new StringBuffer();
+                  while(res.moveToNext()){
+                      buffer.append("Name :"+res.getString(0)+"\n");
+                      buffer.append("Count :"+res.getString(1)+"\n");
+                      buffer.append("UPC :"+res.getString(2)+"\n\n");
+                  }
+
+                  AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                  builder.setCancelable(true);
+                  builder.setTitle("User Entries");
+                  builder.setMessage(buffer.toString());
+                  builder.show();
+              }        });
+       //   DBHelper mydb = new DBHelper(getActivity());
+         // User test = new User();
+
+  //        mydb.addOne(test);
+          StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+          StrictMode.setThreadPolicy(policy);
+
+          WebView wb = (WebView) view.findViewById(R.id.webview);
+          wb.loadUrl("file:///android_asset/index.html");
+          editTextName = (EditText) view.findViewById(R.id.upcData);
+          btnClickHere = (Button) view.findViewById(R.id.sub);
+           textName = (TextView) view.findViewById(R.id.retData);
+          //btnClickHere.setVisibility(View.INVISIBLE);
+
+//xml stuff
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/upcData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sub"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Enter a UPC Code"
+        android:inputType="textPersonName"
+        />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="307dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp">
+    </WebView>
+
+    <TextView
+        android:id="@+id/retData"
+        android:layout_width="10dp"
+        android:layout_height="10dp" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="View Data"
+        android:layout_below="@id/retData"/>

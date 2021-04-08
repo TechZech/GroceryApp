@@ -4,6 +4,8 @@ public class GroceryItem {
     private String id;
     private String title;
     private String upc;
+    int count;
+
 
 
     public GroceryItem(){

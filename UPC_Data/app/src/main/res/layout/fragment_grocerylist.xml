@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.GroceryListFragment">
 
+    <TextView
+        android:id="@+id/tvGrocerListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="GROCERY LIST"
+        android:textSize="40dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGroceryItems"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="500dp"
+        android:layout_marginTop="70dp"/>
 
-</FrameLayout>
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="70dp"/>
+
+</RelativeLayout>

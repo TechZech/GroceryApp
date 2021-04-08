@@ -3,6 +3,7 @@ package com.groceryapp.upcdata.fragments;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,37 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.Scraper;
+import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryFragment extends Fragment {
+
+    public final String TAG = "InventoryFragment";
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
+    private RecyclerView rvInventory;
+    protected GroceryItemAdapter adapter;
+    protected List<GroceryItem> allGroceryItems;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -37,49 +58,45 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DBHelper DB = new DBHelper(getContext());
-        EditText editTextName;
-        Button btnClickHere = view.findViewById(R.id.btnView);
-        TextView textName;
-        Scraper myScrap = new Scraper();
-        GroceryItem groceryItem = new GroceryItem();
-        groceryItem.setTitle("Test");
-        groceryItem.setUpc("1234");
-        DB.insertGroceryItemData(groceryItem);
-        btnClickHere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Cursor res = DB.getdata();
-                if(res.getCount()==0){
-                    Toast.makeText(getContext(), "No Entry Exists", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                StringBuffer buffer = new StringBuffer();
-                while(res.moveToNext()){
-                    buffer.append("Name :"+res.getString(0)+"\n");
-                    buffer.append("Count :"+res.getString(1)+"\n");
-                    buffer.append("UPC :"+res.getString(2)+"\n\n");
-                }
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setCancelable(true);
-                builder.setTitle("User Entries");
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }        });
-     //   DBHelper mydb = new DBHelper(getActivity());
-       // User test = new User();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
-//        mydb.addOne(test);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        rvInventory = view.findViewById(R.id.rvInventory);
+        allGroceryItems = new ArrayList<>();
+        adapter = new GroceryItemAdapter(getContext(), allGroceryItems);
+        rvInventory.setAdapter(adapter);
+        rvInventory.setLayoutManager(linearLayoutManager);
 
-        WebView wb = (WebView) view.findViewById(R.id.webview);
-        wb.loadUrl("file:///android_asset/index.html");
-        editTextName = (EditText) view.findViewById(R.id.upcData);
-        btnClickHere = (Button) view.findViewById(R.id.sub);
-         textName = (TextView) view.findViewById(R.id.retData);
-        //btnClickHere.setVisibility(View.INVISIBLE);
+        queryGroceryItems();
+        adapter.notifyDataSetChanged();
+    }
 
+    private void queryGroceryItems(){
+        List<GroceryItem> newGroceryItems = new ArrayList<>();
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                newGroceryItems.add(document.toObject(GroceryItem.class));
+                            }
+                            allGroceryItems.addAll(newGroceryItems);
+                            adapter.notifyDataSetChanged();
+                            Log.d(TAG, "GroceryList Size is " + allGroceryItems.size());
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+    }
+
+    private void addGroceryItem(String id, String itemName, String UPC){
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
+                .document(id).set(new GroceryItem(id, itemName, UPC));
     }
 }

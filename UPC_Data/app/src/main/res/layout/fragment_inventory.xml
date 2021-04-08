@@ -5,41 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/upcData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sub"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Enter a UPC Code"
-        android:inputType="textPersonName"
-        />
-
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="307dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="3dp">
-    </WebView>
-
     <TextView
-        android:id="@+id/retData"
-        android:layout_width="10dp"
-        android:layout_height="10dp" />
-
-    <Button
-        android:id="@+id/btnView"
+        android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="View Data"
-        android:layout_below="@id/retData"/>
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="INVENTORY"
+        android:textSize="40dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInventory"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="70dp"/>
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="70dp"/>
 </RelativeLayout>
