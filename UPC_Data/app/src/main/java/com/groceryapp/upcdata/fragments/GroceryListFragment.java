@@ -62,6 +62,7 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         queryGroceryItems();
+        addGroceryItem("test", "test","test");
         adapter.notifyDataSetChanged();
     }
 
@@ -91,6 +92,6 @@ public class GroceryListFragment extends Fragment {
 
     private void addGroceryItem(String id, String itemName, String UPC){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List")
-                .document(id).set(new GroceryItem(id, itemName, UPC));
+                .add(new GroceryItem(id, itemName, UPC));
     }
 }
