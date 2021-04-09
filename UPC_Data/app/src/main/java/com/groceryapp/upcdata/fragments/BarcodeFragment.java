@@ -79,9 +79,12 @@ public class BarcodeFragment extends Fragment{
         if(result != null){
 
             if(result.getContents() != null){
+                scrap = new Scraper();
                 DB = new DBHelper(getContext());
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(result.getContents());
+                GroceryItem groceryItem = new GroceryItem();
+                groceryItem.setUpc(result.getContents());
                 builder.setTitle("Scanning Result");
                 builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
                     @Override
@@ -91,15 +94,21 @@ public class BarcodeFragment extends Fragment{
                 }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO: GET SCRAPER ADDED TO GROCERY LIST
-                        GroceryItem groceryItem = new GroceryItem();
-                        groceryItem.setUpc(result.getContents());
-                        try {
-                            groceryItem.setTitle(scrap.getUPCData(groceryItem.getUpc()));
-                            DB.insertGroceryItemData(groceryItem);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Log.i(TAG, "Barcode Number for getContents: " + result.getContents());
+                        Log.i(TAG, "Barcode Number for getUPC: " + groceryItem.getUpc());
+
+                        Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try  {
+                                    Log.i(TAG, "Title: " + scrap.getUPCData(groceryItem.getUpc()));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
+
                         // sends user back to home screen
                         Fragment fragment = new GroceryListFragment();
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
