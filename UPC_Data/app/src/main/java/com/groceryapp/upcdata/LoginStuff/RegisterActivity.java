@@ -134,12 +134,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         documentReference.collection("Grocery List").document("GroceryItemTest")
-                .set(new GroceryItem("testid", "testname", "testupc"));
+                .set(new GroceryItem("testname", "testupc"));
         documentReference.collection("Grocery List").document("GroceryItemTest2")
-                .set(new GroceryItem("test2", "test2", "test2"));
+                .set(new GroceryItem("test2", "test2"));
 
         documentReference.collection("Inventory").document("GroceryItemTest")
-                .set(new GroceryItem("testid","testname","testupc"));
+                .set(new GroceryItem("testname","testupc"));
 
     }
 

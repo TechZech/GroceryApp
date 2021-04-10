@@ -1,34 +1,29 @@
 package com.groceryapp.upcdata.DB.GroceryItem;
 
 public class GroceryItem {
-    private String id;
     private String title;
     private String upc;
-    int count;
+    private int quantity;
 
 
 
     public GroceryItem(){
     }
 
-    public GroceryItem(String id, String title, String upc) {
-        this.id = id;
+    public GroceryItem(String title, String upc) {
         this.title = title;
         this.upc = upc;
+        this.quantity = 0;
     }
 
     @Override
     public String toString() {
         return "GroceryList{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", upc='" + upc + '\'' +
                 '}';
     }
 
-    public String getId() {
-        return id;
-    }
 
     public String getTitle() {
         return title;
@@ -38,16 +33,20 @@ public class GroceryItem {
         return upc;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
     public void setUpc(String upc) {
         this.upc = upc;
+    }
+
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+
+    public int getQuantity(){
+        return quantity;
     }
 
 }

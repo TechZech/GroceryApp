@@ -27,7 +27,7 @@ public class BarcodeCamera extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.fragment_barcode_camera);
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
-        DB = new DBHelper(this);
+        DB = new DBHelper();
         scrap = new Scraper();
     }
 

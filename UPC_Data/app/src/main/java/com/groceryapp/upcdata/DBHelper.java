@@ -3,84 +3,86 @@ package com.groceryapp.upcdata;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
-public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(Context context) {
-        super(context, "Grocerylist.db", null, 1);
+import java.util.ArrayList;
+import java.util.List;
+
+public class DBHelper {
+
+    public final String TAG = "DBHelper";
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+    public DBHelper(){
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table Grocerylist(name TEXT primary key, count TEXT, upc TEXT)");
+    public List<GroceryItem> queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Grocery List")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allGroceryItems.add(document.toObject(GroceryItem.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return allGroceryItems;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("drop Table if exists Grocerylist");
+    public List<GroceryItem> queryInventoryItems(List<GroceryItem> allInventoryItems, GroceryItemAdapter adapter){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allInventoryItems.add(document.toObject(GroceryItem.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+        return allInventoryItems;
     }
 
-    public Boolean insertGroceryItemData(GroceryItem groceryItem)
-    {
-        SQLiteDatabase DB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name", groceryItem.getTitle());
-        contentValues.put("count", 0);
-        contentValues.put("upc", groceryItem.getUpc());
-        long result=DB.insert("Grocerylist", null, contentValues);
-        if(result==-1){
-            return false;
-        }else{
-            return true;
-        }
+
+    public void addGroceryItem(String itemName, String UPC){
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
+                .add(new GroceryItem(itemName, UPC));
     }
 
-
-    public Boolean updateGroceryItemdata(String name, String count, String upc) {
-        SQLiteDatabase DB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("count", count);
-        contentValues.put("upc", upc);
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
-        if (cursor.getCount() > 0) {
-            long result = DB.update("Userdetails", contentValues, "name=?", new String[]{name});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }}
-
-
-    public Boolean deletedata (String name)
-    {
-        SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
-        if (cursor.getCount() > 0) {
-            long result = DB.delete("Userdetails", "name=?", new String[]{name});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-
-    }
-
-    public Cursor getdata ()
-    {
-        SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Grocerylist", null);
-        return cursor;
-
+    public void addGroceryItem(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
+                .add(groceryItem);
     }
 }

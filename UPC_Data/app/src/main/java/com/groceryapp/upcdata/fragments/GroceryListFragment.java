@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
@@ -36,13 +37,10 @@ public class GroceryListFragment extends Fragment {
 
     public final String TAG = "GroceryListFragment";
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     private RecyclerView rvGroceryItems;
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allGroceryItems;
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
+     DBHelper dbHelper = new DBHelper();
 
     @Nullable
     @Override
@@ -58,40 +56,14 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems = view.findViewById(R.id.rvGroceryItems);
         allGroceryItems = new ArrayList<>();
         adapter = new GroceryItemAdapter(getContext(), allGroceryItems);
+
         rvGroceryItems.setAdapter(adapter);
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
-        queryGroceryItems();
-        addGroceryItem("test", "test","test");
-        adapter.notifyDataSetChanged();
+        allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
     }
 
-    private void queryGroceryItems(){
-        List<GroceryItem> newGroceryItems = new ArrayList<>();
-        firestore.collection("users")
-                .document(User.getUserID()).collection("Grocery List")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (DocumentSnapshot document : task.getResult()){
-                                Log.d(TAG, document.getId() + "=> " + document.getData());
-                                newGroceryItems.add(document.toObject(GroceryItem.class));
-                            }
-                            allGroceryItems.addAll(newGroceryItems);
-                            adapter.notifyDataSetChanged();
-                            Log.d(TAG, "GroceryList Size is " + allGroceryItems.size());
-                        }
-                        else
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
 
-    }
 
-    private void addGroceryItem(String id, String itemName, String UPC){
-        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
-                .add(new GroceryItem(id, itemName, UPC));
-    }
+
 }

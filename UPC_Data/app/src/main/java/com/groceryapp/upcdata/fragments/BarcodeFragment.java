@@ -80,7 +80,7 @@ public class BarcodeFragment extends Fragment{
 
             if(result.getContents() != null){
                 scrap = new Scraper();
-                DB = new DBHelper(getContext());
+                DB = new DBHelper();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(result.getContents());
                 GroceryItem groceryItem = new GroceryItem();
@@ -102,6 +102,8 @@ public class BarcodeFragment extends Fragment{
                             public void run() {
                                 try  {
                                     Log.i(TAG, "Title: " + scrap.getUPCData(groceryItem.getUpc()));
+                                    groceryItem.setTitle(scrap.getUPCData(groceryItem.getUpc()));
+                                    DB.addGroceryItem(groceryItem);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

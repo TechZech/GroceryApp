@@ -56,20 +56,24 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvUPC;
+        private TextView tvQuantity;
         private TextView tvTitle;
         private ImageView ivGroceryItemImage;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            tvUPC = itemView.findViewById(R.id.tvUPCcode);
+
+            tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTitle = itemView.findViewById(R.id.tvGroceryName);
             ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
         }
 
         public void bind(GroceryItem groceryItem){
-            tvUPC.setText(groceryItem.getUpc());
+            String strQuantity = "";
+            strQuantity = strQuantity.valueOf(groceryItem.getQuantity());
+
             tvTitle.setText(groceryItem.getTitle());
+            tvQuantity.setText(strQuantity);
         }
     }
 }
