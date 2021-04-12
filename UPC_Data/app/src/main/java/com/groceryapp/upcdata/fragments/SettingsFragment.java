@@ -47,10 +47,10 @@ public class SettingsFragment extends Fragment {
     private ImageView ivProfile;
     private ImageView ivEditProfile;
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String email = user.getEmail();
-    Uri userphotoUrl = user.getPhotoUrl();
-    String Username = user.getDisplayName();
+    FirebaseUser user;
+    String email;
+    Uri userphotoUrl;
+    String Username;
 
 
         @Nullable
@@ -70,6 +70,11 @@ public class SettingsFragment extends Fragment {
             btnSettings1 = view.findViewById(R.id.btnSettings1);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
+
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            email = user.getEmail();
+            userphotoUrl = user.getPhotoUrl();
+            Username = user.getDisplayName();
 
             tvEmail.setText(email);
             tvDisplayName.setText(Username);
@@ -143,5 +148,10 @@ public class SettingsFragment extends Fragment {
                         .into(ivProfile);
             }
         }
+    }
+
+    public void UpdateFragmentData(){
+            tvDisplayName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            tvEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
     }
 }

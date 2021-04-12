@@ -85,4 +85,14 @@ public class DBHelper {
         firestore.collection("users").document(User.getUserID()).collection("Grocery List")
                 .add(groceryItem);
     }
+
+    public void addInventoryItem(String itemName, String UPC){
+        firestore.collection("users").document(User.getUserID()).collection("Inventory")
+                .add(new GroceryItem(itemName, UPC));
+    }
+
+    public void addInventoryItem(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Inventory")
+                .add(groceryItem);
+    }
 }
