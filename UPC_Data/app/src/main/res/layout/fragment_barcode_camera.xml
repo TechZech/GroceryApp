@@ -7,13 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".BarcodeCamera">
 
+    <TextView
+        android:id="@+id/tvGroceryListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/GroceryAppGreen"
+        android:gravity="center"
+        android:text="BARCODE SCANNER"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp" />
+
     <Button
         android:id="@+id/scanBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="109dp"
         android:text="@string/tap_to_scan"
         android:textSize="30sp" />
 
@@ -26,10 +36,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="-246dp"
-        android:layout_marginEnd="-5dp"
-        android:layout_marginBottom="-11dp"
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="-181dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="-76dp"
         app:srcCompat="@drawable/barcodescanphone" />
 
 </RelativeLayout>
