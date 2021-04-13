@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +20,25 @@ import java.util.List;
 
 public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
 
+    public interface OnLongClickListener {
+        void onItemLongClicked(int position);
+    }
+
+    public interface OnClickListener {
+        void onItemClicked(int position);
+    }
+
+    OnLongClickListener longClickListener;
+    OnClickListener clickListener;
+
     private Context context;
     private List<GroceryItem> groceryItems;
 
-    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems){
+    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener){
         this.context = context;
         this.groceryItems = groceryItems;
+        this.longClickListener = longClickListener;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -59,6 +74,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         private TextView tvQuantity;
         private TextView tvTitle;
         private ImageView ivGroceryItemImage;
+        private RelativeLayout item_grocery_container;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -66,6 +82,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTitle = itemView.findViewById(R.id.tvGroceryName);
             ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
+            item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
         }
 
         public void bind(GroceryItem groceryItem){
@@ -74,6 +91,24 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
             tvTitle.setText(groceryItem.getTitle());
             tvQuantity.setText(strQuantity);
+
+            item_grocery_container.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(context, "OnLongClick", Toast.LENGTH_SHORT);
+                    longClickListener.onItemLongClicked(getAdapterPosition());
+                    return true;
+                }
+            });
+
+            item_grocery_container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "OnClick", Toast.LENGTH_SHORT);
+                    clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+
         }
     }
 }

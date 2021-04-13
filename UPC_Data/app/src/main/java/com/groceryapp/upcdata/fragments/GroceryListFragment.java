@@ -1,11 +1,13 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,14 +55,32 @@ public class GroceryListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
+        GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
+            @Override
+            public void onItemLongClicked(int position) {
+                GroceryItem groceryItem = allGroceryItems.get(position);
+                dbHelper.removeGroceryItem(groceryItem);
+                allGroceryItems.remove(position);
+                adapter.notifyItemRemoved(position);
+            }
+        };
+
+        GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
+            }
+        };
+
         rvGroceryItems = view.findViewById(R.id.rvGroceryItems);
         allGroceryItems = new ArrayList<>();
-        adapter = new GroceryItemAdapter(getContext(), allGroceryItems);
+        adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener);
 
         rvGroceryItems.setAdapter(adapter);
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
+        dbHelper.addGroceryItem(new GroceryItem("123","123"));
     }
 
 

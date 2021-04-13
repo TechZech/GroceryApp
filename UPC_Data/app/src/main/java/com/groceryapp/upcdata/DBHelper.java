@@ -77,22 +77,32 @@ public class DBHelper {
 
 
     public void addGroceryItem(String itemName, String UPC){
-        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
-                .add(new GroceryItem(itemName, UPC));
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(UPC)
+                .set(new GroceryItem(itemName, UPC));
     }
 
     public void addGroceryItem(GroceryItem groceryItem){
-        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
-                .add(groceryItem);
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(groceryItem.getUpc())
+                .set(groceryItem);
     }
 
     public void addInventoryItem(String itemName, String UPC){
-        firestore.collection("users").document(User.getUserID()).collection("Inventory")
-                .add(new GroceryItem(itemName, UPC));
+        firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
+                .set(new GroceryItem(itemName, UPC));
     }
 
     public void addInventoryItem(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Inventory").document(groceryItem.getUpc())
+                .set(groceryItem);
+    }
+
+    public void removeGroceryItem(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
+                .document(groceryItem.getUpc()).delete();
+    }
+
+    public void removeInventoryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Inventory")
-                .add(groceryItem);
+                .document(groceryItem.getUpc()).delete();
     }
 }

@@ -58,14 +58,35 @@ public class InventoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
+        GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
+            @Override
+            public void onItemLongClicked(int position) {
+                GroceryItem groceryItem = allInventoryItems.get(position);
+                Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
+                dbHelper.removeInventoryItem(groceryItem);
+                allInventoryItems.remove(position);
+                adapter.notifyItemRemoved(position);
+            }
+        };
+
+        GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Toast.makeText(getContext(), "OnCLick", Toast.LENGTH_SHORT).show();
+            }
+        };
+
         rvInventory = view.findViewById(R.id.rvInventory);
         allInventoryItems = new ArrayList<>();
-        adapter = new GroceryItemAdapter(getContext(), allInventoryItems);
+        adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener);
 
         rvInventory.setAdapter(adapter);
         rvInventory.setLayoutManager(linearLayoutManager);
 
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
+
+        dbHelper.addInventoryItem(new GroceryItem("123", "123"));
+        dbHelper.addInventoryItem(new GroceryItem("12", "12"));
     }
 
 }
