@@ -46,4 +46,15 @@ public class Scraper {
         System.out.println(doc.html());
         return itemTitle.html();
     }
+    public String getImageData(String query) throws IOException {
+        Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
+        //log(doc.html());
+        Elements itemURL = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image");
+      //  System.out.println(itemURL.html());
+        return itemURL.html();
+
+    }
+
+
 }
