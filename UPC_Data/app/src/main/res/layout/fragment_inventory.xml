@@ -9,9 +9,11 @@
         android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:background="@color/GroceryAppGreen"
         android:gravity="center"
         android:text="INVENTORY"
-        android:textSize="40dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="40sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInventory"
