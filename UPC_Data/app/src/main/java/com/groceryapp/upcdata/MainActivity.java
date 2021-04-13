@@ -58,19 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_scanner:
                         fragment = new BarcodeFragment();
-                        Toast.makeText(MainActivity.this, "Scanner!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_groceryList:
                         fragment = new GroceryListFragment();
-                        Toast.makeText(MainActivity.this, "List!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_inventory:
                         fragment = new InventoryFragment();
-                        Toast.makeText(MainActivity.this, "Inventory!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_settings:
                         fragment = new SettingsFragment();
-                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
