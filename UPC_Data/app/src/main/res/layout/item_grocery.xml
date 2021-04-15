@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tvGroceryName"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
@@ -17,7 +17,9 @@
         android:layout_marginTop="19dp"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textColor="@color/black"/>
+
 
     <TextView
         android:id="@+id/tvQuantity"
@@ -26,10 +28,49 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="TextView" />
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="42dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textColor="@color/black"/>
 
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:text="TextView"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvPriceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="110dp"
+        android:text="PRICE"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvQtyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="33dp"
+        android:text="QTY"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 
     <View
         android:id="@+id/divider5"

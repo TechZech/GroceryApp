@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,7 +70,7 @@ public class GroceryListFragment extends Fragment {
         GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
+                goToDetailFragment(position);
             }
         };
 
@@ -80,10 +82,22 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
-        dbHelper.addGroceryItem(new GroceryItem("123","123"));
     }
 
-
-
-
+private void goToDetailFragment(int position){
+    GroceryItem groceryItem = allGroceryItems.get(position);
+    Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
+    Bundle bundle = new Bundle();
+    bundle.putString("UPC", groceryItem.getUpc());
+    bundle.putString("Title", groceryItem.getTitle());
+    bundle.putString("ImageUrl", groceryItem.getImageUrl());
+    bundle.putInt("Quantity", groceryItem.getQuantity());
+    Fragment fragment = new DetailFragment();
+    fragment.setArguments(bundle);
+    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.flContainer, fragment);
+    fragmentTransaction.addToBackStack(null);
+    fragmentTransaction.commit();
+    }
 }

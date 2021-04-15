@@ -22,14 +22,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthCredential;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
+
+import java.io.File;
 
 
 public class SettingsFragment extends Fragment {
@@ -110,8 +117,6 @@ public class SettingsFragment extends Fragment {
                     .load(userphotoUrl)
                     .placeholder(R.drawable.download)
                     .into(ivProfile);
-
-
         }
 
     public void LogOut(){
@@ -125,33 +130,44 @@ public class SettingsFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000){
             if (resultCode == Activity.RESULT_OK){
-                Uri imageUri = data.getData();
-                ivProfile.setImageURI(imageUri);
+                Uri LocalimageUri = data.getData();
 
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setPhotoUri(imageUri)
-                        .build();
-
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference imageRef = storageRef.child(user.getUid());
+                UploadTask uploadTask = imageRef.putFile(LocalimageUri);
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.i(TAG, "Upload Success");
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    Log.d(TAG, "User Profile Updated");
-                                }
+                            public void onSuccess(Uri uri) {
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setPhotoUri(uri)
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+                                                    Log.d(TAG, "User Profile Updated");
+                                                }
+                                                else{
+                                                    Log.d(TAG, "Error Updating Profile");
+                                                }
+                                            }
+                                        });
                             }
                         });
-
-                userphotoUrl = imageUri;
-                Glide.with(this)
-                        .load(userphotoUrl)
-                        .into(ivProfile);
+                    }
+                });
             }
         }
-    }
-
-    public void UpdateFragmentData(){
-            tvDisplayName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-            tvEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        Glide.with(this)
+                .load(data.getData())
+                .into(ivProfile);
     }
 }

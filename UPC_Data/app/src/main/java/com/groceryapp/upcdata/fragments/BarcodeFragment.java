@@ -122,7 +122,9 @@ public class BarcodeFragment extends Fragment{
                             public void run() {
                                 try  {
                                     Log.i(TAG, "Title: " + scrap.getUPCData(groceryItem.getUpc()));
+                                    Log.i(TAG, "ImageUrl: " + scrap.getImageData(groceryItem.getUpc()));
                                     groceryItem.setTitle(scrap.getUPCData(groceryItem.getUpc()));
+                                    groceryItem.setImageUrl(scrap.getImageData(groceryItem.getUpc()));
                                     DB.addInventoryItem(groceryItem);
                                 } catch (Exception e) {
                                     e.printStackTrace();

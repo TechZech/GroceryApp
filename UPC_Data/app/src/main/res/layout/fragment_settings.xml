@@ -95,7 +95,7 @@
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/instagram_home_outline_24"
-        android:text="Some other setting"
+        android:text="Budget Settings"
         android:textColor="@color/black"/>
 
     <Button
@@ -108,7 +108,7 @@
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/instagram_user_outline_24"
-        android:text="another setting "
+        android:text="Health Settings"
         android:textColor="@color/black"/>
 
 

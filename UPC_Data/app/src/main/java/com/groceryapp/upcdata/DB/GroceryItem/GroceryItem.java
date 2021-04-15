@@ -4,16 +4,18 @@ public class GroceryItem {
     private String title;
     private String upc;
     private int quantity;
+    private String ImageUrl;
 
 
 
     public GroceryItem(){
     }
 
-    public GroceryItem(String title, String upc) {
+    public GroceryItem(String title, String upc, String imageUrl) {
         this.title = title;
         this.upc = upc;
         this.quantity = 0;
+        this.ImageUrl = imageUrl;
     }
 
     @Override
@@ -49,4 +51,11 @@ public class GroceryItem {
         return quantity;
     }
 
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
 }
