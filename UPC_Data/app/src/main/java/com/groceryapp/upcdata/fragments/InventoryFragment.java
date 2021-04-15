@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,6 +75,7 @@ public class InventoryFragment extends Fragment {
             @Override
             public void onItemClicked(int position) {
                 Toast.makeText(getContext(), "OnCLick", Toast.LENGTH_SHORT).show();
+                goToDetailFragment(position);
             }
         };
 
@@ -86,4 +89,20 @@ public class InventoryFragment extends Fragment {
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
     }
 
+    private void goToDetailFragment(int position){
+        GroceryItem groceryItem = allInventoryItems.get(position);
+        Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("UPC", groceryItem.getUpc());
+        bundle.putString("Title", groceryItem.getTitle());
+        bundle.putString("ImageUrl", groceryItem.getImageUrl());
+        bundle.putInt("Quantity", groceryItem.getQuantity());
+        Fragment fragment = new DetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 }
