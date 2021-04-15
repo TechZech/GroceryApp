@@ -42,6 +42,7 @@ public class BarcodeFragment extends Fragment{
     Button scanBtn;
     DBHelper DB;
     Scraper scrap;
+    String productDetails = "default";
     private String TAG = "BarcodeFragment";
 
     @Nullable
@@ -72,6 +73,10 @@ public class BarcodeFragment extends Fragment{
         integrator.initiateScan();
     }
 
+    private void setProductDetails(String setThis){
+        productDetails = setThis;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -82,16 +87,31 @@ public class BarcodeFragment extends Fragment{
                 scrap = new Scraper();
                 DB = new DBHelper();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(result.getContents());
                 GroceryItem groceryItem = new GroceryItem();
                 groceryItem.setUpc(result.getContents());
-                builder.setTitle("Scanning Result");
-                builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
+                /*Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            productDetails = scrap.getUPCData(groceryItem.getUpc());
+                            setProductDetails(productDetails);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            productDetails = "No Product Found";
+                            setProductDetails(productDetails);
+                        }
+                    }
+                });
+                thread.start();
+                */
+                builder.setMessage("Barcode Scanned: " + groceryItem.getUpc() + "\nProduct Info: " + productDetails + "\n\nIs This Correct?");
+                builder.setTitle("Your Barcode Has Been Scanned!");
+                builder.setPositiveButton("No, Scan Again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         scanCode();
                     }
-                }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Yes, Add To Inventory", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.i(TAG, "Barcode Number for getContents: " + result.getContents());
