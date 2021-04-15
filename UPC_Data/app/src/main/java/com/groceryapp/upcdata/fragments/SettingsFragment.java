@@ -117,7 +117,6 @@ public class SettingsFragment extends Fragment {
                     .load(userphotoUrl)
                     .placeholder(R.drawable.download)
                     .into(ivProfile);
-            Log.d(TAG, userphotoUrl.toString());
         }
 
     public void LogOut(){

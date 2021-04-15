@@ -80,7 +80,6 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
-        dbHelper.addGroceryItem(new GroceryItem("123","123"));
     }
 
 

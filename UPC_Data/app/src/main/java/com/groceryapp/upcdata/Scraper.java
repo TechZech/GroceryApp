@@ -14,6 +14,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import androidx.fragment.app.Fragment;
@@ -52,9 +53,21 @@ public class Scraper {
         Elements itemURL = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
                 .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image");
       //  System.out.println(itemURL.html());
-        return itemURL.html();
+        return itemURL.first().attr("src");
+        //return itemURL.html();
 
     }
 
-
+    public String getPriceData(String query) throws IOException{
+        Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
+        Elements rows = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.row").select("div.col-md-12 mt-3").select("div.store-list pt-2 table-responsive").select("table.table list").select("tr");
+        String itemPrc = "";
+        for (Element row : rows){
+            if (row.select("td").contains('$')){
+                itemPrc = row.select("td").text();
+            }
+        }
+        return itemPrc;
+    }
 }

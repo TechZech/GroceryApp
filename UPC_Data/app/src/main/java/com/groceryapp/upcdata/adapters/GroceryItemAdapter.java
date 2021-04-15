@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.R;
 
@@ -91,6 +92,8 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
             tvTitle.setText(groceryItem.getTitle());
             tvQuantity.setText(strQuantity);
+
+            Glide.with(context).load(groceryItem.getImageUrl()).into(ivGroceryItemImage);
 
             item_grocery_container.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

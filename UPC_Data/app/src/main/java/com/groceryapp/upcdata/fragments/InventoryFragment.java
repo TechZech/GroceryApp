@@ -84,9 +84,6 @@ public class InventoryFragment extends Fragment {
         rvInventory.setLayoutManager(linearLayoutManager);
 
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
-
-        dbHelper.addInventoryItem(new GroceryItem("123", "123"));
-        dbHelper.addInventoryItem(new GroceryItem("12", "12"));
     }
 
 }
