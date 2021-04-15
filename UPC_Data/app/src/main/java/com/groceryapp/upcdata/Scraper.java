@@ -20,6 +20,7 @@ import org.jsoup.select.Elements;
 import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Scraper {
     String upcCode;
@@ -51,8 +52,8 @@ public class Scraper {
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
         //log(doc.html());
         Elements itemURL = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
-                .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image");
-      //  System.out.println(itemURL.html());
+                .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image").select("img");
+        //System.out.println(itemURL.html());
         return itemURL.first().attr("src");
         //return itemURL.html();
 
@@ -69,5 +70,29 @@ public class Scraper {
             }
         }
         return itemPrc;
+    }
+
+    public ArrayList<String> getAllData(String query) throws IOException{
+        ArrayList<String> allData = new ArrayList<>();
+        Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
+
+        // SLOT 0: reserved for returning the barcode itself
+        allData.add(query);
+
+        // SLOT 1: reserved for returning the Item Title (getUPCData)
+        Elements itemTitle = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.detailtitle").select("h2");
+        Elements upcA = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.row");
+        allData.add(itemTitle.html());
+
+        // SLOT 2: reserved for returning the item's image url (getImagedata)
+        Elements itemURL = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image").select("img");
+        allData.add(itemURL.first().attr("src"));
+
+        // SLOT 3: reserved for returning the item price (will do eventually)
+
+        return allData;
     }
 }

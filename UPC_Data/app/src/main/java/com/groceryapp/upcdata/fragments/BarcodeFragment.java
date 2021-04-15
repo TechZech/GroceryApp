@@ -36,6 +36,7 @@ import com.groceryapp.upcdata.Scraper;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BarcodeFragment extends Fragment{
 
@@ -43,6 +44,9 @@ public class BarcodeFragment extends Fragment{
     DBHelper DB;
     Scraper scrap;
     String productDetails = "default";
+    String scraperTitle;
+    String scraperImage;
+    ArrayList<String> allBarcodeData = new ArrayList<>();
     private String TAG = "BarcodeFragment";
 
     @Nullable
@@ -104,7 +108,7 @@ public class BarcodeFragment extends Fragment{
                 });
                 thread.start();
                 */
-                builder.setMessage("Barcode Scanned: " + groceryItem.getUpc() + "\nProduct Info: " + productDetails + "\n\nIs This Correct?");
+                builder.setMessage("Barcode Scanned: " + groceryItem.getUpc() + "\n\nIs This Correct?");
                 builder.setTitle("Your Barcode Has Been Scanned!");
                 builder.setPositiveButton("No, Scan Again", new DialogInterface.OnClickListener() {
                     @Override
@@ -121,10 +125,13 @@ public class BarcodeFragment extends Fragment{
                             @Override
                             public void run() {
                                 try  {
-                                    Log.i(TAG, "Title: " + scrap.getUPCData(groceryItem.getUpc()));
-                                    Log.i(TAG, "ImageUrl: " + scrap.getImageData(groceryItem.getUpc()));
-                                    groceryItem.setTitle(scrap.getUPCData(groceryItem.getUpc()));
-                                    groceryItem.setImageUrl(scrap.getImageData(groceryItem.getUpc()));
+                                    allBarcodeData = scrap.getAllData(groceryItem.getUpc());
+                                    scraperTitle = allBarcodeData.get(1);
+                                    scraperImage = allBarcodeData.get(2);
+                                    Log.i(TAG, "Title: " + scraperTitle);
+                                    Log.i(TAG, "ImageUrl: " + scraperImage);
+                                    groceryItem.setTitle(scraperTitle);
+                                    groceryItem.setImageUrl(scraperImage);
                                     DB.addInventoryItem(groceryItem);
                                 } catch (Exception e) {
                                     e.printStackTrace();
