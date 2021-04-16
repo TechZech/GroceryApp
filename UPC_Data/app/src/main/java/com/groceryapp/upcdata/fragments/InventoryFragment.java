@@ -98,6 +98,7 @@ public class InventoryFragment extends Fragment {
         bundle.putString("Title", groceryItem.getTitle());
         bundle.putString("ImageUrl", groceryItem.getImageUrl());
         bundle.putInt("Quantity", groceryItem.getQuantity());
+        bundle.putBoolean("fromInventory", true);
         Fragment fragment = new DetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

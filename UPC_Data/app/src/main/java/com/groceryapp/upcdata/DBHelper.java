@@ -105,4 +105,13 @@ public class DBHelper {
         firestore.collection("users").document(User.getUserID()).collection("Inventory")
                 .document(groceryItem.getUpc()).delete();
     }
+
+    public void UpdateInventoryQuantity(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Inventory")
+                .document(groceryItem.getUpc()).update("quantity", groceryItem.getQuantity());
+    }
+    public void UpdateGroceryListQuantity(GroceryItem groceryItem){
+        firestore.collection("users").document(User.getUserID()).collection("Grocery List")
+                .document(groceryItem.getUpc()).update("quantity", groceryItem.getQuantity());
+    }
 }

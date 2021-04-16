@@ -3,6 +3,7 @@ package com.groceryapp.upcdata.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.DetailFragment;
@@ -86,6 +88,10 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         private ImageView ivGroceryItemImage;
         private RelativeLayout item_grocery_container;
 
+        private ImageView QuantityAdd;
+        private ImageView QuantitySubtract;
+        private DBHelper dbHelper;
+
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
@@ -94,6 +100,9 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
             ViewCompat.setTransitionName(ivGroceryItemImage, "grocery_item_image");
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
+            QuantityAdd = itemView.findViewById(R.id.ivPlusSign);
+            QuantitySubtract = itemView.findViewById(R.id.ivMinusSign);
+            dbHelper = new DBHelper();
         }
 
         public void bind(GroceryItem groceryItem){
@@ -119,6 +128,36 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                 public void onClick(View v) {
                     Toast.makeText(context, "OnClick", Toast.LENGTH_SHORT);
                     clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+
+            QuantityAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "OnClick PlusSign", Toast.LENGTH_SHORT).show();
+                    groceryItem.setQuantity(groceryItem.getQuantity()+1);
+                    dbHelper.UpdateGroceryListQuantity(groceryItem);
+                    dbHelper.UpdateInventoryQuantity(groceryItem);
+                    notifyDataSetChanged();
+                }
+            });
+
+            QuantitySubtract.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "OnClick MinusSign", Toast.LENGTH_SHORT).show();
+                    if (groceryItem.getQuantity() > 0){
+                        groceryItem.setQuantity(groceryItem.getQuantity()-1);
+                        dbHelper.UpdateGroceryListQuantity(groceryItem);
+                        dbHelper.UpdateInventoryQuantity(groceryItem);
+                        notifyDataSetChanged();
+                        }
+                   /* if (groceryItem.getQuantity() == 0){
+                        dbHelper.removeInventoryItem(groceryItem);
+                        dbHelper.addGroceryItem(groceryItem);
+                        notifyDataSetChanged();
+                    }*/
+
                 }
             });
 

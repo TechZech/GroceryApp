@@ -47,7 +47,7 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         groceryItem = new GroceryItem();
-        unpackBundle();
+        boolean fromInventory = unpackBundle();
 
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
@@ -64,7 +64,11 @@ public class DetailFragment extends Fragment {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new InventoryFragment();
+                Fragment fragment;
+                if (fromInventory)
+                    fragment = new InventoryFragment();
+                else
+                    fragment = new GroceryListFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                         .replace(R.id.flContainer, fragment);
@@ -74,12 +78,13 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private void unpackBundle(){
+    private boolean unpackBundle(){
         Bundle Args = getArguments();
         groceryItem.setUpc(Args.getString("UPC"));
         groceryItem.setTitle(Args.getString("Title"));
         groceryItem.setImageUrl(Args.getString("ImageUrl"));
         groceryItem.setQuantity(Args.getInt("Quantity"));
+        return Args.getBoolean("fromInventory");
     }
 
 }

@@ -28,6 +28,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -41,6 +43,7 @@ import java.util.ArrayList;
 public class BarcodeFragment extends Fragment{
 
     Button scanBtn;
+    Button btnManualAdd;
     DBHelper DB;
     Scraper scrap;
     String productDetails = "default";
@@ -59,11 +62,19 @@ public class BarcodeFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         scanBtn = view.findViewById(R.id.scanBtn);
+        btnManualAdd = view.findViewById(R.id.btnManualAdd);
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scanCode();
+            }
+        });
+
+        btnManualAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ManualAdd();
             }
         });
     }
@@ -160,5 +171,40 @@ public class BarcodeFragment extends Fragment{
         else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void ManualAdd(){
+        LayoutInflater factory = LayoutInflater.from(getContext());
+
+//text_entry is an Layout XML file containing two text field to display in alert dialog
+        final View textEntryView = factory.inflate(R.layout.manual_add_dialog, null);
+
+        final EditText input1 = (EditText) textEntryView.findViewById(R.id.input1);
+        final EditText input2 = (EditText) textEntryView.findViewById(R.id.input2);
+        final EditText input3 = (EditText) textEntryView.findViewById(R.id.input3);
+        final EditText input4 = (EditText) textEntryView.findViewById(R.id.input4);
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Manual Add").setView(textEntryView).setPositiveButton("Save",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+
+                        Log.i("AlertDialog","TextEntry 1 Entered "+input1.getText().toString());
+                        Log.i("AlertDialog","TextEntry 2 Entered "+input2.getText().toString());
+                        Log.i("AlertDialog","TextEntry 3 Entered "+input3.getText().toString());
+                        Log.i("AlertDialog","TextEntry 4 Entered "+input4.getText().toString());
+                        /* User clicked OK so do some stuff */
+                    }
+                }).setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                        /*
+                         * User clicked cancel so do some stuff
+                         */
+                    }
+                });
+        alert.show();
     }
 }

@@ -29,10 +29,10 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="34dp"
-        android:layout_marginEnd="42dp"
-        android:text="TextView"
+        android:layout_marginEnd="70dp"
         android:gravity="center"
-        android:textColor="@color/black"/>
+        android:text="TextView"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -41,10 +41,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="110dp"
         android:text="TextView"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tvPriceLabel"
@@ -54,10 +54,10 @@
         android:layout_alignParentEnd="true"
 
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginEnd="126dp"
         android:text="PRICE"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvQtyLabel"
@@ -67,10 +67,10 @@
         android:layout_alignParentEnd="true"
 
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="60dp"
         android:text="QTY"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/divider5"
@@ -90,6 +90,26 @@
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/glistappicon"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/ivPlusSign"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="17dp"
+        app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <ImageView
+        android:id="@+id/ivMinusSign"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="17dp"
+        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
 
 
 </RelativeLayout>

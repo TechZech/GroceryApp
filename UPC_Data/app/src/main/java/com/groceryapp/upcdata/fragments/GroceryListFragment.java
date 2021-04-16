@@ -92,6 +92,7 @@ private void goToDetailFragment(int position){
     bundle.putString("Title", groceryItem.getTitle());
     bundle.putString("ImageUrl", groceryItem.getImageUrl());
     bundle.putInt("Quantity", groceryItem.getQuantity());
+    bundle.putBoolean("fromInventory", false);
     Fragment fragment = new DetailFragment();
     fragment.setArguments(bundle);
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
