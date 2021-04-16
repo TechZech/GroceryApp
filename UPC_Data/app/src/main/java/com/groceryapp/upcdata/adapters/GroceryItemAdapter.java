@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -91,6 +92,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTitle = itemView.findViewById(R.id.tvGroceryName);
             ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
+            ViewCompat.setTransitionName(ivGroceryItemImage, "grocery_item_image");
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
         }
 

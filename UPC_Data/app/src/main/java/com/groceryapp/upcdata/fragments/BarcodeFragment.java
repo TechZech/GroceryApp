@@ -125,6 +125,7 @@ public class BarcodeFragment extends Fragment{
                             @Override
                             public void run() {
                                 try  {
+                                    Log.i(TAG, "PRICE: " + scrap.getPriceData(groceryItem.getUpc()));
                                     allBarcodeData = scrap.getAllData(groceryItem.getUpc());
                                     scraperTitle = allBarcodeData.get(1);
                                     scraperImage = allBarcodeData.get(2);

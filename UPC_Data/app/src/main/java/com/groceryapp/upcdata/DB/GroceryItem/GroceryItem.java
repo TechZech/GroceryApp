@@ -5,6 +5,7 @@ public class GroceryItem {
     private String upc;
     private int quantity;
     private String ImageUrl;
+    private String price;
 
 
 

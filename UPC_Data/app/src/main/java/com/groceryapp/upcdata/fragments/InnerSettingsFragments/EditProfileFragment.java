@@ -142,10 +142,17 @@ public class EditProfileFragment extends Fragment {
                         }
                     });
                 }
-                Fragment newfragment = new SettingsFragment();
+                Fragment fragment = new SettingsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.flContainer, newfragment);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+
+                                R.anim.fade_in,
+                                R.anim.slide_out,
+                                R.anim.slide_in,
+                                R.anim.fade_out
+                        )
+                        .replace(R.id.flContainer, fragment);
                 fragmentTransaction.commit();
             }
         });
