@@ -6,6 +6,12 @@
     android:orientation="vertical"
     android:id="@+id/item_grocery_container">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/shape"
+        android:layout_margin="4dp"
+        />
 
     <TextView
         android:id="@+id/tvGroceryName"
@@ -31,7 +37,6 @@
         android:layout_marginTop="34dp"
         android:layout_marginEnd="70dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/black" />
 
     <TextView
@@ -67,20 +72,11 @@
         android:layout_alignParentEnd="true"
 
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="65dp"
         android:text="QTY"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="86dp"
-        android:background="?android:attr/listDivider" />
 
     <ImageView
         android:id="@+id/ivGroceryItemImage"
@@ -110,6 +106,5 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="17dp"
         app:srcCompat="@android:drawable/button_onoff_indicator_off" />
-
 
 </RelativeLayout>

@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -88,6 +89,23 @@ public class InventoryFragment extends Fragment {
         rvInventory.setLayoutManager(linearLayoutManager);
 
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                GroceryItem groceryItem = allInventoryItems.get(viewHolder.getAdapterPosition());
+                Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
+                dbHelper.removeInventoryItem(groceryItem);
+                allInventoryItems.remove(viewHolder.getAdapterPosition());
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                dbHelper.addGroceryItem(groceryItem);
+            }
+        }).attachToRecyclerView(rvInventory);
     }
 
     private void goToDetailFragment(int position){

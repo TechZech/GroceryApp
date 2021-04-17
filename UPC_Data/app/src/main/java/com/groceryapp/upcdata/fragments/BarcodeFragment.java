@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.BarcodeCamera;
 import com.groceryapp.upcdata.CaptureAct;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
@@ -144,6 +145,7 @@ public class BarcodeFragment extends Fragment{
                                     Log.i(TAG, "ImageUrl: " + scraperImage);
                                     groceryItem.setTitle(scraperTitle);
                                     groceryItem.setImageUrl(scraperImage);
+                                    groceryItem.setQuantity(1);
                                     DB.addInventoryItem(groceryItem);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -174,7 +176,8 @@ public class BarcodeFragment extends Fragment{
     }
 
     private void ManualAdd(){
-        LayoutInflater factory = LayoutInflater.from(getContext());
+        DB = new DBHelper();
+        LayoutInflater factory = LayoutInflater.from(getActivity());
 
 //text_entry is an Layout XML file containing two text field to display in alert dialog
         final View textEntryView = factory.inflate(R.layout.manual_add_dialog, null);
@@ -184,7 +187,7 @@ public class BarcodeFragment extends Fragment{
         final EditText input3 = (EditText) textEntryView.findViewById(R.id.input3);
         final EditText input4 = (EditText) textEntryView.findViewById(R.id.input4);
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Manual Add").setView(textEntryView).setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
@@ -194,7 +197,15 @@ public class BarcodeFragment extends Fragment{
                         Log.i("AlertDialog","TextEntry 2 Entered "+input2.getText().toString());
                         Log.i("AlertDialog","TextEntry 3 Entered "+input3.getText().toString());
                         Log.i("AlertDialog","TextEntry 4 Entered "+input4.getText().toString());
+                        String qtyString = input4.getText().toString();
+                        Log.i(TAG, qtyString);
+                        int qtyValue = Integer.parseInt(qtyString);
+                        Log.i(TAG, "Int value: " + qtyValue);
                         /* User clicked OK so do some stuff */
+                        if (!input1.getText().toString().isEmpty() && !input2.getText().toString().isEmpty() &&
+                                !input3.getText().toString().isEmpty() && !input4.getText().toString().isEmpty()){
+                            DB.addInventoryItem(input1.getText().toString(), input2.getText().toString(), input3.getText().toString(), qtyValue);
+                        }
                     }
                 }).setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {

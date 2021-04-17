@@ -76,9 +76,9 @@ public class DBHelper {
     }
 
 
-    public void addGroceryItem(String itemName, String UPC, String url){
+    public void addGroceryItem(String itemName, String UPC, String url, int quantity){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(UPC)
-                .set(new GroceryItem(itemName, UPC, url));
+                .set(new GroceryItem(itemName, UPC, url, quantity));
     }
 
     public void addGroceryItem(GroceryItem groceryItem){
@@ -86,9 +86,9 @@ public class DBHelper {
                 .set(groceryItem);
     }
 
-    public void addInventoryItem(String itemName, String UPC, String url){
+    public void addInventoryItem(String itemName, String UPC, String url, int quantity){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
-                .set(new GroceryItem(itemName, UPC, url));
+                .set(new GroceryItem(itemName, UPC, url, quantity));
     }
 
     public void addInventoryItem(GroceryItem groceryItem){

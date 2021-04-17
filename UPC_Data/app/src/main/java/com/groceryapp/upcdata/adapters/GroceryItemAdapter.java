@@ -27,6 +27,7 @@ import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.DetailFragment;
+import com.groceryapp.upcdata.fragments.InventoryFragment;
 
 import java.util.List;
 
@@ -156,6 +157,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                         dbHelper.removeInventoryItem(groceryItem);
                         dbHelper.addGroceryItem(groceryItem);
                         notifyDataSetChanged();
+
                     }*/
 
                 }

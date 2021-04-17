@@ -12,11 +12,12 @@ public class GroceryItem {
     public GroceryItem(){
     }
 
-    public GroceryItem(String title, String upc, String imageUrl) {
+    public GroceryItem(String title, String upc, String imageUrl, int quantity) {
         this.title = title;
         this.upc = upc;
-        this.quantity = 0;
+        this.quantity = quantity;
         this.ImageUrl = imageUrl;
+        this.price = "$10.00";
     }
 
     @Override
