@@ -138,5 +138,13 @@
         android:background="?android:attr/listDivider"
         android:layout_marginTop="470dp"/>
 
+    <Button
+        android:id="@+id/btnNutrition"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
+        android:text="View nutrition Data" />
+
 
 </RelativeLayout>

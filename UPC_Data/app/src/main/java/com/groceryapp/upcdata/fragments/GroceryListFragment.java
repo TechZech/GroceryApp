@@ -31,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
+import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
@@ -82,6 +83,9 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
+
+        EdamamService edamamService = new EdamamService();
+        edamamService.findItemFromUPC("016000275287");
     }
 
 private void goToDetailFragment(int position){

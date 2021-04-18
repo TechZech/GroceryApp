@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
-
     public final String TAG = "DBHelper";
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
