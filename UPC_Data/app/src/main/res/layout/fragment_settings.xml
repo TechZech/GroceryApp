@@ -95,7 +95,7 @@
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/instagram_home_outline_24"
-        android:text="Budget Settings"
+        android:text="Clear Inventory"
         android:textColor="@color/black"/>
 
     <Button
@@ -108,7 +108,7 @@
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/instagram_user_outline_24"
-        android:text="Health Settings"
+        android:text="Clear Grocery List"
         android:textColor="@color/black"/>
 
 

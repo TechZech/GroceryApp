@@ -113,4 +113,40 @@ public class DBHelper {
         firestore.collection("users").document(User.getUserID()).collection("Grocery List")
                 .document(groceryItem.getUpc()).update("quantity", groceryItem.getQuantity());
     }
+
+    public void RemoveAllInventory() {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Inventory").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    public void RemoveAllGroceryList() {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Grocery List")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Grocery List").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
 }

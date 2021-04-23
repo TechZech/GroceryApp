@@ -62,9 +62,9 @@ public class Scraper {
     public String getPriceData(String query) throws IOException{
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
         Elements rows = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
-                .select("div.row").select("div.col-md-12 mt-3").select("div.store-list pt-2 table-responsive").select("table.table list").select("tbody").select("tr").select("td");
-        String itemPrc = "";
-        itemPrc = rows.html();
+                .select("div.row[style]").select("div.col-md-12 mt-3").select("div.store-list pt-2 table-responsive").select("table.table list").select("tbody").select("tr");
+        String itemPrc;
+        itemPrc = rows.select("td").toString();
         return itemPrc;
     }
 

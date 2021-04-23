@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
@@ -58,7 +59,7 @@ public class SettingsFragment extends Fragment {
     String email;
     Uri userphotoUrl;
     String Username;
-
+    DBHelper DBhelper;
 
         @Nullable
         @Override
@@ -82,6 +83,7 @@ public class SettingsFragment extends Fragment {
             email = user.getEmail();
             userphotoUrl = user.getPhotoUrl();
             Username = user.getDisplayName();
+            DBhelper = new DBHelper();
 
             tvEmail.setText(email);
             tvDisplayName.setText(Username);
@@ -116,6 +118,20 @@ public class SettingsFragment extends Fragment {
                             .replace(R.id.flContainer, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+                }
+            });
+
+            btnSettings2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DBhelper.RemoveAllInventory();
+                }
+            });
+
+            btnSettings3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DBhelper.RemoveAllGroceryList();
                 }
             });
 
