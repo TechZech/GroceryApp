@@ -35,6 +35,8 @@ import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,8 +86,8 @@ public class GroceryListFragment extends Fragment {
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
 
-        EdamamService edamamService = new EdamamService();
-        edamamService.findItemFromUPC("016000275287");
+        //EdamamService edamamService = new EdamamService();
+        //edamamService.findItemFromUPC("016000275287");
     }
 
 private void goToDetailFragment(int position){

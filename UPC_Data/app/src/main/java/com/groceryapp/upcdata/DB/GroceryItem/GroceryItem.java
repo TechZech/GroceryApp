@@ -6,8 +6,6 @@ public class GroceryItem {
     private int quantity;
     private String ImageUrl;
     private String price;
-    private String timeAdded;
-
 
 
 
@@ -63,11 +61,11 @@ public class GroceryItem {
         return ImageUrl;
     }
 
-    public String getPrice(){
-        return price;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public void setPrice(String price){
-        this.price = price;
+    public String getPrice() {
+        return price;
     }
 }
