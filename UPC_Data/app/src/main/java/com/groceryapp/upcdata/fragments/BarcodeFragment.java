@@ -40,6 +40,7 @@ import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragme
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BarcodeFragment extends Fragment{
 
@@ -137,7 +138,7 @@ public class BarcodeFragment extends Fragment{
                             @Override
                             public void run() {
                                 try  {
-                                    Log.i(TAG, "PRICE: " + scrap.getPriceData(groceryItem.getUpc()));
+                                    //Log.i(TAG, "PRICE: " + scrap.getPriceData(groceryItem.getUpc()));
                                     allBarcodeData = scrap.getAllData(groceryItem.getUpc());
                                     scraperTitle = allBarcodeData.get(1);
                                     scraperImage = allBarcodeData.get(2);

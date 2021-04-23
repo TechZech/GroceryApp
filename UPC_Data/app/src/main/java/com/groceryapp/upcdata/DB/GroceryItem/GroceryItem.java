@@ -6,6 +6,8 @@ public class GroceryItem {
     private int quantity;
     private String ImageUrl;
     private String price;
+    private String timeAdded;
+
 
 
 
