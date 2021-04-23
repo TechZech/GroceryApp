@@ -88,6 +88,7 @@ public class Scraper {
         allData.add(itemURL.first().attr("src"));
 
         // SLOT 3: reserved for returning the item price (will do eventually)
+
         return allData;
     }
 }
