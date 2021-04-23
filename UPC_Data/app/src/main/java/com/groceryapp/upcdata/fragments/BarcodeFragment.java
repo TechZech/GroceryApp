@@ -40,6 +40,7 @@ import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragme
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BarcodeFragment extends Fragment{
 
