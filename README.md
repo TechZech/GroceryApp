@@ -27,7 +27,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 **Required Must-have Stories**
 
 * [X] Barcode scanner
-* [ ] Current inventory
+* [X] Current inventory
 * [ ] List of groceries you need to buy
 * [X] Login + Registration 
 
