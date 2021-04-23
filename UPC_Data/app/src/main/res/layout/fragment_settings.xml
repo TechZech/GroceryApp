@@ -81,7 +81,7 @@
         android:layout_marginTop="-6dp"
         android:layout_marginEnd="0dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/instagram_user_outline_24"
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
         android:text="Edit Profile"
         android:textColor="@color/black" />
 
@@ -94,9 +94,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/instagram_home_outline_24"
+        android:drawableLeft="@drawable/ic_baseline_delete_forever_24"
         android:text="Clear Inventory"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnSettings3"
@@ -107,9 +107,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/instagram_user_outline_24"
+        android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
         android:text="Clear Grocery List"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
 
 
 
