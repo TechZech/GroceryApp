@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.fragments.BarcodeFragment;
+import com.groceryapp.upcdata.fragments.FeedFragment;
 import com.groceryapp.upcdata.fragments.GroceryListFragment;
 import com.groceryapp.upcdata.fragments.InventoryFragment;
 import com.groceryapp.upcdata.fragments.SettingsFragment;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_inventory:
                         fragment = new InventoryFragment();
+                        break;
+                    case R.id.action_feed:
+                        fragment = new FeedFragment();
                         break;
                     case R.id.action_settings:
                         fragment = new SettingsFragment();

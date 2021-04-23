@@ -18,6 +18,11 @@
         android:title="Inventory"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_feed"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="Feed"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
         android:title="Settings"
