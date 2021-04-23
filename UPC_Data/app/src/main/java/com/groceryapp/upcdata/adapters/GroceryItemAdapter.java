@@ -88,6 +88,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         private TextView tvTitle;
         private ImageView ivGroceryItemImage;
         private RelativeLayout item_grocery_container;
+        private TextView tvPrice;
 
         private ImageView QuantityAdd;
         private ImageView QuantitySubtract;
@@ -104,6 +105,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantityAdd = itemView.findViewById(R.id.ivPlusSign);
             QuantitySubtract = itemView.findViewById(R.id.ivMinusSign);
             dbHelper = new DBHelper();
+            tvPrice = itemView.findViewById(R.id.tvPrice);
         }
 
         public void bind(GroceryItem groceryItem){
@@ -112,6 +114,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
             tvTitle.setText(groceryItem.getTitle());
             tvQuantity.setText(strQuantity);
+            tvPrice.setText(groceryItem.getPrice());
 
             Glide.with(context).load(groceryItem.getImageUrl()).into(ivGroceryItemImage);
 
