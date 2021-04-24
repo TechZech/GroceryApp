@@ -77,7 +77,7 @@
 * Food description
     * Click on a food item to learn more. Ex: bought date, initial size, how often bought
 
-## Wireframes
+## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
 
 ## Schema
