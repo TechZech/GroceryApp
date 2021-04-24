@@ -1,6 +1,6 @@
 ![Logo](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/glistappicon.png?raw=true)
 
-# Grocery List Tracker
+# GroceryList
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -10,7 +10,7 @@
 
 ## Overview
 ### Description
-Allows you to scan bar code of stuff you buy and keeps an inventory of it in a local sqllite db and user can click on the item to 'remove' it whenever it is consumed and when there are none left, alert the user. This can be used to build up a new grocery list automatically so the user has an all in 1 app for grocieries
+*GroceryList* is the new, ideal app for keeping track of your stock of groceries at home, as well as keeping track of groceries when supplies run low. Our app allows you to scan the barcode on any grocery item you buy, and keeps an inventory of it in a database. With this database, users can keep track of their stock, as well as form a grocery list of items to buy when supplies run low for certain items.
 
 ### App Evaluation
 - **Category:** Productivity
@@ -28,7 +28,7 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 
 * [X] Barcode scanner
 * [X] Current inventory
-* [ ] List of groceries you need to buy
+* [X] List of groceries you need to buy
 * [X] Login + Registration 
 
 **Optional Nice-to-have Stories**
@@ -37,31 +37,33 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 * [ ] Healthy foods tracker
 * [X] Profile
 * [ ] Weigh food - package already has weight printed on it
-* [ ] Social media aspect?
-    * 
+* [X] Social media aspect
 
 ### 2. Screen Archetypes
 
 * Scanner
-   * Get access to camera to scan the barcode of groceries
-* Grocery list
-   * RecyclerView of groceries you need to buy
+   * Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
 * Inventory
    * Checklist of groceries you currently have
+* Grocery list
+   * RecyclerView of groceries you want to buy
 * Profile
-   * User info, settings
+   * User info and settings
 * Login Screen
     * User can login to their account
 * Registration Screen
     * Create a new account
+* The Feed
+   * Social Media tab that allows user to see what other grocery items friends have bought
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* Scanner
+* Barcode Scanner
 * Grocery List
 * Inventory
+* The Feed
 * Profile
 
 **Flow Navigation** (Screen to Screen)
@@ -132,7 +134,6 @@ Allows you to scan bar code of stuff you buy and keeps an inventory of it in a l
 * Profile Screen 
 	* (Read/GET) Query logged in user object
 	* (Update/PUT) Update user profile image
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
 
 
 ### Gif Walkthrough Week 10
