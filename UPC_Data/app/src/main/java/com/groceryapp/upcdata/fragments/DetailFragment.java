@@ -44,6 +44,7 @@ public class DetailFragment extends Fragment {
     ImageView ivDetailImage;
     TextView tvDetailTitle;
     TextView tvDetailUpc;
+    TextView tvDetailPrice;
     TextView tvDetailQuantity;
     Button btnGoBack;
     Button btnNutrition;
@@ -65,6 +66,7 @@ public class DetailFragment extends Fragment {
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
         tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
         tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
+        tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
         tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
         btnGoBack = view.findViewById(R.id.btnGoBack);
         btnNutrition = view.findViewById(R.id.btnNutrition);
@@ -72,6 +74,7 @@ public class DetailFragment extends Fragment {
         Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(groceryItem.getTitle());
         tvDetailUpc.setText(groceryItem.getUpc());
+        tvDetailPrice.setText(groceryItem.getPrice());
         tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
 
         nutritionData = new ArrayList<>();
@@ -105,6 +108,7 @@ public class DetailFragment extends Fragment {
         groceryItem.setUpc(Args.getString("UPC"));
         groceryItem.setTitle(Args.getString("Title"));
         groceryItem.setImageUrl(Args.getString("ImageUrl"));
+        groceryItem.setPrice(Args.getString("Price"));
         groceryItem.setQuantity(Args.getInt("Quantity"));
         return Args.getBoolean("fromInventory");
     }
