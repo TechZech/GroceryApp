@@ -15,8 +15,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
+import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +76,27 @@ public class DBHelper {
         return allInventoryItems;
     }
 
+    public List<GroceryPost> queryFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+        firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                        FeedItems.add(document.toObject(GroceryPost.class));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return FeedItems;
+    }
+
+    public void addPostItem(GroceryPost groceryPost){
+        firestore.collection("Posts").document().set(groceryPost);
+    }
 
     public void addGroceryItem(String itemName, String UPC, String url, int quantity){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(UPC)
@@ -88,11 +111,15 @@ public class DBHelper {
     public void addInventoryItem(String itemName, String UPC, String url, int quantity){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
                 .set(new GroceryItem(itemName, UPC, url, quantity));
+
+        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), new GroceryItem(itemName, UPC, url, quantity), true ));
     }
 
     public void addInventoryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(groceryItem.getUpc())
                 .set(groceryItem);
+
+        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), groceryItem, true ));
     }
 
     public void removeGroceryItem(GroceryItem groceryItem){
@@ -112,5 +139,41 @@ public class DBHelper {
     public void UpdateGroceryListQuantity(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List")
                 .document(groceryItem.getUpc()).update("quantity", groceryItem.getQuantity());
+    }
+
+    public void RemoveAllInventory() {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Inventory").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    public void RemoveAllGroceryList() {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Grocery List")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Grocery List").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
     }
 }

@@ -21,11 +21,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
+import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.grpc.NameResolver;
 
@@ -40,6 +47,7 @@ public class DetailFragment extends Fragment {
     TextView tvDetailQuantity;
     Button btnGoBack;
     Button btnNutrition;
+    List<NutritionData> nutritionData;
 
     @Nullable
     @Override
@@ -65,6 +73,8 @@ public class DetailFragment extends Fragment {
         tvDetailTitle.setText(groceryItem.getTitle());
         tvDetailUpc.setText(groceryItem.getUpc());
         tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
+
+        nutritionData = new ArrayList<>();
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,18 +112,21 @@ public class DetailFragment extends Fragment {
     private void showNutritionData(){
         LayoutInflater factory = LayoutInflater.from(getActivity());
 
-//text_entry is an Layout XML file containing two text field to display in alert dialog
+        EdamamService edamamService = new EdamamService();
+        edamamService.findItemFromUPC("016000275287", nutritionData);
         final View View = factory.inflate(R.layout.nutrition_dialog, null);
 
-        final ImageView ivNutrition = (ImageView) View.findViewById(R.id.ivNutrition);
+        final TextView tvCalories = View.findViewById(R.id.calories);
+        //tvCalories.setText(nutritionData.get(0).getCalories());
 
+        final ImageView ivNutrition = (ImageView) View.findViewById(R.id.ivNutrition);
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setView(View).setPositiveButton("EXIT",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                        /* User clicked OK so do some stuff */
+
 
                     }
                 });

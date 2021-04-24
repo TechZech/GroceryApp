@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvInventoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/GroceryAppGreen_DARK"
+        android:gravity="center"
+        android:text="FEED"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFeed"
+        android:layout_width="match_parent"
+        android:layout_height="661dp"
+        android:layout_marginTop="70dp"
+        android:background="@color/GroceryAppGreen_LIGHT"/>
+</RelativeLayout>
