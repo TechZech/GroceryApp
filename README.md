@@ -14,11 +14,11 @@
 
 ### App Evaluation
 - **Category:** Productivity
-- **Mobile:** User can user their phone's camera to scan barcodes.
-- **Story:** User can easily keep track of their grocery list
-- **Market:** Anyone who buys groceries, generally 18+
-- **Habit:** User updates the status of what's being consumed whenever they consume groceries (at least 3 times a day)
-- **Scope:** Would need to have access to the inventories of nearby grocery stores? App is pretty clearly defined
+- **Mobile:** User can use their phone's camera to scan grocery barcodes
+- **Story:** User can easily keep track of their grocery list and inventory
+- **Market:** Targeted towards anyone who buys groceries, generally 18+
+- **Habit:** User updates the status of what's being consumed whenever they consume groceries, as well as when they buy more food
+- **Scope:** Would need to have access to a database of barcodes (Internet connection)
 
 ## Product Spec
 
