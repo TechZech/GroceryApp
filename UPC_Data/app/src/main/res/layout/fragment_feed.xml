@@ -16,7 +16,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFeed"
         android:layout_width="match_parent"
-        android:layout_height="661dp"
+        android:layout_height="530dp"
         android:layout_marginTop="70dp"
         android:background="@color/GroceryAppGreen_LIGHT"/>
 </RelativeLayout>
