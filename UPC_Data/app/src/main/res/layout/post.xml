@@ -91,4 +91,13 @@
         android:layout_marginStart="9dp"
         app:srcCompat="@drawable/glistappicon"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="17dp"
+        android:text="Add to my list" />
 </RelativeLayout>

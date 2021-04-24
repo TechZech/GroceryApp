@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
         private TextView tvUser;
         private TextView tvListName;
         private TextView tvItemName;
-
+        private Button addButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             tvUser = itemView.findViewById(R.id.tvUser);
@@ -88,6 +89,15 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
             ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
+            addButton = itemView.findViewById(R.id.addButton);
+
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                dbHelper.addGroceryItem(groceryPosts.get(getAdapterPosition()).getGroceryItem());
+                }
+            });
+
         }
 
         public void bind(GroceryPost groceryPost){
