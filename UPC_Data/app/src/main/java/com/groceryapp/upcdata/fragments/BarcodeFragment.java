@@ -51,6 +51,7 @@ public class BarcodeFragment extends Fragment{
     String productDetails = "default";
     String scraperTitle;
     String scraperImage;
+    String scraperPrice;
     ArrayList<String> allBarcodeData = new ArrayList<>();
     private String TAG = "BarcodeFragment";
 
@@ -138,14 +139,16 @@ public class BarcodeFragment extends Fragment{
                             @Override
                             public void run() {
                                 try  {
-                                    //Log.i(TAG, "PRICE: " + scrap.getPriceData(groceryItem.getUpc()));
                                     allBarcodeData = scrap.getAllData(groceryItem.getUpc());
                                     scraperTitle = allBarcodeData.get(1);
                                     scraperImage = allBarcodeData.get(2);
+                                    scraperPrice = allBarcodeData.get(3);
                                     Log.i(TAG, "Title: " + scraperTitle);
                                     Log.i(TAG, "ImageUrl: " + scraperImage);
+                                    Log.i(TAG, "Price: " + scraperPrice);
                                     groceryItem.setTitle(scraperTitle);
                                     groceryItem.setImageUrl(scraperImage);
+                                    groceryItem.setPrice(scraperPrice);
                                     groceryItem.setQuantity(1);
                                     DB.addInventoryItem(groceryItem);
                                 } catch (Exception e) {

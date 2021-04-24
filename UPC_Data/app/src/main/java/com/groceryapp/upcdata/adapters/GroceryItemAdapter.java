@@ -165,7 +165,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
                 }
             });
-
         }
     }
 }

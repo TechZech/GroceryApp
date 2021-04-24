@@ -62,9 +62,11 @@ public class Scraper {
     public String getPriceData(String query) throws IOException{
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
         Elements rows = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
-                .select("div.row").select("div.col-md-12 mt-3").select("div.store-list pt-2 table-responsive").select("table.table list").select("tbody").select("tr").select("td");
+                .select("div.row").select("div.col-md-12.mt-3").select("div.store-list.pt-2.table-responsive").select("table.table.list").select("tbody").select("tr").select("td:contains($)");
         String itemPrc = "";
         itemPrc = rows.html();
+        String[] arr = itemPrc.split(" ", 2);
+        itemPrc = arr[0];
         return itemPrc;
     }
 
@@ -88,6 +90,13 @@ public class Scraper {
         allData.add(itemURL.first().attr("src"));
 
         // SLOT 3: reserved for returning the item price (will do eventually)
+        Elements rows = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
+                .select("div.row").select("div.col-md-12.mt-3").select("div.store-list.pt-2.table-responsive").select("table.table.list").select("tbody").select("tr").select("td:contains($)");
+        String itemPrc = "";
+        itemPrc = rows.html();
+        String[] arr = itemPrc.split(" ", 2);
+        itemPrc = arr[0];
+        allData.add(itemPrc);
 
         return allData;
     }
