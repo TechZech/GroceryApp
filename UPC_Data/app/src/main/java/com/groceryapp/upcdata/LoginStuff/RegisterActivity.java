@@ -134,12 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         documentReference.collection("Grocery List").document("GroceryItemTest")
-                .set(new GroceryItem("testname", "GroceryItemTest","https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1));
-        documentReference.collection("Grocery List").document("GroceryItemTest2")
-                .set(new GroceryItem("test2", "GroceryItemTest2", "https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b",1 ));
+                .set(new GroceryItem("testname", "GroceryItemTest","https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1, "$5.00"));
+
 
         documentReference.collection("Inventory").document("GroceryItemTest")
-                .set(new GroceryItem("testname","GroceryItemTest", "https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1));
+                .set(new GroceryItem("testname","GroceryItemTest", "https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1, "$5.00"));
 
     }
 
