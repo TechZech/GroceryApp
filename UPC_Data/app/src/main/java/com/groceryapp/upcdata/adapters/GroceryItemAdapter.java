@@ -130,7 +130,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             item_grocery_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "OnClick", Toast.LENGTH_SHORT);
                     clickListener.onItemClicked(getAdapterPosition());
                 }
             });
@@ -138,7 +137,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantityAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "OnClick PlusSign", Toast.LENGTH_SHORT).show();
                     groceryItem.setQuantity(groceryItem.getQuantity()+1);
                     dbHelper.UpdateGroceryListQuantity(groceryItem);
                     dbHelper.UpdateInventoryQuantity(groceryItem);
@@ -149,7 +147,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantitySubtract.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "OnClick MinusSign", Toast.LENGTH_SHORT).show();
                     if (groceryItem.getQuantity() > 0){
                         groceryItem.setQuantity(groceryItem.getQuantity()-1);
                         dbHelper.UpdateGroceryListQuantity(groceryItem);
