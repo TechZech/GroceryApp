@@ -111,6 +111,13 @@
         android:text="Clear Grocery List"
         android:textColor="@color/black" />
 
+    <Button
+        android:id="@+id/friendsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Friends" />
 
 
 </RelativeLayout>

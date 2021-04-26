@@ -8,7 +8,7 @@
     tools:context=".BarcodeCamera">
 
     <TextView
-        android:id="@+id/tvGroceryListTitle"
+        android:id="@+id/friendTitle"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/GroceryAppGreen"

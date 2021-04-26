@@ -51,7 +51,7 @@ public class SettingsFragment extends Fragment {
     Button btnSettings1;
     Button btnSettings2;
     Button btnSettings3;
-
+    Button friendsButton1;
     private ImageView ivProfile;
     private ImageView ivEditProfile;
 
@@ -78,7 +78,7 @@ public class SettingsFragment extends Fragment {
             btnSettings1 = view.findViewById(R.id.btnSettings1);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
-
+            friendsButton1 = view.findViewById(R.id.friendsButton);
             user = FirebaseAuth.getInstance().getCurrentUser();
             email = user.getEmail();
             userphotoUrl = user.getPhotoUrl();
@@ -102,7 +102,23 @@ public class SettingsFragment extends Fragment {
                     LogOut();
                 }
             });
-
+            friendsButton1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FriendsFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
             btnSettings1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
