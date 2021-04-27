@@ -14,13 +14,13 @@
         />
 
     <TextView
-        android:id="@+id/frUser"
+        android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="9dp"
-        android:layout_toEndOf="@+id/frImage"
+        android:layout_toEndOf="@+id/tvImage"
         android:gravity="center"
         android:text="TextView"
         android:textColor="@color/black"
@@ -31,11 +31,11 @@
         android:id="@+id/justadded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/frUser"
+        android:layout_below="@+id/tvUser"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="-17dp"
-        android:layout_toEndOf="@+id/frUser"
+        android:layout_toEndOf="@+id/tvUser"
         android:gravity="center"
         android:text="just added"
         android:textColor="@color/black"
@@ -48,7 +48,7 @@
         android:layout_below="@+id/tvItemName"
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/frImage"
+        android:layout_toEndOf="@+id/tvImage"
         android:gravity="center"
         android:text="to their "
         android:textColor="@color/black"
@@ -75,7 +75,7 @@
         android:layout_below="@+id/justadded"
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/frImage"
+        android:layout_toEndOf="@+id/tvImage"
         android:text="TextView"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
@@ -83,7 +83,7 @@
         android:textStyle="italic" />
 
     <ImageView
-        android:id="@+id/frImage"
+        android:id="@+id/tvImage"
         android:layout_width="86dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"

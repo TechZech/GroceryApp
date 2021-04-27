@@ -69,11 +69,11 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
         private Button addButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            tvUser = itemView.findViewById(R.id.frUser);
+            tvUser = itemView.findViewById(R.id.tvUser);
             tvListName = itemView.findViewById(R.id.tvListName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
 
-            ivGroceryItemImage = itemView.findViewById(R.id.frImage);
+            ivGroceryItemImage = itemView.findViewById(R.id.tvImage);
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
             addButton = itemView.findViewById(R.id.acceptButton);

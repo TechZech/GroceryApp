@@ -18,7 +18,7 @@
         android:textSize="40sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvGroceryItems"
+        android:id="@+id/tvGroceryItems"
         android:layout_width="match_parent"
         android:layout_height="530dp"
         android:layout_marginTop="70dp"

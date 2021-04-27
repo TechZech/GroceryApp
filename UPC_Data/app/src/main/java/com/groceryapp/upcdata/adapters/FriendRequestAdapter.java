@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.User.FriendRequest;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -72,9 +71,9 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         private DBHelper dbHelper;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            frUser = itemView.findViewById(R.id.frUser);
+            frUser = itemView.findViewById(R.id.tvUser);
 
-            frImage = itemView.findViewById(R.id.frImage);
+            frImage = itemView.findViewById(R.id.tvImage);
           //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
             acceptButton = itemView.findViewById(R.id.acceptButton);

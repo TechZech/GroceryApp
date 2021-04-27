@@ -16,13 +16,13 @@
         android:src="@drawable/shape" />
 
     <TextView
-        android:id="@+id/frUser"
+        android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="9dp"
-        android:layout_toEndOf="@+id/frImage"
+        android:layout_toEndOf="@+id/tvImage"
         android:gravity="center"
         android:text="TextView"
         android:textColor="@color/black"
@@ -30,7 +30,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/frImage"
+        android:id="@+id/tvImage"
         android:layout_width="86dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"

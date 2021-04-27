@@ -79,7 +79,7 @@
 
 
     <ImageView
-        android:id="@+id/frImage"
+        android:id="@+id/tvImage"
         android:layout_width="86dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"

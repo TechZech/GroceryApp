@@ -1,22 +1,14 @@
 package com.groceryapp.upcdata.fragments;
 
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -24,21 +16,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
-import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
-import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.Scraper;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +63,7 @@ public class InventoryFragment extends Fragment {
             }
         };
 
-        rvInventory = view.findViewById(R.id.rvInventory);
+        rvInventory = view.findViewById(R.id.tvInventory);
         allInventoryItems = new ArrayList<>();
         adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener);
 
