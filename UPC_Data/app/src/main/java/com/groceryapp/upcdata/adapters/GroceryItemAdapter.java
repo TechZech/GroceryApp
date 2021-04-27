@@ -1,10 +1,6 @@
 package com.groceryapp.upcdata.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DBHelper;
-import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.fragments.DetailFragment;
-import com.groceryapp.upcdata.fragments.InventoryFragment;
 
 import java.util.List;
 
@@ -99,7 +89,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTitle = itemView.findViewById(R.id.tvGroceryName);
-            ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
+            ivGroceryItemImage = itemView.findViewById(R.id.frImage);
             ViewCompat.setTransitionName(ivGroceryItemImage, "grocery_item_image");
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             QuantityAdd = itemView.findViewById(R.id.ivPlusSign);

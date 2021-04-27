@@ -1,10 +1,6 @@
 package com.groceryapp.upcdata.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,23 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DBHelper;
-import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.fragments.DetailFragment;
-import com.groceryapp.upcdata.fragments.InventoryFragment;
 
 import java.util.List;
 
@@ -82,14 +69,14 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
         private Button addButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            tvUser = itemView.findViewById(R.id.tvUser);
+            tvUser = itemView.findViewById(R.id.frUser);
             tvListName = itemView.findViewById(R.id.tvListName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
 
-            ivGroceryItemImage = itemView.findViewById(R.id.ivGroceryItemImage);
+            ivGroceryItemImage = itemView.findViewById(R.id.frImage);
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
-            addButton = itemView.findViewById(R.id.addButton);
+            addButton = itemView.findViewById(R.id.acceptButton);
 
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override

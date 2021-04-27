@@ -25,7 +25,7 @@
         android:layout_marginTop="70dp"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addFriendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -45,5 +45,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Enter Friend's Name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFriends"
+        android:layout_width="408dp"
+        android:layout_height="581dp"
+        android:layout_below="@+id/divider4"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp" />
 
 </RelativeLayout>

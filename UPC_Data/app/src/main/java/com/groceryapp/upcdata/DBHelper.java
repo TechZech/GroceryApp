@@ -16,7 +16,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DB.User.Friend;
+import com.groceryapp.upcdata.DB.User.FriendRequest;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
@@ -175,5 +178,36 @@ public class DBHelper {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+    }
+    public void addFriend(String uid) {
+        Friend f = new Friend(uid);
+        firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
+                .set(f);
+        Friend ff = new Friend(User.getUserID());
+        firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
+                .set(ff);
+
+    }
+
+    public List<FriendRequest> queryFriendRequests(List<FriendRequest> allFriendRequests, FriendRequestAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Pending Friend Requests")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allFriendRequests.add(document.toObject(FriendRequest.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return allFriendRequests;
     }
 }

@@ -79,7 +79,7 @@
 
 
     <ImageView
-        android:id="@+id/ivGroceryItemImage"
+        android:id="@+id/frImage"
         android:layout_width="86dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"

@@ -1,12 +1,10 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
 import java.util.ArrayList;
@@ -47,7 +43,7 @@ public class FeedFragment extends Fragment {
         rvFeed = view.findViewById(R.id.rvFeed);
         FeedItems = new ArrayList<>();
         adapter = new GroceryPostAdapter(getContext(), FeedItems);
-        addB = view.findViewById(R.id.addButton);
+        addB = view.findViewById(R.id.acceptButton);
 
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
