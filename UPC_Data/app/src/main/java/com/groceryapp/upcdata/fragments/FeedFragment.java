@@ -47,7 +47,7 @@ public class FeedFragment extends Fragment {
 
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
-        FeedItems = dbHelper.queryFeedItems(FeedItems, adapter);
+        FeedItems = dbHelper.queryAllFeedItems(FeedItems, adapter);
 
     }
 }

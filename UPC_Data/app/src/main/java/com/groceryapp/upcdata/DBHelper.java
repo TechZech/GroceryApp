@@ -82,7 +82,7 @@ public class DBHelper {
         return allInventoryItems;
     }
 
-    public List<GroceryPost> queryFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+    public List<GroceryPost> queryAllFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -99,7 +99,23 @@ public class DBHelper {
         });
         return FeedItems;
     }
-
+    public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+        firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                        FeedItems.add(document.toObject(GroceryPost.class));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return FeedItems;
+    }
     public void addPostItem(GroceryPost groceryPost){
         firestore.collection("Posts").document().set(groceryPost);
     }
@@ -271,12 +287,34 @@ public class DBHelper {
     }
     public void declineFriend(String uid){
 
-        Friend f = new Friend(uid);
-        firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
-                .set(f);
-        Friend ff = new Friend(User.getUserID());
-        firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
-                .set(ff);
+        firestore.collection("users").document(User.getUserID()).collection("Pending Friend Requests").document(uid)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        firestore.collection("users").document(uid).collection("Sent Friend Requests").document(User.getUserID())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
 
     }
 }
