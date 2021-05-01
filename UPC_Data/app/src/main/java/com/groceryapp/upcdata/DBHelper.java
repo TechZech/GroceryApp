@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -224,5 +226,42 @@ public class DBHelper {
         });
         Log.d(TAG, list.get(0) + "In Here");
         return list.get(0);
+    }
+    public void acceptFriend(String uid){
+        firestore.collection("users").document(User.getUserID()).collection("Pending Friend Requests").document(uid)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        firestore.collection("users").document(uid).collection("Sent Friend Requests").document(User.getUserID())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        Friend f = new Friend(uid);
+        firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
+                .set(f);
+        Friend ff = new Friend(User.getUserID());
+        firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
+                .set(ff);
+
     }
 }
