@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_scanner"
         android:icon="@drawable/camera"
-        android:title="Barcode Scanner"
+        android:title="Scanner"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_groceryList"
@@ -25,6 +25,6 @@
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
-        android:title="Settings"
+        android:title="Profile"
         app:showAsAction="always" />
 </menu>
