@@ -74,7 +74,7 @@ public class GroceryListFragment extends Fragment {
 
 private void goToDetailFragment(int position){
     GroceryItem groceryItem = allGroceryItems.get(position);
-    Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
+    //Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
     Bundle bundle = new Bundle();
     bundle.putString("UPC", groceryItem.getUpc());
     bundle.putString("Title", groceryItem.getTitle());

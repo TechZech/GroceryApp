@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                             User newUser = new User(FirebaseUser.getUid(), username, FirebaseUser.getEmail());
                             createNewFirebaseUserData(newUser, FirebaseUser);
 
-                            Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
 
 
 
