@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/GroceryAppGreen"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:text="BARCODE SCANNER"
+        android:text="Barcode Scanner"
         android:textColor="#FFFFFF"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/scanBtn"

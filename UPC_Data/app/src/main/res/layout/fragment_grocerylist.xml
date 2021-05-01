@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/GroceryAppGreen_DARK"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:text="GROCERY LIST"
+        android:text="Grocery List"
         android:textColor="#FFFFFF"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvGroceryItems"
