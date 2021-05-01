@@ -5,8 +5,8 @@
     <item
         android:id="@+id/action_scanner"
         android:icon="@drawable/camera"
-        android:title="Scanner"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:title="Scanner"/>
     <item
         android:id="@+id/action_groceryList"
         android:icon="@drawable/shoppingcart"

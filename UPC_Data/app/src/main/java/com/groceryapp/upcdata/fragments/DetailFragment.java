@@ -48,6 +48,7 @@ public class DetailFragment extends Fragment {
     TextView tvDetailQuantity;
     Button btnGoBack;
     Button btnNutrition;
+    Button btnSimilarProducts;
     List<NutritionData> nutritionData;
 
     @Nullable
@@ -70,6 +71,7 @@ public class DetailFragment extends Fragment {
         tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
         btnGoBack = view.findViewById(R.id.btnGoBack);
         btnNutrition = view.findViewById(R.id.btnNutrition);
+        btnSimilarProducts = view.findViewById(R.id.btnSimilarProducts);
 
         Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(groceryItem.getTitle());
@@ -99,6 +101,14 @@ public class DetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showNutritionData();
+            }
+        });
+
+        btnSimilarProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                showSimilarProducts();
             }
         });
     }
@@ -135,5 +145,9 @@ public class DetailFragment extends Fragment {
                     }
                 });
         alert.show();
+    }
+
+    private void showSimilarProducts(){
+        // TODO: xml file is called similar_dialog.xml
     }
     }

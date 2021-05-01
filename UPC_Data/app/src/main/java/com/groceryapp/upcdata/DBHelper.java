@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -214,18 +215,22 @@ public class DBHelper {
     }
 
     public User getUser(String uid){
-        List<User> list = new ArrayList<>();
-        firestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        final com.groceryapp.upcdata.DB.User.User[] user = new User[1];
+        DocumentReference docRef = firestore.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
-                    list.add(document.toObject(User.class));
+                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    user[0] = new User(uid, document.get("username").toString(), document.get("email").toString());
                 }
+                else
+                    Log.d(TAG, "get failed with ", task.getException());
             }
         });
-        Log.d(TAG, list.get(0) + "In Here");
-        return list.get(0);
+        Log.d(TAG, user[0].getUsername());
+        return user[0];
     }
     public void acceptFriend(String uid){
         firestore.collection("users").document(User.getUserID()).collection("Pending Friend Requests").document(uid)
