@@ -269,4 +269,14 @@ public class DBHelper {
                 .set(ff);
 
     }
+    public void declineFriend(String uid){
+
+        Friend f = new Friend(uid);
+        firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
+                .set(f);
+        Friend ff = new Friend(User.getUserID());
+        firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
+                .set(ff);
+
+    }
 }

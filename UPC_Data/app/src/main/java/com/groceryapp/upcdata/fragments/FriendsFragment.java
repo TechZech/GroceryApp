@@ -35,6 +35,7 @@ public class FriendsFragment extends Fragment {
     Button addFriendButton;
     EditText friendName;
     DBHelper dbHelper;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

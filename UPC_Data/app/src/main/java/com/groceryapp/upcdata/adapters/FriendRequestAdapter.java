@@ -70,6 +70,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         private TextView frUser;
         private Button acceptButton;
         private DBHelper dbHelper;
+        private Button declineButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
@@ -78,11 +79,17 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
           //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
             acceptButton = itemView.findViewById(R.id.acceptButton);
-
+            declineButton = itemView.findViewById(R.id.declineButton);
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                //    dbHelper.acceptFriendRequest(friendRequestList.get(getAdapterPosition()).getFriendItem());
+                    dbHelper.acceptFriend(friendRequestList.get(getAdapterPosition()).getUid());
+                }
+            });
+            declineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHelper.declineFriend(friendRequestList.get(getAdapterPosition()).getUid());
                 }
             });
 
