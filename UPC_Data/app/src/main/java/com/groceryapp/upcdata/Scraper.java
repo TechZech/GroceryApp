@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Scraper {
+    private String TAG = "Scraper";
     String upcCode;
     void setCode(String s) {
         this.upcCode = s;
@@ -82,9 +83,13 @@ public class Scraper {
         ArrayList<GroceryItem> similarProducts = new ArrayList<>();
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
 
-        Elements product1Title = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12")
-                .select("div.box-content").select("div.box").select("div.row").select("div.col-md-12").select("div.related-code").select("div.upc-list")
-                .select("ul").select("li").select("div.UPCdetail").select("p");
+        Elements productTable = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12")
+                .select("div.box-content").select("div.box").select("div.row").select("div.col-md-12").select("div.related-code").select("div.upc-list").select("ul");
+
+        Elements elements = productTable.first().children();
+        //elements[0] gets first item... and so on
+        Log.i(TAG, (elements.get(0)).html());
+
 
 
 
