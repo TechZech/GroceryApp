@@ -94,10 +94,16 @@
 
     <Button
         android:id="@+id/acceptButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/totheirlist"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="17dp"
-        android:text="Add to my list" />
+        android:layout_marginStart="202dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toEndOf="@+id/tvImage"
+        android:text="Add friend"
+        android:textSize="10sp" />
+
 </RelativeLayout>
