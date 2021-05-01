@@ -21,6 +21,9 @@
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/GroceryAppGreen_DARK"
+        app:itemTextColor="#000000"
         app:menu="@menu/menu_bottom_navigation" />
 
 
