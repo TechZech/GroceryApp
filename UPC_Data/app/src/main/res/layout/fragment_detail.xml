@@ -146,5 +146,14 @@
         android:layout_marginTop="470dp"
         android:text="View nutrition Data" />
 
+    <Button
+        android:id="@+id/btnSimilarProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNutrition"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:text="View similar products" />
+
 
 </RelativeLayout>
