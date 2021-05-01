@@ -48,7 +48,6 @@ public class BarcodeFragment extends Fragment{
     Button btnManualAdd;
     DBHelper DB;
     Scraper scrap;
-    String productDetails = "default";
     String scraperTitle;
     String scraperImage;
     String scraperPrice;
@@ -91,10 +90,6 @@ public class BarcodeFragment extends Fragment{
         integrator.initiateScan();
     }
 
-    private void setProductDetails(String setThis){
-        productDetails = setThis;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -107,21 +102,6 @@ public class BarcodeFragment extends Fragment{
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 GroceryItem groceryItem = new GroceryItem();
                 groceryItem.setUpc(result.getContents());
-                /*Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            productDetails = scrap.getUPCData(groceryItem.getUpc());
-                            setProductDetails(productDetails);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            productDetails = "No Product Found";
-                            setProductDetails(productDetails);
-                        }
-                    }
-                });
-                thread.start();
-                */
                 builder.setMessage("Barcode Scanned: " + groceryItem.getUpc() + "\n\nIs This Correct?");
                 builder.setTitle("Your Barcode Has Been Scanned!");
                 builder.setPositiveButton("No, Scan Again", new DialogInterface.OnClickListener() {

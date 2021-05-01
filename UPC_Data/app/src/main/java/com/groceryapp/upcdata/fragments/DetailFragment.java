@@ -26,11 +26,14 @@ import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
 import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.Scraper;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +111,18 @@ public class DetailFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                showSimilarProducts();
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Scraper scrap = new Scraper();
+                            showSimilarProducts(scrap.getSimilarProducts(groceryItem.getUpc()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    });
+                thread.start();
             }
         });
     }
@@ -147,7 +161,11 @@ public class DetailFragment extends Fragment {
         alert.show();
     }
 
-    private void showSimilarProducts(){
+    private void showSimilarProducts(ArrayList<GroceryItem> products) throws IOException {
         // TODO: xml file is called similar_dialog.xml
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        final View View = factory.inflate(R.layout.similar_dialog, null);
+
+
     }
     }

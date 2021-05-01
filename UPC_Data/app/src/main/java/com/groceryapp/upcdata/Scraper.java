@@ -74,11 +74,17 @@ public class Scraper {
     }
 
     public ArrayList<GroceryItem> getSimilarProducts(String query) throws IOException{
+        //THIS FUNCTION GETS 3 SIMILAR PRODUCTS. If we want this to be more, just kind of like copy and past the blocks below and change variables so it makes sense and what not
         String tempTitle;
         String tempUPC;
         String tempURL;
-        int tempQuantity = 0;
+        int tempQuantity = 1;
         String tempPrice = "$0.00";
+
+        // Similar Product GroceryItems
+        GroceryItem sp1 = new GroceryItem();
+        GroceryItem sp2 = new GroceryItem();
+        GroceryItem sp3 = new GroceryItem();
 
         ArrayList<GroceryItem> similarProducts = new ArrayList<>();
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
@@ -86,12 +92,50 @@ public class Scraper {
         Elements productTable = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12")
                 .select("div.box-content").select("div.box").select("div.row").select("div.col-md-12").select("div.related-code").select("div.upc-list").select("ul");
 
-        Elements elements = productTable.first().children();
         //elements[0] gets first item... and so on
-        Log.i(TAG, (elements.get(0)).html());
+        Elements elements = productTable.first().children();
 
+        // Similar Product #1
+        tempTitle = elements.get(0).select("div.UPCdetail").select("p").html();
+        tempUPC = elements.get(0).select("div.UPCdetail").select("a").html();
+        tempURL = elements.get(0).select("a.product").select("img").attr("src");
+        Log.i(TAG, tempTitle);
+        Log.i(TAG, tempUPC);
+        Log.i(TAG, tempURL);
+        sp1.setTitle(tempTitle);
+        sp1.setUpc(tempUPC);
+        sp1.setImageUrl(tempURL);
+        sp1.setQuantity(tempQuantity);
+        sp1.setPrice(tempPrice);
+        similarProducts.add(sp1);
 
+        // Similar Product #2
+        tempTitle = elements.get(1).select("div.UPCdetail").select("p").html();
+        tempUPC = elements.get(1).select("div.UPCdetail").select("a").html();
+        tempURL = elements.get(1).select("a.product").select("img").attr("src");
+        Log.i(TAG, tempTitle);
+        Log.i(TAG, tempUPC);
+        Log.i(TAG, tempURL);
+        sp2.setTitle(tempTitle);
+        sp2.setUpc(tempUPC);
+        sp2.setImageUrl(tempURL);
+        sp2.setQuantity(tempQuantity);
+        sp2.setPrice(tempPrice);
+        similarProducts.add(sp2);
 
+        // Similar Product #3
+        tempTitle = elements.get(2).select("div.UPCdetail").select("p").html();
+        tempUPC = elements.get(2).select("div.UPCdetail").select("a").html();
+        tempURL = elements.get(2).select("a.product").select("img").attr("src");
+        Log.i(TAG, tempTitle);
+        Log.i(TAG, tempUPC);
+        Log.i(TAG, tempURL);
+        sp3.setTitle(tempTitle);
+        sp3.setUpc(tempUPC);
+        sp3.setImageUrl(tempURL);
+        sp3.setQuantity(tempQuantity);
+        sp3.setPrice(tempPrice);
+        similarProducts.add(sp3);
 
         return similarProducts;
     }
