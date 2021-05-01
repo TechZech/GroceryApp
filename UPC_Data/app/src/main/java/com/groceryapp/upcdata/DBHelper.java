@@ -210,4 +210,19 @@ public class DBHelper {
 
         return allFriendRequests;
     }
+
+    public User getUser(String uid){
+        List<User> list = new ArrayList<>();
+        firestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    list.add(document.toObject(User.class));
+                }
+            }
+        });
+        Log.d(TAG, list.get(0) + "In Here");
+        return list.get(0);
+    }
 }

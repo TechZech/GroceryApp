@@ -88,7 +88,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         }
 
         public void bind(FriendRequest fr){
-            frUser.setText(fr.getUserName());
+            frUser.setText(fr.getUid());
           //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
       //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
         }
