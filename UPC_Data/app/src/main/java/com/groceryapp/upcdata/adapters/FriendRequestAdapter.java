@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.User.FriendRequest;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
@@ -89,6 +90,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
         public void bind(FriendRequest fr){
             frUser.setText(fr.getUid());
+            dbHelper.getUser(fr.getUid());
           //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
       //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
         }

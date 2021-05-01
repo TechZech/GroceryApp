@@ -18,7 +18,7 @@ public class FriendRequest {
 
         public FriendRequest(String uid) {
             this.uid = uid;
-            this.Username = dbHelper.getUser(uid).getUsername();
+            //this.Username = dbHelper.getUser(uid).getUsername();
         }
 
         @Override
