@@ -14,13 +14,16 @@
         android:layout_height="675dp" />
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/bnve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/GroceryAppGreen_DARK"
+        app:itemTextColor="#000000"
         app:menu="@menu/menu_bottom_navigation" />
 
 

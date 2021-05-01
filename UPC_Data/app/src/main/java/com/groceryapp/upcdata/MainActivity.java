@@ -25,6 +25,7 @@ import com.groceryapp.upcdata.fragments.FeedFragment;
 import com.groceryapp.upcdata.fragments.GroceryListFragment;
 import com.groceryapp.upcdata.fragments.InventoryFragment;
 import com.groceryapp.upcdata.fragments.SettingsFragment;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.io.IOException;
 
@@ -50,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bnve);
+        BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.bnve);
+        bnve.setTextVisibility(false);
+        bnve.enableAnimation(false);
+        bnve.enableShiftingMode(false);
+        bnve.enableItemShiftingMode(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
