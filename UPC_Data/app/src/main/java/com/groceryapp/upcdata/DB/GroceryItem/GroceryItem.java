@@ -15,8 +15,8 @@ public class GroceryItem {
     public GroceryItem(String title, String upc, String imageUrl, int quantity, String price) {
         this.title = title;
         this.upc = upc;
-        this.quantity = quantity;
         this.ImageUrl = imageUrl;
+        this.quantity = quantity;
         this.price = price;
     }
 

@@ -19,6 +19,8 @@ import org.jsoup.select.Elements;
 
 import androidx.fragment.app.Fragment;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -70,6 +72,25 @@ public class Scraper {
         return itemPrc;
     }
 
+    public ArrayList<GroceryItem> getSimilarProducts(String query) throws IOException{
+        String tempTitle;
+        String tempUPC;
+        String tempURL;
+        int tempQuantity = 0;
+        String tempPrice = "$0.00";
+
+        ArrayList<GroceryItem> similarProducts = new ArrayList<>();
+        Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
+
+        Elements product1Title = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12")
+                .select("div.box-content").select("div.box").select("div.row").select("div.col-md-12").select("div.related-code").select("div.upc-list")
+                .select("ul").select("li").select("div.UPCdetail").select("p");
+
+
+
+        return similarProducts;
+    }
+
     public ArrayList<String> getAllData(String query) throws IOException{
         ArrayList<String> allData = new ArrayList<>();
         Document doc = Jsoup.connect("https://www.barcodespider.com/"+query).get();
@@ -89,7 +110,7 @@ public class Scraper {
                 .select("div.row").select("div.col-md-7").select("div.barcode-detail-container").select("div.barcode-image-container").select("div.thumb-image").select("img");
         allData.add(itemURL.first().attr("src"));
 
-        // SLOT 3: reserved for returning the item price (will do eventually)
+        // SLOT 3: reserved for returning the item price
         Elements rows = doc.select("div.main-content").select("section.body-content").select("div.container").select("div.row").select("div.col-md-12").select("div.box-content").select("div.box")
                 .select("div.row").select("div.col-md-12.mt-3").select("div.store-list.pt-2.table-responsive").select("table.table.list").select("tbody").select("tr").select("td:contains($)");
         String itemPrc = "";
