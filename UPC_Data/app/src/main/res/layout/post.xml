@@ -103,7 +103,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="9dp"
         android:layout_toEndOf="@+id/tvImage"
-        android:text="Add friend"
+        android:text="Add To GList"
         android:textSize="10sp" />
 
 </RelativeLayout>
