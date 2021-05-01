@@ -35,6 +35,7 @@
 
 * [ ] Grocery budget
 * [ ] Healthy foods tracker
+* [X] Recommended Products
 * [X] Profile
 * [ ] Weigh food - package already has weight printed on it
 * [X] Social media aspect
