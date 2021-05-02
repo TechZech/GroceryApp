@@ -99,6 +99,26 @@ public class DBHelper {
         });
         return FeedItems;
     }
+    public boolean areFriends(String FriendAUid, String FriendBUid){
+        Boolean ret = Boolean.FALSE;
+        firestore.collection("Friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                        if((Boolean) document.get(FriendBUid)){
+                            Log.d(TAG, "AREFRIENDS");
+                          //  ret = true;
+                        }
+                    }
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return ret;
+    }
     public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -106,7 +126,12 @@ public class DBHelper {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
-                        FeedItems.add(document.toObject(GroceryPost.class));
+                        /*if(areFriends(friendA,friendB)) {
+                            FeedItems.add(document.toObject(GroceryPost.class));
+                        }
+                        else{
+
+                        }*/
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -205,6 +230,11 @@ public class DBHelper {
         Friend ff = new Friend(User.getUserID());
         firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
                 .set(ff);
+
+    }
+    public void deleteFriend(String uid) {
+        firestore.collection("users").document(User.getUserID()).collection("Friends")
+                .document(uid).delete();
 
     }
 
