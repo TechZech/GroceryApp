@@ -126,12 +126,12 @@ public class DBHelper {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
-                        /*if(areFriends(friendA,friendB)) {
+                        if(areFriends(User.getUserID(), document.getId())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
                         }
                         else{
 
-                        }*/
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 }
