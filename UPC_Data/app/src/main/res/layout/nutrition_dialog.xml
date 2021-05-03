@@ -9,82 +9,123 @@
         android:src="@drawable/nutrition"/>
 
     <TextView
+        android:id="@+id/ServingSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:layout_marginStart="128dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="100g"
+        />
+
+    <TextView
         android:id="@+id/calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginStart="140dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginStart="120dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/calFromFat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="148dp"
+        android:layout_marginStart="300dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/fat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="203dp"
+        android:layout_marginStart="130dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/fatsat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="232dp"
+        android:layout_marginStart="160dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/fattrans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginStart="140dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/cholestorol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="372dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="288dp"
+        android:layout_marginStart="150dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/sodium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="410dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="318dp"
+        android:layout_marginStart="125dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/carbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="345dp"
+        android:layout_marginStart="215dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/fiber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="374dp"
+        android:layout_marginStart="160dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/sugars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="510dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="403dp"
+        android:layout_marginStart="120dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 
     <TextView
         android:id="@+id/protein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginStart="115dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         />
 </RelativeLayout>
