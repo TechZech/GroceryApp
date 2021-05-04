@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.OAuthCredential;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,8 +33,6 @@ import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
-
-import java.io.File;
 
 
 public class SettingsFragment extends Fragment {
@@ -52,6 +47,7 @@ public class SettingsFragment extends Fragment {
     Button btnSettings2;
     Button btnSettings3;
     Button friendsButton1;
+    Button friendsListButton;
     private ImageView ivProfile;
     private ImageView ivEditProfile;
 
@@ -78,7 +74,8 @@ public class SettingsFragment extends Fragment {
             btnSettings1 = view.findViewById(R.id.btnSettings1);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
-            friendsButton1 = view.findViewById(R.id.friendsButton);
+            friendsButton1 = view.findViewById(R.id.frButton);
+            friendsListButton = view.findViewById(R.id.friendsButton);
             user = FirebaseAuth.getInstance().getCurrentUser();
             email = user.getEmail();
             userphotoUrl = user.getPhotoUrl();
@@ -105,7 +102,24 @@ public class SettingsFragment extends Fragment {
             friendsButton1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new FriendsFragment();
+                    Fragment fragment = new FriendRequestFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+            friendsListButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FriendListFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                             .setCustomAnimations(

@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="3dp"
         android:backgroundTint="@color/GroceryAppGreen_DARK"
         android:text="Log Out" />
 
@@ -112,11 +112,23 @@
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/friendsButton"
+        android:id="@+id/frButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="71dp"
+        android:layout_toStartOf="@+id/friendsButton"
+        android:text="Friends Requests" />
+
+    <Button
+        android:id="@+id/friendsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="75dp"
         android:text="Friends" />
 
 

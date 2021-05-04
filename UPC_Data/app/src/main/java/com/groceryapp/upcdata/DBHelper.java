@@ -1,12 +1,8 @@
 package com.groceryapp.upcdata;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,13 +16,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.Friend;
-import com.groceryapp.upcdata.DB.User.FriendRequest;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
@@ -238,7 +233,7 @@ public class DBHelper {
 
     }
 
-    public List<FriendRequest> queryFriendRequests(List<FriendRequest> allFriendRequests, FriendRequestAdapter adapter) {
+    public List<Friend> queryFriendRequests(List<Friend> allFriendRequests, FriendRequestAdapter adapter) {
         firestore.collection("users")
                 .document(User.getUserID()).collection("Pending Friend Requests")
                 .get()
@@ -248,7 +243,7 @@ public class DBHelper {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot document : task.getResult()){
                                 Log.d(TAG, document.getId() + "=> " + document.getData());
-                                allFriendRequests.add(document.toObject(FriendRequest.class));
+                                allFriendRequests.add(document.toObject(Friend.class));
                             }
                             adapter.notifyDataSetChanged();
                         }
@@ -259,7 +254,27 @@ public class DBHelper {
 
         return allFriendRequests;
     }
+    public List<Friend> queryFriends(List<Friend> allFriends, FriendListAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Friends")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allFriends.add(document.toObject(Friend.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
 
+        return allFriends;
+    }
     public User getUser(String uid){
         final com.groceryapp.upcdata.DB.User.User[] user = new User[1];
         DocumentReference docRef = firestore.collection("users").document(uid);
