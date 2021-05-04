@@ -32,7 +32,6 @@ public class SimilarProductsFragment extends Fragment {
     Button btnAdd1, btnAdd2, btnAdd3, btnGoBackToDetail;
     String scraperTitle, scraperImage, scraperPrice;
     ArrayList<String> allBarcodeData = new ArrayList<>();
-    GroceryItem giFromDetail;
 
     @Nullable
     @Override
