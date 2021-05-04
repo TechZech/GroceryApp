@@ -47,6 +47,7 @@ public class FriendRequestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dbHelper.addFriend(friendName.getText().toString());
+                friendName.setText("");
             }
         });
 

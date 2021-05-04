@@ -43,8 +43,8 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="95dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter Friend's Name" />
+        android:hint="Enter Friend's Name"
+        android:inputType="textPersonName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFriends"
