@@ -162,10 +162,22 @@ public class DetailFragment extends Fragment {
     }
 
     private void showSimilarProducts(ArrayList<GroceryItem> products) throws IOException {
-        // TODO: xml file is called similar_dialog.xml
-        LayoutInflater factory = LayoutInflater.from(getActivity());
-        final View View = factory.inflate(R.layout.similar_dialog, null);
-
-
+        Bundle bundle = new Bundle();
+        bundle.putString("Picture1", products.get(0).getImageUrl());
+        bundle.putString("Picture2", products.get(1).getImageUrl());
+        bundle.putString("Picture3", products.get(2).getImageUrl());
+        bundle.putString("Title1", products.get(0).getTitle());
+        bundle.putString("Title2", products.get(1).getTitle());
+        bundle.putString("Title3", products.get(2).getTitle());
+        bundle.putString("UPC1", products.get(0).getUpc());
+        bundle.putString("UPC2", products.get(1).getUpc());
+        bundle.putString("UPC3", products.get(2).getUpc());
+        Fragment fragment = new SimilarProductsFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
     }

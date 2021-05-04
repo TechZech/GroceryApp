@@ -58,7 +58,6 @@ public class InventoryFragment extends Fragment {
         GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                Toast.makeText(getContext(), "OnCLick", Toast.LENGTH_SHORT).show();
                 goToDetailFragment(position);
             }
         };
@@ -92,7 +91,6 @@ public class InventoryFragment extends Fragment {
 
     private void goToDetailFragment(int position){
         GroceryItem groceryItem = allInventoryItems.get(position);
-        //Toast.makeText(getContext(), "OnClick", Toast.LENGTH_SHORT).show();
         Bundle bundle = new Bundle();
         bundle.putString("UPC", groceryItem.getUpc());
         bundle.putString("Title", groceryItem.getTitle());
