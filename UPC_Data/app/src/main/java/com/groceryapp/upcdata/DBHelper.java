@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.Document;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.Friend;
@@ -96,6 +97,7 @@ public class DBHelper {
     }
     public boolean areFriends(String FriendAUid, String FriendBUid){
         Boolean ret = Boolean.FALSE;
+        Log.d(TAG, "AREFRIENDS");
         firestore.collection("Friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -104,7 +106,10 @@ public class DBHelper {
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                         if((Boolean) document.get(FriendBUid)){
                             Log.d(TAG, "AREFRIENDS");
-                          //  ret = true;
+
+                        }
+                        else{
+                            Log.d(TAG, "ARENNOTFRIEND");
                         }
                     }
                 }
@@ -114,6 +119,14 @@ public class DBHelper {
         });
         return ret;
     }
+    /*
+    public GroceryItem createGroceryItemFromFirebase(DocumentSnapshot document){
+
+        return document.getData();
+    }
+
+*/
+
     public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -121,11 +134,9 @@ public class DBHelper {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
-                        if(areFriends(User.getUserID(), document.getId())) {
+                        GroceryPost groceryPost = document.toObject(GroceryPost.class);
+                        if(areFriends(User.getUserID(), groceryPost.getUid())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
-                        }
-                        else{
-
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -154,14 +165,14 @@ public class DBHelper {
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
                 .set(new GroceryItem(itemName, UPC, url, quantity, price));
 
-        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), new GroceryItem(itemName, UPC, url, quantity, price), true ));
+        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), new GroceryItem(itemName, UPC, url, quantity, price), true, User.getUserID() ));
     }
 
     public void addInventoryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(groceryItem.getUpc())
                 .set(groceryItem);
 
-        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), groceryItem, true ));
+        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), groceryItem, true, User.getUserID() ));
     }
 
     public void removeGroceryItem(GroceryItem groceryItem){

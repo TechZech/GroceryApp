@@ -6,7 +6,17 @@ public class GroceryPost {
     private GroceryItem groceryItem;
     private Boolean whichList;
 
-    public GroceryPost(String Username, GroceryItem groceryItem, Boolean whichList){
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    private String uid;
+
+    public GroceryPost(String Username, GroceryItem groceryItem, Boolean whichList, String uid){
         this.UserName = Username;
         this.groceryItem = groceryItem;
         this.whichList = whichList;
