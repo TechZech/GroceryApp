@@ -1,12 +1,8 @@
 package com.groceryapp.upcdata;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,13 +16,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.Friend;
-import com.groceryapp.upcdata.DB.User.FriendRequest;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
@@ -82,7 +77,7 @@ public class DBHelper {
         return allInventoryItems;
     }
 
-    public List<GroceryPost> queryFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+    public List<GroceryPost> queryAllFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -99,7 +94,48 @@ public class DBHelper {
         });
         return FeedItems;
     }
+    public boolean areFriends(String FriendAUid, String FriendBUid){
+        Boolean ret = Boolean.FALSE;
+        firestore.collection("Friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                        if((Boolean) document.get(FriendBUid)){
+                            Log.d(TAG, "AREFRIENDS");
+                          //  ret = true;
+                        }
+                    }
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return ret;
+    }
+    public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+        firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                        if(areFriends(User.getUserID(), document.getId())) {
+                            FeedItems.add(document.toObject(GroceryPost.class));
+                        }
+                        else{
 
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return FeedItems;
+    }
     public void addPostItem(GroceryPost groceryPost){
         firestore.collection("Posts").document().set(groceryPost);
     }
@@ -191,8 +227,13 @@ public class DBHelper {
                 .set(ff);
 
     }
+    public void deleteFriend(String uid) {
+        firestore.collection("users").document(User.getUserID()).collection("Friends")
+                .document(uid).delete();
 
-    public List<FriendRequest> queryFriendRequests(List<FriendRequest> allFriendRequests, FriendRequestAdapter adapter) {
+    }
+
+    public List<Friend> queryFriendRequests(List<Friend> allFriendRequests, FriendRequestAdapter adapter) {
         firestore.collection("users")
                 .document(User.getUserID()).collection("Pending Friend Requests")
                 .get()
@@ -202,7 +243,7 @@ public class DBHelper {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot document : task.getResult()){
                                 Log.d(TAG, document.getId() + "=> " + document.getData());
-                                allFriendRequests.add(document.toObject(FriendRequest.class));
+                                allFriendRequests.add(document.toObject(Friend.class));
                             }
                             adapter.notifyDataSetChanged();
                         }
@@ -213,7 +254,27 @@ public class DBHelper {
 
         return allFriendRequests;
     }
+    public List<Friend> queryFriends(List<Friend> allFriends, FriendListAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Friends")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allFriends.add(document.toObject(Friend.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
 
+        return allFriends;
+    }
     public User getUser(String uid){
         final com.groceryapp.upcdata.DB.User.User[] user = new User[1];
         DocumentReference docRef = firestore.collection("users").document(uid);
@@ -267,6 +328,38 @@ public class DBHelper {
         Friend ff = new Friend(User.getUserID());
         firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
                 .set(ff);
+
+    }
+    public void declineFriend(String uid){
+
+        firestore.collection("users").document(User.getUserID()).collection("Pending Friend Requests").document(uid)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        firestore.collection("users").document(uid).collection("Sent Friend Requests").document(User.getUserID())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
 
     }
 }

@@ -18,14 +18,14 @@ import com.groceryapp.upcdata.R;
 
 import java.util.List;
 
-public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder> {
+public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
     private Context context;
-    private List<Friend> friendRequestList;
+    private List<Friend> friends;
 
-    public FriendRequestAdapter(Context context, List<Friend> friendRequestList){
+    public FriendListAdapter(Context context, List<Friend> friendRequestList){
         this.context = context;
-        this.friendRequestList = friendRequestList;
+        this.friends = friendRequestList;
     }
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
@@ -38,68 +38,55 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.request, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.friend, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("FriendRequestAdapter", "OnBindViewHolder" + position);
-        Friend fr = friendRequestList.get(position);
+        Friend fr = friends.get(position);
         holder.bind(fr);
     }
 
     public void clear(){
-        friendRequestList.clear();
+        friends.clear();
         notifyDataSetChanged();
     }
     public void addAll(List<Friend> list){
-        friendRequestList.addAll(list);
+        friends.addAll(list);
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return friendRequestList.size();
+        return friends.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView frImage;
         private TextView frUser;
-        private Button acceptButton;
         private DBHelper dbHelper;
-        private Button declineButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
 
             frImage = itemView.findViewById(R.id.tvImage);
-          //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
+            //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
-            acceptButton = itemView.findViewById(R.id.acceptButton);
-            declineButton = itemView.findViewById(R.id.declineButton);
-            acceptButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dbHelper.acceptFriend(friendRequestList.get(getAdapterPosition()).getUid());
-                }
-            });
-            declineButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dbHelper.declineFriend(friendRequestList.get(getAdapterPosition()).getUid());
-                }
-            });
+
+
+
 
         }
 
         public void bind(Friend fr){
             frUser.setText(fr.getUid());
-       //     User u = dbHelper.getUser(fr.getUid());
-      //      frUser.setText(u.getUsername());
-          //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
-      //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
+            //     User u = dbHelper.getUser(fr.getUid());
+            //      frUser.setText(u.getUsername());
+            //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
+            //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
         }
     }
 }

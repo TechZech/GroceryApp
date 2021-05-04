@@ -143,12 +143,12 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                         dbHelper.UpdateInventoryQuantity(groceryItem);
                         notifyDataSetChanged();
                         }
-                   /* if (groceryItem.getQuantity() == 0){
+                    if (groceryItem.getQuantity() == 0){
                         dbHelper.removeInventoryItem(groceryItem);
                         dbHelper.addGroceryItem(groceryItem);
                         notifyDataSetChanged();
 
-                    }*/
+                    }
 
                 }
             });

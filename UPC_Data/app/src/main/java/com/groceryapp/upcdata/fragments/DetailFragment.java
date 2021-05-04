@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,7 +55,7 @@ public class DetailFragment extends Fragment {
     Button btnGoBack;
     Button btnNutrition;
     Button btnSimilarProducts;
-    List<NutritionData> nutritionData;
+    List<NutritionData> nutritionDataList;
 
     @Nullable
     @Override
@@ -82,7 +85,14 @@ public class DetailFragment extends Fragment {
         tvDetailPrice.setText(groceryItem.getPrice());
         tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
 
-        nutritionData = new ArrayList<>();
+        nutritionDataList = new ArrayList<>();
+        EdamamService edamamService = new EdamamService();
+        edamamService.findItemFromUPC(groceryItem.getUpc(), new EdamamService.EdamamCallback() {
+            @Override
+            public void onResponse(NutritionData nutritionData) {
+                nutritionDataList.add(nutritionData);
+            }
+        });
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,28 +147,55 @@ public class DetailFragment extends Fragment {
         return Args.getBoolean("fromInventory");
     }
 
-    private void showNutritionData(){
+    private void showNutritionData() {
         LayoutInflater factory = LayoutInflater.from(getActivity());
-
-        EdamamService edamamService = new EdamamService();
-        edamamService.findItemFromUPC("016000275287", nutritionData);
+        Typeface face = Typeface.createFromAsset(getContext().getResources().getAssets(), "helveticabold.ttf");
         final View View = factory.inflate(R.layout.nutrition_dialog, null);
+        TextView tvCalories = View.findViewById(R.id.calories);
+        TextView tvCalFromFat = View.findViewById(R.id.calFromFat);
+        TextView tvFat = View.findViewById(R.id.fat);
+        TextView tvSatFat = View.findViewById(R.id.fatsat);
+        TextView tvTransFat = View.findViewById(R.id.fattrans);
+        TextView tvChol = View.findViewById(R.id.cholestorol);
+        TextView tvSodium = View.findViewById(R.id.sodium);
+        TextView tvCarbs = View.findViewById(R.id.carbs);
+        TextView tvFiber = View.findViewById(R.id.fiber);
+        TextView tvSugars = View.findViewById(R.id.sugars);
+        TextView tvProtein = View.findViewById(R.id.protein);
 
-        final TextView tvCalories = View.findViewById(R.id.calories);
-        //tvCalories.setText(nutritionData.get(0).getCalories());
+        tvCalories.setTypeface(face);
+        tvFat.setTypeface(face);
+        tvCalFromFat.setTypeface(face);
 
-        final ImageView ivNutrition = (ImageView) View.findViewById(R.id.ivNutrition);
+        if (nutritionDataList.size() != 0) {
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setView(View).setPositiveButton("EXIT",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int whichButton) {
+            tvCalories.setText(nutritionDataList.get(0).getCalories());
+            tvCalFromFat.setText(nutritionDataList.get(0).getCalFromFat());
+            tvFat.setText(nutritionDataList.get(0).getTotalfat());
+            tvSatFat.setText(nutritionDataList.get(0).getSatfat());
+            tvTransFat.setText(nutritionDataList.get(0).getTransfat());
+            tvChol.setText(nutritionDataList.get(0).getCholesterol());
+            tvSodium.setText(nutritionDataList.get(0).getSodium());
+            tvCarbs.setText(nutritionDataList.get(0).getCarbs());
+            tvFiber.setText(nutritionDataList.get(0).getFiber());
+            tvSugars.setText(nutritionDataList.get(0).getSugars());
+            tvProtein.setText(nutritionDataList.get(0).getProtein());
+
+            final ImageView ivNutrition = (ImageView) View.findViewById(R.id.ivNutrition);
+            final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setView(View).setPositiveButton("EXIT",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
 
 
-                    }
-                });
-        alert.show();
+                        }
+                    });
+            alert.show();
+        }
+        else{
+            Toast.makeText(getContext(), "Oh No! Nutrtion Data isn't available for this item :(", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void showSimilarProducts(ArrayList<GroceryItem> products) throws IOException {
@@ -179,5 +216,10 @@ public class DetailFragment extends Fragment {
                 .replace(R.id.flContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void SetUpNutritionDialog(){
+
+
     }
     }
