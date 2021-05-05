@@ -34,6 +34,8 @@ import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 
 public class SettingsFragment extends Fragment {
 
@@ -162,43 +164,46 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null)
+            return;
+
         if (requestCode == 1000){
-            if (resultCode == Activity.RESULT_OK){
-                Uri LocalimageUri = data.getData();
+            if (resultCode == Activity.RESULT_OK) {
+                    Uri LocalimageUri = data.getData();
 
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReference();
-                StorageReference imageRef = storageRef.child(user.getUid());
-                UploadTask uploadTask = imageRef.putFile(LocalimageUri);
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.i(TAG, "Upload Success");
-                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setPhotoUri(uri)
-                                        .build();
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference storageRef = storage.getReference();
+                    StorageReference imageRef = storageRef.child(user.getUid());
+                    UploadTask uploadTask = imageRef.putFile(LocalimageUri);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.i(TAG, "Upload Success");
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setPhotoUri(uri)
+                                            .build();
 
-                                user.updateProfile(profileUpdates)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Log.d(TAG, "User Profile Updated");
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d(TAG, "User Profile Updated");
+                                                    } else {
+                                                        Log.d(TAG, "Error Updating Profile");
+                                                    }
                                                 }
-                                                else{
-                                                    Log.d(TAG, "Error Updating Profile");
-                                                }
-                                            }
-                                        });
-                            }
-                        });
-                    }
-                });
-            }
+                                            });
+                                }
+                            });
+                        }
+                    });
+                }
         }
         Glide.with(this)
                 .load(data.getData())
