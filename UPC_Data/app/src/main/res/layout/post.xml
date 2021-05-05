@@ -104,6 +104,7 @@
         android:layout_marginEnd="9dp"
         android:layout_toEndOf="@+id/tvImage"
         android:text="Add To GList"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        app:icon="@android:drawable/ic_menu_add" />
 
 </RelativeLayout>
