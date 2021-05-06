@@ -103,7 +103,7 @@ public class DBHelper {
     }
     public boolean areFriends(String FriendAUid, String FriendBUid){
         Boolean ret = Boolean.FALSE;
-        Log.d(TAG, "AREFRIENDS");
+     //   Log.d(TAG, "AREFRIENDS");
         firestore.collection("Friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -143,6 +143,7 @@ public class DBHelper {
                         GroceryPost groceryPost = document.toObject(GroceryPost.class);
                         if(areFriends(User.getUserID(), groceryPost.getUid())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
+                            adapter.notifyDataSetChanged();
                         }
                     }
                     adapter.notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,17 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.Friend;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.ArrayList;
@@ -42,12 +47,17 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
-
+        UserAdapter.OnClickListener onClickListener = new UserAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                goToDetailFragment(position);
+            }
+        };
         rvSearch = view.findViewById(R.id.rvSearch);
         rvButton = view.findViewById(R.id.rvButton);
         rvSearchText = view.findViewById(R.id.searchText);
         allSearches = new ArrayList<>();
-        adapter = new UserAdapter(getContext(), allSearches);
+        adapter = new UserAdapter(getContext(), allSearches, onClickListener);
 
         rvSearch.setAdapter(adapter);
         rvSearch.setLayoutManager(linearLayoutManager);
@@ -67,5 +77,20 @@ public class SearchFragment extends Fragment {
         });
 
 
+    }
+    private void goToDetailFragment(int position){
+        User user = allSearches.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("email", user.getEmail());
+        bundle.putString("userID", user.getUserID());
+        bundle.putString("username", user.getUsername());
+        bundle.putBoolean("fromInventory", true); //???
+        Fragment fragment = new userProfileFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
