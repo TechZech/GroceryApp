@@ -14,50 +14,57 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.User.Friend;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
+import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-public class FriendRequestFragment extends Fragment {
+public class SearchFragment extends Fragment {
     public final String TAG = "FriendsFragment";
-    private RecyclerView rvFriends;
-    protected FriendRequestAdapter adapter;
-    protected List<Friend> allFriendRequests;
-    Button addFriendButton;
-    EditText friendName;
+    private RecyclerView rvSearch;
+    protected UserAdapter adapter;
+    protected List<User> allSearches;
+    Button rvButton;
+    EditText rvSearchText;
     DBHelper dbHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friendrequests, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        addFriendButton = view.findViewById(R.id.rvButton);
-        friendName = view.findViewById(R.id.searchText);
         dbHelper = new DBHelper();
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
+
+        rvSearch = view.findViewById(R.id.rvSearch);
+        rvButton = view.findViewById(R.id.rvButton);
+        rvSearchText = view.findViewById(R.id.searchText);
+        allSearches = new ArrayList<>();
+        adapter = new UserAdapter(getContext(), allSearches);
+
+        rvSearch.setAdapter(adapter);
+        rvSearch.setLayoutManager(linearLayoutManager);
+        rvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.addFriend(friendName.getText().toString());
-                friendName.setText("");
+                dbHelper.queryUserSearch(allSearches, adapter, rvSearchText.getText().toString(), new DBHelper.MyUserSearchCallback() {
+                    @Override
+                    public void onCallback(List<User> value) {
+                        allSearches = value;
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         });
 
-        rvFriends = view.findViewById(R.id.rvSearch);
-        allFriendRequests = new ArrayList<>();
-        adapter = new FriendRequestAdapter(getContext(), allFriendRequests);
 
-        rvFriends.setAdapter(adapter);
-        rvFriends.setLayoutManager(linearLayoutManager);
-        allFriendRequests = dbHelper.queryFriendRequests(allFriendRequests, adapter);
     }
 }

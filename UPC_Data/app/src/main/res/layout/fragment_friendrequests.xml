@@ -25,7 +25,7 @@
         android:background="?android:attr/listDivider" />
 
     <Button
-        android:id="@+id/addFriendButton"
+        android:id="@+id/rvButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -35,7 +35,7 @@
         android:text="Add Friend" />
 
     <EditText
-        android:id="@+id/addFriendText"
+        android:id="@+id/searchText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -47,7 +47,7 @@
         android:inputType="textPersonName" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFriends"
+        android:id="@+id/rvSearch"
         android:layout_width="408dp"
         android:layout_height="581dp"
         android:layout_below="@+id/divider4"
