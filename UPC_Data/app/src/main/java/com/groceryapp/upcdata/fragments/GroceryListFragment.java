@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,17 +60,21 @@ public class GroceryListFragment extends Fragment {
             }
         };
 
+        GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
+
+            @Override
+            public void onSubtractClicked(int position) {
+            }
+        };
+
         rvGroceryItems = view.findViewById(R.id.tvGroceryItems);
         allGroceryItems = new ArrayList<>();
-        adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener);
+        adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener, subtractListener);
 
         rvGroceryItems.setAdapter(adapter);
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
         allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
-
-        //EdamamService edamamService = new EdamamService();
-        //edamamService.findItemFromUPC("016000275287");
     }
 
 private void goToDetailFragment(int position){

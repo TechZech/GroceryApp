@@ -62,14 +62,29 @@ public class InventoryFragment extends Fragment {
             }
         };
 
+        GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
+
+            @Override
+            public void onSubtractClicked(int position) {
+                GroceryItem groceryItem = allInventoryItems.get(position);
+                groceryItem.setInventory(false);
+                Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
+                dbHelper.removeInventoryItem(groceryItem);
+                allInventoryItems.remove(position);
+                adapter.notifyItemRemoved(position);
+                dbHelper.addGroceryItem(groceryItem);
+            }
+        };
+
         rvInventory = view.findViewById(R.id.tvInventory);
         allInventoryItems = new ArrayList<>();
-        adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener);
+        adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener, subtractListener);
 
         rvInventory.setAdapter(adapter);
         rvInventory.setLayoutManager(linearLayoutManager);
 
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -84,6 +99,7 @@ public class InventoryFragment extends Fragment {
                 dbHelper.removeInventoryItem(groceryItem);
                 allInventoryItems.remove(viewHolder.getAdapterPosition());
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                groceryItem.setInventory(false);
                 dbHelper.addGroceryItem(groceryItem);
             }
         }).attachToRecyclerView(rvInventory);

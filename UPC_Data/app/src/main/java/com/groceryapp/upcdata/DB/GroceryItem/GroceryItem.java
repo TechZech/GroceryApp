@@ -6,18 +6,22 @@ public class GroceryItem {
     private int quantity;
     private String ImageUrl;
     private String price;
-
+    private boolean isInventory;
 
 
     public GroceryItem(){
     }
 
-    public GroceryItem(String title, String upc, String imageUrl, int quantity, String price) {
+
+
+
+    public GroceryItem(String title, String upc, String imageUrl, int quantity, String price, boolean isInventory) {
         this.title = title;
         this.upc = upc;
         this.ImageUrl = imageUrl;
         this.quantity = quantity;
         this.price = price;
+        this.isInventory = isInventory;
     }
 
     @Override
@@ -67,5 +71,13 @@ public class GroceryItem {
 
     public String getPrice() {
         return price;
+    }
+
+    public boolean isInventory() {
+        return isInventory;
+    }
+
+    public void setInventory(boolean inventory) {
+        isInventory = inventory;
     }
 }
