@@ -265,9 +265,12 @@ public class DBHelper {
 
     }
     public void deleteFriend(String uid) {
+        Log.d(TAG, "UID IS" + uid);
         firestore.collection("users").document(User.getUserID()).collection("Friends")
                 .document(uid).delete();
 
+        firestore.collection("users").document(uid).collection("Friends")
+                .document(User.getUserID()).delete();
     }
     public List<User> queryUserSearch(List<User> userSearchList, UserAdapter adapter, String searchQuery, MyUserSearchCallback myCallback) {
         Log.d(TAG, "CALLING");

@@ -119,21 +119,21 @@
         android:layout_marginTop="470dp"/>
 
     <Button
-        android:id="@+id/btnNutrition"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
-        android:text="View nutrition Data" />
-
-    <Button
-        android:id="@+id/btnSimilarProducts"
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnNutrition"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
+        android:text="Add Friend" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
-        android:text="View similar products" />
+        android:text="Delete Friend" />
 
 
 </RelativeLayout>
