@@ -17,9 +17,9 @@ public class User {
 
     //This constructor will be used when creating a new user
     public User(String userid, String name, String email){
-        userID = userid;
-        Username = name;
-        Email = email;
+        this.userID = userid;
+        this.Username = name;
+        this.Email = email;
     }
 
     public User(FirebaseAuth firebaseAuth){

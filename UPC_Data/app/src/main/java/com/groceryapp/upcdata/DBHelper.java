@@ -289,7 +289,7 @@ public class DBHelper {
                                 }
 
                                 Log.d(TAG,sb.toString());
-                                if(holder.getUsername().toString()==searchQuery){
+                                if(holder.getUsername().equals(searchQuery)){
                                     Log.d(TAG,  holder.getUsername() + "==" + searchQuery);
                                     userSearchList.add(document.toObject(User.class));
                                     myCallback.onCallback(userSearchList);

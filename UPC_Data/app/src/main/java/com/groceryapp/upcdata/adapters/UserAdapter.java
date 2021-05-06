@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.Friend;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
@@ -43,7 +45,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
-
+        User user = users.get(position);
+        holder.bind(user);
     }
 
 
@@ -79,8 +82,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         }
 
-        public void bind(Friend fr){
-            frUser.setText(fr.getuserID());
+        public void bind(User fr){
+            Log.d("BIND","BIND");
+            dbHelper.getUserFromUid(fr.getUserID(), new DBHelper.MyCallback() {
+                @Override
+                public void onCallback(String value) {
+                    frUser.setText(value);
+                }
+            });
+
             //     User u = dbHelper.getUser(fr.getUid());
             //      frUser.setText(u.getUsername());
             //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());

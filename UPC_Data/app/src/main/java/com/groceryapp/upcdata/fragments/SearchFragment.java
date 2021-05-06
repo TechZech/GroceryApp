@@ -58,6 +58,7 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onCallback(List<User> value) {
                         allSearches = value;
+
                         adapter.notifyDataSetChanged();
                     }
                 });
