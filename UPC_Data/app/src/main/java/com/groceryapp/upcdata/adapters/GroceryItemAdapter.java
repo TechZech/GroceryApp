@@ -157,10 +157,6 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                         if (!groceryItem.isInventory())
                             notifyDataSetChanged();
 
-
-                       // dbHelper.removeInventoryItem(groceryItem);
-                       // dbHelper.addGroceryItem(groceryItem);
-                        //notifyItemRemoved(getAdapterPosition());
                         subtractListener.onSubtractClicked(getAdapterPosition());
                     }
 

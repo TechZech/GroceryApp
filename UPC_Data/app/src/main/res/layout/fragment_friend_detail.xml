@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnRemoveFriend"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/GroceryAppGreen_DARK"
+        android:text="Remove Friend" />
+
+    <RelativeLayout
+        android:id="@+id/rlUpper"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:background="@color/GroceryAppGreen_DARK">
+
+        <TextView
+            android:id="@+id/tvFriendName"
+            android:layout_width="241dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/ivFriendPic"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="85dp"
+            android:gravity="center"
+            android:text="Display Name"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvFriendEmail"
+            android:layout_width="241dp"
+            android:layout_height="44dp"
+            android:layout_below="@+id/tvFriendName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="85dp"
+            android:gravity="center"
+            android:text="sampleemail@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivFriendPic"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="143dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -42,7 +42,11 @@ public class DBHelper {
     public interface MyUserSearchCallback {
         void onCallback(List<com.groceryapp.upcdata.DB.User.User> value);
     }
-    public List<GroceryItem> queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter){
+    public interface GroceryItemQueryCallback{
+        void OnCallback(List<GroceryItem> list, String price);
+    }
+
+    public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
                 .get()
@@ -50,18 +54,22 @@ public class DBHelper {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
+                            double totalPrice = 0.00;
                             for (DocumentSnapshot document : task.getResult()){
                                 Log.d(TAG, document.getId() + "=> " + document.getData());
-                                allGroceryItems.add(document.toObject(GroceryItem.class));
+                                GroceryItem groceryItem = document.toObject(GroceryItem.class);
+                                allGroceryItems.add(groceryItem);
+                                if (groceryItem.getPrice() != "")
+                                    totalPrice+=groceryItem.returnPriceAsFloat();
                             }
+
+                            callback.OnCallback(allGroceryItems, Double.toString(totalPrice));
                             adapter.notifyDataSetChanged();
                         }
                         else
                             Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
-
-        return allGroceryItems;
     }
 
     public List<GroceryItem> queryInventoryItems(List<GroceryItem> allInventoryItems, GroceryItemAdapter adapter){
@@ -163,10 +171,10 @@ public class DBHelper {
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                         GroceryPost groceryPost = document.toObject(GroceryPost.class);
-                       if(areFriends(User.getUserID(), groceryPost.user.getUserID())) {
+                        /*if(areFriends(User.getUserID(), groceryPost.user.getUserID())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
                             adapter.notifyDataSetChanged();
-                        }
+                        }*/
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -188,6 +196,7 @@ public class DBHelper {
     public void addGroceryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(groceryItem.getUpc())
                 .set(groceryItem);
+        Log.d(TAG, "GroceryItem Added");
     }
 
     public void addInventoryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
