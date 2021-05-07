@@ -29,6 +29,7 @@ public class DBHelper {
     public final String TAG = "DBHelper";
     private String returnusername;
     private String returnemail;
+    Boolean ret = Boolean.FALSE;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -102,7 +103,7 @@ public class DBHelper {
         return FeedItems;
     }
     public boolean areFriends(String FriendAUid, String FriendBUid){
-        Boolean ret = Boolean.FALSE;
+
      //   Log.d(TAG, "AREFRIENDS");
         firestore.collection("users")
                 .document(User.getUserID()).collection("Friends")
@@ -112,7 +113,34 @@ public class DBHelper {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot document : task.getResult()){
-                                Log.d(TAG, document.getId() + "WT=> " + document.getData());
+                         //       Log.d(TAG, document.getId() + "=> " + document.getData());
+                                getUserFromUid(FriendBUid, new MyCallback() {
+
+                                    @Override
+                                    public void onCallback(String value1) {
+                                        Log.d(TAG, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                                        getUserFromUid(FriendBUid, new MyCallback() {
+                                            @Override
+                                            public void onCallback(String value) {
+                                                if(value1.equals(value)){
+                                                    ret = Boolean.TRUE;
+                                                    Log.d(TAG, "ARE FRIENDS???????????????????????????");
+                                                }
+                                                else{
+                                                    Log.d(TAG, "NOT FRIENDS??????????????????????" + value1 + " != " + value);
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                if(FriendBUid.equals(document.get("userID"))){
+                                    ret = Boolean.TRUE;
+                                    Log.d(TAG, "ARE FRIENDS");
+
+                                }
+                                else{
+                                    Log.d(TAG, FriendBUid + "!=" + FriendAUid + "!=" +document.get("userID"));
+                                }
 
                             }
 
