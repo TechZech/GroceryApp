@@ -12,7 +12,7 @@ public class GroceryPost {
         this.user = user;
     }
 
-    public User user;
+    public User user = new User("test","test","test");
     public GroceryItem groceryItem;
     private Boolean whichList;
 
