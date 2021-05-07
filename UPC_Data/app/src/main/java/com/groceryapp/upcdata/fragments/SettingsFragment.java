@@ -157,7 +157,7 @@ public class SettingsFragment extends Fragment {
             btnSettings2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DBhelper.RemoveAllInventory();
+
                 }
             });
 
@@ -165,7 +165,7 @@ public class SettingsFragment extends Fragment {
             btnSettings3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DBhelper.RemoveAllGroceryList();
+
                 }
             });
 
