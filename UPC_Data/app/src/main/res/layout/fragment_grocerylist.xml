@@ -20,7 +20,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvGroceryItems"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
+        android:layout_height="510dp"
         android:layout_marginTop="70dp"
         android:background="@color/white" />
 
@@ -30,5 +30,25 @@
         android:layout_height="1dp"
         android:layout_marginTop="70dp"
         android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="580dp"
+        android:text="Total Price: $"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        />
+
+    <TextView
+        android:id="@+id/tvTotalPrice"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="580dp"
+        android:text="0.00"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
 
 </RelativeLayout>
