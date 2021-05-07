@@ -60,7 +60,7 @@ public class DBHelper {
                                 GroceryItem groceryItem = document.toObject(GroceryItem.class);
                                 allGroceryItems.add(groceryItem);
                                 if (groceryItem.getPrice() != "")
-                                    totalPrice+=groceryItem.returnPriceAsFloat();
+                                    totalPrice+=(groceryItem.returnPriceAsFloat()*groceryItem.getQuantity());
                             }
 
                             callback.OnCallback(allGroceryItems, Double.toString(totalPrice));
