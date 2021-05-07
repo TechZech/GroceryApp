@@ -88,7 +88,7 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
         }
 
         public void bind(GroceryPost groceryPost){
-            tvUser.setText(groceryPost.getUserName());
+            tvUser.setText(groceryPost.user.getUsername());
             tvItemName.setText(groceryPost.getGroceryItem().getTitle());
             if (groceryPost.getWhichList())
                 tvListName.setText("Inventory");

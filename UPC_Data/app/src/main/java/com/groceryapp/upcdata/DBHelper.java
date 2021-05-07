@@ -21,19 +21,26 @@ import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.List;
 
 public class DBHelper {
     public final String TAG = "DBHelper";
-
+    private String returnusername;
+    private String returnemail;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     public DBHelper(){
     }
-
+    public interface MyCallback {
+        void onCallback(String value);
+    }
+    public interface MyUserSearchCallback {
+        void onCallback(List<com.groceryapp.upcdata.DB.User.User> value);
+    }
     public List<GroceryItem> queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
@@ -96,24 +103,30 @@ public class DBHelper {
     }
     public boolean areFriends(String FriendAUid, String FriendBUid){
         Boolean ret = Boolean.FALSE;
-        firestore.collection("Friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (DocumentSnapshot document : task.getResult()){
-                        Log.d(TAG, document.getId() + "=> " + document.getData());
-                        if((Boolean) document.get(FriendBUid)){
-                            Log.d(TAG, "AREFRIENDS");
-                          //  ret = true;
+     //   Log.d(TAG, "AREFRIENDS");
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Friends")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "WT=> " + document.getData());
+
+                            }
+
                         }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                     }
-                }
-                else
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-            }
-        });
+                });
+
+
+
         return ret;
     }
+
     public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -121,11 +134,10 @@ public class DBHelper {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
-                        if(areFriends(User.getUserID(), document.getId())) {
+                        GroceryPost groceryPost = document.toObject(GroceryPost.class);
+                       if(areFriends(User.getUserID(), groceryPost.user.getUserID())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
-                        }
-                        else{
-
+                            adapter.notifyDataSetChanged();
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -140,9 +152,9 @@ public class DBHelper {
         firestore.collection("Posts").document().set(groceryPost);
     }
 
-    public void addGroceryItem(String itemName, String UPC, String url, int quantity, String price){
+    public void addGroceryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
         firestore.collection("users").document(User.getUserID()).collection("Grocery List").document(UPC)
-                .set(new GroceryItem(itemName, UPC, url, quantity, price));
+                .set(new GroceryItem(itemName, UPC, url, quantity, price, isInventory));
     }
 
     public void addGroceryItem(GroceryItem groceryItem){
@@ -150,18 +162,18 @@ public class DBHelper {
                 .set(groceryItem);
     }
 
-    public void addInventoryItem(String itemName, String UPC, String url, int quantity, String price){
+    public void addInventoryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
-                .set(new GroceryItem(itemName, UPC, url, quantity, price));
+                .set(new GroceryItem(itemName, UPC, url, quantity, price, isInventory));
 
-        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), new GroceryItem(itemName, UPC, url, quantity, price), true ));
+        // GROCERY POST COMMENT  firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), new GroceryItem(itemName, UPC, url, quantity, price, isInventory), true, User.getUserID() ));
     }
 
     public void addInventoryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(groceryItem.getUpc())
                 .set(groceryItem);
 
-        firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), groceryItem, true ));
+        // GROCERY POST COMMENT firestore.collection("Posts").document().set(new GroceryPost(User.getUsername(), groceryItem, true, User.getUserID() ));
     }
 
     public void removeGroceryItem(GroceryItem groceryItem){
@@ -219,20 +231,82 @@ public class DBHelper {
                 });
     }
     public void addFriend(String uid) {
-        Friend f = new Friend(uid);
-        firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
-                .set(f);
-        Friend ff = new Friend(User.getUserID());
+
+        getUserFromUid(uid, new MyCallback() {
+            @Override
+            public void onCallback(String value1) {
+                getEmailFromUid(uid, new MyCallback() {
+                    @Override
+                    public void onCallback(String value) {
+                        Friend f = new Friend(uid,value1, value);
+                        firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
+                                .set(f);
+                    }
+                });
+
+            }
+        });
+
+      //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
+
+
+
+     //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
+
+        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail());
         firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
                 .set(ff);
 
     }
     public void deleteFriend(String uid) {
+        Log.d(TAG, "UID IS" + uid);
         firestore.collection("users").document(User.getUserID()).collection("Friends")
                 .document(uid).delete();
 
+        firestore.collection("users").document(uid).collection("Friends")
+                .document(User.getUserID()).delete();
     }
+    public List<User> queryUserSearch(List<User> userSearchList, UserAdapter adapter, String searchQuery, MyUserSearchCallback myCallback) {
+        Log.d(TAG, "CALLING");
+        firestore.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                User holder = document.toObject(User.class);
+                                Log.d(TAG,  holder.getUsername() + "==" + searchQuery);
+                                Log.d(TAG, "CLASSES: "+ holder.getUsername().getClass() + "==" + searchQuery.getClass());
+                                StringBuilder sb = new StringBuilder();
+                                char[] letters = holder.getUsername().toCharArray();
 
+                                for (char ch : letters) {
+                                    sb.append((byte) ch);
+                                }
+
+                                Log.d(TAG,sb.toString());
+                                if(holder.getUsername().equals(searchQuery)){
+                                    Log.d(TAG,  holder.getUsername() + "==" + searchQuery);
+                                    userSearchList.add(document.toObject(User.class));
+                                    myCallback.onCallback(userSearchList);
+                                    adapter.notifyDataSetChanged();
+                                }
+                                else{
+                                    Log.d(TAG, "NO MATCH BECAUSE " + holder.getUsername() + " != " + searchQuery);
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return userSearchList;
+    }
     public List<Friend> queryFriendRequests(List<Friend> allFriendRequests, FriendRequestAdapter adapter) {
         firestore.collection("users")
                 .document(User.getUserID()).collection("Pending Friend Requests")
@@ -293,6 +367,55 @@ public class DBHelper {
         Log.d(TAG, user[0].getUsername());
         return user[0];
     }
+    public String getUserFromUid(String uid, MyCallback myCallback){
+        DocumentReference docRef = firestore.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        Friend f = document.toObject(Friend.class);
+                        returnusername = document.getString("username");
+                        myCallback.onCallback(returnusername);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        return returnusername;
+    }
+    public String getEmailFromUid(String uid, MyCallback myCallback){
+
+        DocumentReference docRef = firestore.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        Friend f = document.toObject(Friend.class);
+
+                        returnemail = document.getString("email");
+                        myCallback.onCallback(returnemail);
+                        Log.d(TAG,"EMAIL IS: " + returnemail);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        return returnemail;
+    }
     public void acceptFriend(String uid){
         firestore.collection("users").document(User.getUserID()).collection("Pending Friend Requests").document(uid)
                 .delete()
@@ -322,10 +445,22 @@ public class DBHelper {
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
-        Friend f = new Friend(uid);
-        firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
-                .set(f);
-        Friend ff = new Friend(User.getUserID());
+        getUserFromUid(uid, new MyCallback() {
+            @Override
+            public void onCallback(String value1) {
+                getEmailFromUid(uid, new MyCallback() {
+                    @Override
+                    public void onCallback(String value) {
+                        Friend f = new Friend(uid, value1, value);
+                        firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
+                                .set(f);
+                    }
+                });
+
+            }
+        });
+
+        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail());
         firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
                 .set(ff);
 

@@ -23,6 +23,7 @@ import java.util.List;
 
 public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
 
+
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
     }
@@ -31,17 +32,23 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         void onItemClicked(int position);
     }
 
+    public interface OnClickListenerQuantitySubtract{
+        void onSubtractClicked(int position);
+    }
+
     OnLongClickListener longClickListener;
     OnClickListener clickListener;
+    OnClickListenerQuantitySubtract subtractListener;
 
     private Context context;
     private List<GroceryItem> groceryItems;
 
-    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener){
+    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener, OnClickListenerQuantitySubtract subtractListener){
         this.context = context;
         this.groceryItems = groceryItems;
         this.longClickListener = longClickListener;
         this.clickListener = clickListener;
+        this.subtractListener = subtractListener;
     }
 
     @NonNull
@@ -137,17 +144,24 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantitySubtract.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (groceryItem.getQuantity() > 0){
+                    if (groceryItem.getQuantity() > 1){
                         groceryItem.setQuantity(groceryItem.getQuantity()-1);
                         dbHelper.UpdateGroceryListQuantity(groceryItem);
                         dbHelper.UpdateInventoryQuantity(groceryItem);
                         notifyDataSetChanged();
                         }
-                    if (groceryItem.getQuantity() == 0){
-                        dbHelper.removeInventoryItem(groceryItem);
-                        dbHelper.addGroceryItem(groceryItem);
-                        notifyDataSetChanged();
+                    else if (groceryItem.getQuantity() == 1){
+                        groceryItem.setQuantity(groceryItem.getQuantity()-1);
+                        dbHelper.UpdateGroceryListQuantity(groceryItem);
+                        dbHelper.UpdateInventoryQuantity(groceryItem);
+                        if (!groceryItem.isInventory())
+                            notifyDataSetChanged();
 
+
+                       // dbHelper.removeInventoryItem(groceryItem);
+                       // dbHelper.addGroceryItem(groceryItem);
+                        //notifyItemRemoved(getAdapterPosition());
+                        subtractListener.onSubtractClicked(getAdapterPosition());
                     }
 
                 }

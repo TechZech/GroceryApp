@@ -2,14 +2,11 @@ package com.groceryapp.upcdata.fragments;
 
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,30 +14,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
 import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.Scraper;
-import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
-
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.grpc.NameResolver;
 
 public class DetailFragment extends Fragment {
 
@@ -76,8 +64,8 @@ public class DetailFragment extends Fragment {
         tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
         tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
         btnGoBack = view.findViewById(R.id.btnGoBack);
-        btnNutrition = view.findViewById(R.id.btnNutrition);
-        btnSimilarProducts = view.findViewById(R.id.btnSimilarProducts);
+        btnNutrition = view.findViewById(R.id.addButton);
+        btnSimilarProducts = view.findViewById(R.id.deleteButton);
 
         Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(groceryItem.getTitle());

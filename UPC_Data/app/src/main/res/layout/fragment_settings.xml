@@ -126,32 +126,28 @@
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/frButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSettings3"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="69dp"
-        android:layout_toStartOf="@+id/friendsButton"
-        android:text="Requests"
-        app:icon="@drawable/ic_baseline_emoji_people_24" />
-
-    <Button
         android:id="@+id/friendsButton"
         android:layout_width="142dp"
         android:layout_height="52dp"
         android:layout_below="@+id/btnSettings3"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="69dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="62dp"
         android:text="Friends"
         app:icon="@drawable/ic_baseline_people_alt_24" />
+
+    <Button
+        android:id="@+id/searchRequestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginBottom="69dp"
+        android:text="Search" />
 
 
 </RelativeLayout>

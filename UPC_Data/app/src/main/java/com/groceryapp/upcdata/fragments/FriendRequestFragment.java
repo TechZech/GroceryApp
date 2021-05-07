@@ -20,6 +20,7 @@ import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FriendRequestFragment extends Fragment {
     public final String TAG = "FriendsFragment";
@@ -40,8 +41,8 @@ public class FriendRequestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        addFriendButton = view.findViewById(R.id.addFriendButton);
-        friendName = view.findViewById(R.id.addFriendText);
+        addFriendButton = view.findViewById(R.id.rvButton);
+        friendName = view.findViewById(R.id.searchText);
         dbHelper = new DBHelper();
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,7 @@ public class FriendRequestFragment extends Fragment {
             }
         });
 
-        rvFriends = view.findViewById(R.id.rvFriends);
+        rvFriends = view.findViewById(R.id.rvSearch);
         allFriendRequests = new ArrayList<>();
         adapter = new FriendRequestAdapter(getContext(), allFriendRequests);
 

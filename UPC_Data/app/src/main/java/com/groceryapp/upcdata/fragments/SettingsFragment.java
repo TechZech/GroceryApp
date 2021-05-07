@@ -34,6 +34,8 @@ import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 
 public class SettingsFragment extends Fragment {
 
@@ -46,10 +48,10 @@ public class SettingsFragment extends Fragment {
     Button btnSettings1;
     Button btnSettings2;
     Button btnSettings3;
-    Button friendsButton1;
     Button friendsListButton;
     private ImageView ivProfile;
     private ImageView ivEditProfile;
+    Button searchRequestButton;
 
     FirebaseUser user;
     String email;
@@ -74,8 +76,9 @@ public class SettingsFragment extends Fragment {
             btnSettings1 = view.findViewById(R.id.btnSettings1);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
-            friendsButton1 = view.findViewById(R.id.frButton);
             friendsListButton = view.findViewById(R.id.friendsButton);
+            searchRequestButton = view.findViewById(R.id.searchRequestButton);
+
             user = FirebaseAuth.getInstance().getCurrentUser();
             email = user.getEmail();
             userphotoUrl = user.getPhotoUrl();
@@ -99,23 +102,7 @@ public class SettingsFragment extends Fragment {
                     LogOut();
                 }
             });
-            friendsButton1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Fragment fragment = new FriendRequestFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                            .setCustomAnimations(
-                                    R.anim.slide_in,
-                                    R.anim.fade_out,
-                                    R.anim.fade_in,
-                                    R.anim.slide_out
-                            )
-                            .replace(R.id.flContainer, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });
+
             friendsListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -150,13 +137,30 @@ public class SettingsFragment extends Fragment {
                     fragmentTransaction.commit();
                 }
             });
-
+            searchRequestButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new SearchFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
             btnSettings2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DBhelper.RemoveAllInventory();
                 }
             });
+
 
             btnSettings3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -180,43 +184,46 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null)
+            return;
+
         if (requestCode == 1000){
-            if (resultCode == Activity.RESULT_OK){
-                Uri LocalimageUri = data.getData();
+            if (resultCode == Activity.RESULT_OK) {
+                    Uri LocalimageUri = data.getData();
 
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReference();
-                StorageReference imageRef = storageRef.child(user.getUid());
-                UploadTask uploadTask = imageRef.putFile(LocalimageUri);
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.i(TAG, "Upload Success");
-                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setPhotoUri(uri)
-                                        .build();
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference storageRef = storage.getReference();
+                    StorageReference imageRef = storageRef.child(user.getUid());
+                    UploadTask uploadTask = imageRef.putFile(LocalimageUri);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.i(TAG, "Upload Success");
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setPhotoUri(uri)
+                                            .build();
 
-                                user.updateProfile(profileUpdates)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Log.d(TAG, "User Profile Updated");
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d(TAG, "User Profile Updated");
+                                                    } else {
+                                                        Log.d(TAG, "Error Updating Profile");
+                                                    }
                                                 }
-                                                else{
-                                                    Log.d(TAG, "Error Updating Profile");
-                                                }
-                                            }
-                                        });
-                            }
-                        });
-                    }
-                });
-            }
+                                            });
+                                }
+                            });
+                        }
+                    });
+                }
         }
         Glide.with(this)
                 .load(data.getData())

@@ -130,6 +130,7 @@ public class BarcodeFragment extends Fragment{
                                     groceryItem.setImageUrl(scraperImage);
                                     groceryItem.setPrice(scraperPrice);
                                     groceryItem.setQuantity(1);
+                                    groceryItem.setInventory(true);
                                     DB.addInventoryItem(groceryItem);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -188,7 +189,7 @@ public class BarcodeFragment extends Fragment{
                         /* User clicked OK so do some stuff */
                         if (!input1.getText().toString().isEmpty() && !input2.getText().toString().isEmpty() &&
                                 !input3.getText().toString().isEmpty() && !input4.getText().toString().isEmpty()){
-                            DB.addInventoryItem(input1.getText().toString(), input2.getText().toString(), "0", qtyValue, input3.getText().toString());
+                            DB.addInventoryItem(input1.getText().toString(), input2.getText().toString(), "0", qtyValue, input3.getText().toString(), true);
                         }
                     }
                 }).setNegativeButton("Cancel",

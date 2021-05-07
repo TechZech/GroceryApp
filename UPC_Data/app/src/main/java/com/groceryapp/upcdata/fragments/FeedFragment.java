@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
@@ -24,7 +26,7 @@ public class FeedFragment extends Fragment {
     public final String TAG = "FeedFragment";
 
     private RecyclerView rvFeed;
-    private Button addB;
+    private Button addGroceryPost;
     protected GroceryPostAdapter adapter;
     protected List<GroceryPost> FeedItems;
     DBHelper dbHelper = new DBHelper();
@@ -43,8 +45,20 @@ public class FeedFragment extends Fragment {
         rvFeed = view.findViewById(R.id.rvFeed);
         FeedItems = new ArrayList<>();
         adapter = new GroceryPostAdapter(getContext(), FeedItems);
-        addB = view.findViewById(R.id.acceptButton);
-
+        addGroceryPost = view.findViewById(R.id.testButton);
+        addGroceryPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GroceryItem gp = new GroceryItem("Test", "12345", "www.google.com", 5, "4.99", true);
+                    User u = new User();
+                    u.setEmail("test");
+                    u.setUserID("test");
+                  //  u.setUid("TEST");
+                    u.setUsername("test");
+                GroceryPost gp2 = new GroceryPost(gp, u);
+                dbHelper.addPostItem(gp2);
+            }
+        });
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
         FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter);

@@ -5,27 +5,33 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.Friend;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
 import java.util.List;
 
-public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
+    private final OnClickListener clickListener;
     private Context context;
-    private List<Friend> friends;
+    private List<User> users;
+    private RelativeLayout rl;
 
-    public FriendListAdapter(Context context, List<Friend> friendRequestList){
+    public UserAdapter(Context context, List<User> userList, OnClickListener clickListener){
         this.context = context;
-        this.friends = friendRequestList;
+        this.users = userList;
+        this.clickListener = clickListener;
     }
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
@@ -39,28 +45,29 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.friend, parent, false);
+        rl = view.findViewById(R.id.post_container);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("FriendRequestAdapter", "OnBindViewHolder" + position);
-        Friend fr = friends.get(position);
-        holder.bind(fr);
+    public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
+        User user = users.get(position);
+        holder.bind(user);
     }
 
+
     public void clear(){
-        friends.clear();
+        users.clear();
         notifyDataSetChanged();
     }
-    public void addAll(List<Friend> list){
-        friends.addAll(list);
+    public void addAll(List<User> list){
+        users.addAll(list);
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return friends.size();
+        return users.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -71,18 +78,29 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
-
             frImage = itemView.findViewById(R.id.tvImage);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
+                rl = itemView.findViewById(R.id.post_container);
+            }
 
 
+        public void bind(User fr){
+            Log.d("BIND","BIND");
+            dbHelper.getUserFromUid(fr.getUserID(), new DBHelper.MyCallback() {
+                @Override
+                public void onCallback(String value) {
+                    frUser.setText(value);
+                }
+            });
 
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
 
-        }
-
-        public void bind(Friend fr){
-            frUser.setText(fr.getusername());
             //     User u = dbHelper.getUser(fr.getUid());
             //      frUser.setText(u.getUsername());
             //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());

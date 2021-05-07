@@ -42,15 +42,6 @@
         android:gravity="center"
         android:text="Price" />
 
-    <TextView
-        android:id="@+id/tvDetailQuantity"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="420dp"
-        android:gravity="center"
-        android:text="Quantity" />
-
     <Button
         android:id="@+id/btnGoBack"
         android:layout_width="80dp"
@@ -66,9 +57,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="245dp"
-        android:text="TITLE"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="USER"
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="50dp"
@@ -77,9 +68,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="320dp"
-        android:text="UPC"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="UID"
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="50dp"
@@ -88,20 +79,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="370dp"
-        android:text="PRICE"
-        android:textColor="@color/black"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="420dp"
-        android:text="QUANTITY"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="EMAIL"
+        android:textColor="@color/black" />
 
     <View
         android:id="@+id/divider1"
@@ -140,11 +120,11 @@
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="470dp"
-        android:text="View nutrition Data" />
+        android:text="Add Friend" />
 
     <Button
         android:id="@+id/deleteButton"
@@ -153,7 +133,7 @@
         android:layout_below="@+id/addButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
-        android:text="View similar products" />
+        android:text="Delete Friend" />
 
 
 </RelativeLayout>

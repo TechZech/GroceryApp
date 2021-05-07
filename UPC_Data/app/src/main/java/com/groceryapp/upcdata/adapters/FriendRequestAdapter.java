@@ -82,20 +82,20 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dbHelper.acceptFriend(friendRequestList.get(getAdapterPosition()).getUid());
+                    dbHelper.acceptFriend(friendRequestList.get(getAdapterPosition()).getuserID());
                 }
             });
             declineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dbHelper.declineFriend(friendRequestList.get(getAdapterPosition()).getUid());
+                    dbHelper.declineFriend(friendRequestList.get(getAdapterPosition()).getuserID());
                 }
             });
 
         }
 
         public void bind(Friend fr){
-            frUser.setText(fr.getUid());
+            frUser.setText(fr.getusername());
        //     User u = dbHelper.getUser(fr.getUid());
       //      frUser.setText(u.getUsername());
           //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());

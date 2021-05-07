@@ -133,13 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: user data created for " + FirebaseUser.getUid());
             }
         });
-        documentReference.collection("Grocery List").document("GroceryItemTest")
-                .set(new GroceryItem("testname", "GroceryItemTest","https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1, "$5.00"));
-
-
-        documentReference.collection("Inventory").document("GroceryItemTest")
-                .set(new GroceryItem("testname","GroceryItemTest", "https://preview.redd.it/w3kr4m2fi3111.png?auto=webp&s=b4fb4bdfd262de01e49b9f7463d784c6d9013a1b", 1, "$5.00"));
-
     }
 
     private void updateAuthUserName(String username, FirebaseUser firebaseUser){
