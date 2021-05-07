@@ -59,7 +59,7 @@ public class DBHelper {
                                 Log.d(TAG, document.getId() + "=> " + document.getData());
                                 GroceryItem groceryItem = document.toObject(GroceryItem.class);
                                 allGroceryItems.add(groceryItem);
-                                if (groceryItem.getPrice() != "")
+                                if (!groceryItem.getPrice().equals("N/A"))
                                     totalPrice+=groceryItem.returnPriceAsFloat();
                             }
 
