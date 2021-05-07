@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DB.User.Group;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
@@ -31,7 +36,10 @@ public class InventoryFragment extends Fragment {
     private RecyclerView rvInventory;
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allInventoryItems;
+    private Button createGroupButton;
     DBHelper dbHelper = new DBHelper();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    User User = new User(mAuth);
 
     @Nullable
     @Override
@@ -43,7 +51,7 @@ public class InventoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
+        createGroupButton = view.findViewById(R.id.createGroupButton);
         GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
@@ -55,6 +63,14 @@ public class InventoryFragment extends Fragment {
             }
         };
 
+        createGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Group g = new Group("Founders",User );
+                dbHelper.createNewGroup(g);
+            }
+        });
         GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
@@ -77,7 +93,9 @@ public class InventoryFragment extends Fragment {
         };
 
         rvInventory = view.findViewById(R.id.tvInventory);
+
         allInventoryItems = new ArrayList<>();
+
         adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener, subtractListener);
 
         rvInventory.setAdapter(adapter);

@@ -49,10 +49,10 @@ public class FeedFragment extends Fragment {
         addGroceryPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GroceryItem gp = new GroceryItem("Test", "12345", "www.google.com", 5, "4.99", true);
+                GroceryItem gp = new GroceryItem("Test", "12345", "www.google.com", 1, "10.00", true);
                     User u = new User();
                     u.setEmail("test");
-                    u.setUserID("test");
+                    u.setUserID("zz3jMPS4roYB31pu4Mu6Wn7hN552");
                   //  u.setUid("TEST");
                     u.setUsername("test");
                 GroceryPost gp2 = new GroceryPost(gp, u);

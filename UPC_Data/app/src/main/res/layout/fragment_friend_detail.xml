@@ -68,5 +68,14 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btnNutrition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="123dp"
+        android:text="Invite to Group" />
+
 
 </RelativeLayout>
