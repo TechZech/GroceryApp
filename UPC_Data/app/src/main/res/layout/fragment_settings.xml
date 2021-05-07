@@ -124,7 +124,6 @@
         android:layout_below="@+id/btnSettings3"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="62dp"
@@ -134,12 +133,17 @@
     <Button
         android:id="@+id/searchRequestButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnSettings3"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="51dp"
-        android:layout_marginBottom="69dp"
-        android:text="Search" />
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="62dp"
+        android:layout_toStartOf="@+id/friendsButton"
+        android:text="Search"
+        app:icon="?android:attr/actionModeWebSearchDrawable" />
 
 
 </RelativeLayout>
