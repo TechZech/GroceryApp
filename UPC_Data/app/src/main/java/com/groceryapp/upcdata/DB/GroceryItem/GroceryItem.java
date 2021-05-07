@@ -1,5 +1,7 @@
 package com.groceryapp.upcdata.DB.GroceryItem;
 
+import android.util.Log;
+
 public class GroceryItem {
     private String title;
     private String upc;
@@ -79,5 +81,11 @@ public class GroceryItem {
 
     public void setInventory(boolean inventory) {
         isInventory = inventory;
+    }
+
+    public double returnPriceAsFloat(){
+        String thisPrice = this.price;
+        Log.d("GroceryItem", thisPrice.substring(1));
+        return Double.parseDouble(thisPrice.substring(1));
     }
 }
