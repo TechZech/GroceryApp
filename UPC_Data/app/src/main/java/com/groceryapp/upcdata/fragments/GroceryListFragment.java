@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class GroceryListFragment extends Fragment {
     private RecyclerView rvGroceryItems;
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allGroceryItems;
+    TextView tvTotalPrice;
      DBHelper dbHelper = new DBHelper();
 
     @Nullable
@@ -69,12 +71,21 @@ public class GroceryListFragment extends Fragment {
 
         rvGroceryItems = view.findViewById(R.id.tvGroceryItems);
         allGroceryItems = new ArrayList<>();
+
         adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener, subtractListener);
 
         rvGroceryItems.setAdapter(adapter);
         rvGroceryItems.setLayoutManager(linearLayoutManager);
 
-        allGroceryItems = dbHelper.queryGroceryItems(allGroceryItems, adapter);
+        tvTotalPrice = view.findViewById(R.id.tvTotalPrice);
+        dbHelper.queryGroceryItems(allGroceryItems, adapter, new DBHelper.GroceryItemQueryCallback() {
+            @Override
+            public void OnCallback(List<GroceryItem> list, String price) {
+                tvTotalPrice.setText(price);
+            }
+        });
+
+
     }
 
 private void goToDetailFragment(int position){
