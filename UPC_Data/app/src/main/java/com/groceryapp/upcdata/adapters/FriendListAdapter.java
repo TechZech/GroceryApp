@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,12 +21,15 @@ import java.util.List;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
+    private final FriendListAdapter.OnClickListener clickListener;
     private Context context;
     private List<Friend> friends;
+    private RelativeLayout rl;
 
-    public FriendListAdapter(Context context, List<Friend> friendRequestList){
+    public FriendListAdapter(Context context, List<Friend> friendRequestList, OnClickListener clickListener){
         this.context = context;
         this.friends = friendRequestList;
+        this.clickListener = clickListener;
     }
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
@@ -75,6 +79,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             frImage = itemView.findViewById(R.id.tvImage);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
+            rl = itemView.findViewById(R.id.post_container);
 
 
 
@@ -87,6 +92,19 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             //      frUser.setText(u.getUsername());
             //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
             //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
+            dbHelper.getUserFromUid(fr.getuserID(), new DBHelper.MyCallback() {
+                @Override
+                public void onCallback(String value) {
+                    frUser.setText(value);
+                }
+            });
+
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
         }
     }
 }

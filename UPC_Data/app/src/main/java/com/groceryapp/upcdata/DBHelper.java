@@ -135,10 +135,10 @@ public class DBHelper {
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                         GroceryPost groceryPost = document.toObject(GroceryPost.class);
-                       if(areFriends(User.getUserID(), groceryPost.user.getUserID())) {
+                       /*if(areFriends(User.getUserID(), groceryPost.user.getUserID())) {
                             FeedItems.add(document.toObject(GroceryPost.class));
                             adapter.notifyDataSetChanged();
-                        }
+                        }*/
                     }
                     adapter.notifyDataSetChanged();
                 }

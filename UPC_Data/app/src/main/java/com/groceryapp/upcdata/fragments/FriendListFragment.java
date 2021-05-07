@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.User.Friend;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.FriendListAdapter;
+import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +49,19 @@ public class FriendListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
+        FriendListAdapter.OnClickListener onClickListener = new FriendListAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                goToDetailFragment(position);
+            }
+        };
         rvFriends = view.findViewById(R.id.rvSearch);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText);
         rvButton = view.findViewById(R.id.rvButton);
         frCount = view.findViewById(R.id.frCounter);
         allFriends  = new ArrayList<>();
-        adapter = new FriendListAdapter(getContext(), allFriends);
+        adapter = new FriendListAdapter(getContext(), allFriends, onClickListener);
 
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
@@ -91,5 +99,20 @@ public class FriendListFragment extends Fragment {
             frTV.setVisibility(View.GONE);
 
         }
+    }
+
+    private void goToDetailFragment(int position){
+        Friend friend = allFriends.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("email", friend.getemail());
+        bundle.putString("userID", friend.getuserID());
+        bundle.putString("username", friend.getusername());
+        Fragment fragment = new FriendDetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

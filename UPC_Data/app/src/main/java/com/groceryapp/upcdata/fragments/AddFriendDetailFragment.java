@@ -19,38 +19,38 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
-public class FriendDetailFragment extends Fragment {
+public class AddFriendDetailFragment extends Fragment {
 
-    public static final String TAG = "FriendDetailFragment";
-    ImageView ivFriendPic;
-    TextView tvFriendName, tvFriendEmail;
-    Button btnRemoveFriend;
+    public static final String TAG = "AddFriendDetailFragment";
+    ImageView ivAddFriendPic;
+    TextView tvAddFriendName, tvAddFriendEmail;
+    Button btnAddFriend;
     User user = new User();
     DBHelper dbHelper = new DBHelper();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friend_detail, container, false);
+        return inflater.inflate(R.layout.fragment_search_friend_detail, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ivFriendPic = view.findViewById(R.id.ivFriendPic);
-        tvFriendEmail = view.findViewById(R.id.tvFriendEmail);
-        tvFriendName = view.findViewById(R.id.tvFriendName);
-        btnRemoveFriend = view.findViewById(R.id.btnRemoveFriend);
+        ivAddFriendPic = view.findViewById(R.id.ivAddFriendPic);
+        tvAddFriendEmail = view.findViewById(R.id.tvAddFriendEmail);
+        tvAddFriendName = view.findViewById(R.id.tvAddFriendName);
+        btnAddFriend = view.findViewById(R.id.btnAddFriend);
         unpackBundle();
 
-        tvFriendName.setText(user.getUsername());
-        tvFriendEmail.setText(user.getEmail());
+        tvAddFriendName.setText(user.getUsername());
+        tvAddFriendEmail.setText(user.getEmail());
 
-        btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
+        btnAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.deleteFriend(user.getUserID());
+                dbHelper.addFriend(user.getUserID());
             }
         });
 
