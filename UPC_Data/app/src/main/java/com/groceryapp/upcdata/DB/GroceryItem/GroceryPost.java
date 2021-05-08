@@ -22,17 +22,8 @@ public class GroceryPost {
         this.whichList = gp.isInventory();
     }
 
-    public String getUid() {
-        return user.getUserID();
-    }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    private String uid;
-
-    public GroceryPost(User user, GroceryItem groceryItem, Boolean whichList, String uid){
+    public GroceryPost(User user, GroceryItem groceryItem, Boolean whichList){
         this.user = user;
         this.groceryItem = groceryItem;
         this.whichList = whichList;

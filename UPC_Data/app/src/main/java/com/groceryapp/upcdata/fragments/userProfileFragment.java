@@ -60,7 +60,7 @@ public class userProfileFragment extends Fragment {
         btnNutrition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.addFriend(user.getUserID() );
+               // dbHelper.inviteToGroup(user.getUserID() );
             }
         });
         btnSimilarProducts.setOnClickListener(new View.OnClickListener() {

@@ -16,9 +16,9 @@ public class User {
     public User(){}
 
     //This constructor will be used when creating a new user
-    public User(String userid, String name, String email){
+    public User(String userid, String username, String email){
         userID = userid;
-        Username = name;
+        Username = username;
         Email = email;
     }
 

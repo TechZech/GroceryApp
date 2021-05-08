@@ -12,4 +12,5 @@
     <color name="GroceryAppGreen_LIGHT">#D4DFCA</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="background_green">#102300</color>
+    <color name="Sign_Out_Red">#CC0202</color>
 </resources>

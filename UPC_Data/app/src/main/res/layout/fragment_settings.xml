@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="600dp">
+    android:layout_height="615dp">
 
     <RelativeLayout
         android:id="@+id/rlUpper"
@@ -69,18 +69,19 @@
 
     <Button
         android:id="@+id/btnLogOut"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="3dp"
-        android:backgroundTint="@color/GroceryAppGreen_DARK"
-        android:text="Log Out" />
+        android:layout_marginTop="570dp"
+        android:backgroundTint="@color/white"
+        android:text="Sign Out"
+        android:textColor="@color/Sign_Out_Red"
+        android:textAlignment="textStart"/>
 
     <Button
         android:id="@+id/btnSettings1"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_below="@id/rlUpper"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -88,40 +89,37 @@
         android:layout_marginTop="-6dp"
         android:layout_marginEnd="0dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/ic_baseline_edit_24"
-        android:drawableRight="@drawable/ic_baseline_edit_24"
         android:text="Edit Profile"
-        android:textAlignment="gravity"
+        android:textAlignment="textStart"
         android:textColor="@color/black" />
+
+
 
     <Button
         android:id="@+id/btnSettings2"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/btnSettings1"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/ic_baseline_delete_forever_24"
-        android:drawableRight="@drawable/ic_baseline_delete_forever_24"
-        android:text="Clear Inventory"
-        android:textAlignment="center"
+
+        android:text="Shopping History"
+        android:textAlignment="textStart"
         android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnSettings3"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/btnSettings2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
-        android:drawableRight="@drawable/ic_baseline_delete_outline_24"
         android:text="Clear Grocery List"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/black" />
 
     <Button
@@ -148,5 +146,28 @@
         android:text="Search"
         app:icon="?android:attr/actionModeWebSearchDrawable" />
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="263dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="325dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="385dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
 
 </RelativeLayout>
