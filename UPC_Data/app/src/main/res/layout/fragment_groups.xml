@@ -7,6 +7,7 @@
     android:textAlignment="center"
     tools:context=".fragments.GroceryListFragment">
 
+
     <TextView
         android:id="@+id/friendTitle"
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
         android:background="@color/GroceryAppGreen_DARK"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:text="Friends"
+        android:text="Groups
+"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -28,44 +30,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearch"
-        android:layout_width="411dp"
-        android:layout_height="620dp"
+        android:layout_width="match_parent"
+        android:layout_height="661dp"
         android:layout_below="@+id/divider4"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="-1dp" />
-
-    <TextView
-        android:id="@+id/FRLabel"
-        android:layout_width="221dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="179dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="11dp"
-        android:paddingTop="5dp"
-        android:text="No Friend Requests"
-        android:textAlignment="viewEnd"
-        android:textSize="24sp" />
-
-    <Button
-        android:id="@+id/frCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="362dp"
-        android:text="1234567890" />
 
 </RelativeLayout>

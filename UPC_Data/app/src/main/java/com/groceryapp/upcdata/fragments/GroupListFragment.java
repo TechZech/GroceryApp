@@ -17,27 +17,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.Friend.Friend;
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
-import com.groceryapp.upcdata.adapters.FriendListAdapter;
+import com.groceryapp.upcdata.adapters.GroupAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendListFragment extends Fragment {
-    public final String TAG = "FriendsFragment";
+public class GroupListFragment extends Fragment {
+    public final String TAG = "GroupListFragment";
     private RecyclerView rvFriends;
     private TextView frTV;
     private Button frCount;
-    protected FriendListAdapter adapter;
-    protected List<Friend> allFriends;
+    protected GroupAdapter adapter;
+    protected List<Group> allFriends;
     TextView SearchText;
+    Button rvButton;
     DBHelper dbHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friends, container, false);
+        return inflater.inflate(R.layout.fragment_groups, container, false);
     }
 
     @Override
@@ -45,63 +47,33 @@ public class FriendListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
-        FriendListAdapter.OnClickListener onClickListener = new FriendListAdapter.OnClickListener() {
-            @Override
-            public void onItemClicked(int position) {
-                goToDetailFragment(position);
-            }
-        };
+
         rvFriends = view.findViewById(R.id.rvSearch);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText);
-        frCount = view.findViewById(R.id.frCounter);
         allFriends  = new ArrayList<>();
-        adapter = new FriendListAdapter(getContext(), allFriends, onClickListener);
+        adapter = new GroupAdapter(getContext(), allFriends);
 
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
-        allFriends = dbHelper.queryFriends(allFriends, adapter);
+        allFriends = dbHelper.getUserGroups(allFriends, adapter);
 
-        frCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new FriendRequestFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.slide_in,
-                                R.anim.fade_out,
-                                R.anim.fade_in,
-                                R.anim.slide_out
-                        )
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-        Log.d(TAG, "ALL FRIENDS SIZE IS" + allFriends.size());
-        if(allFriends.size()!=0){
-            frCount.setVisibility(View.GONE);
-            frTV.setVisibility(View.VISIBLE);
-        }
-        else{
-            frTV.setVisibility(View.GONE);
+        Log.d(TAG, "ALL GROUPS SIZE IS" + allFriends.size());
 
-        }
     }
-
+/*
     private void goToDetailFragment(int position){
         Friend friend = allFriends.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("email", friend.getemail());
         bundle.putString("userID", friend.getuserID());
         bundle.putString("username", friend.getusername());
-        Fragment fragment = new userProfileFragment();
+        Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                 .replace(R.id.flContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-    }
+    }*/
 }

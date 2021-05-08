@@ -78,20 +78,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             frImage = itemView.findViewById(R.id.tvImage);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
-            acceptButton = itemView.findViewById(R.id.acceptButton);
-            declineButton = itemView.findViewById(R.id.declineButton);
-            acceptButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                //    dbHelper.acceptFriend(groupList.get(getAdapterPosition()).getuserID());
-                }
-            });
-            declineButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                 ///   dbHelper.declineFriend(groupList.get(getAdapterPosition()).getuserID());
-                }
-            });
+
+
 
         }
 

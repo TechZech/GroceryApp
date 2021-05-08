@@ -40,7 +40,6 @@ public class FriendRequestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        addFriendButton = view.findViewById(R.id.rvButton);
         friendName = view.findViewById(R.id.searchText);
         dbHelper = new DBHelper();
 
@@ -52,14 +51,5 @@ public class FriendRequestFragment extends Fragment {
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriendRequests = dbHelper.queryFriendRequests(allFriendRequests, adapter);
-        if(allFriendRequests.size()>0){
-            addFriendButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dbHelper.addFriend(friendName.getText().toString());
-                    friendName.setText("");
-                }
-            });
-        }
     }
 }
