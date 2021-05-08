@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -30,11 +29,13 @@ public class GroupListFragment extends Fragment {
     private RecyclerView rvFriends;
     private TextView frTV;
     private Button frCount;
+
     protected GroupAdapter adapter;
     protected List<Group> allFriends;
     TextView SearchText;
     Button rvButton;
     DBHelper dbHelper;
+
 
     @Nullable
     @Override
@@ -47,12 +48,18 @@ public class GroupListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
-
+        GroupAdapter.OnClickListener onClickListener = new GroupAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position)  {
+                Log.d(TAG, "ITEM CLICKED HERE");
+                goToDetailFragment(position);
+            }
+        };
         rvFriends = view.findViewById(R.id.rvSearch);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText);
         allFriends  = new ArrayList<>();
-        adapter = new GroupAdapter(getContext(), allFriends);
+        adapter = new GroupAdapter(onClickListener, getContext(), allFriends);
 
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
@@ -61,13 +68,14 @@ public class GroupListFragment extends Fragment {
         Log.d(TAG, "ALL GROUPS SIZE IS" + allFriends.size());
 
     }
-/*
+
     private void goToDetailFragment(int position){
-        Friend friend = allFriends.get(position);
+        Log.d(TAG,"GROUP NAME IS" + allFriends.get(position).getGroupname());
+        Group group = allFriends.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("email", friend.getemail());
-        bundle.putString("userID", friend.getuserID());
-        bundle.putString("username", friend.getusername());
+     ///   bundle.putString("email", friend.getemail());
+     ///   bundle.putString("userID", friend.getuserID());
+     ///   bundle.putString("username", friend.getusername());
         Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -75,5 +83,5 @@ public class GroupListFragment extends Fragment {
                 .replace(R.id.flContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-    }*/
+    }
 }

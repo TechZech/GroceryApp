@@ -34,8 +34,6 @@ import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
-import static android.app.Activity.RESULT_CANCELED;
-
 
 public class SettingsFragment extends Fragment {
 
