@@ -55,6 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
+        getSupportActionBar().hide();
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -7,18 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="1.3"
+        android:scaleType="centerCrop"
+        android:src="@drawable/grocery_background" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="266dp"
-        android:layout_height="82dp"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="453dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="470dp"
+        android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:paddingLeft="8dp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,30 +37,36 @@
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="266dp"
-        android:layout_height="82dp"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="372dp"
-        android:ems="10"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="417dp"
+        android:background="@drawable/custom_input"
+        android:ems="5"
+        android:textSize="14dp"
         android:hint="Username"
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingLeft="8dp" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="266dp"
-        android:layout_height="82dp"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="289dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="363dp"
+        android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +74,13 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="198dp"
+        android:layout_width="248dp"
         android:layout_height="44dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="281dp"
         android:text="CREATE ACCOUNT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -73,30 +89,23 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="298dp"
+        android:layout_height="122dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="43dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="61dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
         android:text="Grocery List Tracker"
-        android:textSize="36sp"
+        android:textColor="@color/white"
+        android:textSize="44sp"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="211dp"
-        android:layout_height="151dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvLogin"
@@ -104,8 +113,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="129dp"
-        android:layout_marginBottom="175dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="70dp"
         android:clickable="true"
-        android:text="Click Here to Login" />
+        android:text="Click Here to Login"
+        android:textColor="@color/white" />
 </RelativeLayout>
