@@ -42,6 +42,7 @@ public class FriendDetailFragment extends Fragment {
         tvFriendEmail = view.findViewById(R.id.tvFriendEmail);
         tvFriendName = view.findViewById(R.id.tvFriendName);
         btnRemoveFriend = view.findViewById(R.id.btnRemoveFriend);
+
         unpackBundle();
 
         tvFriendName.setText(user.getUsername());

@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
@@ -52,7 +54,6 @@ public class userProfileFragment extends Fragment {
         btnGoBack = view.findViewById(R.id.btnGoBack);
         btnNutrition = view.findViewById(R.id.addButton);
         btnSimilarProducts = view.findViewById(R.id.deleteButton);
-
       //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(user.getUsername());
         tvDetailUpc.setText(user.getUserID());
@@ -60,7 +61,9 @@ public class userProfileFragment extends Fragment {
         btnNutrition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // dbHelper.inviteToGroup(user.getUserID() );
+                Log.d(TAG, "ONCLICK BEING CALLED");
+                Group g = new Group("Founders",user );
+                dbHelper.inviteToGroup(g,user);
             }
         });
         btnSimilarProducts.setOnClickListener(new View.OnClickListener() {

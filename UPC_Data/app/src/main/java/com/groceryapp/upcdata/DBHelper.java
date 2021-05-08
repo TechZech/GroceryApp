@@ -15,8 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
-import com.groceryapp.upcdata.DB.User.Friend;
-import com.groceryapp.upcdata.DB.User.Group;
+import com.groceryapp.upcdata.DB.Friend.Friend;
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
@@ -117,9 +117,14 @@ public class DBHelper {
     public void createNewGroup(Group g){
         firestore.collection("Groups").document().set(g);
 
-    }
-    public void inviteToGroup(Group g, User u){
+    }/*
+    public Group getGroup(){
 
+    }*/
+    public void inviteToGroup(Group g, User u){
+        Log.d(TAG, "INVITE TO GROUP BEING CALLED");
+        firestore.collection("users").document(u.getUserID()).collection("Pending Group Invites").document()
+                .set(g);
     }
     public void addGroupMember(Group g, User u){
 

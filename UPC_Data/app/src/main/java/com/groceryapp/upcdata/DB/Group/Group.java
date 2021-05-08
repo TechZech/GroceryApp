@@ -1,4 +1,4 @@
-package com.groceryapp.upcdata.DB.User;
+package com.groceryapp.upcdata.DB.Group;
 
 
 import android.util.Log;
@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 
 public class Group {

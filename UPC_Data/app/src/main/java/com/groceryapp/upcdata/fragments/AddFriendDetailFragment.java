@@ -31,7 +31,7 @@ public class AddFriendDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search_friend_detail, container, false);
+        return inflater.inflate(R.layout.fragment_user_profile_detail, container, false);
     }
 
     @Override
@@ -44,15 +44,7 @@ public class AddFriendDetailFragment extends Fragment {
         btnAddFriend = view.findViewById(R.id.btnAddFriend);
         unpackBundle();
 
-        tvAddFriendName.setText(user.getUsername());
-        tvAddFriendEmail.setText(user.getEmail());
 
-        btnAddFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbHelper.addFriend(user.getUserID());
-            }
-        });
 
     }
 
