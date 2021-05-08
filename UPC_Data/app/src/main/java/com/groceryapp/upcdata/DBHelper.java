@@ -117,11 +117,12 @@ public class DBHelper {
     }
     public void createNewGroup(Group g){
         firestore.collection("Groups").document().set(g);
+        firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document().set(g);
 
     }
     public List<Group> getUserGroups(List<Group> allUserGroups, GroupAdapter adapter) {
         firestore.collection("users")
-                .document(User.getUserID()).collection("Pending Group Invites")
+                .document(User.getUserID()).collection("Groups")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -1,32 +1,42 @@
 package com.groceryapp.upcdata.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeedFragment extends Fragment {
     public final String TAG = "FeedFragment";
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     private RecyclerView rvFeed;
-    private Button addGroceryPost;
+    private Button chooseItem;
+    Button submitButton;
+    TextView itemName;
+    GroceryItem groceryItem = new GroceryItem();
     protected GroceryPostAdapter adapter;
     protected List<GroceryPost> FeedItems;
     DBHelper dbHelper = new DBHelper();
@@ -34,7 +44,16 @@ public class FeedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_feed, container, false);
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+
     }
 
     @Override
@@ -43,25 +62,74 @@ public class FeedFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         rvFeed = view.findViewById(R.id.rvFeed);
+        itemName = view.findViewById(R.id.itemName);
+        submitButton = view.findViewById(R.id.submitButton);
         FeedItems = new ArrayList<>();
         adapter = new GroceryPostAdapter(getContext(), FeedItems);
-        addGroceryPost = view.findViewById(R.id.testButton);
-        addGroceryPost.setOnClickListener(new View.OnClickListener() {
+        chooseItem = view.findViewById(R.id.chooseItemButton);
+
+        chooseItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GroceryItem gp = new GroceryItem("Test", "12345", "www.google.com", 1, "10.00", true);
-                    User u = new User();
-                    u.setEmail("test");
-                    u.setUserID("zz3jMPS4roYB31pu4Mu6Wn7hN552");
-                  //  u.setUid("TEST");
-                    u.setUsername("test");
-                GroceryPost gp2 = new GroceryPost(gp, u);
-                dbHelper.addPostItem(gp2);
+                Fragment fragment = new PostInventoryFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                        )
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemName.getText().toString().equals("DEFAULT TEXT")) {
+
+                }
+                else{
+
+                    GroceryItem gg = new GroceryItem(groceryItem.getTitle(),groceryItem.getUpc(),groceryItem.getImageUrl(),groceryItem.getQuantity(),groceryItem.getPrice(),groceryItem.isInventory() );
+                    GroceryPost g = new GroceryPost(gg, User);
+                    dbHelper.addPostItem(g);
+                }
             }
         });
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
         FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter);
+        Bundle b = this.getArguments();
+        if(b!=null){
+            unpackBundle();
+            if(groceryItem.getTitle().equals("")){
+                Log.d(TAG, "CHANGED TO DEFAULT TEXT");
+                    itemName.setText("DEFAULT TEXT");
+            }
+            else{
+                Log.d(TAG,"GROCERYYYYYYYYYYYYYYYYYYYYY " + groceryItem.getTitle());
 
+                itemName.setText(groceryItem.getTitle());
+            }
+
+        }
+        else{
+
+            itemName.setText("DEFAULT TEXT");
+        }
+
+        Log.d(TAG, "GROCERY ITEM IS: " + groceryItem.getTitle());
+    }
+
+    private void unpackBundle(){
+        Bundle Args = getArguments();
+        groceryItem.setUpc(Args.getString("UPC"));
+        groceryItem.setTitle(Args.getString("Title"));
+        groceryItem.setImageUrl(Args.getString("ImageUrl"));
+        groceryItem.setPrice(Args.getString("Price"));
+        groceryItem.setQuantity(Args.getInt("Quantity"));
     }
 }

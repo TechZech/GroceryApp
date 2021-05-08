@@ -18,16 +18,44 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFeed"
         android:layout_width="match_parent"
-        android:layout_height="535dp"
-        android:layout_marginTop="70dp"
+        android:layout_height="580dp"
+        android:layout_below="@+id/chooseItemButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="-1dp"
         android:background="@color/white" />
 
     <Button
-        android:id="@+id/testButton"
+        android:id="@+id/chooseItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
-        android:text="Add test grocery post" />
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="140dp"
+        android:text="Choose Item" />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="98dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="19dp"
+        android:text="Submit" />
+
 </RelativeLayout>

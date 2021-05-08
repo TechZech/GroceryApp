@@ -29,7 +29,13 @@ public class GroceryPost {
         this.whichList = whichList;
     }
 
-    public GroceryPost(){}
+    public GroceryPost(){
+        User u = new User();
+        this.user = u;
+        GroceryItem g = new GroceryItem();
+        this.groceryItem = g;
+        this.whichList = true;
+    }
 
 
     public Boolean getWhichList() {
