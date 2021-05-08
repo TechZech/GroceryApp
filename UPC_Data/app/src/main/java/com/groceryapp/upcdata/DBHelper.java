@@ -22,6 +22,7 @@ import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.List;
@@ -117,10 +118,29 @@ public class DBHelper {
     public void createNewGroup(Group g){
         firestore.collection("Groups").document().set(g);
 
-    }/*
-    public Group getGroup(){
+    }
+    public List<Group> getUserGroups(List<Group> allUserGroups, GroupAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Pending Group Invites")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allUserGroups.add(document.toObject(Group.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
 
-    }*/
+        return allUserGroups;
+    }
+
     public void inviteToGroup(Group g, User u){
         Log.d(TAG, "INVITE TO GROUP BEING CALLED");
         firestore.collection("users").document(u.getUserID()).collection("Pending Group Invites").document()
@@ -129,6 +149,7 @@ public class DBHelper {
     public void addGroupMember(Group g, User u){
 
     }
+
     public boolean areFriends(String FriendAUid, String FriendBUid, AreFriendsCallback Callback){
 
      //   Log.d(TAG, "AREFRIENDS");

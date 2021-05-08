@@ -43,13 +43,7 @@ public class FriendRequestFragment extends Fragment {
         addFriendButton = view.findViewById(R.id.rvButton);
         friendName = view.findViewById(R.id.searchText);
         dbHelper = new DBHelper();
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbHelper.addFriend(friendName.getText().toString());
-                friendName.setText("");
-            }
-        });
+
 
         rvFriends = view.findViewById(R.id.rvSearch);
         allFriendRequests = new ArrayList<>();
@@ -58,5 +52,14 @@ public class FriendRequestFragment extends Fragment {
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriendRequests = dbHelper.queryFriendRequests(allFriendRequests, adapter);
+        if(allFriendRequests.size()>0){
+            addFriendButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHelper.addFriend(friendName.getText().toString());
+                    friendName.setText("");
+                }
+            });
+        }
     }
 }
