@@ -122,8 +122,6 @@ public class FriendDetailFragment extends Fragment {
         bundle.putString("ImageUrl", groceryItem.getImageUrl());
         bundle.putString("Price", groceryItem.getPrice());
         bundle.putInt("Quantity", groceryItem.getQuantity());
-        bundle.putBoolean("fromFriend", true);
-        bundle.putString("FriendID", "");           //TODO: ask Trevor about friend id???
         Fragment fragment = new DetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

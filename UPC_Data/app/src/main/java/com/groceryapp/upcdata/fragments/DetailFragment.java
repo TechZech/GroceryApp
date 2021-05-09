@@ -55,7 +55,7 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         groceryItem = new GroceryItem();
-        boolean fromInventory = unpackBundle();
+        unpackBundle();
 
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
@@ -117,14 +117,13 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private boolean unpackBundle(){
+    private void unpackBundle(){
         Bundle Args = getArguments();
         groceryItem.setUpc(Args.getString("UPC"));
         groceryItem.setTitle(Args.getString("Title"));
         groceryItem.setImageUrl(Args.getString("ImageUrl"));
         groceryItem.setPrice(Args.getString("Price"));
         groceryItem.setQuantity(Args.getInt("Quantity"));
-        return Args.getBoolean("fromInventory");
     }
 
     private void showNutritionData() {
