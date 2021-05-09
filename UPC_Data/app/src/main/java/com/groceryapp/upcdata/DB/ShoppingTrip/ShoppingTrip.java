@@ -2,9 +2,10 @@ package com.groceryapp.upcdata.DB.ShoppingTrip;
 
 import java.util.Date;
 
-public class ShoppingTrip {
+public class ShoppingTrip implements Comparable<ShoppingTrip>{
     private Date date;
     private double totalPrice;
+    private
 
 
     ShoppingTrip(){}
@@ -28,5 +29,9 @@ public class ShoppingTrip {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public int compareTo(ShoppingTrip shoppingTrip){
+        return getDate().compareTo(shoppingTrip.getDate());
     }
 }

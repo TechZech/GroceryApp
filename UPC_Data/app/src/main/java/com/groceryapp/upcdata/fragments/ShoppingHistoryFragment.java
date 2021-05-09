@@ -21,6 +21,8 @@ import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -63,6 +65,9 @@ public class ShoppingHistoryFragment extends Fragment {
 
 
         allShoppingTrips = dbHelper.queryShoppingTrips(allShoppingTrips, adapter);
+
+        Collections.sort(allShoppingTrips, Collections.reverseOrder());
+
     }
 
 
