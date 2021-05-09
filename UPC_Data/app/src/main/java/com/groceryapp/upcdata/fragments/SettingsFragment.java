@@ -104,7 +104,7 @@ public class SettingsFragment extends Fragment {
             friendsListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new GroupListFragment();
+                    Fragment fragment = new FriendListFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                             .setCustomAnimations(
