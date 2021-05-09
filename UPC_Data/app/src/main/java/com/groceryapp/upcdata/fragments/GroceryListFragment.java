@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.ShoppingTrip.ShoppingTrip;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
@@ -31,8 +33,10 @@ public class GroceryListFragment extends Fragment {
     private RecyclerView rvGroceryItems;
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allGroceryItems;
+    DBHelper dbHelper = new DBHelper();
+
     TextView tvTotalPrice;
-     DBHelper dbHelper = new DBHelper();
+    Button btnTripComplete;
 
     @Nullable
     @Override
@@ -43,8 +47,9 @@ public class GroceryListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        btnTripComplete = view.findViewById(R.id.btnTripComplete);
         GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
@@ -68,6 +73,16 @@ public class GroceryListFragment extends Fragment {
             public void onSubtractClicked(int position) {
             }
         };
+
+        btnTripComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbHelper.moveGrocerytoInventory(adapter);
+                Double totalPrice = Double.parseDouble(tvTotalPrice.getText().toString());
+                dbHelper.addShoppingTrip(new ShoppingTrip(totalPrice));
+                tvTotalPrice.setText("0.0");
+            }
+        });
 
         rvGroceryItems = view.findViewById(R.id.tvGroceryItems);
         allGroceryItems = new ArrayList<>();
@@ -96,7 +111,6 @@ private void goToDetailFragment(int position){
     bundle.putString("ImageUrl", groceryItem.getImageUrl());
     bundle.putString("Price", groceryItem.getPrice());
     bundle.putInt("Quantity", groceryItem.getQuantity());
-    bundle.putBoolean("fromInventory", false);
     Fragment fragment = new DetailFragment();
     fragment.setArguments(bundle);
     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

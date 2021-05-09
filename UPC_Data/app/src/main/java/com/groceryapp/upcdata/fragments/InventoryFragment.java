@@ -77,7 +77,6 @@ public class InventoryFragment extends Fragment {
         };
 
         GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
-
             @Override
             public void onSubtractClicked(int position) {
                 GroceryItem groceryItem = allInventoryItems.get(position);

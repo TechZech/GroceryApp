@@ -50,4 +50,14 @@
         android:textColor="@color/black"
         android:textSize="25dp" />
 
+    <Button
+        android:id="@+id/btnTripComplete"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="54dp"
+        android:text="Trip Complete" />
+
 </RelativeLayout>

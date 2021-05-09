@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GroceryAppGreen_LIGHT"
+    android:background="@color/white"
     android:textAlignment="center"
     tools:context=".fragments.GroceryListFragment">
 
@@ -38,7 +38,8 @@
         android:layout_marginStart="-1dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="-1dp" />
+        android:layout_marginBottom="-1dp"
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/FRLabel"

@@ -39,6 +39,8 @@
         android:layout_height="150dp"
         android:layout_below="@+id/dividerSM1"
         android:layout_marginTop="30dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true"
         app:srcCompat="@drawable/download" />
 
     <ImageView
@@ -47,6 +49,8 @@
         android:layout_height="150dp"
         android:layout_below="@+id/dividerSM2"
         android:layout_marginTop="30dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true"
         app:srcCompat="@drawable/download" />
 
     <TextView
@@ -94,6 +98,8 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="65dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true"
         app:srcCompat="@drawable/download" />
 
     <TextView
