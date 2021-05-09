@@ -80,7 +80,7 @@ public class SearchFragment extends Fragment {
         bundle.putString("email", user.getEmail());
         bundle.putString("userID", user.getUserID());
         bundle.putString("username", user.getUsername());
-        Fragment fragment = new userProfileFragment();
+        Fragment fragment = new AddFriendDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()

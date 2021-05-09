@@ -96,7 +96,7 @@ public class FriendListFragment extends Fragment {
         bundle.putString("email", friend.getemail());
         bundle.putString("userID", friend.getuserID());
         bundle.putString("username", friend.getusername());
-        Fragment fragment = new userProfileFragment();
+        Fragment fragment = new FriendDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
