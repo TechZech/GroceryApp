@@ -19,6 +19,8 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
 
+import javax.security.auth.callback.Callback;
+
 public class GroupDetailFragment extends Fragment {
 
     public static final String TAG = "GroupDetailFragment";
@@ -56,7 +58,7 @@ public class GroupDetailFragment extends Fragment {
         btnNutrition = view.findViewById(R.id.addButton);
         btnSimilarProducts = view.findViewById(R.id.deleteButton);
         //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
-        tvDetailTitle.setText(grr.getGroupname());
+     //   tvDetailTitle.setText(grr.getGroupname());
     //    tvDetailUpc.setText();
 //        tvDetailPrice.setText(user.getEmail());
         btnNutrition.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +81,17 @@ public class GroupDetailFragment extends Fragment {
     private boolean unpackBundle(){
         Bundle Args = getArguments();
         Log.d(TAG, "ARGS STRING IS " + Args.getString("gid"));
-        grr = dbHelper.getGroupById(Args.getString("gid"));
+
+        dbHelper.getGroupById(Args.getString("gid"), new DBHelper.GroupCallback() {
+            @Override
+            public void OnCallback(Group g) {
+                 tvDetailTitle.setText(g.getGroupname());
+            }
+        });
+        {
+
+        }
+        //grr = dbHelper.getGroupById(Args.getString("gid"));
         Log.d(TAG, "TESTESTEST");
         return Args.getBoolean("fromSearch");
     }

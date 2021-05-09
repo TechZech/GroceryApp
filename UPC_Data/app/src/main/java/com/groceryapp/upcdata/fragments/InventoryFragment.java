@@ -23,6 +23,7 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
+import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class InventoryFragment extends Fragment {
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allInventoryItems;
     private Button createGroupButton;
+    private Button groupListButton;
     DBHelper dbHelper = new DBHelper();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     User User = new User(mAuth);
@@ -50,6 +52,7 @@ public class InventoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         createGroupButton = view.findViewById(R.id.createGroupButton);
+        groupListButton = view.findViewById(R.id.viewGroupsButton);
         GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
@@ -118,6 +121,23 @@ public class InventoryFragment extends Fragment {
                 dbHelper.addGroceryItem(groceryItem);
             }
         }).attachToRecyclerView(rvInventory);
+        groupListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new GroupListFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                        )
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     private void goToDetailFragment(int position){

@@ -54,7 +54,9 @@ public class DBHelper {
         void OnCallBack(Boolean value);
     }
     public interface GroupCallback{
-        void OnCallback(List<Group> list, String group);
+        void OnCallback(Group g);
+
+
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -165,7 +167,7 @@ public class DBHelper {
         firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document().set(g);
 
     }
-    public Group getGroupById(String gid){
+    public Group getGroupById(String gid, GroupCallback groupCallback){
         Log.d(TAG,"SHOULD BE FIRST");
 /*
         DocumentReference docRef =  firestore.collection("Groups").document(gid);
@@ -192,6 +194,7 @@ public class DBHelper {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         Log.d(TAG, document.getId() + "=> " + document.getData());
+                        groupCallback.OnCallback(document.toObject(Group.class));
                     }
                 }
                 else

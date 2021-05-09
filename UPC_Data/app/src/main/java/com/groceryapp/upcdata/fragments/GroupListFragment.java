@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -70,10 +71,10 @@ public class GroupListFragment extends Fragment {
     }
 
     private void goToDetailFragment(int position){
-        Log.d(TAG,"GROUP NAME IS" + allFriends.get(position).getGroupname());
-        Group group = allFriends.get(position);
+        Group gg = allFriends.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("gid", "EI4Luqm9PFLyjgNzgOQt");
+        bundle.putString("gid", "4yaQRdBSywIEAIpzyGvW" );
+        bundle.putBoolean("fromInventory", true);
         Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
