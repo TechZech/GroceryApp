@@ -73,7 +73,8 @@ public class GroupListFragment extends Fragment {
     private void goToDetailFragment(int position){
         Group gg = allFriends.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("gid", "4yaQRdBSywIEAIpzyGvW" );
+        String gidString = gg.getGid();
+        bundle.putString("gid", gidString );
         bundle.putBoolean("fromInventory", true);
         Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);

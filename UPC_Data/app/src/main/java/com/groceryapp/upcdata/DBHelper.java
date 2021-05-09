@@ -163,8 +163,12 @@ public class DBHelper {
         return FeedItems;
     }
     public void createNewGroup(Group g){
-        firestore.collection("Groups").document().set(g);
-        firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document().set(g);
+        DocumentReference groupToGroup = firestore.collection("Groups").document();
+        g.setGid(groupToGroup.getId());
+        groupToGroup.set(g);
+
+        DocumentReference userToGroup = firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document();
+        userToGroup.set(g);
 
     }
     public Group getGroupById(String gid, GroupCallback groupCallback){
@@ -188,19 +192,20 @@ public class DBHelper {
                     }
                 });
 */
-        firestore.collection("Groups").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        DocumentReference docRef = firestore.collection("Groups").document(gid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
-                    for (DocumentSnapshot document : task.getResult()){
-                        Log.d(TAG, document.getId() + "=> " + document.getData());
-                        groupCallback.OnCallback(document.toObject(Group.class));
-                    }
+                    DocumentSnapshot document = task.getResult();
+                    retGroup = document.toObject(Group.class);
+                    groupCallback.OnCallback(document.toObject(Group.class));
                 }
                 else
-                    Log.d(TAG, "Error getting documents: ", task.getException());
+                    Log.d(TAG, "get failed with ", task.getException());
             }
         });
+
         return retGroup;
     }
     public List<Group> getUserGroups(List<Group> allUserGroups, GroupAdapter adapter) {
@@ -413,6 +418,10 @@ public class DBHelper {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+    }
+    public void addGroupPost(Group g, GroceryPost groceryPost){
+        firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                .set(groceryPost);
     }
     public void addFriend(String uid) {
 

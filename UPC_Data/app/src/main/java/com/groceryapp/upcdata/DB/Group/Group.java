@@ -13,9 +13,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 
+import java.util.ArrayList;
+
 public class Group {
 
     private String groupname;
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+    private String gid;
 
     public Group(Group gid) {
         this.groupname = gid.groupname;
@@ -39,18 +51,20 @@ public class Group {
         this.owner = owner;
     }
 
-    public User[] getMembers() {
-        return members;
-    }
-
-    public void setMembers(User[] members) {
-        this.members = members;
-    }
 
 
 
     private User owner;
-    private User[] members;
+
+    public ArrayList<User> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<User> members) {
+        this.members = members;
+    }
+
+    private ArrayList<User> members = new ArrayList<User>();
 
 
 
@@ -59,9 +73,10 @@ public class Group {
     public Group(String groupname, User owner) {
         this.groupname = groupname;
         this.owner = owner;
-        this.members = members;
+        members.add(owner);
+
     }
-    public Group(String groupname, User owner, User[] members) {
+    public Group(String groupname, User owner, ArrayList<User> members) {
         this.groupname = groupname;
         this.owner = owner;
         this.members = members;
