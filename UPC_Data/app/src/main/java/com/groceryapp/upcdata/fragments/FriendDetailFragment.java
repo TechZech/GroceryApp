@@ -104,7 +104,7 @@ public class FriendDetailFragment extends Fragment {
         groceryItemAdapter = new GroceryItemAdapter(getContext(), allFriendsItems, onLongClickListener, onClickListener, subtractListener);
         rvFriendInv.setAdapter(groceryItemAdapter);
         rvFriendInv.setLayoutManager(linearLayoutManager);
-        allFriendsItems = dbHelper.queryInventoryItems(allFriendsItems, groceryItemAdapter);
+        allFriendsItems = dbHelper.queryFriendInventoryItems(user.getUserID(), allFriendsItems, groceryItemAdapter);
     }
 
     private void unpackBundle(){

@@ -85,16 +85,8 @@ public class DetailFragment extends Fragment {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment;
-                if (fromInventory)
-                    fragment = new InventoryFragment();
-                else
-                    fragment = new GroceryListFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentManager.popBackStack();
             }
         });
 
