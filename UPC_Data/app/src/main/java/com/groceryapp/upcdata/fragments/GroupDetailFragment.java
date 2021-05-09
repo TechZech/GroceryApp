@@ -23,7 +23,7 @@ public class GroupDetailFragment extends Fragment {
 
     public static final String TAG = "GroupDetailFragment";
     User user;
-
+    Group grr;
     ImageView ivDetailImage;
     TextView tvDetailTitle;
     TextView tvDetailUpc;
@@ -33,6 +33,7 @@ public class GroupDetailFragment extends Fragment {
     Button btnNutrition;
     Button btnSimilarProducts;
     DBHelper dbHelper;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,9 +43,9 @@ public class GroupDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user = new User();
-        boolean userProfile = unpackBundle();
         dbHelper = new DBHelper();
+        boolean userProfile = unpackBundle();
+
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
         tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
@@ -55,9 +56,9 @@ public class GroupDetailFragment extends Fragment {
         btnNutrition = view.findViewById(R.id.addButton);
         btnSimilarProducts = view.findViewById(R.id.deleteButton);
         //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
-        tvDetailTitle.setText(user.getUsername());
-        tvDetailUpc.setText(user.getUserID());
-        tvDetailPrice.setText(user.getEmail());
+        tvDetailTitle.setText(grr.getGroupname());
+    //    tvDetailUpc.setText();
+//        tvDetailPrice.setText(user.getEmail());
         btnNutrition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,9 +78,9 @@ public class GroupDetailFragment extends Fragment {
     }
     private boolean unpackBundle(){
         Bundle Args = getArguments();
-        user.setEmail(Args.getString("email"));
-        user.setUserID(Args.getString("userID"));
-        user.setUsername(Args.getString("username"));
+        Log.d(TAG, "ARGS STRING IS " + Args.getString("gid"));
+        grr = dbHelper.getGroupById(Args.getString("gid"));
+        Log.d(TAG, "TESTESTEST");
         return Args.getBoolean("fromSearch");
     }
 

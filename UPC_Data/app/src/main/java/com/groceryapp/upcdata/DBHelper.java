@@ -31,6 +31,7 @@ public class DBHelper {
     public final String TAG = "DBHelper";
     private String returnusername;
     private String returnemail;
+    private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
@@ -50,7 +51,9 @@ public class DBHelper {
     public interface AreFriendsCallback{
         void OnCallBack(Boolean value);
     }
-
+    public interface GroupCallback{
+        void OnCallback(List<Group> list, String group);
+    }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
@@ -119,6 +122,41 @@ public class DBHelper {
         firestore.collection("Groups").document().set(g);
         firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document().set(g);
 
+    }
+    public Group getGroupById(String gid){
+        Log.d(TAG,"SHOULD BE FIRST");
+/*
+        DocumentReference docRef =  firestore.collection("Groups").document(gid);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                retGroup = document.toObject(Group.class);
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+*/
+        firestore.collection("Groups").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot document : task.getResult()){
+                        Log.d(TAG, document.getId() + "=> " + document.getData());
+                    }
+                }
+                else
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
+        return retGroup;
     }
     public List<Group> getUserGroups(List<Group> allUserGroups, GroupAdapter adapter) {
         firestore.collection("users")

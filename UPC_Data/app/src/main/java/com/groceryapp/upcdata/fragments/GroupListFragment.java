@@ -73,9 +73,7 @@ public class GroupListFragment extends Fragment {
         Log.d(TAG,"GROUP NAME IS" + allFriends.get(position).getGroupname());
         Group group = allFriends.get(position);
         Bundle bundle = new Bundle();
-     ///   bundle.putString("email", friend.getemail());
-     ///   bundle.putString("userID", friend.getuserID());
-     ///   bundle.putString("username", friend.getusername());
+        bundle.putString("gid", "EI4Luqm9PFLyjgNzgOQt");
         Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

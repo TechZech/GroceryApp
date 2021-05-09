@@ -17,6 +17,12 @@ public class Group {
 
     private String groupname;
 
+    public Group(Group gid) {
+        this.groupname = gid.groupname;
+        this.owner = gid.owner;
+        this.members = gid.members;
+    }
+
     public String getGroupname() {
         return groupname;
     }
