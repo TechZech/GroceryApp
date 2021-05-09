@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +24,11 @@ import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
+import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
+import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupDetailFragment extends Fragment {
 
@@ -31,11 +38,13 @@ public class GroupDetailFragment extends Fragment {
     ImageView ivDetailImage;
     TextView tvDetailTitle;
 Button addPostButton;
+List<GroceryPost> allPostItems;
+RecyclerView recyclerView;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     DBHelper dbHelper;
-
+    GroceryPostAdapter groceryPostAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,8 +55,9 @@ Button addPostButton;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dbHelper = new DBHelper();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         boolean userProfile = unpackBundle();
-
+        recyclerView = view.findViewById(R.id.groupFeedRV);
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         addPostButton = view.findViewById(R.id.addPostButton);
         GroceryItem groceryItem=new GroceryItem();
@@ -68,6 +78,10 @@ Button addPostButton;
 //        tvDetailPrice.setText(user.getEmail());
 
 
+        allPostItems = new ArrayList<>();
+        groceryPostAdapter = new GroceryPostAdapter(getContext(), allPostItems);
+        recyclerView.setAdapter(groceryPostAdapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
     }
     private boolean unpackBundle(){
@@ -79,6 +93,7 @@ Button addPostButton;
             public void OnCallback(Group g) {
                 grr = g;
                tvDetailTitle.setText(g.getGroupname());
+                allPostItems = dbHelper.getGroupPosts(grr,allPostItems, groceryPostAdapter);
          //       tvDetailTitle.setText(Args.getString("gid"));
             }
         });

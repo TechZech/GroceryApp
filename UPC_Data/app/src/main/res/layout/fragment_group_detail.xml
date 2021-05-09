@@ -115,6 +115,7 @@
         android:text="Add Group Post" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupFeedRV"
         android:layout_width="412dp"
         android:layout_height="220dp"
         android:layout_alignParentStart="true"

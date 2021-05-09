@@ -229,7 +229,32 @@ public class DBHelper {
 
         return allUserGroups;
     }
+    public List<GroceryPost> getGroupPosts(Group grroup, List<GroceryPost> allGroupGroceryPosts, GroceryPostAdapter adapter) {
+        try {
+            firestore.collection("Groups")
+                    .document(grroup.getGid()).collection("Posts")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot document : task.getResult()){
+                                    Log.d(TAG, document.getId() + "=> " + document.getData());
+                                    allGroupGroceryPosts.add(document.toObject(GroceryPost.class));
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                            else
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+
+        return  allGroupGroceryPosts;
+    }
     public void inviteToGroup(Group g, User u){
         Log.d(TAG, "INVITE TO GROUP BEING CALLED");
         firestore.collection("users").document(u.getUserID()).collection("Pending Group Invites").document()
