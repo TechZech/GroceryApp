@@ -119,7 +119,7 @@
         android:layout_marginTop="470dp"/>
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/membersListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -127,10 +127,10 @@
         android:text="Add Friend" />
 
     <Button
-        android:id="@+id/deleteButton"
+        android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addButton"
+        android:layout_below="@+id/membersListButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:text="Delete Friend" />

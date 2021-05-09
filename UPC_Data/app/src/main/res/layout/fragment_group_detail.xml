@@ -33,24 +33,6 @@
         android:gravity="center"
         android:text="UPC" />
 
-    <TextView
-        android:id="@+id/tvDetailPrice"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="370dp"
-        android:gravity="center"
-        android:text="Price" />
-
-    <TextView
-        android:id="@+id/tvDetailQuantity"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="420dp"
-        android:gravity="center"
-        android:text="Quantity" />
-
     <Button
         android:id="@+id/btnGoBack"
         android:layout_width="80dp"
@@ -66,9 +48,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="245dp"
-        android:text="TITLE"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="GROUP NAME"
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="50dp"
@@ -77,31 +59,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="320dp"
-        android:text="UPC"
-        android:textColor="@color/black"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="370dp"
-        android:text="PRICE"
-        android:textColor="@color/black"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="420dp"
-        android:text="QUANTITY"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="GROUP OWNER"
+        android:textColor="@color/black" />
 
     <View
         android:id="@+id/divider1"
@@ -124,36 +84,53 @@
         android:background="?android:attr/listDivider"
         android:layout_marginTop="370dp"/>
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="420dp"/>
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="470dp"/>
-
     <Button
         android:id="@+id/membersListButton"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
-        android:text="View nutrition Data" />
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="46dp"
+        android:text="View Group Members" />
 
     <Button
         android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="84dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/membersListButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="1dp"
-        android:text="View similar products" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="53dp"
+        android:text="Group Settings" />
+
+    <Button
+        android:id="@+id/addPostButton"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="50dp"
+        android:text="Add Group Post" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="412dp"
+        android:layout_height="220dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="373dp" />
+
+    <Button
+        android:id="@+id/groupFeedButton"
+        android:layout_width="84dp"
+        android:layout_height="74dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="56dp"
+        android:text="View Group Feed" />
 
 
 </RelativeLayout>

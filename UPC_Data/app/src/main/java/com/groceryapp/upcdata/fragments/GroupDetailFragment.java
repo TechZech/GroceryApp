@@ -19,8 +19,6 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
 
-import javax.security.auth.callback.Callback;
-
 public class GroupDetailFragment extends Fragment {
 
     public static final String TAG = "GroupDetailFragment";
@@ -39,7 +37,7 @@ public class GroupDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_profile_detail, container, false);
+        return inflater.inflate(R.layout.fragment_group_detail, container, false);
     }
 
     @Override
@@ -55,8 +53,8 @@ public class GroupDetailFragment extends Fragment {
         tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
         tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
         btnGoBack = view.findViewById(R.id.btnGoBack);
-        btnNutrition = view.findViewById(R.id.addButton);
-        btnSimilarProducts = view.findViewById(R.id.deleteButton);
+        btnNutrition = view.findViewById(R.id.membersListButton);
+        btnSimilarProducts = view.findViewById(R.id.settingsButton);
         //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
      //   tvDetailTitle.setText(grr.getGroupname());
     //    tvDetailUpc.setText();

@@ -64,8 +64,8 @@ public class DetailFragment extends Fragment {
         tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
         tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
         btnGoBack = view.findViewById(R.id.btnGoBack);
-        btnNutrition = view.findViewById(R.id.addButton);
-        btnSimilarProducts = view.findViewById(R.id.deleteButton);
+        btnNutrition = view.findViewById(R.id.membersListButton);
+        btnSimilarProducts = view.findViewById(R.id.settingsButton);
 
         Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(groceryItem.getTitle());
