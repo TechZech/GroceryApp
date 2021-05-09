@@ -1,4 +1,4 @@
-package com.groceryapp.upcdata.DB.User;
+package com.groceryapp.upcdata.DB.Friend;
 
 
 import android.util.Log;

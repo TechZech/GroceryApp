@@ -19,9 +19,9 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
 
-public class userProfileFragment extends Fragment {
+public class GroupDetailFragment extends Fragment {
 
-    public static final String TAG = "DetailFragment";
+    public static final String TAG = "GroupDetailFragment";
     User user;
 
     ImageView ivDetailImage;
@@ -54,7 +54,7 @@ public class userProfileFragment extends Fragment {
         btnGoBack = view.findViewById(R.id.btnGoBack);
         btnNutrition = view.findViewById(R.id.addButton);
         btnSimilarProducts = view.findViewById(R.id.deleteButton);
-      //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
+        //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
         tvDetailTitle.setText(user.getUsername());
         tvDetailUpc.setText(user.getUserID());
         tvDetailPrice.setText(user.getEmail());

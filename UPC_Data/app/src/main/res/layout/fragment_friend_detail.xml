@@ -69,12 +69,12 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btnNutrition"
+        android:id="@+id/btnGroupInvite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/btnRemoveFriend"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="123dp"
+        android:layout_marginBottom="15dp"
         android:text="Invite to Group" />
 
 

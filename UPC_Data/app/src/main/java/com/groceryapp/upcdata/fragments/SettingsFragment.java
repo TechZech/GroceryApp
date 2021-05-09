@@ -34,8 +34,6 @@ import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
-import static android.app.Activity.RESULT_CANCELED;
-
 
 public class SettingsFragment extends Fragment {
 
@@ -157,7 +155,18 @@ public class SettingsFragment extends Fragment {
             btnSettings2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Fragment fragment = new ShoppingHistoryFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
             });
 

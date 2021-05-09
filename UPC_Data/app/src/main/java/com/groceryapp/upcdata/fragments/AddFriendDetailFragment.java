@@ -53,7 +53,6 @@ public class AddFriendDetailFragment extends Fragment {
                 dbHelper.addFriend(user.getUserID());
             }
         });
-
     }
 
     private void unpackBundle(){

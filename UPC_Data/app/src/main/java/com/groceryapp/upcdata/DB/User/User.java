@@ -13,7 +13,11 @@ public class User {
     private String Email;
 
 
-    public User(){}
+    public User(){
+        userID = "";
+        Username = "";
+        Email = "";
+    }
 
     //This constructor will be used when creating a new user
     public User(String userid, String username, String email){

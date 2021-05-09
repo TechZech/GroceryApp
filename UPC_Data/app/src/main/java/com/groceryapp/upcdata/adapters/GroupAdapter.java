@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,98 +13,92 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.groceryapp.upcdata.DB.Friend.Friend;
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
 import java.util.List;
 
-public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
-
-    private final FriendListAdapter.OnClickListener clickListener;
+public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> {
+    private final OnClickListener clickListener;
     private Context context;
-    private List<Friend> friends;
+    private List<Group> groupList;
     private RelativeLayout rl;
-
-    public FriendListAdapter(Context context, List<Friend> friendRequestList, OnClickListener clickListener){
-        this.context = context;
-        this.friends = friendRequestList;
-        this.clickListener = clickListener;
-    }
-    public interface OnLongClickListener {
-        void onItemLongClicked(int position);
-    }
 
     public interface OnClickListener {
         void onItemClicked(int position);
     }
+    public GroupAdapter(Context context, List<Group> groupList, GroupAdapter.OnClickListener clickListener){
+        this.context = context;
+        this.groupList = groupList;
+        this.clickListener = clickListener;
+    }
+    public GroupAdapter(OnClickListener clickListener, Context context, List<Group> groupList){
+        this.clickListener = clickListener;
+        this.context = context;
+        this.groupList = groupList;
+    }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.friend, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.group, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("FriendRequestAdapter", "OnBindViewHolder" + position);
-        Friend fr = friends.get(position);
-        holder.bind(fr);
+        Group gr = groupList.get(position);
+        holder.bind(gr);
     }
 
     public void clear(){
-        friends.clear();
+        groupList.clear();
         notifyDataSetChanged();
     }
-    public void addAll(List<Friend> list){
-        friends.addAll(list);
+    public void addAll(List<Group> list){
+        groupList.addAll(list);
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return friends.size();
+        return groupList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView frImage;
         private TextView frUser;
+        private Button acceptButton;
         private DBHelper dbHelper;
+        private Button declineButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
-
+            rl = itemView.findViewById(R.id.post_container);
             frImage = itemView.findViewById(R.id.tvImage);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
-            rl = itemView.findViewById(R.id.post_container);
-
 
 
 
         }
 
-        public void bind(Friend fr){
-            frUser.setText(fr.getusername());
-            //     User u = dbHelper.getUser(fr.getUid());
-            //      frUser.setText(u.getUsername());
-            //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
-            //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
-            dbHelper.getUserFromUid(fr.getuserID(), new DBHelper.MyCallback() {
-                @Override
-                public void onCallback(String value) {
-                    frUser.setText(value);
-                }
-            });
-
+        public void bind(Group gr){
+            frUser.setText(gr.getGroupname());
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     clickListener.onItemClicked(getAdapterPosition());
                 }
             });
+            //     User u = dbHelper.getUser(fr.getUid());
+            //      frUser.setText(u.getUsername());
+            //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
+            //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
         }
     }
 }

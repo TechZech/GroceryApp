@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.fragments.BarcodeFragment;
@@ -73,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new InventoryFragment();
                         break;
                     case R.id.action_feed:
+
                         fragment = new FeedFragment();
+
                         break;
                     case R.id.action_settings:
                         fragment = new SettingsFragment();

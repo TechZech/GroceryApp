@@ -24,7 +24,7 @@ public class FriendDetailFragment extends Fragment {
     public static final String TAG = "FriendDetailFragment";
     ImageView ivFriendPic;
     TextView tvFriendName, tvFriendEmail;
-    Button btnRemoveFriend;
+    Button btnRemoveFriend, btnGroupInvite;
     User user = new User();
     DBHelper dbHelper = new DBHelper();
 
@@ -42,6 +42,8 @@ public class FriendDetailFragment extends Fragment {
         tvFriendEmail = view.findViewById(R.id.tvFriendEmail);
         tvFriendName = view.findViewById(R.id.tvFriendName);
         btnRemoveFriend = view.findViewById(R.id.btnRemoveFriend);
+        btnGroupInvite = view.findViewById(R.id.btnGroupInvite);
+
         unpackBundle();
 
         tvFriendName.setText(user.getUsername());
@@ -51,6 +53,13 @@ public class FriendDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dbHelper.deleteFriend(user.getUserID());
+            }
+        });
+
+        btnGroupInvite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Whatever code to invite this user to a group
             }
         });
 

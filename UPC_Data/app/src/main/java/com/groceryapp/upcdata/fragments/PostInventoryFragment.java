@@ -27,8 +27,7 @@ import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryFragment extends Fragment {
-
+public class PostInventoryFragment extends InventoryFragment {
     public final String TAG = "InventoryFragment";
 
     private RecyclerView rvInventory;
@@ -37,12 +36,12 @@ public class InventoryFragment extends Fragment {
     private Button createGroupButton;
     DBHelper dbHelper = new DBHelper();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    User User = new User(mAuth);
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inventory, container, false);
+        return inflater.inflate(R.layout.fragment_post_inventory, container, false);
     }
 
     @Override
@@ -65,18 +64,19 @@ public class InventoryFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Group g = new Group("Founders",User );
-                dbHelper.createNewGroup(g);
+                GroceryItem g = new GroceryItem("Test","12345","http:www.google.com/",5,"4.99",true);
+                dbHelper.addInventoryItem(g);
             }
         });
         GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                goToDetailFragment(position);
+                    Log.d(TAG, "ITEM IS " + allInventoryItems.get(position));
+                    goToDetailFragment(position);
             }
         };
 
-        GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
+        GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract() {
 
             @Override
             public void onSubtractClicked(int position) {
@@ -102,26 +102,11 @@ public class InventoryFragment extends Fragment {
         allInventoryItems = dbHelper.queryInventoryItems(allInventoryItems, adapter);
 
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
 
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                GroceryItem groceryItem = allInventoryItems.get(viewHolder.getAdapterPosition());
-                Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
-                dbHelper.removeInventoryItem(groceryItem);
-                allInventoryItems.remove(viewHolder.getAdapterPosition());
-                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                groceryItem.setInventory(false);
-                dbHelper.addGroceryItem(groceryItem);
-            }
-        }).attachToRecyclerView(rvInventory);
     }
-
     private void goToDetailFragment(int position){
+
+
         GroceryItem groceryItem = allInventoryItems.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("UPC", groceryItem.getUpc());
@@ -130,12 +115,12 @@ public class InventoryFragment extends Fragment {
         bundle.putString("Price", groceryItem.getPrice());
         bundle.putInt("Quantity", groceryItem.getQuantity());
         bundle.putBoolean("fromInventory", true);
-        Fragment fragment = new DetailFragment();
+        Fragment fragment = new FeedFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.flContainer, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+      FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+               .replace(R.id.flContainer, fragment);
+       fragmentTransaction.addToBackStack(null);
+       fragmentTransaction.commit();
     }
 }

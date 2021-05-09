@@ -15,13 +15,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
-import com.groceryapp.upcdata.DB.User.Friend;
-import com.groceryapp.upcdata.DB.User.Group;
+import com.groceryapp.upcdata.DB.Friend.Friend;
+import com.groceryapp.upcdata.DB.Group.Group;
+import com.groceryapp.upcdata.DB.ShoppingTrip.ShoppingTrip;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.adapters.GroupAdapter;
+import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.List;
@@ -97,6 +100,46 @@ public class DBHelper {
         return allInventoryItems;
     }
 
+    public List<GroceryItem> queryFriendInventoryItems(String uid, List<GroceryItem> allInventoryItems, GroceryItemAdapter adapter){
+        firestore.collection("users")
+                .document(uid).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allInventoryItems.add(document.toObject(GroceryItem.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+        return allInventoryItems;
+    }
+
+    public void moveGrocerytoInventory(GroceryItemAdapter adapter){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Grocery List")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                GroceryItem groceryItem = document.toObject(GroceryItem.class);
+                                removeGroceryItem(groceryItem);
+                                addInventoryItem(groceryItem);
+                            }
+                            adapter.clear();
+                        }
+                    }
+                });
+    }
+
     public List<GroceryPost> queryAllFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -116,14 +159,40 @@ public class DBHelper {
     }
     public void createNewGroup(Group g){
         firestore.collection("Groups").document().set(g);
+        firestore.collection("users").document(g.getOwner().getUserID()).collection("Groups").document().set(g);
 
     }
-    public void inviteToGroup(Group g, User u){
+    public List<Group> getUserGroups(List<Group> allUserGroups, GroupAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Groups")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allUserGroups.add(document.toObject(Group.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
 
+        return allUserGroups;
+    }
+
+    public void inviteToGroup(Group g, User u){
+        Log.d(TAG, "INVITE TO GROUP BEING CALLED");
+        firestore.collection("users").document(u.getUserID()).collection("Pending Group Invites").document()
+                .set(g);
     }
     public void addGroupMember(Group g, User u){
 
     }
+
     public boolean areFriends(String FriendAUid, String FriendBUid, AreFriendsCallback Callback){
 
      //   Log.d(TAG, "AREFRIENDS");
@@ -570,5 +639,32 @@ public class DBHelper {
                     }
                 });
 
+    }
+
+    public void addShoppingTrip(ShoppingTrip shoppingTrip){
+        firestore.collection("users").document(User.getUserID()).collection("Shopping History").document(shoppingTrip.getDate().toString())
+                .set(shoppingTrip);
+        Log.d(TAG, "ShoppingTrip Added");
+    }
+
+    public List<ShoppingTrip> queryShoppingTrips(List<ShoppingTrip> shoppingTrips, ShoppingTripAdapter adapter){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Shopping History")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                shoppingTrips.add(document.toObject(ShoppingTrip.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+        return shoppingTrips;
     }
 }

@@ -12,6 +12,12 @@ public class GroceryItem {
 
 
     public GroceryItem(){
+        this.title = "";
+        this.upc = "";
+        this.ImageUrl = "";
+        this.quantity = 0;
+        this.price = "";
+        this.isInventory = true;
     }
 
 
