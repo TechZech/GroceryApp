@@ -100,6 +100,27 @@ public class DBHelper {
         return allInventoryItems;
     }
 
+    public List<GroceryItem> queryFriendInventoryItems(String uid, List<GroceryItem> allInventoryItems, GroceryItemAdapter adapter){
+        firestore.collection("users")
+                .document(uid).collection("Inventory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allInventoryItems.add(document.toObject(GroceryItem.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+        return allInventoryItems;
+    }
+
     public void moveGrocerytoInventory(GroceryItemAdapter adapter){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
