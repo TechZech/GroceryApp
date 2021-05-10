@@ -92,7 +92,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="19dp"
         android:layout_marginBottom="43dp"
-        android:text="View Group Members" />
+        android:text="View Group Members"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/settingsButton"
@@ -102,7 +103,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="50dp"
-        android:text="Group Settings" />
+        android:text="Group Settings"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/addPostButton"
@@ -113,7 +115,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="149dp"
         android:layout_marginBottom="54dp"
-        android:text="Add Group Post" />
+        android:text="Add Group Post"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupFeedRV"
@@ -122,7 +125,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="373dp" />
+        android:layout_marginTop="373dp"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

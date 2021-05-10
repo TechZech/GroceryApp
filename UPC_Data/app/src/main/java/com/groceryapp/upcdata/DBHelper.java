@@ -71,7 +71,9 @@ public class DBHelper {
     }
     public interface GroupSearchCallback{
             void OnCallback(List<Group> value); //for search
-
+    }
+    public interface SettingCallback{
+        void OnCallback(Boolean value); //for search
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -465,22 +467,53 @@ public class DBHelper {
                     }
                 });
     }
-    public boolean querySetting(String query){
+    public boolean querySetting(String query, Group g, SettingCallback settingCallback){
+        if(query.equals("visibility")) {
+            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            Group g = document.toObject(Group.class);
+                            if(g.getGroupSettings().getVisibility().equals("Public")){
+                                settingCallback.OnCallback(true);
+                            }
+                            else{
+                                settingCallback.OnCallback(false);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                            settingCallback.OnCallback(false);
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                        settingCallback.OnCallback(false);
+                    }
+                }
+            });
+        }
         return true;
+
     }
     public void addGroupPost(Group g, GroceryPost groceryPost){
-        if(querySetting("ownerOnly")==true){
-            if(g.getOwner().getUserID().equals(User.getUserID())){
-                firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                        .set(groceryPost);
-            }// if it's not the owner (admins) posting, no one can post
-
-
+        querySetting("visibility", g, new SettingCallback() {
+            @Override
+            public void OnCallback(Boolean value) {
+                if(value==true){
+                    if(g.getOwner().getUserID().equals(User.getUserID())){
+                        firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                                .set(groceryPost);
+                    }// if it's not the owner (admins) posting, no one can post
+            }
+                else if(value==false){
+                    firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                            .set(groceryPost);
+                }
         }
-        else if(querySetting("ownerOnly")==false) { //anyone can post
-            firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                    .set(groceryPost);
-        }
+        });
     }
     public void addFriend(String uid) {
 

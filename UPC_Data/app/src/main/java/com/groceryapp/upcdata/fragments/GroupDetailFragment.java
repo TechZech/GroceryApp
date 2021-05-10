@@ -65,6 +65,7 @@ RecyclerView recyclerView;
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         addPostButton = view.findViewById(R.id.addPostButton);
         settingsButton = view.findViewById(R.id.settingsButton);
+
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +117,15 @@ RecyclerView recyclerView;
             public void OnCallback(Group g) {
                 grr = g;
                tvDetailTitle.setText(g.getGroupname());
+                dbHelper.querySetting("visibility", grr, new DBHelper.SettingCallback() {
+                    @Override
+                    public void OnCallback(Boolean value) {
+                        if(value==true){
+                            Log.d(TAG,"SETTING IS" + value);
+                            settingsButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
                 allPostItems = dbHelper.getGroupPosts(grr,allPostItems, groceryPostAdapter);
          //       tvDetailTitle.setText(Args.getString("gid"));
             }
