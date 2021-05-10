@@ -43,6 +43,7 @@ public class DBHelper {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private List<User> retttUser;
 
     public DBHelper(){
     }
@@ -77,6 +78,9 @@ public class DBHelper {
     }
     public interface isMemberCallback{
         void OnCallback(Boolean b);
+    }
+    public interface MemberListCallback{
+        void OnCallback(List<User> b);
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -254,6 +258,28 @@ public class DBHelper {
                 });
 
         return allUserGroups;
+    }
+    public List<User> queryGroupMembers(List<User> allFriends, Group g, UserAdapter adapter, MemberListCallback callback) {
+        DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    retGroup = document.toObject(Group.class);
+                    Log.d(TAG, "THE GROUP IS " + g.getMembers().get(0).getUsername());
+                   retttUser = retGroup.getMembers();
+                   callback.OnCallback(retttUser);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                    Log.d(TAG, "get failed with ", task.getException());
+            }
+
+        });
+
+        adapter.notifyDataSetChanged();
+        return retttUser;
     }
     public List<GroceryPost> getGroupPosts(Group grroup, List<GroceryPost> allGroupGroceryPosts, GroceryPostAdapter adapter) {
         try {

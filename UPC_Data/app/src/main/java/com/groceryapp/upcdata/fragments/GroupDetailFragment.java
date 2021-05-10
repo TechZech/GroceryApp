@@ -94,6 +94,13 @@ RecyclerView recyclerView;
                 dbHelper.addGroupPost(grr, gp);
             }
         });
+        memberListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               goToMembers();
+            }
+
+        });
 
         tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
@@ -122,6 +129,20 @@ RecyclerView recyclerView;
         recyclerView.setVisibility(View.GONE);
         addPostButton.setVisibility(View.GONE);
         memberListButton.setVisibility(View.GONE);
+    }
+    public void goToMembers(){
+        Group gg = grr;
+        Bundle bundle = new Bundle();
+        String gidString = gg.getGid();
+        bundle.putString("gid", gidString );
+        bundle.putBoolean("fromInventory", true);
+        Fragment fragment = new GroupMemberListFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
     private boolean unpackBundle(){
         Bundle Args = getArguments();
