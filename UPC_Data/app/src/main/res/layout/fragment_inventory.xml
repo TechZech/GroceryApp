@@ -3,32 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f9f9f9">
 
     <TextView
         android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/GroceryAppGreen_DARK"
+        android:layout_height="190dp"
+        android:background="@drawable/shape"
         android:fontFamily="sans-serif-smallcaps"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="Inventory"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvInventory"
         android:layout_width="match_parent"
         android:layout_height="535dp"
-        android:layout_marginTop="70dp"
-        android:background="@color/white" />
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="70dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_marginTop="50dp"
+        android:background="@null" />
 
     <Button
         android:id="@+id/createGroupButton"

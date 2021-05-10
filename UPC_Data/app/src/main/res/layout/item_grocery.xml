@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/white"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="5dp"
+    android:elevation="7dp">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/item_grocery_container">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:src="@drawable/shape"
-        android:layout_margin="4dp"
-        />
 
     <TextView
         android:id="@+id/tvGroceryName"
@@ -110,3 +115,4 @@
         app:srcCompat="@drawable/minus" />
 
 </RelativeLayout>
+</androidx.cardview.widget.CardView>
