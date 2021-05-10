@@ -50,6 +50,7 @@ RecyclerView recyclerView;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     DBHelper dbHelper;
     GroceryPostAdapter groceryPostAdapter;
+    boolean isM = false;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -109,6 +110,19 @@ RecyclerView recyclerView;
         recyclerView.setLayoutManager(linearLayoutManager);
 
     }
+    public void displayPublic(){
+        settingsButton.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+        addPostButton.setVisibility(View.VISIBLE);
+        memberListButton.setVisibility(View.VISIBLE);
+    }
+
+    public void displayPrivate(){
+        settingsButton.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        addPostButton.setVisibility(View.GONE);
+        memberListButton.setVisibility(View.GONE);
+    }
     private boolean unpackBundle(){
         Bundle Args = getArguments();
         Log.d(TAG, "ARGS STRING IS " + Args.getString("gid"));
@@ -118,16 +132,28 @@ RecyclerView recyclerView;
             public void OnCallback(Group g) {
                 grr = g;
                tvDetailTitle.setText(g.getGroupname());
+               dbHelper.isMember(User, grr, new DBHelper.isMemberCallback() {
+                   @Override
+                   public void OnCallback(Boolean b) {
+                       displayPublic();
+                       isM=true;
+                       return;
+                   }
+               });
                 dbHelper.querySetting("visibility", grr, new DBHelper.SettingCallback() {
                     @Override
                     public void OnCallback(Boolean value) {
                         if(value==true){
                             Log.d(TAG,"SETTING IS" + value);
-                            settingsButton.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                            addPostButton.setVisibility(View.VISIBLE);
-                            memberListButton.setVisibility(View.VISIBLE);
-
+                            displayPublic();
+                        }
+                        else if(value==false){
+                            if(isM == true){
+                                displayPublic();
+                            }
+                            else{
+                                displayPrivate();
+                            }
                         }
                     }
                 });

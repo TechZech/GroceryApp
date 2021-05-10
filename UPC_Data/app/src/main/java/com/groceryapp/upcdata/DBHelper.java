@@ -73,7 +73,10 @@ public class DBHelper {
             void OnCallback(List<Group> value); //for search
     }
     public interface SettingCallback{
-        void OnCallback(Boolean value); //for search
+        void OnCallback(Boolean value);
+    }
+    public interface isMemberCallback{
+        void OnCallback(Boolean b);
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -521,6 +524,7 @@ public class DBHelper {
                                 for(int jj = 0; jj<g.getMembers().size(); jj++){
                                     if(User.getUserID().equals(g.getMembers().get(jj).getUserID())){
                                         settingCallback.OnCallback(true); //ismember function
+                                        break;
                                     }
                                 }
 
@@ -539,6 +543,36 @@ public class DBHelper {
                 }
             });
         }
+        return true;
+
+    }
+    public boolean isMember(User u, Group g, isMemberCallback settingCallback){
+            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            Group g = document.toObject(Group.class);
+                            for (int jj = 0; jj < g.getMembers().size(); jj++) {
+                                if (User.getUserID().equals(g.getMembers().get(jj).getUserID())) {
+                                    settingCallback.OnCallback(true); //ismember function
+                                    break;
+                                }
+                            }
+                        }
+
+                            else{
+                                settingCallback.OnCallback(false);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                            settingCallback.OnCallback(false);
+                        }
+                }
+            });
         return true;
 
     }

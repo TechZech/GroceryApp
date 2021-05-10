@@ -56,7 +56,7 @@ public class SearchFragment extends Fragment {
         GroupAdapter.OnClickListener onClickListener2 = new GroupAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-             //   goToDetailFragment(position);
+               goToDetailFragment(position);
             }
         };
         rvSearch = view.findViewById(R.id.rvSearch);
@@ -93,6 +93,7 @@ public class SearchFragment extends Fragment {
 
 
     }
+    /*
     private void goToDetailFragment(int position){
         User user = allSearches.get(position);
         Bundle bundle = new Bundle();
@@ -100,6 +101,21 @@ public class SearchFragment extends Fragment {
         bundle.putString("userID", user.getUserID());
         bundle.putString("username", user.getUsername());
         Fragment fragment = new AddFriendDetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }*/
+
+    private void goToDetailFragment(int position){
+        Group gg = allSearches2.get(position);
+        Bundle bundle = new Bundle();
+        String gidString = gg.getGid();
+        bundle.putString("gid", gidString );
+        bundle.putBoolean("fromInventory", true);
+        Fragment fragment = new GroupDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
