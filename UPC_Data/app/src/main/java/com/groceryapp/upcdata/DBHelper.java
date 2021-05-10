@@ -59,13 +59,18 @@ public class DBHelper {
     }
     public interface GroceryItemQueryCallback{
         void OnCallback(List<GroceryItem> list, String price);
+
     }
     public interface AreFriendsCallback{
         void OnCallBack(Boolean value);
     }
     public interface GroupCallback{
         void OnCallback(Group g);
+    //    void OnCallback(List<Group> value); //for search
 
+    }
+    public interface GroupSearchCallback{
+            void OnCallback(List<Group> value); //for search
 
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
@@ -460,9 +465,22 @@ public class DBHelper {
                     }
                 });
     }
+    public boolean querySetting(String query){
+        return true;
+    }
     public void addGroupPost(Group g, GroceryPost groceryPost){
-        firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                .set(groceryPost);
+        if(querySetting("ownerOnly")==true){
+            if(g.getOwner().getUserID().equals(User.getUserID())){
+                firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                        .set(groceryPost);
+            }// if it's not the owner (admins) posting, no one can post
+
+
+        }
+        else if(querySetting("ownerOnly")==false) { //anyone can post
+            firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                    .set(groceryPost);
+        }
     }
     public void addFriend(String uid) {
 
@@ -499,6 +517,40 @@ public class DBHelper {
 
         firestore.collection("users").document(uid).collection("Friends")
                 .document(User.getUserID()).delete();
+    }
+    public List<Group> queryGroupSearch(List<Group> groupSearchList, GroupAdapter adapter, String searchQuery, GroupSearchCallback myCallback) {
+        Log.d(TAG, "CALLING");
+        firestore.collection("Groups")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                Group holder = document.toObject(Group.class);
+                                Log.d(TAG,  holder.getGroupname() + "==" + searchQuery);
+                                Log.d(TAG, "CLASSES: "+ holder.getGroupname().getClass() + "==" + searchQuery.getClass());
+
+                                if(holder.getGroupname().equals(searchQuery)){
+                                    Log.d(TAG,  holder.getGroupname() + "==" + searchQuery);
+                                        groupSearchList.add(document.toObject(Group.class));
+                                   myCallback.OnCallback(groupSearchList);
+                                    adapter.notifyDataSetChanged();
+                                }
+                                else{
+                                    Log.d(TAG, "NO MATCH BECAUSE " + holder.getGroupname() + " != " + searchQuery);
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return groupSearchList;
     }
     public List<User> queryUserSearch(List<User> userSearchList, UserAdapter adapter, String searchQuery, MyUserSearchCallback myCallback) {
         Log.d(TAG, "CALLING");

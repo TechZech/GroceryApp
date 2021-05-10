@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,7 @@ import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,7 @@ public class GroupDetailFragment extends Fragment {
     ImageView ivDetailImage;
     TextView tvDetailTitle;
 Button addPostButton;
+Button settingsButton;
 List<GroceryPost> allPostItems;
 RecyclerView recyclerView;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -60,8 +64,27 @@ RecyclerView recyclerView;
         recyclerView = view.findViewById(R.id.groupFeedRV);
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         addPostButton = view.findViewById(R.id.addPostButton);
+        settingsButton = view.findViewById(R.id.settingsButton);
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new GroupSettingsFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                        )
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+
+        });
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

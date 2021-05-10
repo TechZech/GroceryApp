@@ -19,6 +19,15 @@ public class Group {
 
     private String groupname;
 
+    public GroupSettings getGroupSettings() {
+        return groupSettings;
+    }
+
+    public void setGroupSettings(GroupSettings groupSettings) {
+        this.groupSettings = groupSettings;
+    }
+
+    private GroupSettings groupSettings;
     public String getGid() {
         return gid;
     }
@@ -33,6 +42,7 @@ public class Group {
         this.groupname = gid.groupname;
         this.owner = gid.owner;
         this.members = gid.members;
+        this.groupSettings = new GroupSettings();
     }
 
     public String getGroupname() {
@@ -74,14 +84,33 @@ public class Group {
         this.groupname = groupname;
         this.owner = owner;
         members.add(owner);
+        this.groupSettings = new GroupSettings();
 
     }
     public Group(String groupname, User owner, ArrayList<User> members) {
         this.groupname = groupname;
         this.owner = owner;
         this.members = members;
+        this.groupSettings = new GroupSettings();
     }
-
+    public Group(String groupname, GroupSettings groupSettings) {
+        this.groupname = groupname;
+        this.owner = owner;
+        this.members = members;
+        this.groupSettings = groupSettings;
+    }
+    public Group(String groupname, User owner, GroupSettings groupSettings) {
+        this.groupname = groupname;
+        this.owner = owner;
+        this.members = members;
+        this.groupSettings = groupSettings;
+    }
+    public Group(String groupname, User owner, ArrayList<User> members, GroupSettings groupSettings) {
+        this.groupname = groupname;
+        this.owner = owner;
+        this.members = members;
+        this.groupSettings = groupSettings;
+    }
     @Override
     public String toString() {
         return "Group{" +
