@@ -1,5 +1,6 @@
 package com.groceryapp.upcdata;
 
+import android.text.Editable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +84,14 @@ public class DBHelper {
                                 if (!groceryItem.getPrice().equals("N/A")) //Keep this
                                     totalPrice+=(groceryItem.returnPriceAsFloat()*groceryItem.getQuantity());
                             }
-
-                            callback.OnCallback(allGroceryItems, Double.toString(totalPrice));
+                            DecimalFormat precision;
+                            if (totalPrice > 100){
+                                precision = new DecimalFormat("000.00");
+                            }
+                            else {
+                                precision = new DecimalFormat("0.00");
+                            }
+                            callback.OnCallback(allGroceryItems, precision.format(totalPrice));
                             adapter.notifyDataSetChanged();
                         }
                         else

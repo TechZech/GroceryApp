@@ -20,6 +20,7 @@ import com.groceryapp.upcdata.DB.ShoppingTrip.ShoppingTrip;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ShoppingTripAdapter extends RecyclerView.Adapter<ShoppingTripAdapter.ViewHolder>{
@@ -77,7 +78,14 @@ public class ShoppingTripAdapter extends RecyclerView.Adapter<ShoppingTripAdapte
         public void bind(ShoppingTrip shoppingTrip){
             String modifiedDate = shoppingTrip.getDate().toString().substring(0, 10) + ", " + shoppingTrip.getDate().toString().substring(24);
             tvDate.setText(modifiedDate);
-            tvCost.setText("$" + String.valueOf(shoppingTrip.getTotalPrice()).substring(0, 5));
+            DecimalFormat precision;
+            if (shoppingTrip.getTotalPrice() > 100){
+                precision = new DecimalFormat("000.00");
+            }
+            else {
+                precision = new DecimalFormat("0.00");
+            }
+            tvCost.setText("$" + precision.format(shoppingTrip.getTotalPrice()));
 
             item_trip_container.setOnClickListener(new View.OnClickListener() {
                 @Override
