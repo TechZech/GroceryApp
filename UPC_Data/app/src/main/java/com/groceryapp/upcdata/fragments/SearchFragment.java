@@ -15,9 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.util.ArrayList;
@@ -27,7 +29,9 @@ public class SearchFragment extends Fragment {
     public final String TAG = "FriendsFragment";
     private RecyclerView rvSearch;
     protected UserAdapter adapter;
+    protected GroupAdapter adapter2;
     protected List<User> allSearches;
+    protected List<Group> allSearches2;
     Button rvButton;
     EditText rvSearchText;
     DBHelper dbHelper;
@@ -49,17 +53,25 @@ public class SearchFragment extends Fragment {
                 goToDetailFragment(position);
             }
         };
+        GroupAdapter.OnClickListener onClickListener2 = new GroupAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+             //   goToDetailFragment(position);
+            }
+        };
         rvSearch = view.findViewById(R.id.rvSearch);
         rvButton = view.findViewById(R.id.rvButton);
         rvSearchText = view.findViewById(R.id.searchText);
         allSearches = new ArrayList<>();
+        allSearches2 = new ArrayList<>();
         adapter = new UserAdapter(getContext(), allSearches, onClickListener);
-
-        rvSearch.setAdapter(adapter);
+        adapter2 = new GroupAdapter(onClickListener2, getContext(), allSearches2);
+        rvSearch.setAdapter(adapter2);
         rvSearch.setLayoutManager(linearLayoutManager);
         rvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 dbHelper.queryUserSearch(allSearches, adapter, rvSearchText.getText().toString(), new DBHelper.MyUserSearchCallback() {
                     @Override
                     public void onCallback(List<User> value) {
@@ -68,7 +80,14 @@ public class SearchFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 });
-
+*/
+                dbHelper.queryGroupSearch(allSearches2, adapter2, rvSearchText.getText().toString(), new DBHelper.GroupSearchCallback() {
+                    @Override
+                    public void OnCallback(List<Group> value) {
+                        allSearches2 = value;
+                        adapter2.notifyDataSetChanged();
+                    }
+                });
             }
         });
 

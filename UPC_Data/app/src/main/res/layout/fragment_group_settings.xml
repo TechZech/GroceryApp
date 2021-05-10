@@ -15,7 +15,7 @@
         android:background="@color/GroceryAppGreen_DARK">
 
         <TextView
-            android:id="@+id/tvDisplayName"
+            android:id="@+id/tvGroupName"
             android:layout_width="241dp"
             android:layout_height="40dp"
             android:layout_below="@+id/ivProfile"
@@ -25,22 +25,21 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="85dp"
             android:gravity="center"
-            android:text="Display Name"
+            android:text="Group Name"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/ownertv"
             android:layout_width="241dp"
             android:layout_height="44dp"
-            android:layout_below="@+id/tvDisplayName"
+            android:layout_below="@+id/tvGroupName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="85dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="85dp"
             android:gravity="center"
-            android:text="sampleemail@gmail.com"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -67,26 +66,115 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/kickButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/rlUpper"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginEnd="0dp"
+        android:backgroundTint="@color/white"
+        android:text="Kick User"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+
+    <Button
+        android:id="@+id/btnSettings2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/kickButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-9dp"
+        android:backgroundTint="@color/white"
+
+        android:text="Clear Posts"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnSettings3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/btnSettings2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-9dp"
+        android:backgroundTint="@color/white"
+        android:text="EXTRA"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="263dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="325dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="385dp"
+        android:src="@drawable/chevron"
+        android:elevation="5dp"/>
+
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlUpper"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="60dp"
-        android:text="ToggleButton" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="293dp"
+        android:layout_marginBottom="109dp"
+        android:text="ToggleButton"
+        android:textOff="PUBLIC"
+        android:textOn="PRIVATE" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="292dp"
+        android:layout_marginBottom="16dp"
+        android:text="ToggleButton"
+        android:textOff="EVERYONE"
+        android:textOn="OWNER" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="136dp"
-        android:layout_toStartOf="@+id/toggleButton"
-        android:text="TextView" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="118dp"
+        android:text="Visibility" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="38dp"
+        android:text="Who can Post" />
 
 </RelativeLayout>

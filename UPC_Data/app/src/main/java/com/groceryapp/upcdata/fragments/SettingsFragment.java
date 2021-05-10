@@ -69,9 +69,9 @@ public class SettingsFragment extends Fragment {
             btnLogOut = view.findViewById(R.id.btnLogOut);
             ivProfile = view.findViewById(R.id.ivProfile);
             ivEditProfile = view.findViewById(R.id.ivEditProfile);
-            tvEmail = view.findViewById(R.id.tvEmail);
-            tvDisplayName = view.findViewById(R.id.tvDisplayName);
-            btnSettings1 = view.findViewById(R.id.btnSettings1);
+            tvEmail = view.findViewById(R.id.ownertv);
+            tvDisplayName = view.findViewById(R.id.tvGroupName);
+            btnSettings1 = view.findViewById(R.id.kickButton);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
             friendsListButton = view.findViewById(R.id.friendsButton);
