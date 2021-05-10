@@ -42,6 +42,7 @@ public class GroupDetailFragment extends Fragment {
     TextView tvDetailTitle;
 Button addPostButton;
 Button settingsButton;
+Button memberListButton;
 List<GroceryPost> allPostItems;
 RecyclerView recyclerView;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -65,7 +66,7 @@ RecyclerView recyclerView;
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
         addPostButton = view.findViewById(R.id.addPostButton);
         settingsButton = view.findViewById(R.id.settingsButton);
-
+        memberListButton = view.findViewById(R.id.membersListButton);
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +124,10 @@ RecyclerView recyclerView;
                         if(value==true){
                             Log.d(TAG,"SETTING IS" + value);
                             settingsButton.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            addPostButton.setVisibility(View.VISIBLE);
+                            memberListButton.setVisibility(View.VISIBLE);
+
                         }
                     }
                 });

@@ -468,7 +468,7 @@ public class DBHelper {
                 });
     }
     public boolean querySetting(String query, Group g, SettingCallback settingCallback){
-        if(query.equals("visibility")) {
+        if(query.equals("visibility") || query.equals("Visible") || query.equals("Visibility") || query.equals("visible")) {
             DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -495,23 +495,61 @@ public class DBHelper {
                 }
             });
         }
+        else if(query.equals("WhoCanPost") || query.equals("whocanpost")){
+            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            Group g = document.toObject(Group.class);
+                            if(g.getGroupSettings().getWhoCanPost().equals("Owner")){
+                                if(User.getUserID().equals(g.getOwner().getUserID())){
+                                    settingCallback.OnCallback(true);
+                                }
+                                else{
+                                    settingCallback.OnCallback(false);
+                                }
+
+                            }
+                            else if(g.getGroupSettings().getWhoCanPost().equals("Everyone")){
+                                settingCallback.OnCallback(true);
+                            }
+                            else if(g.getGroupSettings().getWhoCanPost().equals("Members Only")){
+                                for(int jj = 0; jj<g.getMembers().size(); jj++){
+                                    if(User.getUserID().equals(g.getMembers().get(jj).getUserID())){
+                                        settingCallback.OnCallback(true); //ismember function
+                                    }
+                                }
+
+                            }
+                            else{
+                                settingCallback.OnCallback(false);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                            settingCallback.OnCallback(false);
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                        settingCallback.OnCallback(false);
+                    }
+                }
+            });
+        }
         return true;
 
     }
     public void addGroupPost(Group g, GroceryPost groceryPost){
-        querySetting("visibility", g, new SettingCallback() {
+        querySetting("WhoCanPost", g, new SettingCallback() {
             @Override
             public void OnCallback(Boolean value) {
                 if(value==true){
-                    if(g.getOwner().getUserID().equals(User.getUserID())){
                         firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
                                 .set(groceryPost);
-                    }// if it's not the owner (admins) posting, no one can post
             }
-                else if(value==false){
-                    firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                            .set(groceryPost);
-                }
         }
         });
     }
