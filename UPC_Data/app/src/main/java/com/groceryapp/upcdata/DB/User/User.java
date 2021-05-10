@@ -31,7 +31,11 @@ public class User {
         userID = firebaseAuth.getCurrentUser().getUid();
         Username = firebaseAuth.getCurrentUser().getDisplayName();
         Email = firebaseAuth.getCurrentUser().getEmail();
-        photoUrl = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
+        if (firebaseAuth.getCurrentUser().getPhotoUrl() == null) {
+        }
+        else {
+            photoUrl = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
+        }
     }
 
 
