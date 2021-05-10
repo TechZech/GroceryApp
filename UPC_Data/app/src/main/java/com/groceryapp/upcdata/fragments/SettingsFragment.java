@@ -228,7 +228,8 @@ public class SettingsFragment extends Fragment {
                                                     }
                                                 }
                                             });
-                                    DBhelper.setUserPhotoUrl(uri.toString());
+                                    if(uri != null)
+                                        DBhelper.setUserPhotoUrl(uri.toString());
                                 }
                             });
                         }
