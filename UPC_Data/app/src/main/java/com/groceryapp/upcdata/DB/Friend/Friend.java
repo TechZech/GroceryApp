@@ -19,6 +19,7 @@ public class Friend {
     private String email;
     public String username;
     private String userID;
+    private String photoUrl;
 
     public String getemail() {
         return email;
@@ -32,11 +33,11 @@ public class Friend {
     public Friend(){
     }
 
-    public Friend(String userID, String username, String email) {
+    public Friend(String userID, String username, String email, String photoUrl) {
         this.userID = userID;
         this.username = username;
         this.email = email;
-
+        this.photoUrl = photoUrl;
         //    this.Username = dbHelper.getUser(uid).getUsername();
     }
 
@@ -61,5 +62,13 @@ public class Friend {
     }
     public void setusername(String username){
         this.username = username;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

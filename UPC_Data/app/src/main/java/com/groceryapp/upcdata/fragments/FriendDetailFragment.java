@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
@@ -62,6 +63,7 @@ public class FriendDetailFragment extends Fragment {
 
         tvFriendName.setText(user.getUsername());
         tvFriendEmail.setText(user.getEmail());
+        Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
 
         btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +114,7 @@ public class FriendDetailFragment extends Fragment {
         user.setEmail(Args.getString("email"));
         user.setUserID(Args.getString("userID"));
         user.setUsername(Args.getString("username"));
+        user.setProfilePhotoURL(Args.getString("photoUrl"));
     }
 
     private void goToDetailFragment(int position){

@@ -51,7 +51,7 @@ public class SettingsFragment extends Fragment {
     private ImageView ivEditProfile;
     Button searchRequestButton;
 
-    FirebaseUser user;
+    FirebaseUser FirebaseUser;
     String email;
     Uri userphotoUrl;
     String Username;
@@ -77,10 +77,10 @@ public class SettingsFragment extends Fragment {
             friendsListButton = view.findViewById(R.id.friendsButton);
             searchRequestButton = view.findViewById(R.id.searchRequestButton);
 
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            email = user.getEmail();
-            userphotoUrl = user.getPhotoUrl();
-            Username = user.getDisplayName();
+            FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            email = FirebaseUser.getEmail();
+            userphotoUrl = FirebaseUser.getPhotoUrl();
+            Username = FirebaseUser.getDisplayName();
             DBhelper = new DBHelper();
 
             tvEmail.setText(email);
@@ -203,7 +203,7 @@ public class SettingsFragment extends Fragment {
 
                     FirebaseStorage storage = FirebaseStorage.getInstance();
                     StorageReference storageRef = storage.getReference();
-                    StorageReference imageRef = storageRef.child(user.getUid());
+                    StorageReference imageRef = storageRef.child(FirebaseUser.getUid());
                     UploadTask uploadTask = imageRef.putFile(LocalimageUri);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -217,7 +217,7 @@ public class SettingsFragment extends Fragment {
                                             .setPhotoUri(uri)
                                             .build();
 
-                                    user.updateProfile(profileUpdates)
+                                    FirebaseUser.updateProfile(profileUpdates)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -228,6 +228,7 @@ public class SettingsFragment extends Fragment {
                                                     }
                                                 }
                                             });
+                                    DBhelper.setUserPhotoUrl(uri.toString());
                                 }
                             });
                         }

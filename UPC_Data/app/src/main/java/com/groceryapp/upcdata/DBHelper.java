@@ -27,12 +27,15 @@ import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DBHelper {
     public final String TAG = "DBHelper";
     private String returnusername;
     private String returnemail;
+    private String returnphotoUrl;
     private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -44,6 +47,11 @@ public class DBHelper {
     public interface MyCallback {
         void onCallback(String value);
     }
+
+    public interface twoValueCallback{
+        void onCallback(String value, String photoUrl);
+    }
+
     public interface MyUserSearchCallback {
         void onCallback(List<com.groceryapp.upcdata.DB.User.User> value);
     }
@@ -450,13 +458,13 @@ public class DBHelper {
     }
     public void addFriend(String uid) {
 
-        getUserFromUid(uid, new MyCallback() {
+        getUserFromUid(uid, new twoValueCallback() {
             @Override
-            public void onCallback(String value1) {
+            public void onCallback(String value1, String photoUrl) {
                 getEmailFromUid(uid, new MyCallback() {
                     @Override
                     public void onCallback(String value) {
-                        Friend f = new Friend(uid,value1, value);
+                        Friend f = new Friend(uid,value1, value, returnphotoUrl);
                         firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
                                 .set(f);
                     }
@@ -471,7 +479,7 @@ public class DBHelper {
 
      //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
 
-        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail());
+        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
         firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
                 .set(ff);
 
@@ -567,25 +575,11 @@ public class DBHelper {
 
         return allFriends;
     }
-    public User getUser(String uid){
-        final com.groceryapp.upcdata.DB.User.User[] user = new User[1];
-        DocumentReference docRef = firestore.collection("users").document(uid);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    user[0] = new User(uid, document.get("username").toString(), document.get("email").toString());
-                }
-                else
-                    Log.d(TAG, "get failed with ", task.getException());
-            }
-        });
-        Log.d(TAG, user[0].getUsername());
-        return user[0];
+    public void setUserPhotoUrl(String url){
+        firestore.collection("users").document(User.getUserID()).update("photoUrl", url);
     }
-    public String getUserFromUid(String uid, MyCallback myCallback){
+
+    public String getUserFromUid(String uid, twoValueCallback myCallback){
         DocumentReference docRef = firestore.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -596,7 +590,9 @@ public class DBHelper {
                         Log.d(TAG, document.getData().toString());
                         Friend f = document.toObject(Friend.class);
                         returnusername = document.getString("username");
-                        myCallback.onCallback(returnusername);
+                        returnphotoUrl = document.getString("photoUrl");
+                        Log.d(TAG, "IN getUserFromUid, photoUrl = " + returnphotoUrl);
+                        myCallback.onCallback(returnusername, returnphotoUrl);
                         //    this.Username = dbHelper.getUser(uid).getUsername();
                     } else {
                         Log.d(TAG, "No such document");
@@ -663,22 +659,23 @@ public class DBHelper {
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
-        getUserFromUid(uid, new MyCallback() {
+        getUserFromUid(uid, new twoValueCallback() {
             @Override
-            public void onCallback(String value1) {
+            public void onCallback(String value1, String photoUrl) {
                 getEmailFromUid(uid, new MyCallback() {
                     @Override
                     public void onCallback(String value) {
-                        Friend f = new Friend(uid, value1, value);
+                        Friend f = new Friend(uid, value1, value, returnphotoUrl);
                         firestore.collection("users").document(User.getUserID()).collection("Friends").document(uid)
                                 .set(f);
+                        Log.d(TAG, "IN ACCEPT FRIEND, PHOTO URL = " + photoUrl);
                     }
                 });
 
             }
         });
 
-        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail());
+        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
         firestore.collection("users").document(uid).collection("Friends").document(User.getUserID())
                 .set(ff);
 

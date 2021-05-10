@@ -77,10 +77,11 @@ public class GroceryListFragment extends Fragment {
         btnTripComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.moveGrocerytoInventory(adapter);
-                Double totalPrice = Double.parseDouble(tvTotalPrice.getText().toString());
-                dbHelper.addShoppingTrip(new ShoppingTrip(totalPrice));
-                tvTotalPrice.setText("0.0");
+                    dbHelper.moveGrocerytoInventory(adapter);
+                    Double totalPrice = Double.parseDouble(tvTotalPrice.getText().toString());
+                    dbHelper.addShoppingTrip(new ShoppingTrip(totalPrice));
+                    tvTotalPrice.setText("0.0");
+
             }
         });
 

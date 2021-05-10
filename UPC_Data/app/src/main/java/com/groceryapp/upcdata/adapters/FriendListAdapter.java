@@ -91,9 +91,9 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             //      frUser.setText(u.getUsername());
             //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
             //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
-            dbHelper.getUserFromUid(fr.getuserID(), new DBHelper.MyCallback() {
+            dbHelper.getUserFromUid(fr.getuserID(), new DBHelper.twoValueCallback() {
                 @Override
-                public void onCallback(String value) {
+                public void onCallback(String value, String photoUrl) {
                     frUser.setText(value);
                 }
             });

@@ -84,9 +84,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         public void bind(User fr){
             Log.d("BIND","BIND");
-            dbHelper.getUserFromUid(fr.getUserID(), new DBHelper.MyCallback() {
+            dbHelper.getUserFromUid(fr.getUserID(), new DBHelper.twoValueCallback() {
                 @Override
-                public void onCallback(String value) {
+                public void onCallback(String value, String photoUrl) {
                     frUser.setText(value);
                 }
             });
