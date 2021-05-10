@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/tvTotalPrice"
-        android:layout_width="65dp"
+        android:layout_width="95dp"
         android:layout_height="30dp"
         android:layout_marginStart="170dp"
         android:layout_marginTop="560dp"

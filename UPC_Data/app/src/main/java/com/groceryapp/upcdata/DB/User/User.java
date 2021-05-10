@@ -11,7 +11,7 @@ public class User {
     private String userID;
     private String Username;
     private String Email;
-
+    private String photoUrl;
 
     public User(){
         userID = "";
@@ -24,12 +24,14 @@ public class User {
         userID = userid;
         Username = username;
         Email = email;
+        photoUrl = "";
     }
 
     public User(FirebaseAuth firebaseAuth){
         userID = firebaseAuth.getCurrentUser().getUid();
         Username = firebaseAuth.getCurrentUser().getDisplayName();
         Email = firebaseAuth.getCurrentUser().getEmail();
+        photoUrl = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
     }
 
 
@@ -52,5 +54,13 @@ public class User {
     }
     public String getEmail(){
         return Email;
+    }
+
+    public String getProfilePhotoURL() {
+        return photoUrl;
+    }
+
+    public void setProfilePhotoURL(String profilePhotoURL) {
+        this.photoUrl = profilePhotoURL;
     }
 }
