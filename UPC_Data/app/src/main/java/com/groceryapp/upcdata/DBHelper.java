@@ -40,6 +40,7 @@ public class DBHelper {
     private String returnphotoUrl;
     private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
+    int count = 0;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -260,6 +261,7 @@ public class DBHelper {
         return allUserGroups;
     }
     public List<User> queryGroupMembers(List<User> allFriends, Group g, UserAdapter adapter, MemberListCallback callback) {
+
         DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -268,18 +270,20 @@ public class DBHelper {
                     DocumentSnapshot document = task.getResult();
                     retGroup = document.toObject(Group.class);
                     Log.d(TAG, "THE GROUP IS " + g.getMembers().get(0).getUsername());
-                   retttUser = retGroup.getMembers();
-                   callback.OnCallback(retttUser);
+                    allFriends.add(g.getMembers().get(count));
+
+
                     adapter.notifyDataSetChanged();
                 }
                 else
                     Log.d(TAG, "get failed with ", task.getException());
             }
 
+
         });
 
-        adapter.notifyDataSetChanged();
-        return retttUser;
+        callback.OnCallback(allFriends);
+        return allFriends;
     }
     public List<GroceryPost> getGroupPosts(Group grroup, List<GroceryPost> allGroupGroceryPosts, GroceryPostAdapter adapter) {
         try {

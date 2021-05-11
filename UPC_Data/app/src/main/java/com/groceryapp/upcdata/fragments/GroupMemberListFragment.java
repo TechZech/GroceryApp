@@ -60,7 +60,6 @@ public class GroupMemberListFragment extends Fragment {
         frTV = view.findViewById(R.id.FRLabel);
         allFriends = new ArrayList<>();
         adapter = new UserAdapter(getContext(), allFriends, onClickListener);
-
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
 
@@ -91,10 +90,15 @@ public class GroupMemberListFragment extends Fragment {
                     @Override
                     public void OnCallback(List<User> b) {
                         allFriends = b;
-                        adapter.notifyDataSetChanged();
+                        for(int ij = 0; ij<allFriends.size(); ij++){
+                            Log.d(TAG,"ALL FRIENDS IS " + allFriends.get(ij).getUsername());
+                        }
+
+
                     }
                 });
             }
+
         });
         return Args.getBoolean("fromInventory");
     }
