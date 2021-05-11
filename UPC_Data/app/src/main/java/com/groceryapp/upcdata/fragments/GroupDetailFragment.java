@@ -73,18 +73,7 @@ RecyclerView recyclerView;
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new GroupSettingsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.slide_in,
-                                R.anim.fade_out,
-                                R.anim.fade_in,
-                                R.anim.slide_out
-                        )
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+               goToSettingsFragment();
             }
 
         });
@@ -191,6 +180,18 @@ RecyclerView recyclerView;
     }
 
 
-
+    private void goToSettingsFragment(){
+        Bundle bundle = new Bundle();
+        String gidString = grr.getGid();
+        bundle.putString("gid", gidString );
+        bundle.putBoolean("fromInventory", true);
+        Fragment fragment = new GroupSettingsFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
 }

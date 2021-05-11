@@ -29,10 +29,14 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.groceryapp.upcdata.DB.Group.Group;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
+
+import java.util.List;
 
 public class GroupSettingsFragment extends Fragment {
 
@@ -44,7 +48,10 @@ public class GroupSettingsFragment extends Fragment {
     String email;
     Uri userphotoUrl;
     String Username;
-    DBHelper DBhelper;
+    DBHelper Dbhelper;
+    Button kickButton;
+    TextView tvGroupname;
+    Group grr;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,13 +67,51 @@ public class GroupSettingsFragment extends Fragment {
         email = user.getEmail();
         userphotoUrl = user.getPhotoUrl();
         Username = user.getDisplayName();
-        DBhelper = new DBHelper();
-
+        Dbhelper = new DBHelper();
+        tvGroupname = view.findViewById(R.id.tvGroupName);
+        kickButton = view.findViewById(R.id.kickButton);
+        kickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Group gg = grr;
+                Bundle bundle = new Bundle();
+                String gidString = gg.getGid();
+                bundle.putString("gid", gidString );
+                bundle.putBoolean("fromInventory", true);
+                Fragment fragment = new GroupMemberListFragment();
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+unpackBundle();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+    }
+    private boolean unpackBundle(){
+        Bundle Args = getArguments();
+        Log.d(TAG, "ARGS STRING IS " + Args.getString("gid"));
+
+        Dbhelper.getGroupById(Args.getString("gid"), new DBHelper.GroupCallback() {
+            @Override
+            public void OnCallback(Group g) {
+                grr = g;
+                tvGroupname.setText(g.getGroupname());
+
+            }
+        });
+        {
+
+        }
+        //grr = dbHelper.getGroupById(Args.getString("gid"));
+        Log.d(TAG, "TESTESTEST");
+        return Args.getBoolean("fromSearch");
     }
 }
