@@ -500,6 +500,79 @@ public class DBHelper {
                     }
                 });
     }
+
+    public void setGroupSetting(String query, Group g){
+        if(query.equals("Public")) {
+            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            Group g = document.toObject(Group.class);
+                            g.getGroupSettings().setVisibility("Private");
+                            docRef.set(g);
+                        }
+                    }
+                }
+            });
+        }
+        else if(query.equals("Private")){
+            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            Group g = document.toObject(Group.class);
+                            g.getGroupSettings().setVisibility("Public");
+                            docRef.set(g);
+                        }
+                    }
+                }
+            });
+        }
+    }
+    public void setUserSetting(String query, User ust){
+        if(query.equals("Public")) {
+            DocumentReference docRef = firestore.collection("users").document(ust.getUserID());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            User wtg = document.toObject(User.class);
+                            wtg.getUserSettings().setVisibility("Private");
+                            docRef.set(wtg);
+                        }
+                    }
+                }
+            });
+        }
+        else if(query.equals("Private")){
+            DocumentReference docRef = firestore.collection("users").document(ust.getUserID());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            User wtg = document.toObject(User.class);
+                            wtg.getUserSettings().setVisibility("Public");
+                            docRef.set(wtg);
+                        }
+                    }
+                }
+            });
+        }
+    }
     public boolean querySetting(String query, Group g, SettingCallback settingCallback){
         if(query.equals("visibility") || query.equals("Visible") || query.equals("Visibility") || query.equals("visible")) {
             DocumentReference docRef = firestore.collection("Groups").document(g.getGid());

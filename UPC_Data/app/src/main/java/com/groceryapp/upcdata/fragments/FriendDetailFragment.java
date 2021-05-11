@@ -108,7 +108,14 @@ public class FriendDetailFragment extends Fragment {
         rvFriendInv.setLayoutManager(linearLayoutManager);
         allFriendsItems = dbHelper.queryFriendInventoryItems(user.getUserID(), allFriendsItems, groceryItemAdapter);
     }
-
+    public void makePublic(){
+        rvFriendInv.setVisibility(View.VISIBLE);
+        btnGroupInvite.setVisibility(View.VISIBLE);
+    }
+    public void makePrivate(){
+        rvFriendInv.setVisibility(View.GONE);
+        btnGroupInvite.setVisibility(View.GONE);
+    }
     private void unpackBundle(){
         Bundle Args = getArguments();
         user.setEmail(Args.getString("email"));
@@ -119,9 +126,11 @@ public class FriendDetailFragment extends Fragment {
             @Override
             public void OnCallback(Boolean value) {
                 if(value==true){
-                    rvFriendInv.setVisibility(View.VISIBLE);
-                    btnGroupInvite.setVisibility(View.VISIBLE);
 
+                        makePublic();
+                }
+                else{
+                    makePrivate();
                 }
             }
         });

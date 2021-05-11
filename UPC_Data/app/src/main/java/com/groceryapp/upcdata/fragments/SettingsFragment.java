@@ -26,9 +26,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.R;
@@ -47,6 +49,7 @@ public class SettingsFragment extends Fragment {
     Button btnSettings2;
     Button btnSettings3;
     Button friendsListButton;
+    Button privacyButton;
     private ImageView ivProfile;
     private ImageView ivEditProfile;
     Button searchRequestButton;
@@ -56,7 +59,9 @@ public class SettingsFragment extends Fragment {
     Uri userphotoUrl;
     String Username;
     DBHelper DBhelper;
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +77,7 @@ public class SettingsFragment extends Fragment {
             tvEmail = view.findViewById(R.id.ownertv);
             tvDisplayName = view.findViewById(R.id.tvGroupName);
             btnSettings1 = view.findViewById(R.id.kickButton);
+            privacyButton = view.findViewById(R.id.privacyButton);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
             friendsListButton = view.findViewById(R.id.friendsButton);
@@ -85,7 +91,17 @@ public class SettingsFragment extends Fragment {
 
             tvEmail.setText(email);
             tvDisplayName.setText(Username);
-
+            privacyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(privacyButton.getText().toString().equals("PUBLIC")){
+                        DBhelper.setUserSetting("Private", User);
+                    }
+                    else if(privacyButton.getText().toString().equals("PRIVATE")){
+                        DBhelper.setUserSetting("Public", User);
+                    }
+                }
+            });
             ivEditProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

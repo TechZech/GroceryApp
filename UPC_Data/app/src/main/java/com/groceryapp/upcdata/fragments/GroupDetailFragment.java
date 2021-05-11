@@ -73,7 +73,8 @@ RecyclerView recyclerView;
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               goToSettingsFragment();
+
+                goToSettingsFragment();
             }
 
         });
