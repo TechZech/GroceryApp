@@ -83,13 +83,7 @@ RecyclerView recyclerView;
                 dbHelper.addGroupPost(grr, gp);
             }
         });
-        memberListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               goToMembers();
-            }
 
-        });
 
         tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
         ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
@@ -110,14 +104,14 @@ RecyclerView recyclerView;
         settingsButton.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
         addPostButton.setVisibility(View.VISIBLE);
-        memberListButton.setVisibility(View.VISIBLE);
+//        memberListButton.setVisibility(View.VISIBLE);
     }
 
     public void displayPrivate(){
         settingsButton.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         addPostButton.setVisibility(View.GONE);
-        memberListButton.setVisibility(View.GONE);
+    //    memberListButton.setVisibility(View.GONE);
     }
     public void goToMembers(){
         Group gg = grr;

@@ -22,7 +22,8 @@ public class GroupSettings implements Settings {
     private String visibility = "Public";
     private String whoCanPost = "Everyone";
     public GroupSettings(){
-
+        visibility = "Public";
+        whoCanPost = "Everyone";
     }
     public GroupSettings(String visibility, String whoCanPost){
     this.visibility = visibility;

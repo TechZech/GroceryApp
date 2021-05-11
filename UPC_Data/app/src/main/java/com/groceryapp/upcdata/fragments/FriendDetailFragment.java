@@ -115,6 +115,16 @@ public class FriendDetailFragment extends Fragment {
         user.setUserID(Args.getString("userID"));
         user.setUsername(Args.getString("username"));
         user.setProfilePhotoURL(Args.getString("photoUrl"));
+        dbHelper.queryUserSetting("Visibility", user, new DBHelper.SettingCallback() {
+            @Override
+            public void OnCallback(Boolean value) {
+                if(value==true){
+                    rvFriendInv.setVisibility(View.VISIBLE);
+                    btnGroupInvite.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
     }
 
     private void goToDetailFragment(int position){

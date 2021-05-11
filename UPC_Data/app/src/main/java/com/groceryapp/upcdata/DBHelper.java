@@ -576,6 +576,42 @@ public class DBHelper {
         return true;
 
     }
+
+    public boolean queryUserSetting(String query, User usy, SettingCallback settingCallback){
+        if(query.equals("visibility") || query.equals("Visible") || query.equals("Visibility") || query.equals("visible")) {
+            DocumentReference docRef = firestore.collection("users").document(usy.getUserID());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, document.getData().toString());
+                            User ut = document.toObject(User.class);
+                            if(ut.getUserSettings().getVisibility().equals("Public")){
+                                settingCallback.OnCallback(true);
+                            }
+                            else{
+                                settingCallback.OnCallback(false);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                            settingCallback.OnCallback(false);
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                        settingCallback.OnCallback(false);
+                    }
+                }
+            });
+        }
+
+        return true;
+
+    }
+
+
+
     public boolean isMember(User u, Group g, isMemberCallback settingCallback){
             DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

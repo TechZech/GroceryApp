@@ -13,7 +13,10 @@ public class User {
     private String Username;
     private String Email;
     private String photoUrl;
-    UserSettings UserSettings;
+
+
+
+    private UserSettings UserSettings;
 
     public User(){
         userID = "";
@@ -47,7 +50,13 @@ public class User {
         }
         UserSettings = new UserSettings();
     }
+    public UserSettings getUserSettings() {
+        return UserSettings;
+    }
 
+    public void setUserSettings(UserSettings userSettings) {
+        UserSettings = userSettings;
+    }
 
     public void setUserID(String userid){
         userID = userid;
