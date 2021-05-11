@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="280dp"
         android:background="@drawable/shape"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center_horizontal"
@@ -21,7 +21,7 @@
         android:id="@+id/tvInventory"
         android:layout_width="match_parent"
         android:layout_height="535dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:background="@null" />
 
     <Button

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -87,8 +88,8 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         private RelativeLayout item_grocery_container;
         private TextView tvPrice;
 
-        private ImageView QuantityAdd;
-        private ImageView QuantitySubtract;
+        private Button QuantityAdd;
+        private Button QuantitySubtract;
         private DBHelper dbHelper;
 
         public ViewHolder(@NonNull View itemView){
