@@ -69,7 +69,9 @@ public class GroupMemberListFragment extends Fragment {
     private void goToDetailFragment(int position){
         User user = allFriends.get(position);
         Bundle bundle = new Bundle();
-
+        bundle.putString("email", user.getEmail() );
+        bundle.putString("userID", user.getUserID());
+        bundle.putString("username", user.getUsername());
         Fragment fragment = new FriendDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
