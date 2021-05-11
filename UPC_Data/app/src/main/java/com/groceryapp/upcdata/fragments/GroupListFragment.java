@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -58,7 +57,7 @@ public class GroupListFragment extends Fragment {
         };
         rvFriends = view.findViewById(R.id.rvSearch);
         frTV = view.findViewById(R.id.FRLabel);
-        SearchText = view.findViewById(R.id.searchText);
+        SearchText = view.findViewById(R.id.searchText1);
         allFriends  = new ArrayList<>();
         adapter = new GroupAdapter(onClickListener, getContext(), allFriends);
 

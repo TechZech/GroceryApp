@@ -75,7 +75,7 @@ public class SettingsFragment extends Fragment {
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
             friendsListButton = view.findViewById(R.id.friendsButton);
-            searchRequestButton = view.findViewById(R.id.searchRequestButton);
+       //     searchRequestButton = view.findViewById(R.id.searchRequestButton); moved search to friends fragment
 
             FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             email = FirebaseUser.getEmail();
@@ -135,6 +135,7 @@ public class SettingsFragment extends Fragment {
                     fragmentTransaction.commit();
                 }
             });
+            /*
             searchRequestButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -151,7 +152,7 @@ public class SettingsFragment extends Fragment {
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
-            });
+            });*/
             btnSettings2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -8,7 +8,7 @@
     tools:context=".fragments.GroceryListFragment">
 
     <Button
-        android:id="@+id/rvButton"
+        android:id="@+id/rvButton1"
         android:layout_width="167dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
         android:text="Search" />
 
     <EditText
-        android:id="@+id/searchText"
+        android:id="@+id/searchText1"
         android:layout_width="227dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

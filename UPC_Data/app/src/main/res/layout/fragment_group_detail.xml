@@ -85,17 +85,6 @@
         android:layout_marginTop="370dp"/>
 
     <Button
-        android:id="@+id/membersListButton"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginBottom="43dp"
-        android:text="View Group Members"
-        android:visibility="gone"/>
-
-    <Button
         android:id="@+id/settingsButton"
         android:layout_width="84dp"
         android:layout_height="wrap_content"

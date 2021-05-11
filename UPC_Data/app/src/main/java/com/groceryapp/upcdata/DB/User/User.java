@@ -2,6 +2,7 @@ package com.groceryapp.upcdata.DB.User;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.Group.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class User {
     private String Username;
     private String Email;
     private String photoUrl;
+    UserSettings UserSettings;
 
     public User(){
         userID = "";
@@ -25,8 +27,15 @@ public class User {
         Username = username;
         Email = email;
         photoUrl = "";
+        UserSettings = new UserSettings();
     }
-
+    public User(String userid, String username, String email, UserSettings userSettings){
+        userID = userid;
+        Username = username;
+        Email = email;
+        photoUrl = "";
+        UserSettings = userSettings;
+    }
     public User(FirebaseAuth firebaseAuth){
         userID = firebaseAuth.getCurrentUser().getUid();
         Username = firebaseAuth.getCurrentUser().getDisplayName();
@@ -36,6 +45,7 @@ public class User {
         else {
             photoUrl = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
         }
+        UserSettings = new UserSettings();
     }
 
 

@@ -61,7 +61,7 @@ public class SearchFragment extends Fragment {
         };
         rvSearch = view.findViewById(R.id.rvSearch);
         rvButton = view.findViewById(R.id.rvButton);
-        rvSearchText = view.findViewById(R.id.searchText);
+        rvSearchText = view.findViewById(R.id.searchText1);
         allSearches = new ArrayList<>();
         allSearches2 = new ArrayList<>();
         adapter = new UserAdapter(getContext(), allSearches, onClickListener);

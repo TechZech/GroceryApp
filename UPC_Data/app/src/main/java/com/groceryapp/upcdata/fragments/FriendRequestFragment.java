@@ -40,7 +40,7 @@ public class FriendRequestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        friendName = view.findViewById(R.id.searchText);
+        friendName = view.findViewById(R.id.searchText1);
         dbHelper = new DBHelper();
 
 
