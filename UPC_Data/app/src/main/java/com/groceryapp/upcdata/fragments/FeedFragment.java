@@ -71,18 +71,10 @@ public class FeedFragment extends Fragment {
         chooseItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new PostInventoryFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.slide_in,
-                                R.anim.fade_out,
-                                R.anim.fade_in,
-                                R.anim.slide_out
-                        )
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                // From another Fragment or Activity where you wish to show this
+// PurchaseConfirmationDialogFragment.
+                new PostFragment().show(
+                        getChildFragmentManager(), PostFragment.TAG);
             }
         });
         submitButton.setOnClickListener(new View.OnClickListener() {

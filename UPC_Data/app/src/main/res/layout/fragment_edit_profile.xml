@@ -76,15 +76,15 @@
        android:layout_marginStart="90dp"
        android:text="Reset Password"
        android:id="@+id/btnResetPassword"
-      />
+       />
 
    <Button
        android:id="@+id/btnDeleteAccount"
        android:layout_width="220dp"
        android:layout_height="50dp"
-      android:text="Delete Account"
-      android:layout_marginTop="355dp"
-      android:layout_marginStart="90dp"/>
+       android:text="Delete Account"
+       android:layout_marginTop="355dp"
+       android:layout_marginStart="90dp"/>
 
 
    <View
