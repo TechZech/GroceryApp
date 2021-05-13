@@ -106,9 +106,9 @@ public class SimilarProductsFragment extends Fragment {
         tvTitle1.setText(ArgData.getString("Title1"));
         tvTitle2.setText(ArgData.getString("Title2"));
         tvTitle3.setText(ArgData.getString("Title3"));
-        tvUPC1.setText(ArgData.getString("UPC1"));
-        tvUPC2.setText(ArgData.getString("UPC2"));
-        tvUPC3.setText(ArgData.getString("UPC3"));
+        tvUPC1.setText("UPC: " + ArgData.getString("UPC1"));
+        tvUPC2.setText("UPC: " + ArgData.getString("UPC2"));
+        tvUPC3.setText("UPC: " + ArgData.getString("UPC3"));
     }
 
     private void addToGList(GroceryItem groceryItem){

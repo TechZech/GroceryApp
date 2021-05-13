@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/darker_green_fade">
 
     <Button
         android:id="@+id/btnGoBackToDetail"
@@ -11,161 +13,151 @@
         android:layout_marginTop="10dp"
         android:drawableTop="@drawable/abc_vector_test" />
 
-    <TextView
-        android:id="@+id/tvUPC2"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle2"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/ivProduct2"
-        android:gravity="center"
-        android:text="UPC" />
-
-    <TextView
-        android:id="@+id/tvUPC3"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle3"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/ivProduct3"
-        android:gravity="center"
-        android:text="UPC" />
-
-    <ImageView
-        android:id="@+id/ivProduct2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/dividerSM1"
-        android:layout_marginTop="30dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="true"
-        app:srcCompat="@drawable/download" />
-
-    <ImageView
-        android:id="@+id/ivProduct3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/dividerSM2"
-        android:layout_marginTop="30dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="true"
-        app:srcCompat="@drawable/download" />
-
-    <TextView
-        android:id="@+id/tvTitle1"
-        android:layout_width="240dp"
-        android:layout_height="90dp"
+    <TableRow
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="false"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toEndOf="@+id/ivProduct1"
-        android:gravity="center"
-        android:text="Item Title" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="67dp"
+        android:background="@drawable/shape">
 
-    <TextView
-        android:id="@+id/tvTitle2"
-        android:layout_width="240dp"
-        android:layout_height="90dp"
-        android:layout_below="@+id/dividerSM1"
-        android:layout_alignParentEnd="false"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="1dp"
-        android:layout_toEndOf="@+id/ivProduct2"
-        android:gravity="center"
-        android:text="Item Title" />
+        <ImageView
+            android:id="@+id/ivProduct1"
+            android:layout_width="130dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="true"
+            app:srcCompat="@drawable/download" />
 
-    <TextView
-        android:id="@+id/tvTitle3"
-        android:layout_width="240dp"
-        android:layout_height="90dp"
-        android:layout_below="@+id/dividerSM2"
-        android:layout_alignParentEnd="false"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="1dp"
-        android:layout_toEndOf="@+id/ivProduct3"
-        android:gravity="center"
-        android:text="Item Title" />
+        <TextView
+            android:id="@+id/tvTitle1"
+            android:layout_width="240dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="Item Title" />
 
-    <ImageView
-        android:id="@+id/ivProduct1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        <TextView
+            android:id="@+id/tvUPC1"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-250dp"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:text="UPC" />
+
+        <Button
+            android:id="@+id/btnAdd1"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="75dp"
+            android:text="Add" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="65dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="true"
-        app:srcCompat="@drawable/download" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/shape">
 
-    <TextView
-        android:id="@+id/tvUPC1"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle1"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/ivProduct1"
-        android:gravity="center"
-        android:text="UPC" />
+        <ImageView
+            android:id="@+id/ivProduct2"
+            android:layout_width="130dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="true"
+            app:srcCompat="@drawable/download" />
 
-    <View
-        android:id="@+id/dividerSM1"
+        <TextView
+            android:id="@+id/tvTitle2"
+            android:layout_width="240dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="1dp"
+            android:gravity="center"
+            android:text="Item Title" />
+
+        <TextView
+            android:id="@+id/tvUPC2"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-241dp"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:text="UPC" />
+
+        <Button
+            android:id="@+id/btnAdd2"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="75dp"
+            android:text="Add" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row3"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignTop="@+id/ivProduct1"
-        android:layout_marginTop="180dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="160dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="415dp"
+        android:background="@drawable/shape">
 
-    <View
-        android:id="@+id/dividerSM2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/dividerSM1"
-        android:layout_marginTop="210dp"
-        android:background="?android:attr/listDivider" />
+        <ImageView
+            android:id="@+id/ivProduct3"
+            android:layout_width="130dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="true"
+            app:srcCompat="@drawable/download" />
 
-    <View
-        android:id="@+id/dividerSM3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/dividerSM2"
-        android:layout_marginTop="210dp"
-        android:background="?android:attr/listDivider" />
+        <TextView
+            android:id="@+id/tvTitle3"
+            android:layout_width="240dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="1dp"
+            android:gravity="center"
+            android:text="Item Title" />
 
-    <Button
-        android:id="@+id/btnAdd1"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle1"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/tvUPC1"
-        android:text="Add" />
+        <TextView
+            android:id="@+id/tvUPC3"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-241dp"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:text="UPC" />
 
-    <Button
-        android:id="@+id/btnAdd2"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle2"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/tvUPC2"
-        android:text="Add" />
-
-    <Button
-        android:id="@+id/btnAdd3"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvTitle3"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/tvUPC3"
-        android:text="Add" />
+        <Button
+            android:id="@+id/btnAdd3"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="75dp"
+            android:text="Add" />
+    </TableRow>
 
 
 </RelativeLayout>
