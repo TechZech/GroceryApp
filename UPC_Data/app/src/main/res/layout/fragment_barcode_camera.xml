@@ -5,16 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/darker_green_fade"
     tools:context=".BarcodeCamera">
 
     <TextView
         android:id="@+id/friendTitle"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/GroceryAppGreen"
-        android:fontFamily="sans-serif-smallcaps"
-        android:gravity="center"
-        android:text="Barcode Scanner"
+        android:layout_height="80dp"
+        android:background="@color/GroceryAppGreen_DARK"
+        android:fontFamily="@font/robotolight"
+        android:gravity="center_vertical"
+        android:text="      Barcode Scanner"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -25,7 +26,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="460dp"
         android:text="@string/tap_to_scan"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:fontFamily="@font/robotolight"/>
 
     <ImageView
         android:id="@+id/ivBarcodeGuide"
@@ -48,7 +50,8 @@
         android:id="@+id/btnManualAdd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="540dp"
-        android:text="Manually add item"/>
+        android:text="Manually add item"
+        android:fontFamily="@font/robotolight"/>
 
     <TextView
         android:layout_width="50dp"
@@ -58,6 +61,7 @@
         android:layout_marginTop="505dp"
         android:text="OR"
         android:textColor="@color/black"
+        android:fontFamily="@font/robotolight"
         />
 
 </RelativeLayout>

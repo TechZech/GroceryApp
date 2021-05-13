@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".fragments.GroceryListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/darker_green_fade">
 
     <TextView
         android:id="@+id/friendTitle"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:background="@color/GroceryAppGreen_DARK"
-        android:fontFamily="sans-serif-smallcaps"
-        android:gravity="center"
-        android:text="Grocery List"
+        android:fontFamily="@font/robotolight"
+        android:gravity="center_vertical"
+        android:text="      Grocery List"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -22,14 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="470dp"
         android:layout_marginTop="70dp"
-        android:background="@color/white" />
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="70dp"
-        android:background="?android:attr/listDivider" />
+        android:background="@null" />
 
     <TextView
         android:layout_width="150dp"
@@ -38,7 +31,8 @@
         android:layout_marginTop="560dp"
         android:text="Total Price: $"
         android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:fontFamily="@font/robotolight"/>
 
     <TextView
         android:id="@+id/tvTotalPrice"
@@ -48,7 +42,8 @@
         android:layout_marginTop="560dp"
         android:text="0.00"
         android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:fontFamily="@font/robotolight"/>
 
     <Button
         android:id="@+id/btnTripComplete"
@@ -58,6 +53,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="54dp"
-        android:text="Trip Complete" />
+        android:text="Trip Complete"
+        android:fontFamily="@font/robotolight"/>
 
 </RelativeLayout>
