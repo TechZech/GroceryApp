@@ -20,14 +20,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
-import com.groceryapp.upcdata.MainActivity;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.SettingsFragment;
 
@@ -60,8 +56,8 @@ public class EditProfileFragment extends Fragment {
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
         btnResetPassword = view.findViewById(R.id.btnResetPassword);
 
-        etEditUsername = view.findViewById(R.id.etEditUsername);
-        etEditEmail = view.findViewById(R.id.etEditEmail);
+        etEditUsername = view.findViewById(R.id.itemTitleText);
+        etEditEmail = view.findViewById(R.id.urltext);
         etEditUsername.setText(Username);
         etEditEmail.setText(email);
 
