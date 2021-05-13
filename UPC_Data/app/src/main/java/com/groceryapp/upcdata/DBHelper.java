@@ -727,6 +727,11 @@ public class DBHelper {
         });
     }
     public void addFriend(String uid) {
+    if(User.getUserID().equals(uid)){ //add yourself
+        return;
+    }
+    else {
+
 
         getUserFromUid(uid, new twoValueCallback() {
             @Override
@@ -734,7 +739,7 @@ public class DBHelper {
                 getEmailFromUid(uid, new MyCallback() {
                     @Override
                     public void onCallback(String value) {
-                        Friend f = new Friend(uid,value1, value, returnphotoUrl);
+                        Friend f = new Friend(uid, value1, value, returnphotoUrl);
                         firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
                                 .set(f);
                     }
@@ -743,16 +748,15 @@ public class DBHelper {
             }
         });
 
-      //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
+        //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
 
 
-
-     //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
+        //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
 
         Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
         firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
                 .set(ff);
-
+    }
     }
     public void deleteFriend(String uid) {
         Log.d(TAG, "UID IS" + uid);
