@@ -8,14 +8,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@color/white"
-    android:layout_margin="6dp"
-    card_view:cardCornerRadius="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    card_view:cardCornerRadius="12dp"
     android:elevation="7dp">
 
     <RelativeLayout
         android:id="@+id/item_grocery_container"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="90dp"
         android:orientation="vertical">
 
 
@@ -24,13 +27,13 @@
             android:layout_width="185dp"
             android:layout_height="55dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/robotolight"
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:fontFamily="@font/robotolight"/>
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvQuantity"
@@ -39,8 +42,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="43dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="15dp"
             android:fontFamily="@font/robotolight"
             android:gravity="center"
             android:text="00"
@@ -53,9 +56,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="123dp"
-            android:fontFamily="@font/robotomedium"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="144dp"
+            android:fontFamily="@font/robotolight"
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/black"
@@ -63,39 +66,44 @@
 
         <ImageView
             android:id="@+id/tvImage"
-            android:layout_width="125dp"
-            android:layout_height="110dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             card_view:srcCompat="@drawable/glistappicon"
             tools:srcCompat="@tools:sample/avatars" />
 
         <Button
             android:id="@+id/ivPlusSign"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="-3dp"
             android:layout_marginEnd="13dp"
             android:fontFamily="@font/robotobold"
             android:padding="0dp"
             android:text="+"
-            android:textSize="25sp" />
+            android:textSize="20sp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            />
 
         <Button
             android:id="@+id/ivMinusSign"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="13dp"
+            android:backgroundTint="@color/white"
             android:fontFamily="@font/robotobold"
             android:padding="0dp"
             android:text="-"
-            android:textSize="25sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

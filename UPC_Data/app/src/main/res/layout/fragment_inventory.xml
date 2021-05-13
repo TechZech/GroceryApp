@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#f9f9f9">
+    android:background="@drawable/darker_green_fade">
 
     <TextView
         android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:background="@drawable/shape"
-        android:fontFamily="sans-serif-smallcaps"
-        android:gravity="center_horizontal"
-        android:text="Inventory"
+        android:layout_height="80dp"
+        android:background="@color/GroceryAppGreen_DARK"
+        android:fontFamily="@font/robotolight"
+        android:gravity="center_vertical"
+        android:text="      Inventory"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="535dp"
         android:layout_marginTop="80dp"
-        android:background="@null" />
+        android:background="@null"
+        android:overScrollMode="never"/>
 
     <Button
         android:id="@+id/createGroupButton"
@@ -33,7 +34,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="134dp"
         android:layout_marginBottom="55dp"
-        android:text="Create Group" />
+        android:text="Create Group"
+        android:fontFamily="@font/robotolight"/>
 
     <Button
         android:id="@+id/viewGroupsButton"
@@ -42,5 +44,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="116dp"
-        android:text="View Your Groups" />
+        android:text="View Your Groups"
+        android:fontFamily="@font/robotolight"/>
 </RelativeLayout>

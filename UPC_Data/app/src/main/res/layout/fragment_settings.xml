@@ -27,7 +27,8 @@
             android:gravity="center"
             android:text="Display Name"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:fontFamily="@font/robotolight"/>
 
         <TextView
             android:id="@+id/ownertv"
@@ -42,7 +43,8 @@
             android:gravity="center"
             android:text="sampleemail@gmail.com"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/robotolight"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
@@ -76,7 +78,8 @@
         android:backgroundTint="@color/white"
         android:text="Sign Out"
         android:textColor="@color/Sign_Out_Red"
-        android:textAlignment="textStart"/>
+        android:textAlignment="textStart"
+        android:fontFamily="@font/robotolight"/>
 
     <Button
         android:id="@+id/kickButton"
@@ -91,7 +94,8 @@
         android:backgroundTint="@color/white"
         android:text="Edit Profile"
         android:textAlignment="textStart"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:fontFamily="@font/robotolight"/>
 
 
 
@@ -107,7 +111,8 @@
 
         android:text="Shopping History"
         android:textAlignment="textStart"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:fontFamily="@font/robotolight"/>
 
     <Button
         android:id="@+id/btnSettings3"
@@ -120,7 +125,8 @@
         android:backgroundTint="@color/white"
         android:text="Clear Grocery List"
         android:textAlignment="textStart"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:fontFamily="@font/robotolight"/>
 
     <Button
         android:id="@+id/friendsButton"
@@ -132,7 +138,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="81dp"
         android:text="Friends and Groups"
-        app:icon="@drawable/ic_baseline_people_alt_24" />
+        app:icon="@drawable/ic_baseline_people_alt_24"
+        android:fontFamily="@font/robotolight"/>
 
     <ImageView
         android:layout_width="30dp"
@@ -167,6 +174,7 @@
         android:layout_marginStart="46dp"
         android:layout_marginBottom="95dp"
         android:textOff="PUBLIC"
-        android:textOn="PRIVATE" />
+        android:textOn="PRIVATE"
+        android:fontFamily="@font/robotolight"/>
 
 </RelativeLayout>
