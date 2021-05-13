@@ -189,7 +189,7 @@ public class BarcodeFragment extends Fragment{
                         /* User clicked OK so do some stuff */
                         if (!input1.getText().toString().isEmpty() && !input2.getText().toString().isEmpty() &&
                                 !input3.getText().toString().isEmpty() && !input4.getText().toString().isEmpty()){
-                            DB.addInventoryItem(input1.getText().toString(), input2.getText().toString(), "0", qtyValue, input3.getText().toString(), true);
+                            DB.addInventoryItem(input1.getText().toString(), input2.getText().toString(), "0", qtyValue, fixString(input3.getText().toString()), true);
                         }
                     }
                 }).setNegativeButton("Cancel",
@@ -202,5 +202,12 @@ public class BarcodeFragment extends Fragment{
                     }
                 });
         alert.show();
+    }
+
+    public String fixString(String price){
+        if(!((price).startsWith("$"))){
+            price = "$" + price;
+        }
+        return price;
     }
 }
