@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -34,8 +35,8 @@ public class EditProfileFragment extends Fragment {
     Button btnSaveChanges;
     Button btnDeleteAccount;
     Button btnResetPassword;
-    EditText etEditUsername;
-    EditText etEditEmail;
+    TextInputEditText etEditUsername;
+    TextInputEditText etEditEmail;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
@@ -56,8 +57,8 @@ public class EditProfileFragment extends Fragment {
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
         btnResetPassword = view.findViewById(R.id.btnResetPassword);
 
-        etEditUsername = view.findViewById(R.id.itemTitleText);
-        etEditEmail = view.findViewById(R.id.urltext);
+        etEditUsername = view.findViewById(R.id.materialETUsername);
+        etEditEmail = view.findViewById(R.id.materialETemail);
         etEditUsername.setText(Username);
         etEditEmail.setText(email);
 

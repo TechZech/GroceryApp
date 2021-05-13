@@ -6,73 +6,103 @@
     tools:context=".fragments.InnerSettingsFragments.EditProfileFragment">
 
    <TextView
-       android:id="@+id/tvEditUsername"
-       android:layout_width="120dp"
-       android:layout_height="50dp"
-       android:layout_marginStart="50dp"
-       android:layout_marginTop="40dp"
-       android:layout_marginEnd="16dp"
+       android:layout_width="200dp"
+       android:layout_height="80dp"
+       android:text="Edit Profile"
        android:gravity="center"
-       android:text="Edit Username" />
+       android:textSize="30dp"
+       android:fontFamily="@font/robotolight"
+       android:layout_marginStart="100dp"
+       android:textColor="@color/black"
+       />
 
    <TextView
-       android:id="@+id/tvEditEmail"
+       android:id="@+id/tvEditUsername"
        android:layout_width="120dp"
        android:layout_height="50dp"
        android:layout_marginStart="50dp"
        android:layout_marginTop="140dp"
        android:layout_marginEnd="16dp"
        android:gravity="center"
-       android:text="Edit Email" />
+       android:text="Edit Username"
+       android:textColor="@color/black"
+       android:fontFamily="@font/robotolight"
+       android:textSize="16sp"/>
+
+   <TextView
+       android:id="@+id/tvEditEmail"
+       android:layout_width="120dp"
+       android:layout_height="50dp"
+       android:layout_marginStart="50dp"
+       android:layout_marginTop="240dp"
+       android:layout_marginEnd="16dp"
+       android:gravity="center"
+       android:text="Edit Email"
+       android:textColor="@color/black"
+       android:fontFamily="@font/robotolight"
+       android:textSize="16sp"/>
 
    <Button
        android:id="@+id/btnSaveChanges"
        android:layout_width="120dp"
        android:layout_height="60dp"
        android:layout_centerHorizontal="true"
-       android:layout_marginTop="500dp"
+       android:layout_marginTop="530dp"
        android:layout_marginEnd="50dp"
        android:text="SAVE CHANGES" />
 
-   <EditText
-       android:id="@+id/itemTitleText"
-       android:layout_width="150dp"
-       android:layout_height="50dp"
-       android:layout_alignParentEnd="true"
-       android:layout_marginStart="40dp"
-       android:layout_marginTop="50dp"
-       android:layout_marginEnd="75dp"
-       android:text="" />
+   <com.google.android.material.textfield.TextInputLayout
 
-   <EditText
-       android:id="@+id/urltext"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content"
+       android:layout_marginTop="130dp"
+       android:layout_marginStart="200dp"
+       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/materialETUsername"
+          android:layout_height="wrap_content"
+          android:layout_width="150dp"
+          android:fontFamily="@font/robotolight"
+          android:textSize="14sp"
+          android:layout_margin="0dp"
+          />
+   </com.google.android.material.textfield.TextInputLayout>
+
+   <com.google.android.material.textfield.TextInputLayout
+
        android:layout_width="150dp"
-       android:layout_height="50dp"
-       android:layout_alignParentEnd="true"
-       android:layout_marginStart="40dp"
-       android:layout_marginTop="150dp"
-       android:layout_marginEnd="75dp"
-       android:text="" />
+       android:layout_height="wrap_content"
+       android:layout_marginTop="240dp"
+       android:layout_marginStart="200dp"
+       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/materialETemail"
+          android:layout_height="wrap_content"
+          android:layout_width="150dp"
+          android:textSize="14sp"
+          android:fontFamily="@font/robotolight"
+          />
+   </com.google.android.material.textfield.TextInputLayout>
 
    <View
        android:id="@+id/divider"
        android:layout_width="match_parent"
        android:layout_height="1dp"
        android:background="?android:attr/listDivider"
-       android:layout_marginTop="110dp"/>
+       android:layout_marginTop="210dp"/>
 
    <View
        android:id="@+id/divider77"
        android:layout_width="match_parent"
        android:layout_height="1dp"
-       android:layout_marginTop="220dp"
+       android:layout_marginTop="320dp"
        android:layout_marginBottom="29dp"
        android:background="?android:attr/listDivider" />
 
    <Button
        android:layout_width="220dp"
        android:layout_height="50dp"
-       android:layout_marginTop="250dp"
+       android:layout_marginTop="350dp"
        android:layout_marginStart="90dp"
        android:text="Reset Password"
        android:id="@+id/btnResetPassword"
@@ -83,7 +113,7 @@
        android:layout_width="220dp"
        android:layout_height="50dp"
        android:text="Delete Account"
-       android:layout_marginTop="355dp"
+       android:layout_marginTop="455dp"
        android:layout_marginStart="90dp"/>
 
 
@@ -91,7 +121,9 @@
        android:id="@+id/divider3"
        android:layout_width="match_parent"
        android:layout_height="1dp"
-       android:layout_marginTop="320dp"
+       android:layout_alignParentStart="true"
+       android:layout_marginStart="-6dp"
+       android:layout_marginTop="420dp"
        android:background="?android:attr/listDivider" />
 
    <View
@@ -99,7 +131,7 @@
        android:layout_width="match_parent"
        android:layout_height="1dp"
        android:background="?android:attr/listDivider"
-       android:layout_marginTop="430dp"/>
+       android:layout_marginTop="530dp"/>
 
 
 </RelativeLayout>

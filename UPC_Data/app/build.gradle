@@ -66,4 +66,5 @@ dependencies {
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
     //noinspection GradleCompatible
     implementation "com.android.support:design:28.0.0"
+    implementation 'com.google.android.material:material:1.3.0'
 }
