@@ -81,7 +81,8 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                dbHelper.addGroceryItem(groceryPosts.get(getAdapterPosition()).getGroceryItem());
+                    groceryPosts.get(getAdapterPosition()).getGroceryItem().setQuantity(1);
+                    dbHelper.addGroceryItem(groceryPosts.get(getAdapterPosition()).getGroceryItem());
                 }
             });
 
