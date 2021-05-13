@@ -77,8 +77,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="72dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Search..." />
+        android:hint="Search..."
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/rvButton"
