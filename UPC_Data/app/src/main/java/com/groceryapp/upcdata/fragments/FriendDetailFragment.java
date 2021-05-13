@@ -68,7 +68,7 @@ public class FriendDetailFragment extends Fragment {
         btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.deleteFriend(user.getUserID());
+                dbHelper.addFriend(user.getUserID());
             }
         });
 
