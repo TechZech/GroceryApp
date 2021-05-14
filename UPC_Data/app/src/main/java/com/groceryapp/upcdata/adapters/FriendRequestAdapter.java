@@ -62,6 +62,11 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
     public int getItemCount() {
         return friendRequestList.size();
     }
+    public void removeAt(int position) {
+        friendRequestList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, friendRequestList.size());
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -83,12 +88,14 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
                 @Override
                 public void onClick(View v) {
                     dbHelper.acceptFriend(friendRequestList.get(getAdapterPosition()).getuserID());
+                    removeAt(getAdapterPosition());
                 }
             });
             declineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dbHelper.declineFriend(friendRequestList.get(getAdapterPosition()).getuserID());
+                    removeAt(getAdapterPosition());
                 }
             });
 

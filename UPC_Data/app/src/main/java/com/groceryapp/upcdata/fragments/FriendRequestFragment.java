@@ -52,4 +52,5 @@ public class FriendRequestFragment extends Fragment {
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriendRequests = dbHelper.queryFriendRequests(allFriendRequests, adapter);
     }
+    
 }
