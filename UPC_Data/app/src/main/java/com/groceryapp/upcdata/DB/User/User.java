@@ -22,6 +22,8 @@ public class User {
         userID = "";
         Username = "";
         Email = "";
+        photoUrl = "";
+        UserSettings = new UserSettings();
     }
 
     //This constructor will be used when creating a new user

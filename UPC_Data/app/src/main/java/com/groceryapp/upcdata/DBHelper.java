@@ -20,6 +20,7 @@ import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.ShoppingTrip.ShoppingTrip;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.adapters.FriendItemAdapter;
 import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
@@ -136,7 +137,7 @@ public class DBHelper {
         return allInventoryItems;
     }
 
-    public List<GroceryItem> queryFriendInventoryItems(String uid, List<GroceryItem> allInventoryItems, GroceryItemAdapter adapter){
+    public List<GroceryItem> queryFriendInventoryItems(String uid, List<GroceryItem> allInventoryItems, FriendItemAdapter adapter){
         firestore.collection("users")
                 .document(uid).collection("Inventory")
                 .get()

@@ -21,33 +21,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.adapters.FriendItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+
 public class FriendDetailFragment extends Fragment {
 
     public static final String TAG = "FriendDetailFragment";
     RecyclerView rvFriendInv;
-    GroceryItemAdapter groceryItemAdapter;
+    FriendItemAdapter friendItemAdapter;
     List<GroceryItem> allFriendsItems;
     ImageView ivFriendPic;
     TextView tvFriendName, tvFriendEmail;
     Button btnRemoveFriend, btnGroupInvite;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     User user = new User();
     DBHelper dbHelper = new DBHelper();
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    User myUser = new User(mAuth);
+Button plusButton;
+Button minusButton;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private List<User> retttUser;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_friend_detail, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -59,6 +69,12 @@ public class FriendDetailFragment extends Fragment {
         btnRemoveFriend = view.findViewById(R.id.btnRemoveFriend);
         btnGroupInvite = view.findViewById(R.id.btnGroupInvite);
         rvFriendInv = view.findViewById(R.id.rvFriendItems);
+        final LayoutInflater factory = getLayoutInflater();
+
+        final View itemGroceryView = factory.inflate(R.layout.item_grocery, null);
+        plusButton = itemGroceryView.findViewById(R.id.ivPlusSign);
+        minusButton = itemGroceryView.findViewById(R.id.ivMinusSign);
+
         unpackBundle();
 
         tvFriendName.setText(user.getUsername());
@@ -79,7 +95,7 @@ public class FriendDetailFragment extends Fragment {
             }
         });
 
-        GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
+        FriendItemAdapter.OnLongClickListener onLongClickListener1 = new FriendItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
                 GroceryItem groceryItem = allFriendsItems.get(position);
@@ -87,34 +103,35 @@ public class FriendDetailFragment extends Fragment {
             }
         };
 
-        GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
+        FriendItemAdapter.OnClickListener onClickListener1 = new FriendItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 goToDetailFragment(position);
             }
         };
-
-        GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
-            @Override
-            public void onSubtractClicked(int position) {
-                GroceryItem groceryItem = allFriendsItems.get(position);
-                Log.i(TAG, "The User clicked on " + groceryItem.getTitle() + " quantity button and nothing should happen to this item");
-            }
-        };
-
         allFriendsItems = new ArrayList<>();
-        groceryItemAdapter = new GroceryItemAdapter(getContext(), allFriendsItems, onLongClickListener, onClickListener, subtractListener);
-        rvFriendInv.setAdapter(groceryItemAdapter);
+        friendItemAdapter = new FriendItemAdapter(getContext(), allFriendsItems, onLongClickListener1, onClickListener1);
+
+      //  groceryItemAdapter = new GroceryItemAdapter(getContext(), allFriendsItems, onLongClickListener, onClickListener, subtractListener);
+
+        rvFriendInv.setAdapter(friendItemAdapter);
         rvFriendInv.setLayoutManager(linearLayoutManager);
-        allFriendsItems = dbHelper.queryFriendInventoryItems(user.getUserID(), allFriendsItems, groceryItemAdapter);
+        allFriendsItems = dbHelper.queryFriendInventoryItems(user.getUserID(), allFriendsItems, friendItemAdapter);
     }
+
     public void makePublic(){
+        Log.d(TAG,"CALLING MAKE PUBLIC");
         rvFriendInv.setVisibility(View.VISIBLE);
-        btnGroupInvite.setVisibility(View.VISIBLE);
+        friendItemAdapter.notifyDataSetChanged();
+
+
     }
     public void makePrivate(){
-        rvFriendInv.setVisibility(View.GONE);
-        btnGroupInvite.setVisibility(View.GONE);
+        Log.d(TAG,"CALLING MAKE PRIVATE");
+        rvFriendInv.setVisibility(GONE);
+        btnGroupInvite.setVisibility(GONE);
+
+
     }
     private void unpackBundle(){
         Bundle Args = getArguments();
@@ -126,15 +143,36 @@ public class FriendDetailFragment extends Fragment {
             @Override
             public void OnCallback(Boolean value) {
                 if(value==true){
-
-                        makePublic();
+                    Log.d(TAG,"SETTIGNS CALLBACK");
+                    makePublic();
                 }
                 else{
+                    Log.d(TAG,"SETTIGNS CALLBACK");
                     makePrivate();
                 }
             }
         });
-    }
+        dbHelper.areFriends(user.getUserID(), myUser.getUserID(), new DBHelper.AreFriendsCallback() {
+            @Override
+            public void OnCallBack(Boolean usersAreFriends) {
+                if(usersAreFriends==Boolean.TRUE){
+                    makePublic();
+                    btnRemoveFriend.setText("Remove Friend");
+
+
+                    btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dbHelper.deleteFriend(user.getUserID());
+                        }
+                    });
+                } //else users aren't friends...
+            }
+        });
+         //users aren't friends so we need to take into account privacy settings.
+
+        }
+
 
     private void goToDetailFragment(int position){
         GroceryItem groceryItem = allFriendsItems.get(position);

@@ -24,9 +24,17 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
-public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.ViewHolder> {
+public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.ViewHolder> {
     private Button QuantityAdd;
     private Button QuantitySubtract;
+
+    public FriendItemAdapter(Context context, List<GroceryItem> allFriendsItems, OnLongClickListener onLongClickListener1, OnClickListener onClickListener1) {
+        this.context = context;
+        this.groceryItems = allFriendsItems;
+        this.longClickListener = onLongClickListener1;
+        this.clickListener = onClickListener1;
+
+    }
 
     public interface hideButtons {
 
@@ -51,7 +59,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
     private Context context;
     private List<GroceryItem> groceryItems;
 
-    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener, OnClickListenerQuantitySubtract subtractListener){
+    public FriendItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener, OnClickListenerQuantitySubtract subtractListener){
         this.context = context;
         this.groceryItems = groceryItems;
         this.longClickListener = longClickListener;
@@ -111,11 +119,12 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantitySubtract = itemView.findViewById(R.id.ivMinusSign);
             dbHelper = new DBHelper();
             tvPrice = itemView.findViewById(R.id.tvPrice);
-
+            hideButtons();
         }
         public void hideButtons(){
             QuantityAdd.setVisibility(GONE);
             QuantitySubtract.setVisibility(GONE);
+            
         }
         public void bind(GroceryItem groceryItem){
             String strQuantity = "";
@@ -161,7 +170,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                         dbHelper.UpdateGroceryListQuantity(groceryItem);
                         dbHelper.UpdateInventoryQuantity(groceryItem);
                         notifyDataSetChanged();
-                        }
+                    }
                     else if (groceryItem.getQuantity() == 1){
                         groceryItem.setQuantity(groceryItem.getQuantity()-1);
                         dbHelper.UpdateGroceryListQuantity(groceryItem);

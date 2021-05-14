@@ -124,6 +124,7 @@ public class FriendListFragment extends Fragment {
             frTV.setVisibility(View.VISIBLE);
         }
         else{
+            frCount.setVisibility(View.VISIBLE);
             frTV.setVisibility(View.GONE);
 
         }
