@@ -124,7 +124,7 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.Vi
         public void hideButtons(){
             QuantityAdd.setVisibility(GONE);
             QuantitySubtract.setVisibility(GONE);
-            
+
         }
         public void bind(GroceryItem groceryItem){
             String strQuantity = "";

@@ -41,6 +41,7 @@ public class DBHelper {
     private String returnphotoUrl;
     private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
+    int frccCount = 0;
     int count = 0;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
@@ -83,6 +84,9 @@ public class DBHelper {
     }
     public interface MemberListCallback{
         void OnCallback(List<User> b);
+    }
+    public interface FriendRequestCountCallback{
+        void OnCallback(int frs);
     }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -841,6 +845,30 @@ public class DBHelper {
                 });
 
         return userSearchList;
+    }
+    public int frCountFunc(User usyy, FriendRequestCountCallback frcc){
+
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Pending Friend Requests")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                frccCount+=1;
+
+                            }
+                            frcc.OnCallback(frccCount);
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+
+                });
+      //  frcc.OnCallback(frccCount);
+        return frccCount;
     }
     public List<Friend> queryFriendRequests(List<Friend> allFriendRequests, FriendRequestAdapter adapter) {
         firestore.collection("users")

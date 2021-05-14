@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
@@ -30,6 +32,9 @@ import java.util.List;
 
 public class FriendListFragment extends Fragment {
     public final String TAG = "FriendsFragment";
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
+
     private RecyclerView rvFriends;
     private TextView frTV;
     private Button frCount;
@@ -68,7 +73,7 @@ public class FriendListFragment extends Fragment {
         frTV = view.findViewById(R.id.FRLabel);
         rvSearchText = view.findViewById(R.id.searchText);
         frCount = view.findViewById(R.id.frCounter);
-        allFriends  = new ArrayList<>();
+        allFriends = new ArrayList<>();
         allUsers = new ArrayList<>();
         useradapter = new UserAdapter(getContext(), allUsers, onClickListener1);
         adapter = new FriendListAdapter(getContext(), allFriends, onClickListener);
@@ -119,15 +124,20 @@ public class FriendListFragment extends Fragment {
             }
         });
         Log.d(TAG, "ALL FRIENDS SIZE IS" + allFriends.size());
-        if(allFriends.size()!=0){
-            frCount.setVisibility(View.GONE);
-            frTV.setVisibility(View.VISIBLE);
-        }
-        else{
-            frCount.setVisibility(View.VISIBLE);
-            frTV.setVisibility(View.GONE);
+        dbHelper.frCountFunc(User, new DBHelper.FriendRequestCountCallback() {
+            @Override
+            public void OnCallback(int frs) {
+                if (frs == 0) {
+                    frCount.setVisibility(View.GONE);
+                    frTV.setVisibility(View.VISIBLE);
+                } else {
+                    frCount.setVisibility(View.VISIBLE);
+                    frTV.setVisibility(View.GONE);
 
-        }
+                }
+            }
+
+        });
     }
 
     private void goToDetailFragment(int position){
