@@ -19,6 +19,15 @@ public class Group {
 
     private String groupname;
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    private String photoUrl;
     public GroupSettings getGroupSettings() {
         return groupSettings;
     }
@@ -42,6 +51,7 @@ public class Group {
         this.groupname = gid.groupname;
         this.owner = gid.owner;
         this.members = gid.members;
+        this.photoUrl = null;
         this.groupSettings = new GroupSettings();
     }
 
@@ -60,8 +70,6 @@ public class Group {
     public void setOwner(User owner) {
         this.owner = owner;
     }
-
-
 
 
     private User owner;
@@ -85,6 +93,7 @@ public class Group {
         this.owner = owner;
         members.add(owner);
         this.groupSettings = new GroupSettings();
+        this.photoUrl = null;
 
     }
     public Group(String groupname, User owner, ArrayList<User> members) {
@@ -92,24 +101,28 @@ public class Group {
         this.owner = owner;
         this.members = members;
         this.groupSettings = new GroupSettings();
+        this.photoUrl = null;
     }
     public Group(String groupname, GroupSettings groupSettings) {
         this.groupname = groupname;
         this.owner = owner;
         this.members = members;
         this.groupSettings = groupSettings;
+        this.photoUrl = null;
     }
     public Group(String groupname, User owner, GroupSettings groupSettings) {
         this.groupname = groupname;
         this.owner = owner;
         this.members = members;
         this.groupSettings = groupSettings;
+        this.photoUrl = null;
     }
     public Group(String groupname, User owner, ArrayList<User> members, GroupSettings groupSettings) {
         this.groupname = groupname;
         this.owner = owner;
         this.members = members;
         this.groupSettings = groupSettings;
+        this.photoUrl = null;
     }
     @Override
     public String toString() {

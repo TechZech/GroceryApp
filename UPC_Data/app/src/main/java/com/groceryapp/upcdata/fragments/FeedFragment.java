@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.User;
@@ -40,7 +41,6 @@ public class FeedFragment extends Fragment {
     protected GroceryPostAdapter adapter;
     protected List<GroceryPost> FeedItems;
     DBHelper dbHelper = new DBHelper();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class FeedFragment extends Fragment {
                         getChildFragmentManager(), PostFragment.TAG);
             }
         });
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

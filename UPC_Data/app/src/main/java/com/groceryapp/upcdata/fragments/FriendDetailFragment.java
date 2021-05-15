@@ -122,6 +122,7 @@ Button minusButton;
     public void makePublic(){
         Log.d(TAG,"CALLING MAKE PUBLIC");
         rvFriendInv.setVisibility(View.VISIBLE);
+        btnGroupInvite.setVisibility(View.VISIBLE);
         friendItemAdapter.notifyDataSetChanged();
 
 

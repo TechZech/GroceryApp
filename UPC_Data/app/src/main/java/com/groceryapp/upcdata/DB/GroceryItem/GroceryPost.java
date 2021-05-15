@@ -3,6 +3,8 @@ package com.groceryapp.upcdata.DB.GroceryItem;
 
 import com.groceryapp.upcdata.DB.User.User;
 
+import java.util.Date;
+
 public class GroceryPost {
     public User getUser() {
         return user;
@@ -15,6 +17,16 @@ public class GroceryPost {
     public User user = new User("test","test","test");
     public GroceryItem groceryItem;
     private Boolean whichList;
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    private Date dateTime;
 
     public GroceryPost(GroceryItem gp, User u) {
         this.user = u;

@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -12,7 +13,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
@@ -30,6 +33,9 @@ import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -392,6 +398,7 @@ public class DBHelper {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
+
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                         GroceryPost gp = document.toObject(GroceryPost.class);
                         Log.d(TAG, "CURRENT USER: " + User.getUserID() + " USER B: " + gp.user.getUserID());
@@ -420,9 +427,35 @@ public class DBHelper {
                     Log.d(TAG, "Error getting documents: ", task.getException());
             }
         });
+        firestore.collection("Posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                Log.d(TAG,"UPDATED");
+                adapter.notifyDataSetChanged();
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+                FeedItems.add(value.getDocumentChanges().get(0).getDocument().toObject(GroceryPost.class));
+                adapter.notifyDataSetChanged();
+               Log.d(TAG,"REALTIME VALUE IS " + value.getDocumentChanges().get(0).getDocument().toString());
+
+            }
+        });
         return FeedItems;
     }
     public void addPostItem(GroceryPost groceryPost){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+
+
+        //--------------------------------      Retreive like this ----------------------------------------------------------
+     //   Calendar cal = Calendar.getInstance();
+      //  cal.setTime(date);
+      //  Integer date = cal.get(Calendar.DATE);
+
+
+        groceryPost.setDateTime(date);
         firestore.collection("Posts").document().set(groceryPost);
     }
 
@@ -721,6 +754,8 @@ public class DBHelper {
 
     }
     public void addGroupPost(Group g, GroceryPost groceryPost){
+        Date date = new Date();
+        groceryPost.setDateTime(date);
         querySetting("WhoCanPost", g, new SettingCallback() {
             @Override
             public void OnCallback(Boolean value) {
