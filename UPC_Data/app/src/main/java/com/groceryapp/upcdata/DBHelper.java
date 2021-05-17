@@ -94,6 +94,10 @@ public class DBHelper {
     public interface FriendRequestCountCallback{
         void OnCallback(int frs);
     }
+
+    public interface ShoppingTripCallback{
+        void OnCallback(List<ShoppingTrip> trips);
+    }
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
@@ -1091,7 +1095,7 @@ public class DBHelper {
         Log.d(TAG, "ShoppingTrip Added");
     }
 
-    public List<ShoppingTrip> queryShoppingTrips(List<ShoppingTrip> shoppingTrips, ShoppingTripAdapter adapter){
+    public void queryShoppingTrips(List<ShoppingTrip> shoppingTrips, ShoppingTripAdapter adapter, ShoppingTripCallback callback){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Shopping History")
                 .get()
@@ -1104,11 +1108,12 @@ public class DBHelper {
                                 shoppingTrips.add(document.toObject(ShoppingTrip.class));
                             }
                             adapter.notifyDataSetChanged();
+                            callback.OnCallback(shoppingTrips);
                         }
                         else
                             Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
-        return shoppingTrips;
+
     }
 }
