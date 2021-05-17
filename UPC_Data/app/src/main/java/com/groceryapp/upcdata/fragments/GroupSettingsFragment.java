@@ -20,8 +20,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -106,6 +113,44 @@ unpackBundle();
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null)
+            return;
+
+        if (requestCode == 1000){
+            if (resultCode == Activity.RESULT_OK) {
+                Uri LocalimageUri = data.getData();
+
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                if(grr!=null){
+                    StorageReference imageRef = storageRef.child(grr.getGid());
+                    UploadTask uploadTask = imageRef.putFile(LocalimageUri);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.i(TAG, "Upload Success");
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+
+                                    if(uri != null)
+                                        grr.setPhotoUrl(uri.toString());
+                                    //         Dbhelper.setUserPhotoUrl(uri.toString());
+                                }
+                            });
+                        }
+                    });
+                }
+
+
+            }
+        }
+        Glide.with(this)
+                .load(data.getData())
+                .into(ivProfile);
 
     }
     private boolean unpackBundle(){
