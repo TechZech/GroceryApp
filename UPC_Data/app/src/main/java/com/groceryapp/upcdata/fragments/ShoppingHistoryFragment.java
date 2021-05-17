@@ -1,12 +1,18 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -29,6 +39,7 @@ import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +78,7 @@ public class ShoppingHistoryFragment extends Fragment {
             }
         };
 
-        LineChart chart = view.findViewById(R.id.LineChart);
+        BarChart chart = view.findViewById(R.id.LineChart);
         rvShoppingHistory = view.findViewById(R.id.rvShoppingHistory);
         allShoppingTrips = new ArrayList<>();
 
@@ -76,25 +87,40 @@ public class ShoppingHistoryFragment extends Fragment {
         rvShoppingHistory.setAdapter(adapter);
         rvShoppingHistory.setLayoutManager(linearLayoutManager);
 
-        List<Entry> entries = new ArrayList<Entry>();
+        List<BarEntry> entries = new ArrayList<BarEntry>();
         dbHelper.queryShoppingTrips(allShoppingTrips, adapter, new DBHelper.ShoppingTripCallback() {
             @Override
             public void OnCallback(List<ShoppingTrip> trips) {
 
-                //Chart Stuff
-                for (ShoppingTrip trip : allShoppingTrips){
-                    entries.add(new Entry((trip.returnDateAsFloat()), (float)trip.getTotalPrice()));
+                if (trips.size() == 0){
+                    Log.d(TAG, "No Shopping History!!");
+                    chart.setVisibility(View.INVISIBLE);
+                    goBackDialog();
                 }
-                chart.getXAxis().setValueFormatter(new LineChartXAxisValueFormatter());
-                chart.getXAxis().setLabelCount(3);
-                chart.getLegend().setEnabled(false);
-                chart.getDescription().setEnabled(false);
-                LineDataSet dataSet = new LineDataSet(entries, "Label");
-                dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-                dataSet.setValueTextColor(355);
-                LineData lineData = new LineData(dataSet);
-                chart.setData(lineData);
-                chart.invalidate(); // refresh
+                else {
+                    //Chart Stuff
+                    float i = 0;
+                    for (ShoppingTrip trip : allShoppingTrips) {
+                        entries.add(new BarEntry(i, (float) trip.getTotalPrice()));
+                        i++;
+                    }
+                    chart.getXAxis().setDrawGridLines(false);
+                    chart.getAxisLeft().setDrawGridLines(false);
+                    chart.getAxisLeft().setDrawAxisLine(false);
+                    chart.getXAxis().setDrawAxisLine(false);
+                    chart.getXAxis().setDrawLabels(false);
+                    chart.getAxisLeft().setAxisMinimum(0);
+                    chart.getAxisRight().setEnabled(false);
+                    chart.getLegend().setEnabled(false);
+                    chart.getDescription().setEnabled(false);
+                    chart.setBackgroundColor(Color.WHITE);
+                    BarDataSet dataSet = new BarDataSet(entries, "Label");
+                    dataSet.setColor(Color.rgb(111, 142, 69));
+                    BarData barData = new BarData(dataSet);
+                    barData.setBarWidth(.7f);
+                    chart.setData(barData);
+                    chart.invalidate(); // refresh
+                }
             }
         });
 
@@ -106,19 +132,18 @@ public class ShoppingHistoryFragment extends Fragment {
 
     }
 
-    public static class LineChartXAxisValueFormatter extends IndexAxisValueFormatter{
-        @Override
-        public String getFormattedValue(float value) {
-
-            // Convert float value to date string
-            // Convert from seconds back to milliseconds to format time  to show to the user
-            long emissionsMilliSince1970Time = ((long) value);
-
-            // Show time in local version
-            Date timeMilliseconds = new Date(emissionsMilliSince1970Time);
-            DateFormat dateTimeFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
-
-            return dateTimeFormat.format(timeMilliseconds);
-    }
+    private void goBackDialog(){
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Looks like you don't have any shopping trips yet!");
+        alertDialog.setMessage("Add a Shopping Trip to Begin Viewing Your Recent History");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "GO BACK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.popBackStackImmediate();
+                    }
+                });
+        alertDialog.show();
     }
 }
