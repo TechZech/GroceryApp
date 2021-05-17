@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ShoppingHistoryFragment">
+    tools:context=".fragments.ShoppingHistoryFragment"
+    android:background="@drawable/darker_green_fade">
 
     <TextView
         android:id="@+id/friendTitle"
@@ -16,18 +17,17 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/LineChart"
+        android:layout_width="350dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="200dp"
-        android:layout_marginTop="100dp"
-        android:text="Graph Here"
-        android:background="@color/GroceryAppGreen"
-        />
+        android:layout_marginTop="80dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvShoppingHistory"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:layout_marginTop="300dp"
-        android:background="@color/GroceryAppGreen_LIGHT"/>
+        android:background="@null"/>
 </RelativeLayout>

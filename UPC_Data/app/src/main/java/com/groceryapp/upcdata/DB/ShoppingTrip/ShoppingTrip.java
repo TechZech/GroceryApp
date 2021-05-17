@@ -19,6 +19,10 @@ public class ShoppingTrip implements Comparable<ShoppingTrip>{
         return date;
     }
 
+    public float returnDateAsFloat(){
+        return date.getTime();
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
