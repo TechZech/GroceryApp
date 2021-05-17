@@ -1,5 +1,6 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,6 +72,7 @@ RecyclerView recyclerView;
         addPostButton = view.findViewById(R.id.addPostButton);
         settingsButton = view.findViewById(R.id.settingsButton);
         memberListButton = view.findViewById(R.id.membersListButton);
+
         tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
