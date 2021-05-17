@@ -158,6 +158,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantitySubtract.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    subtractListener.onSubtractClicked(getAdapterPosition());
                     if (groceryItem.getQuantity() > 1){
                         groceryItem.setQuantity(groceryItem.getQuantity()-1);
                         dbHelper.UpdateGroceryListQuantity(groceryItem);
@@ -165,13 +166,14 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
                         notifyDataSetChanged();
                         }
                     else if (groceryItem.getQuantity() == 1){
+
                         groceryItem.setQuantity(groceryItem.getQuantity()-1);
                         dbHelper.UpdateGroceryListQuantity(groceryItem);
                         dbHelper.UpdateInventoryQuantity(groceryItem);
                         if (!groceryItem.isInventory())
                             notifyDataSetChanged();
 
-                        subtractListener.onSubtractClicked(getAdapterPosition());
+
                     }
 
                 }

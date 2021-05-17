@@ -1,5 +1,6 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
@@ -40,11 +42,13 @@ public class GroupDetailFragment extends Fragment {
     Group grr;
     ImageView ivDetailImage;
     TextView tvDetailTitle;
+    TextView tvDetailUpc;
 Button addPostButton;
 Button settingsButton;
 Button memberListButton;
 List<GroceryPost> allPostItems;
 RecyclerView recyclerView;
+
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -68,6 +72,8 @@ RecyclerView recyclerView;
         addPostButton = view.findViewById(R.id.addPostButton);
         settingsButton = view.findViewById(R.id.settingsButton);
         memberListButton = view.findViewById(R.id.membersListButton);
+
+        tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +143,12 @@ RecyclerView recyclerView;
             public void OnCallback(Group g) {
                 grr = g;
                tvDetailTitle.setText(g.getGroupname());
+               tvDetailUpc.setText(g.getOwner().getUsername());
+               if(g.getPhotoUrl()!=null){
+                   Glide.with(getContext())
+                           .load(g.getPhotoUrl())
+                           .into(ivDetailImage);
+               }
                dbHelper.isMember(User, grr, new DBHelper.isMemberCallback() {
                    @Override
                    public void OnCallback(Boolean b) {
