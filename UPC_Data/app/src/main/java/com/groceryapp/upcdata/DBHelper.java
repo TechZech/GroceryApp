@@ -48,6 +48,8 @@ public class DBHelper {
     private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
     int frccCount = 0;
+    int gCount = 0;
+    int friendsCount = 0;
     int count = 0;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User User = new User(mAuth);
@@ -94,10 +96,16 @@ public class DBHelper {
     public interface FriendRequestCountCallback{
         void OnCallback(int frs);
     }
-
+    public interface FriendCountCallback{
+        void OnCallback(int frs);
+    }
+    public interface GroupCountCallback{
+        void OnCallback(int frs);
+    }
     public interface ShoppingTripCallback{
         void OnCallback(List<ShoppingTrip> trips);
     }
+
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
                 .document(User.getUserID()).collection("Grocery List")
@@ -896,6 +904,54 @@ public class DBHelper {
 
                 });
       //  frcc.OnCallback(frccCount);
+        return frccCount;
+    }
+    public int fCountFunc(FriendCountCallback frcc){
+
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Friends")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                friendsCount+=1;
+
+                            }
+                            frcc.OnCallback(friendsCount);
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+
+                });
+        //  frcc.OnCallback(frccCount);
+        return frccCount;
+    }
+    public int gCountFunc(GroupCountCallback frcc){
+
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Groups")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                gCount+=1;
+
+                            }
+                            frcc.OnCallback(gCount);
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+
+                });
+        //  frcc.OnCallback(frccCount);
         return frccCount;
     }
     public List<Friend> queryFriendRequests(List<Friend> allFriendRequests, FriendRequestAdapter adapter) {

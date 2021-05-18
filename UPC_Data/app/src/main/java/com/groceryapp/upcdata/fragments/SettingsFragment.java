@@ -44,6 +44,7 @@ public class SettingsFragment extends Fragment {
     Activity context = getActivity();
     Button btnLogOut;
     TextView tvEmail;
+    TextView tvEmail2;
     TextView tvDisplayName;
     Button btnSettings1;
     Button btnSettings2;
@@ -75,6 +76,7 @@ public class SettingsFragment extends Fragment {
             ivProfile = view.findViewById(R.id.ivProfile);
             ivEditProfile = view.findViewById(R.id.ivEditProfile);
             tvEmail = view.findViewById(R.id.ownertv);
+            tvEmail2 = view.findViewById(R.id.ownertv2);
             tvDisplayName = view.findViewById(R.id.tvGroupName);
             btnSettings1 = view.findViewById(R.id.kickButton);
             privacyButton = view.findViewById(R.id.privacyButton);
@@ -89,8 +91,8 @@ public class SettingsFragment extends Fragment {
             Username = FirebaseUser.getDisplayName();
             DBhelper = new DBHelper();
 
-            tvEmail.setText(email);
             tvDisplayName.setText(Username);
+
             privacyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -120,18 +122,7 @@ public class SettingsFragment extends Fragment {
             friendsListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new FriendListFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                            .setCustomAnimations(
-                                    R.anim.slide_in,
-                                    R.anim.fade_out,
-                                    R.anim.fade_in,
-                                    R.anim.slide_out
-                            )
-                            .replace(R.id.flContainer, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+
                 }
             });
             btnSettings1.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +178,28 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
-
+            DBhelper.fCountFunc(new DBHelper.FriendCountCallback() {
+                @Override
+                public void OnCallback(int frs) {
+                    if(frs==1){
+                        tvEmail2.setText(String.valueOf(frs) + " Friend");
+                    }
+                    else{
+                        tvEmail2.setText(String.valueOf(frs) + " Friends");
+                    }
+                }
+            });
+            DBhelper.gCountFunc(new DBHelper.GroupCountCallback() {
+                @Override
+                public void OnCallback(int frs) {
+                    if(frs==1){
+                        tvEmail.setText(String.valueOf(frs) + " Group");
+                    }
+                    else{
+                        tvEmail.setText(String.valueOf(frs) + " Groups");
+                    }
+                }
+            });
             btnSettings3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -195,6 +207,40 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
+            tvEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FriendListFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+            tvEmail2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FriendListFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.slide_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.slide_out
+                            )
+                            .replace(R.id.flContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
             Glide.with(this)
                     .load(userphotoUrl)
                     .placeholder(R.drawable.download)

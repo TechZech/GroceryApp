@@ -32,19 +32,37 @@
 
         <TextView
             android:id="@+id/ownertv"
-            android:layout_width="241dp"
-            android:layout_height="44dp"
+            android:layout_width="141dp"
+            android:layout_height="45dp"
             android:layout_below="@+id/tvGroupName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="85dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="263dp"
+            android:fontFamily="@font/robotolight"
             android:gravity="center"
-            android:text="sampleemail@gmail.com"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:fontFamily="@font/robotolight"/>
+            android:onClick="onClick"
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/ownertv2"
+            android:layout_width="141dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/tvGroupName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="19dp"
+            android:fontFamily="@font/robotolight"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:onClick="onClick"
+            android:clickable="true"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
@@ -128,19 +146,6 @@
         android:textColor="@color/black"
         android:fontFamily="@font/robotolight"/>
 
-    <Button
-        android:id="@+id/friendsButton"
-        android:layout_width="142dp"
-        android:layout_height="52dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="81dp"
-        android:text="Friends and Groups"
-        app:icon="@drawable/ic_baseline_people_alt_24"
-        android:fontFamily="@font/robotolight"/>
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -171,10 +176,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginBottom="95dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginBottom="93dp"
+        android:fontFamily="@font/robotolight"
         android:textOff="PUBLIC"
-        android:textOn="PRIVATE"
-        android:fontFamily="@font/robotolight"/>
+        android:textOn="PRIVATE" />
 
 </RelativeLayout>
