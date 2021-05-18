@@ -14,7 +14,9 @@
 
 package com.groceryapp.upcdata.map;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -57,17 +60,22 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.groceryapp.upcdata.R;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * An activity that displays a map showing the place at the device's current location.
  */
 public class MapActivity extends AppCompatActivity
-        implements OnMapReadyCallback {
+        implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final String TAG = MapActivity.class.getSimpleName();
     private GoogleMap map;
     private CameraPosition cameraPosition;
+    HashMap<Marker, Place> markerPlaceHashMap = new HashMap<>();
 
     // The entry point to the Places API.
     private PlacesClient placesClient;
@@ -119,7 +127,7 @@ public class MapActivity extends AppCompatActivity
 
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
-        Places.initialize(getApplicationContext(), "REPLACEWITHSECRETKEYHERE");
+        Places.initialize(getApplicationContext(), "PASTESECRETKEYHERE");
         placesClient = Places.createClient(this);
 
         // Construct a FusedLocationProviderClient.
@@ -183,6 +191,7 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
+        this.map.setOnMarkerClickListener(this);
         initPlaces();
         // [START_EXCLUDE]
         // [START map_current_place_set_info_window_adapter]
@@ -441,10 +450,10 @@ public class MapActivity extends AppCompatActivity
             public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId() + place.getLatLng());
-                map.addMarker(new MarkerOptions()
+                Marker newMarker = map.addMarker(new MarkerOptions()
                         .title(place.getName())
                         .position(place.getLatLng()));
-
+               markerPlaceHashMap.put(newMarker,place);
             }
 
 
@@ -455,5 +464,16 @@ public class MapActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        Log.d(TAG, marker.getTitle());
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("placeid", markerPlaceHashMap.get(marker).getId());
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+
+        return false;
     }
 }

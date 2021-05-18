@@ -484,8 +484,11 @@ public class DBHelper {
     public void addInventoryItem(GroceryItem groceryItem){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(groceryItem.getUpc())
                 .set(groceryItem);
+        GroceryPost myGP = new GroceryPost();
+        myGP.setGroceryItem(groceryItem);
+        myGP.setUser(User);
+        addPostItem(myGP); //if user setting for adding to feed automatically is off then you don't want to do this..
 
-       firestore.collection("Posts").document().set(new GroceryPost(User, groceryItem, true));
     }
 
     public void removeGroceryItem(GroceryItem groceryItem){

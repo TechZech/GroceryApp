@@ -14,6 +14,15 @@ public class GroceryPost {
         this.user = user;
     }
 
+    public String getPlaceid() {
+        return placeid;
+    }
+
+    public void setPlaceid(String placeid) {
+        this.placeid = placeid;
+    }
+
+    private String placeid;
     public User user = new User("test","test","test");
     public GroceryItem groceryItem;
     private Boolean whichList;
