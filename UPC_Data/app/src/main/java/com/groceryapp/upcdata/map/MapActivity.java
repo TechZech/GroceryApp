@@ -127,7 +127,7 @@ public class MapActivity extends AppCompatActivity
 
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
-        Places.initialize(getApplicationContext(), "PASTESECRETKEYHERE");
+        Places.initialize(getApplicationContext(), "AIzaSyBnC4uI9loLC3800-vS9IjmcVwG2jnjw2I");
         placesClient = Places.createClient(this);
 
         // Construct a FusedLocationProviderClient.

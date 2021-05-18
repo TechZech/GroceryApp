@@ -425,27 +425,13 @@ public class DBHelper {
 
 
                     }
-                    adapter.notifyDataSetChanged();
+
                 }
                 else
                     Log.d(TAG, "Error getting documents: ", task.getException());
             }
         });
-        firestore.collection("Posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-                Log.d(TAG,"UPDATED");
-                adapter.notifyDataSetChanged();
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-                FeedItems.add(value.getDocumentChanges().get(0).getDocument().toObject(GroceryPost.class));
-                adapter.notifyDataSetChanged();
-               Log.d(TAG,"REALTIME VALUE IS " + value.getDocumentChanges().get(0).getDocument().toString());
 
-            }
-        });
         return FeedItems;
     }
     public void addPostItem(GroceryPost groceryPost){

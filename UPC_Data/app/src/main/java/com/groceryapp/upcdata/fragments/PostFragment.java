@@ -169,7 +169,7 @@ public class PostFragment extends DialogFragment {
                 // Define a Place ID.
                 String placeid = Args.getString("placeid");
                 Log.d(TAG, placeid);
-                Places.initialize(getContext(), "PASTESECRETKEYHERE");
+                Places.initialize(getContext(), "AIzaSyBnC4uI9loLC3800-vS9IjmcVwG2jnjw2I");
                 placesClient = Places.createClient(getContext());
                 // Specify the fields to return.
                 final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
