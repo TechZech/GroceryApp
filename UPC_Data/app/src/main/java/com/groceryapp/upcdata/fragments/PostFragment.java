@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.groceryapp.upcdata.BuildConfig;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.User.User;
@@ -169,7 +171,7 @@ public class PostFragment extends DialogFragment {
                 // Define a Place ID.
                 String placeid = Args.getString("placeid");
                 Log.d(TAG, placeid);
-                Places.initialize(getContext(), "AIzaSyBnC4uI9loLC3800-vS9IjmcVwG2jnjw2I");
+                Places.initialize(getContext(), BuildConfig.PLACES_KEY);
                 placesClient = Places.createClient(getContext());
                 // Specify the fields to return.
                 final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);

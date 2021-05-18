@@ -57,6 +57,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.groceryapp.upcdata.BuildConfig;
 import com.groceryapp.upcdata.R;
 
 import java.util.Arrays;
@@ -127,7 +128,7 @@ public class MapActivity extends AppCompatActivity
 
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
-        Places.initialize(getApplicationContext(), "AIzaSyBnC4uI9loLC3800-vS9IjmcVwG2jnjw2I");
+        Places.initialize(getApplicationContext(), BuildConfig.PLACES_KEY);
         placesClient = Places.createClient(this);
 
         // Construct a FusedLocationProviderClient.
