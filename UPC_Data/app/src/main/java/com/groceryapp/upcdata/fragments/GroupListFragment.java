@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groceryapp.upcdata.DB.Group.Group;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroupAdapter;
@@ -34,6 +35,7 @@ public class GroupListFragment extends Fragment {
     protected List<Group> allFriends;
     TextView SearchText;
     Button rvButton;
+    User us;
     DBHelper dbHelper;
 
 
@@ -46,13 +48,21 @@ public class GroupListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        boolean inUserDetail = unpackBundle();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
         GroupAdapter.OnClickListener onClickListener = new GroupAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position)  {
                 Log.d(TAG, "ITEM CLICKED HERE");
-                goToDetailFragment(position);
+                if(inUserDetail){
+                    dbHelper.inviteToGroup(allFriends.get(position), us);
+                    Log.d(TAG, "INVITED TO GROUP");
+                }
+                else{
+                    goToDetailFragment(position);
+                }
+
             }
         };
         rvFriends = view.findViewById(R.id.rvSearch);
@@ -82,5 +92,17 @@ public class GroupListFragment extends Fragment {
                 .replace(R.id.flContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+    public boolean unpackBundle(){
+        Bundle Args = getArguments();
+        if(Args.getBoolean("fromProfile")){
+            us = new User(Args.getString("userID"),Args.getString("username"), Args.getString("email") );
+            return Args.getBoolean("fromProfile");
+        }
+        else{
+        return false;
+        }
+
+
     }
 }

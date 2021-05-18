@@ -125,22 +125,28 @@ public class InventoryFragment extends Fragment {
         groupListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new GroupListFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.slide_in,
-                                R.anim.fade_out,
-                                R.anim.fade_in,
-                                R.anim.slide_out
-                        )
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+             goToListFragment();
             }
         });
     }
 
+    private void goToListFragment(){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("fromProfile", false);
+        Fragment fragment = new GroupListFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                )
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
     private void goToDetailFragment(int position){
         GroceryItem groceryItem = allInventoryItems.get(position);
         Bundle bundle = new Bundle();

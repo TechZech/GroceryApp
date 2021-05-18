@@ -92,6 +92,7 @@ Button minusButton;
             @Override
             public void onClick(View v) {
                 // Whatever code to invite this user to a group
+              inviteToGroup();
             }
         });
 
@@ -132,6 +133,27 @@ Button minusButton;
         rvFriendInv.setVisibility(GONE);
         btnGroupInvite.setVisibility(GONE);
 
+
+    }
+    private void inviteToGroup(){
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", user.getUserID() );
+        bundle.putString("username", user.getUsername() );
+        bundle.putString("email", user.getEmail() );
+        bundle.putBoolean("fromProfile", true);
+        Fragment fragment = new GroupListFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                )
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
     }
     private void unpackBundle(){
