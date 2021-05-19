@@ -15,27 +15,38 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFeed"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
-        android:layout_below="@+id/chooseItemButton"
+        android:layout_height="598dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="-1dp"
-        android:background="@color/white" />
+        android:layout_alignParentBottom="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFeed"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:layout_below="@+id/chooseItemButton"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="-1dp"
+            android:background="@color/white" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/chooseItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="271dp"
         android:text="Choose Item" />
 
     <TextView
@@ -54,8 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
         android:text="Submit" />
 
 </RelativeLayout>

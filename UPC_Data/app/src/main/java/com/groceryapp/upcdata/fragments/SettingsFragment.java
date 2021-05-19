@@ -82,7 +82,7 @@ public class SettingsFragment extends Fragment {
             privacyButton = view.findViewById(R.id.privacyButton);
             btnSettings2 = view.findViewById(R.id.btnSettings2);
             btnSettings3 = view.findViewById(R.id.btnSettings3);
-            friendsListButton = view.findViewById(R.id.friendsButton);
+
        //     searchRequestButton = view.findViewById(R.id.searchRequestButton); moved search to friends fragment
 
             FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -119,12 +119,6 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
-            friendsListButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
             btnSettings1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
