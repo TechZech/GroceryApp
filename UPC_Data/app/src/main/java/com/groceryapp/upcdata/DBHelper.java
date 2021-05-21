@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -78,11 +79,11 @@ public class DBHelper {
     }
     public interface GroupCallback{
         void OnCallback(Group g);
-    //    void OnCallback(List<Group> value); //for search
+        //    void OnCallback(List<Group> value); //for search
 
     }
     public interface GroupSearchCallback{
-            void OnCallback(List<Group> value); //for search
+        void OnCallback(List<Group> value); //for search
     }
     public interface SettingCallback{
         void OnCallback(Boolean value);
@@ -345,7 +346,7 @@ public class DBHelper {
 
     public boolean areFriends(String FriendAUid, String FriendBUid, AreFriendsCallback Callback){
 
-     //   Log.d(TAG, "AREFRIENDS");
+        //   Log.d(TAG, "AREFRIENDS");
         firestore.collection("users")
                 .document(FriendAUid).collection("Friends")
                 .get()
@@ -354,7 +355,7 @@ public class DBHelper {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot document : task.getResult()){
-                                   Log.d(TAG, document.getId() + "=> " + document.getData());
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
 
                                 if(FriendBUid.equals(document.get("userID"))){
                                     firestore.collection("users")
@@ -404,7 +405,8 @@ public class DBHelper {
         return ret;
     }
 
-    public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter){
+    public List<GroceryPost> queryFriendFeedItems(List<GroceryPost> FeedItems, GroceryPostAdapter adapter, SwipeRefreshLayout swipeRefreshLayout){
+        FeedItems.clear();
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -414,9 +416,9 @@ public class DBHelper {
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                         GroceryPost gp = document.toObject(GroceryPost.class);
                         Log.d(TAG, "CURRENT USER: " + User.getUserID() + " USER B: " + gp.user.getUserID());
-                      ///  if(User.getUserID().equals(gp.user.getUserID())){
-                     ///       FeedItems.add(document.toObject(GroceryPost.class));
-                     ////   }
+                        ///  if(User.getUserID().equals(gp.user.getUserID())){
+                        ///       FeedItems.add(document.toObject(GroceryPost.class));
+                        ////   }
 
 
                         areFriends(User.getUserID(), gp.user.getUserID(), new AreFriendsCallback() {
@@ -426,6 +428,7 @@ public class DBHelper {
                                 if(value){
                                     FeedItems.add(document.toObject(GroceryPost.class));
                                     adapter.notifyDataSetChanged();
+                                    swipeRefreshLayout.setRefreshing(false);
                                 }
                             }
 
@@ -448,9 +451,9 @@ public class DBHelper {
 
 
         //--------------------------------      Retreive like this ----------------------------------------------------------
-     //   Calendar cal = Calendar.getInstance();
-      //  cal.setTime(date);
-      //  Integer date = cal.get(Calendar.DATE);
+        //   Calendar cal = Calendar.getInstance();
+        //  cal.setTime(date);
+        //  Integer date = cal.get(Calendar.DATE);
 
 
         groceryPost.setDateTime(date);
@@ -725,32 +728,32 @@ public class DBHelper {
 
 
     public boolean isMember(User u, Group g, isMemberCallback settingCallback){
-            DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, document.getData().toString());
-                            Group g = document.toObject(Group.class);
-                            for (int jj = 0; jj < g.getMembers().size(); jj++) {
-                                if (User.getUserID().equals(g.getMembers().get(jj).getUserID())) {
-                                    settingCallback.OnCallback(true); //ismember function
-                                    break;
-                                }
+        DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        Group g = document.toObject(Group.class);
+                        for (int jj = 0; jj < g.getMembers().size(); jj++) {
+                            if (User.getUserID().equals(g.getMembers().get(jj).getUserID())) {
+                                settingCallback.OnCallback(true); //ismember function
+                                break;
                             }
                         }
+                    }
 
-                            else{
-                                settingCallback.OnCallback(false);
-                            }
-                        } else {
-                            Log.d(TAG, "No such document");
-                            settingCallback.OnCallback(false);
-                        }
+                    else{
+                        settingCallback.OnCallback(false);
+                    }
+                } else {
+                    Log.d(TAG, "No such document");
+                    settingCallback.OnCallback(false);
                 }
-            });
+            }
+        });
         return true;
 
     }
@@ -761,43 +764,43 @@ public class DBHelper {
             @Override
             public void OnCallback(Boolean value) {
                 if(value==true){
-                        firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                                .set(groceryPost);
+                    firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
+                            .set(groceryPost);
+                }
             }
-        }
         });
     }
     public void addFriend(String uid) {
-    if(User.getUserID().equals(uid)){ //add yourself
-        return;
-    }
-    else {
+        if(User.getUserID().equals(uid)){ //add yourself
+            return;
+        }
+        else {
 
 
-        getUserFromUid(uid, new twoValueCallback() {
-            @Override
-            public void onCallback(String value1, String photoUrl) {
-                getEmailFromUid(uid, new MyCallback() {
-                    @Override
-                    public void onCallback(String value) {
-                        Friend f = new Friend(uid, value1, value, returnphotoUrl);
-                        firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
-                                .set(f);
-                    }
-                });
+            getUserFromUid(uid, new twoValueCallback() {
+                @Override
+                public void onCallback(String value1, String photoUrl) {
+                    getEmailFromUid(uid, new MyCallback() {
+                        @Override
+                        public void onCallback(String value) {
+                            Friend f = new Friend(uid, value1, value, returnphotoUrl);
+                            firestore.collection("users").document(User.getUserID()).collection("Sent Friend Requests").document(uid)
+                                    .set(f);
+                        }
+                    });
 
-            }
-        });
+                }
+            });
 
-        //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
+            //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
 
 
-        //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
+            //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
 
-        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
-        firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
-                .set(ff);
-    }
+            Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
+            firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
+                    .set(ff);
+        }
     }
     public void deleteFriend(String uid) {
         Log.d(TAG, "UID IS" + uid);
@@ -823,8 +826,8 @@ public class DBHelper {
 
                                 if(holder.getGroupname().equals(searchQuery)){
                                     Log.d(TAG,  holder.getGroupname() + "==" + searchQuery);
-                                        groupSearchList.add(document.toObject(Group.class));
-                                   myCallback.OnCallback(groupSearchList);
+                                    groupSearchList.add(document.toObject(Group.class));
+                                    myCallback.OnCallback(groupSearchList);
                                     adapter.notifyDataSetChanged();
                                 }
                                 else{
@@ -903,7 +906,7 @@ public class DBHelper {
                     }
 
                 });
-      //  frcc.OnCallback(frccCount);
+        //  frcc.OnCallback(frccCount);
         return frccCount;
     }
     public int fCountFunc(FriendCountCallback frcc){

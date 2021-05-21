@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +41,7 @@ public class FeedFragment extends Fragment {
     GroceryItem groceryItem = new GroceryItem();
     protected GroceryPostAdapter adapter;
     protected List<GroceryPost> FeedItems;
+    SwipeRefreshLayout swipeRefreshLayout;
     DBHelper dbHelper = new DBHelper();
     @Nullable
     @Override
@@ -67,6 +69,7 @@ public class FeedFragment extends Fragment {
         FeedItems = new ArrayList<>();
         adapter = new GroceryPostAdapter(getContext(), FeedItems);
         chooseItem = view.findViewById(R.id.chooseItemButton);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         chooseItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +80,14 @@ public class FeedFragment extends Fragment {
                         getChildFragmentManager(), PostFragment.TAG);
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
+                FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter, swipeRefreshLayout);
+
+            }
+        });
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +104,7 @@ public class FeedFragment extends Fragment {
         });
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
-        FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter);
+        FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter, swipeRefreshLayout);
         Bundle b = this.getArguments();
         if(b!=null){
             unpackBundle();
