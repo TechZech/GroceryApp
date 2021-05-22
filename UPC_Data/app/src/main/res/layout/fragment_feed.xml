@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="598dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:clickable="false">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
@@ -33,7 +34,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="-1dp"
-            android:background="@color/white" />
+            android:background="@color/white"
+            android:clickable="false" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button

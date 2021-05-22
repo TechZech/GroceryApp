@@ -1,6 +1,5 @@
 package com.groceryapp.upcdata.fragments;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,9 +27,7 @@ import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.DBHelper;
-import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
-import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,9 +97,16 @@ RecyclerView recyclerView;
     //    tvDetailUpc.setText();
 //        tvDetailPrice.setText(user.getEmail());
 
+        GroceryPostAdapter.OnClickListener onClickListener = new GroceryPostAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position)  {
+                Log.d(TAG, "ITEM CLICKED HERE");
+                goToDetailFragment(position);
 
+            }
+        };
         allPostItems = new ArrayList<>();
-        groceryPostAdapter = new GroceryPostAdapter(getContext(), allPostItems);
+        groceryPostAdapter = new GroceryPostAdapter(getContext(), allPostItems, onClickListener);
         recyclerView.setAdapter(groceryPostAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -200,5 +204,18 @@ RecyclerView recyclerView;
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
+    private void goToDetailFragment(int position){
+        GroceryPost groceryPost = allPostItems.get(position);
+        Bundle bundle = new Bundle();
+        // String gidString = groceryPost.getGid();
+        //   bundle.putString("gid", gidString );
+        //  bundle.putBoolean("fromInventory", true);
+        Fragment fragment = new PostDetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 }

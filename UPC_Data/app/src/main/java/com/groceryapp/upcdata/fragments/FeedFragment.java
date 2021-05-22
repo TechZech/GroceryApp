@@ -18,14 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
-import com.groceryapp.upcdata.fragments.InnerSettingsFragments.EditProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,15 @@ public class FeedFragment extends Fragment {
         itemName = view.findViewById(R.id.itemName);
         submitButton = view.findViewById(R.id.submitButton);
         FeedItems = new ArrayList<>();
-        adapter = new GroceryPostAdapter(getContext(), FeedItems);
+        GroceryPostAdapter.OnClickListener onClickListener = new GroceryPostAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position)  {
+                Log.d(TAG, "ITEM CLICKED HERE");
+                goToDetailFragment(position);
+
+            }
+        };
+        adapter = new GroceryPostAdapter(getContext(), FeedItems, onClickListener);
         chooseItem = view.findViewById(R.id.chooseItemButton);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
@@ -102,6 +109,7 @@ public class FeedFragment extends Fragment {
                 }
             }
         });
+
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
         FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter, swipeRefreshLayout);
@@ -134,5 +142,19 @@ public class FeedFragment extends Fragment {
         groceryItem.setImageUrl(Args.getString("ImageUrl"));
         groceryItem.setPrice(Args.getString("Price"));
         groceryItem.setQuantity(Args.getInt("Quantity"));
+    }
+    private void goToDetailFragment(int position){
+        GroceryPost groceryPost = FeedItems.get(position);
+        Bundle bundle = new Bundle();
+       // String gidString = groceryPost.getGid();
+     //   bundle.putString("gid", gidString );
+      //  bundle.putBoolean("fromInventory", true);
+        Fragment fragment = new PostDetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

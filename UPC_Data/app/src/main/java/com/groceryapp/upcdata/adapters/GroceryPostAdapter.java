@@ -25,9 +25,20 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
     private Context context;
     private List<GroceryPost> groceryPosts;
 
-    public GroceryPostAdapter(Context context, List<GroceryPost> groceryPosts){
+    public interface OnLongClickListener {
+        void onItemLongClicked(int position);
+    }
+
+    public interface OnClickListener {
+        void onItemClicked(int position);
+    }
+    private final OnClickListener onClickListener;
+
+
+    public GroceryPostAdapter(Context context, List<GroceryPost> groceryPosts, OnClickListener onClickListener){
         this.context = context;
         this.groceryPosts = groceryPosts;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
