@@ -121,7 +121,7 @@ public class PostFragment extends DialogFragment {
                     public void run() {
                         try {
                             allBarcodeData = myScrap.getAllData(upctext.getText().toString());
-                            GroceryItem gi = new GroceryItem(allBarcodeData.get(1), upctext.getText().toString(), allBarcodeData.get(1), Integer.parseInt(quantityText.getText().toString()), allBarcodeData.get(3), true);
+                            GroceryItem gi = new GroceryItem(allBarcodeData.get(1), upctext.getText().toString(), allBarcodeData.get(2), Integer.parseInt(quantityText.getText().toString()), allBarcodeData.get(3), true);
                        //     dbhelper.addInventoryItem(gi);
                             GroceryPost myGP = new GroceryPost();
                             myGP.setGroceryItem(gi);
