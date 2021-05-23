@@ -106,7 +106,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
 
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTitle = itemView.findViewById(R.id.tvGroceryName);
-            ivGroceryItemImage = itemView.findViewById(R.id.tvImage);
+            ivGroceryItemImage = itemView.findViewById(R.id.imageView);
             ViewCompat.setTransitionName(ivGroceryItemImage, "grocery_item_image");
             item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             QuantityAdd = itemView.findViewById(R.id.ivPlusSign);

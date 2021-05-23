@@ -79,7 +79,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
             rl = itemView.findViewById(R.id.post_container);
-            frImage = itemView.findViewById(R.id.tvImage);
+            frImage = itemView.findViewById(R.id.imageView);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
 

@@ -75,7 +75,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             super(itemView);
             frUser = itemView.findViewById(R.id.tvUser);
 
-            frImage = itemView.findViewById(R.id.tvImage);
+            frImage = itemView.findViewById(R.id.imageView);
             //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
             rl = itemView.findViewById(R.id.post_container);

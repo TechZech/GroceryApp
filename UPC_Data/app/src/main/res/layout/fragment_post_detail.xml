@@ -7,21 +7,21 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        android:layout_width="86dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="215dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
         android:text="Title"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -31,8 +31,8 @@
         android:id="@+id/descriptionText"
         android:layout_width="220dp"
         android:layout_height="97dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
         android:text="Description"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
@@ -111,6 +111,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintVertical_bias="0.557" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

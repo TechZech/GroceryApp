@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
-import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
@@ -85,7 +84,7 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
             tvListName = itemView.findViewById(R.id.tvListName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
 
-            ivGroceryItemImage = itemView.findViewById(R.id.tvImage);
+            ivGroceryItemImage = itemView.findViewById(R.id.imageView);
 
 
             rl = itemView.findViewById(R.id.post_container);
