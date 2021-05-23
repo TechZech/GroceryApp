@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 
@@ -24,7 +25,7 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
 
     private Context context;
     private List<GroceryPost> groceryPosts;
-
+    private RelativeLayout rl;
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
     }
@@ -71,42 +72,34 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView ivGroceryItemImage;
-        private RelativeLayout item_grocery_container;
+        private ImageView frImage;
+        private TextView frUser;
+        private Button acceptButton;
         private DBHelper dbHelper;
-        private TextView tvUser;
-        private TextView tvListName;
-        private TextView tvItemName;
-        private Button addButton;
+        private Button declineButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            tvUser = itemView.findViewById(R.id.tvUser);
-            tvListName = itemView.findViewById(R.id.tvListName);
-            tvItemName = itemView.findViewById(R.id.tvItemName);
-
-            ivGroceryItemImage = itemView.findViewById(R.id.tvImage);
-            item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
+            frUser = itemView.findViewById(R.id.tvUser);
+            rl = itemView.findViewById(R.id.post_container);
+            frImage = itemView.findViewById(R.id.tvImage);
+            //  item_grocery_container = itemView.findViewById(R.id.item_grocery_container);
             dbHelper = new DBHelper();
-            addButton = itemView.findViewById(R.id.acceptButton);
 
-            addButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    groceryPosts.get(getAdapterPosition()).getGroceryItem().setQuantity(1);
-                    dbHelper.addGroceryItem(groceryPosts.get(getAdapterPosition()).getGroceryItem());
-                }
-            });
+
 
         }
 
         public void bind(GroceryPost groceryPost){
-            tvUser.setText(groceryPost.user.getUsername());
-            tvItemName.setText(groceryPost.getGroceryItem().getTitle());
-            if (groceryPost.getWhichList())
-                tvListName.setText("Inventory");
-            else
-                tvListName.setText("Grocery List");
-            Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+            //     User u = dbHelper.getUser(fr.getUid());
+            //      frUser.setText(u.getUsername());
+            //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
+            //      Glide.with(context).load(groceryPost.getGroceryItem().getImageUrl()).into(ivGroceryItemImage);
         }
     }
 }

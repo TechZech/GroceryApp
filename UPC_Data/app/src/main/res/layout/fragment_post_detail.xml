@@ -51,21 +51,20 @@
         android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="76dp"
         android:text="Likes"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/likeButton"
         app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
     <Button
         android:id="@+id/likeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
         android:layout_marginTop="8dp"
         android:text="Like"
-        app:layout_constraintStart_toEndOf="@+id/likeCount"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        tools:layout_editor_absoluteX="298dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -100,5 +99,14 @@
         app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toEndOf="@+id/commentText"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/dateTimeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="397dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

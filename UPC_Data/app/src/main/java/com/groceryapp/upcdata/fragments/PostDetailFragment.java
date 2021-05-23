@@ -58,7 +58,7 @@ public class PostDetailFragment extends Fragment {
         unpackBundle();
 
         ivDetailImage = view.findViewById(R.id.ivDetailImage);
-        ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
+   //     ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
         tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
         tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
         tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
@@ -67,20 +67,14 @@ public class PostDetailFragment extends Fragment {
         btnNutrition = view.findViewById(R.id.membersListButton);
         btnSimilarProducts = view.findViewById(R.id.settingsButton);
 
-        Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
-        tvDetailTitle.setText(groceryItem.getTitle());
-        tvDetailUpc.setText(groceryItem.getUpc());
-        tvDetailPrice.setText(groceryItem.getPrice());
-        tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
+      //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
+       // tvDetailTitle.setText(groceryItem.getTitle());
+       // tvDetailUpc.setText(groceryItem.getUpc());
+      //  tvDetailPrice.setText(groceryItem.getPrice());
+      //  tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
 
 
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
-            }
-        });
+
 
 
 
