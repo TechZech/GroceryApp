@@ -37,43 +37,45 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
-    <com.google.android.gms.maps.MapView
+    <fragment
         android:id="@+id/mapView"
-        android:layout_width="316dp"
-        android:layout_height="190dp"
-        android:layout_marginTop="36dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="342dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+        tools:context=".MapsActivity" />
 
     <TextView
         android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="388dp"
         android:layout_marginEnd="76dp"
         android:text="Likes"
         app:layout_constraintEnd_toStartOf="@+id/likeButton"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="108dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="368dp"
+        android:layout_marginEnd="8dp"
         android:text="Like"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        tools:layout_editor_absoluteX="298dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="405dp"
+        android:layout_width="404dp"
         android:layout_height="216dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="436dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/commentText"
@@ -106,7 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="397dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -146,8 +146,12 @@ public class FeedFragment extends Fragment {
     private void goToDetailFragment(int position){
         GroceryPost groceryPost = FeedItems.get(position);
         Bundle bundle = new Bundle();
-       // String gidString = groceryPost.getGid();
-     //   bundle.putString("gid", gidString );
+       String placeidString = groceryPost.getPlaceid();
+        bundle.putString("placeid", placeidString );
+        bundle.putString("Title", groceryPost.groceryItem.getTitle() );
+        bundle.putString("ImageUrl", groceryPost.groceryItem.getImageUrl() );
+        bundle.putString("DateTime", groceryPost.getDateTime().toString() );
+        
       //  bundle.putBoolean("fromInventory", true);
         Fragment fragment = new PostDetailFragment();
         fragment.setArguments(bundle);

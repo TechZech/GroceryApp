@@ -3,6 +3,7 @@ package com.groceryapp.upcdata.fragments;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.groceryapp.upcdata.BuildConfig;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
 import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
@@ -28,22 +42,25 @@ import com.groceryapp.upcdata.Scraper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class PostDetailFragment extends Fragment {
+public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
 
     public static final String TAG = "DetailFragment";
-    GroceryItem groceryItem;
-
+    GroceryPost myGroceryPost = new GroceryPost();
+    private GoogleMap map;
+    private CameraPosition cameraPosition;
+    private static final int DEFAULT_ZOOM = 15;
+    private PlacesClient placesClient;
+    Place postPlace;
     ImageView ivDetailImage;
-    TextView tvDetailTitle;
-    TextView tvDetailUpc;
+    TextView titleText;
+    TextView dt;
     TextView tvDetailPrice;
     TextView tvDetailQuantity;
     Button btnGoBack;
-    Button btnNutrition;
-    Button btnSimilarProducts;
-    List<NutritionData> nutritionDataList;
+
 
     @Nullable
     @Override
@@ -54,20 +71,20 @@ public class PostDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        groceryItem = new GroceryItem();
-        unpackBundle();
 
-        ivDetailImage = view.findViewById(R.id.ivDetailImage);
+
+        ivDetailImage = view.findViewById(R.id.imageView);
+        titleText = view.findViewById(R.id.titleText);
+        dt =  view.findViewById(R.id.dateTimeInfo);
    //     ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
-        tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
-        tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
-        tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
-        tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
-        btnGoBack = view.findViewById(R.id.btnGoBack);
-        btnNutrition = view.findViewById(R.id.membersListButton);
-        btnSimilarProducts = view.findViewById(R.id.settingsButton);
+    //    tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
+     //   tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
+   //     tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
+   //     tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
 
-      //  Glide.with(getContext()).load(groceryItem.getImageUrl()).into(ivDetailImage);
+        btnGoBack = view.findViewById(R.id.btnGoBack);
+        unpackBundle();
+      //
        // tvDetailTitle.setText(groceryItem.getTitle());
        // tvDetailUpc.setText(groceryItem.getUpc());
       //  tvDetailPrice.setText(groceryItem.getPrice());
@@ -82,15 +99,47 @@ public class PostDetailFragment extends Fragment {
 
     private void unpackBundle(){
         Bundle Args = getArguments();
-        groceryItem.setUpc(Args.getString("UPC"));
-        groceryItem.setTitle(Args.getString("Title"));
-        groceryItem.setImageUrl(Args.getString("ImageUrl"));
-        groceryItem.setPrice(Args.getString("Price"));
-        groceryItem.setQuantity(Args.getInt("Quantity"));
+        myGroceryPost.groceryItem.setTitle(Args.getString("Title"));
+        titleText.setText(myGroceryPost.groceryItem.getTitle());
+        myGroceryPost.groceryItem.setImageUrl(Args.getString("ImageUrl"));
+        dt.setText(Args.getString("DateTime"));
+        myGroceryPost.setPlaceid(Args.getString("placeid"));
+
+        Glide.with(getContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
+
     }
 
 
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
 
+        Places.initialize(getContext(), BuildConfig.PLACES_KEY);
+        placesClient = Places.createClient(getContext());
+        // Specify the fields to return.
+        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
+        // Construct a request object, passing the place ID and fields array.
+        final FetchPlaceRequest request = FetchPlaceRequest.newInstance(myGroceryPost.getPlaceid(), placeFields);
+        placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
+            postPlace = response.getPlace();
+            SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
+                    .findFragmentById(R.id.mapView);
+            mapFragment.getMapAsync(this);
+            Log.i(TAG, "Place found: " + postPlace.getName());
+            map.addMarker(new MarkerOptions()
+                    .title(myGroceryPost.groceryItem.getTitle())
+                    .position(postPlace.getLatLng()));
+           // placeButton.setText(postPlace.getName());
+        }).addOnFailureListener((exception) -> {
+            if (exception instanceof ApiException) {
+                final ApiException apiException = (ApiException) exception;
+                Log.e(TAG, "Place not found: " + exception.getMessage());
+                final int statusCode = apiException.getStatusCode();
+                // TODO: Handle error with given status code.
+            }
+        });
 
-}
+    }
+
+    }
+
