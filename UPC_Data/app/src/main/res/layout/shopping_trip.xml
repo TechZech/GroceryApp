@@ -11,7 +11,7 @@
     card_view:cardCornerRadius="5dp"
     android:elevation="7dp">
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/item_trip_container">
 
@@ -25,26 +25,29 @@
         android:text="DATE"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/robotolight"/>
 
     <TextView
         android:id="@+id/tvShoppingTripDate"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="35dp"
         android:gravity="center"
         android:text="Date"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/robotolight"/>
 
     <TextView
         android:id="@+id/tvShoppingTripCost"
         android:layout_width="80dp"
         android:layout_height="30dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/robotolight"
         android:gravity="center"
         android:text="Cost"
         android:textColor="@color/black"
@@ -61,7 +64,8 @@
         android:text="COST"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/robotolight"/>
 
 </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="615dp">
+    android:layout_height="615dp"
+    android:background="@drawable/darker_green_fade">
 
     <RelativeLayout
         android:id="@+id/rlUpper"
@@ -92,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="570dp"
+        android:layout_marginTop="530dp"
         android:backgroundTint="@color/white"
         android:text="Sign Out"
         android:textColor="@color/Sign_Out_Red"
@@ -141,7 +142,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="-9dp"
         android:backgroundTint="@color/white"
-        android:text="Clear Grocery List"
+        android:text="Manage Lists"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:fontFamily="@font/robotolight"/>

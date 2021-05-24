@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/darker_green_fade">
 
+
+
     <TextView
         android:id="@+id/tvInventoryListTitle"
         android:layout_width="207dp"
@@ -40,6 +42,13 @@
         android:layout_height="470dp"
         android:layout_marginTop="70dp"
         android:background="@null" />
+
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:background="@drawable/shape"
+        android:layout_marginTop="535dp"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="150dp"

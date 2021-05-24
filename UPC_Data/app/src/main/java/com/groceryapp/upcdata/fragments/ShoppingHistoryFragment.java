@@ -39,8 +39,11 @@ import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -57,6 +60,7 @@ public class ShoppingHistoryFragment extends Fragment {
     protected ShoppingTripAdapter adapter;
     protected List<ShoppingTrip> allShoppingTrips;
     DBHelper dbHelper = new DBHelper();
+    private TextView tvAvgCost;
 
 
     @Nullable
@@ -81,6 +85,7 @@ public class ShoppingHistoryFragment extends Fragment {
         BarChart chart = view.findViewById(R.id.LineChart);
         rvShoppingHistory = view.findViewById(R.id.rvShoppingHistory);
         allShoppingTrips = new ArrayList<>();
+        tvAvgCost = view.findViewById(R.id.tvAvgCost);
 
         adapter = new ShoppingTripAdapter(getContext(), allShoppingTrips, onClickListener);
 
@@ -115,11 +120,28 @@ public class ShoppingHistoryFragment extends Fragment {
                     chart.getDescription().setEnabled(false);
                     chart.setBackgroundColor(Color.WHITE);
                     BarDataSet dataSet = new BarDataSet(entries, "Label");
+                    dataSet.setValueTextSize(0);
                     dataSet.setColor(Color.rgb(111, 142, 69));
                     BarData barData = new BarData(dataSet);
                     barData.setBarWidth(.7f);
                     chart.setData(barData);
                     chart.invalidate(); // refresh
+
+                    //Average Cost below
+                    double totalCost = 0.0;
+                    for (ShoppingTrip trip : trips){
+                        totalCost += trip.getTotalPrice();
+                    }
+                    totalCost /= trips.size();
+
+                    DecimalFormat precision;
+                    if (totalCost > 100){
+                        precision = new DecimalFormat("000.00");
+                    }
+                    else {
+                        precision = new DecimalFormat("0.00");
+                    }
+                    tvAvgCost.setText("$" + precision.format(totalCost));
                 }
             }
         });
@@ -135,7 +157,7 @@ public class ShoppingHistoryFragment extends Fragment {
     private void goBackDialog(){
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Looks like you don't have any shopping trips yet!");
-        alertDialog.setMessage("Add a Shopping Trip to Begin Viewing Your Recent History");
+        alertDialog.setMessage("Add a shopping trip to begin viewing your recent history");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "GO BACK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
