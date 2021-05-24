@@ -9,7 +9,7 @@
         android:title="Scanner"/>
     <item
         android:id="@+id/action_groceryList"
-        android:icon="@drawable/shoppingcart"
+        android:icon="?android:attr/actionModeWebSearchDrawable"
         android:title="Grocery List"
         app:showAsAction="always" />
     <item
