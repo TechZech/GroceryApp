@@ -65,7 +65,7 @@ public class GroupListFragment extends Fragment {
 
             }
         };
-        rvFriends = view.findViewById(R.id.rvSearch);
+        rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText1);
         allFriends  = new ArrayList<>();

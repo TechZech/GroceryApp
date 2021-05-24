@@ -44,7 +44,7 @@ public class FriendRequestFragment extends Fragment {
         dbHelper = new DBHelper();
 
 
-        rvFriends = view.findViewById(R.id.rvSearch);
+        rvFriends = view.findViewById(R.id.staggeredRV);
         allFriendRequests = new ArrayList<>();
         adapter = new FriendRequestAdapter(getContext(), allFriendRequests);
 

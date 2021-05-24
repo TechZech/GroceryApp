@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment {
                goToDetailFragment(position);
             }
         };
-        rvSearch = view.findViewById(R.id.rvSearch);
+        rvSearch = view.findViewById(R.id.staggeredRV);
         rvButton = view.findViewById(R.id.rvButton);
         rvSearchText = view.findViewById(R.id.searchText1);
         allSearches = new ArrayList<>();

@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.groceryapp.upcdata.DB.Friend.Friend;
-import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -69,7 +67,7 @@ public class FriendListFragment extends Fragment {
                 goToUserDetailFragment(position);
             }
         };
-        rvFriends = view.findViewById(R.id.rvSearch);
+        rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
         rvSearchText = view.findViewById(R.id.searchText);
         frCount = view.findViewById(R.id.frCounter);

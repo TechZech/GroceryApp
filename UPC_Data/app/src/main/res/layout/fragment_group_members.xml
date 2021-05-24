@@ -27,7 +27,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearch"
+        android:id="@+id/staggeredRV"
         android:layout_width="411dp"
         android:layout_height="620dp"
         android:layout_below="@+id/divider4"
