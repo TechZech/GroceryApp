@@ -7,14 +7,31 @@
     android:background="@drawable/darker_green_fade">
 
     <TextView
-        android:id="@+id/friendTitle"
-        android:layout_width="match_parent"
+        android:id="@+id/tvInventoryListTitle"
+        android:layout_width="207dp"
         android:layout_height="80dp"
         android:background="@color/GroceryAppGreen_DARK"
         android:fontFamily="@font/robotolight"
         android:gravity="center_vertical"
-        android:text="      Grocery List"
-        android:textColor="#FFFFFF"
+        android:text="Inventory"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tvShopTitle"
+        android:layout_width="207dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/GroceryAppGreen_DARK"
+
+        android:fontFamily="@font/robotolight"
+        android:gravity="center_vertical"
+        android:text="Shopping List"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <androidx.recyclerview.widget.RecyclerView

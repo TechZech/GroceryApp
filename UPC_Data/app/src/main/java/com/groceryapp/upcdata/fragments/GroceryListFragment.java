@@ -34,7 +34,7 @@ public class GroceryListFragment extends Fragment {
     protected GroceryItemAdapter adapter;
     protected List<GroceryItem> allGroceryItems;
     DBHelper dbHelper = new DBHelper();
-
+    TextView tvInventoryTitle;
     TextView tvTotalPrice;
     Button btnTripComplete;
 
@@ -50,6 +50,19 @@ public class GroceryListFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         btnTripComplete = view.findViewById(R.id.btnTripComplete);
+        tvInventoryTitle = view.findViewById(R.id.tvInventoryListTitle);
+        tvInventoryTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new InventoryFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
