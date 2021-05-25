@@ -22,7 +22,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvGroceryItems"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
+        android:layout_height="450dp"
         android:layout_marginTop="70dp"
         android:background="@null" />
 
@@ -30,14 +30,14 @@
         android:layout_width="400dp"
         android:layout_height="80dp"
         android:background="@drawable/shape"
-        android:layout_marginTop="535dp"
+        android:layout_marginTop="525dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="550dp"
         android:text="Total Price: $"
         android:textColor="@color/black"
         android:textSize="25dp"
@@ -48,7 +48,7 @@
         android:layout_width="95dp"
         android:layout_height="30dp"
         android:layout_marginStart="170dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="550dp"
         android:text="0.00"
         android:textColor="@color/black"
         android:textSize="25dp"
@@ -61,7 +61,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="64dp"
         android:text="Trip Complete"
         android:fontFamily="@font/robotolight"/>
 

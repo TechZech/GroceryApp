@@ -46,19 +46,25 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
         void onSubtractClicked(int position);
     }
 
+    public interface OnClickListenerQuantityAdd{
+        void onAddClicked(int position);
+    }
+
     OnLongClickListener longClickListener;
     OnClickListener clickListener;
     OnClickListenerQuantitySubtract subtractListener;
+    OnClickListenerQuantityAdd addListener;
 
     private Context context;
     private List<GroceryItem> groceryItems;
 
-    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener, OnClickListenerQuantitySubtract subtractListener){
+    public GroceryItemAdapter(Context context, List<GroceryItem> groceryItems, OnLongClickListener longClickListener, OnClickListener clickListener, OnClickListenerQuantitySubtract subtractListener, OnClickListenerQuantityAdd addListener){
         this.context = context;
         this.groceryItems = groceryItems;
         this.longClickListener = longClickListener;
         this.clickListener = clickListener;
         this.subtractListener = subtractListener;
+        this.addListener = addListener;
     }
 
     @NonNull
@@ -148,6 +154,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             QuantityAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    addListener.onAddClicked(getAdapterPosition());
                     groceryItem.setQuantity(groceryItem.getQuantity()+1);
                     dbHelper.UpdateGroceryListQuantity(groceryItem);
                     dbHelper.UpdateInventoryQuantity(groceryItem);

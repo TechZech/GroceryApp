@@ -23,8 +23,11 @@ import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Double.parseDouble;
 
 public class GroceryListFragment extends Fragment {
 
@@ -67,10 +70,34 @@ public class GroceryListFragment extends Fragment {
             }
         };
 
+        GroceryItemAdapter.OnClickListenerQuantityAdd addListener = new GroceryItemAdapter.OnClickListenerQuantityAdd() {
+            @Override
+            public void onAddClicked(int position) {
+                double priceAdded = allGroceryItems.get(position).returnPriceAsFloat();
+                String CurrentPrice = (String) tvTotalPrice.getText();
+
+                double priceAsDouble = Double.parseDouble(CurrentPrice);
+                Log.d(TAG, priceAsDouble + "");
+                priceAsDouble += priceAdded;
+                Log.d(TAG, priceAsDouble + "after");
+                CurrentPrice = formatPrice(priceAsDouble);
+                tvTotalPrice.setText(CurrentPrice);
+            }
+        };
+
         GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
 
             @Override
             public void onSubtractClicked(int position) {
+                double priceRemoved = allGroceryItems.get(position).returnPriceAsFloat();
+                String CurrentPrice = (String) tvTotalPrice.getText();
+
+                double priceAsDouble = Double.parseDouble(CurrentPrice);
+                Log.d(TAG, priceAsDouble + "");
+                priceAsDouble -= priceRemoved;
+                Log.d(TAG, priceAsDouble + "after");
+                CurrentPrice = formatPrice(priceAsDouble);
+                tvTotalPrice.setText(CurrentPrice);
             }
         };
 
@@ -79,7 +106,7 @@ public class GroceryListFragment extends Fragment {
             public void onClick(View v) {
                 if (allGroceryItems.size() != 0) {
                     dbHelper.moveGrocerytoInventory(adapter);
-                    Double totalPrice = Double.parseDouble(tvTotalPrice.getText().toString());
+                    Double totalPrice = parseDouble(tvTotalPrice.getText().toString());
                     dbHelper.addShoppingTrip(new ShoppingTrip(totalPrice));
                     tvTotalPrice.setText("0.0");
                 }
@@ -89,7 +116,7 @@ public class GroceryListFragment extends Fragment {
         rvGroceryItems = view.findViewById(R.id.tvGroceryItems);
         allGroceryItems = new ArrayList<>();
 
-        adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener, subtractListener);
+        adapter = new GroceryItemAdapter(getContext(), allGroceryItems, onLongClickListener, onClickListener, subtractListener, addListener);
 
         rvGroceryItems.setAdapter(adapter);
         rvGroceryItems.setLayoutManager(linearLayoutManager);
@@ -121,5 +148,17 @@ private void goToDetailFragment(int position){
     fragmentTransaction.replace(R.id.flContainer, fragment);
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.commit();
+    }
+
+    private String formatPrice(double unformattedDouble){
+        DecimalFormat precision;
+        if (unformattedDouble > 100){
+            precision = new DecimalFormat("000.00");
+        }
+        else {
+            precision = new DecimalFormat("0.00");
+        }
+
+        return precision.format(unformattedDouble);
     }
 }

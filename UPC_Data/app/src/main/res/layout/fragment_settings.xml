@@ -98,7 +98,8 @@
         android:text="Sign Out"
         android:textColor="@color/Sign_Out_Red"
         android:textAlignment="textStart"
-        android:fontFamily="@font/robotolight"/>
+        android:fontFamily="@font/robotolight"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/kickButton"
@@ -114,7 +115,8 @@
         android:text="Edit Profile"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:fontFamily="@font/robotolight"/>
+        android:fontFamily="@font/robotolight"
+        android:textStyle="bold"/>
 
 
 
@@ -131,7 +133,8 @@
         android:text="Shopping History"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:fontFamily="@font/robotolight"/>
+        android:fontFamily="@font/robotolight"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnSettings3"
@@ -145,7 +148,8 @@
         android:text="Manage Lists"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:fontFamily="@font/robotolight"/>
+        android:fontFamily="@font/robotolight"
+        android:textStyle="bold"/>
 
     <ImageView
         android:layout_width="30dp"

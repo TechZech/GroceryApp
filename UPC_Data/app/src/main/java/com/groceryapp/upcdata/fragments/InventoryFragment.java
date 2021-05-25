@@ -93,11 +93,18 @@ public class InventoryFragment extends Fragment {
             }
         };
 
+        GroceryItemAdapter.OnClickListenerQuantityAdd addListener = new GroceryItemAdapter.OnClickListenerQuantityAdd() {
+            @Override
+            public void onAddClicked(int position) {
+
+            }
+        };
+
         rvInventory = view.findViewById(R.id.tvInventory);
 
         allInventoryItems = new ArrayList<>();
 
-        adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener, subtractListener);
+        adapter = new GroceryItemAdapter(getContext(), allInventoryItems, onLongClickListener, onClickListener, subtractListener, addListener);
 
         rvInventory.setAdapter(adapter);
         rvInventory.setLayoutManager(linearLayoutManager);
