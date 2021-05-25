@@ -132,10 +132,7 @@ public class FriendListFragment extends Fragment {
                     frTV.setVisibility(View.GONE);
                     frCount.setText(Integer.toString(frs));
                     frCount.setVisibility(View.VISIBLE);
-
-
-
-
+                    
                 }
             }
 
