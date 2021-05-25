@@ -98,13 +98,15 @@ public class InventoryFragment extends Fragment {
         GroceryItemAdapter.OnClickListenerQuantitySubtract subtractListener = new GroceryItemAdapter.OnClickListenerQuantitySubtract(){
             @Override
             public void onSubtractClicked(int position) {
-                GroceryItem groceryItem = allInventoryItems.get(position);
-                groceryItem.setInventory(false);
-                Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
-                dbHelper.removeInventoryItem(groceryItem);
-                allInventoryItems.remove(position);
-                adapter.notifyItemRemoved(position);
-                dbHelper.addGroceryItem(groceryItem);
+                    GroceryItem groceryItem = allInventoryItems.get(position);
+                if(groceryItem.getQuantity() == 1){
+                    groceryItem.setInventory(false);
+                    Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
+                    dbHelper.removeInventoryItem(groceryItem);
+                    allInventoryItems.remove(position);
+                    adapter.notifyItemRemoved(position);
+                    dbHelper.addGroceryItem(groceryItem);
+                }
             }
         };
 
