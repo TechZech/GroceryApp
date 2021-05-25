@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,46 +29,50 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/staggeredRV"
-        android:layout_width="412dp"
-        android:layout_height="577dp"
+        android:layout_width="411dp"
+        android:layout_height="567dp"
         android:layout_below="@+id/divider4"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="-1dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="-1dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="-2dp"
         android:background="@color/white" />
 
     <TextView
         android:id="@+id/FRLabel"
-        android:layout_width="221dp"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="190dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="128dp"
         android:paddingTop="5dp"
         android:text="No Friend Requests"
-        android:textAlignment="viewEnd"
-        android:textSize="24sp" />
+        android:textAlignment="center"
+        android:textColor="@color/light_gray"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/frCounter"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="361dp"
-        android:text="1234567890" />
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="75dp"
+        android:backgroundTint="#D13F3F"
+        android:text="1234567890"
+        android:textSize="26sp"
+        app:cornerRadius="200dp" />
 
     <EditText
         android:id="@+id/searchText"
@@ -83,11 +88,14 @@
     <Button
         android:id="@+id/rvButton"
         android:layout_width="55dp"
-        android:layout_height="35dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/searchText"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="1dp"
-        android:text="Go" />
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="-8dp"
+        android:text="Go"
+        app:icon="@drawable/quantum_ic_search_grey600_24" />
 
 </RelativeLayout>
