@@ -7,18 +7,20 @@
     android:background="@drawable/darker_green_fade">
 
 
-
     <TextView
         android:id="@+id/tvInventoryListTitle"
         android:layout_width="207dp"
         android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
         android:background="@color/GroceryAppGreen_DARK"
-        android:fontFamily="@font/robotolight"
-        android:gravity="center_vertical"
-        android:text="Inventory"
         android:clickable="true"
-        android:textAlignment="center"
-        android:textColor="@color/white"
+        android:fontFamily="@font/robotolight"
+        android:gravity="start|center_vertical"
+        android:text="Inventory"
+        android:textAlignment="viewStart"
+        android:textColor="@color/light_gray"
         android:textSize="30sp" />
 
     <TextView
@@ -27,14 +29,17 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/GroceryAppGreen_DARK"
+        android:layout_marginTop="0dp"
 
+        android:layout_marginEnd="12dp"
+        android:background="@color/GroceryAppGreen_DARK"
         android:fontFamily="@font/robotolight"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|end"
         android:text="Shopping List"
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvGroceryItems"
