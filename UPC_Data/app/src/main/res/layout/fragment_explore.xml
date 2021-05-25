@@ -40,15 +40,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stagRV"
         android:layout_width="wrap_content"
-        android:layout_height="684dp"
+        android:layout_height="624dp"
         android:layout_below="@+id/divider4"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="-26dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="1dp" />
+        android:layout_marginBottom="0dp" />
 
 </RelativeLayout>

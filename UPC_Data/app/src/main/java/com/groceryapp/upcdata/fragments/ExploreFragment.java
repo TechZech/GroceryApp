@@ -26,6 +26,7 @@ import com.groceryapp.upcdata.adapters.UserGroupItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ExploreFragment extends Fragment {
     public final String TAG = "ExploreFragment";
@@ -53,9 +54,25 @@ public class ExploreFragment extends Fragment {
         };
     }
     private void initImageBitmaps(){
+        for(int kj = 0; kj<10; kj++){
+            Random rand = new Random(); //instance of random class
+            int postUserGroup = rand.nextInt(2);
+            if(postUserGroup==0){ //get random post
+                Random postRand = new Random(); //instance of random class
+            }
+            else if(postUserGroup==1){ //get random user
+                Random userRand = new Random(); //instance of random class
+            }
+            else if(postUserGroup==2){ //get random group
+                Random groupRand = new Random(); //instance of random class
+            }
+            else{ // get random user just in case...
+                Random userRand = new Random(); //instance of random class
+            }
+        }
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        mImageUrls.add("https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14112506/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall.jpg");
         mNames.add("Havasu Falls");
 
         mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
