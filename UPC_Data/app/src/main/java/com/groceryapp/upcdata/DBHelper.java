@@ -890,6 +890,7 @@ public class DBHelper {
                 .document(User.getUserID()).delete();
     }
     public List<Group> queryGroupSearch(List<Group> groupSearchList, GroupAdapter adapter, String searchQuery, GroupSearchCallback myCallback) {
+        groupSearchList.clear();
         Log.d(TAG, "CALLING");
         firestore.collection("Groups")
                 .get()
@@ -924,6 +925,7 @@ public class DBHelper {
         return groupSearchList;
     }
     public List<User> queryUserSearch(List<User> userSearchList, UserAdapter adapter, String searchQuery, MyUserSearchCallback myCallback) {
+        userSearchList.clear();
         Log.d(TAG, "CALLING");
         firestore.collection("users")
                 .get()
