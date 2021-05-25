@@ -47,8 +47,8 @@ public class FriendDetailFragment extends Fragment {
     User user = new User();
     DBHelper dbHelper = new DBHelper();
     User myUser = new User(mAuth);
-Button plusButton;
-Button minusButton;
+    Button plusButton;
+    Button minusButton;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private List<User> retttUser;
 

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/darker_green_fade">
 
     <TextView
         android:id="@+id/tvInventoryTitle"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/GroceryAppGreen_DARK"
-        android:fontFamily="sans-serif-smallcaps"
+        android:fontFamily="@font/robotolight"
         android:gravity="center"
         android:text="Feed"
         android:textColor="#FFFFFF"
@@ -34,7 +34,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="-1dp"
-            android:background="@color/white"
+            android:background="@null"
             android:clickable="false" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -49,7 +49,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="271dp"
-        android:text="Choose Item" />
+        android:text="Choose Item"
+        android:fontFamily="@font/robotolight"/>
 
     <TextView
         android:id="@+id/itemName"
@@ -70,6 +71,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
-        android:text="Submit Post" />
+        android:text="Submit Post"
+        android:fontFamily="@font/robotolight"/>
 
 </RelativeLayout>

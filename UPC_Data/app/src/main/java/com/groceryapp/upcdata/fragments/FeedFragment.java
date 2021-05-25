@@ -27,6 +27,7 @@ import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FeedFragment extends Fragment {
@@ -93,6 +94,7 @@ public class FeedFragment extends Fragment {
             public void onRefresh() {
 
                 FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter, swipeRefreshLayout);
+                Collections.sort(FeedItems);
 
             }
         });
@@ -114,6 +116,7 @@ public class FeedFragment extends Fragment {
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(linearLayoutManager);
         FeedItems = dbHelper.queryFriendFeedItems(FeedItems, adapter, swipeRefreshLayout);
+        Collections.sort(FeedItems);
         Bundle b = this.getArguments();
         if(b!=null){
             unpackBundle();
@@ -134,6 +137,7 @@ public class FeedFragment extends Fragment {
         }
 
         Log.d(TAG, "GROCERY ITEM IS: " + groceryItem.getTitle());
+
     }
 
     private void unpackBundle(){

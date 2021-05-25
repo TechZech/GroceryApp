@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -95,6 +100,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 @Override
                 public void onCallback(String value, String photoUrl) {
                     frUser.setText(value);
+                    //Glide.with(context).load(photoUrl).into(frImage);
                 }
             });
 

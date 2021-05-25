@@ -5,7 +5,7 @@ import com.groceryapp.upcdata.DB.User.User;
 
 import java.util.Date;
 
-public class GroceryPost {
+public class GroceryPost implements Comparable<GroceryPost>{
     public User getUser() {
         return user;
     }
@@ -73,5 +73,11 @@ public class GroceryPost {
 
     public void setWhichList(Boolean whichList) {
         this.whichList = whichList;
+    }
+
+    @Override
+    public int compareTo(GroceryPost o) {
+        Date compareDate = ((GroceryPost)o).getDateTime();
+        return compareDate.compareTo(this.dateTime);
     }
 }
