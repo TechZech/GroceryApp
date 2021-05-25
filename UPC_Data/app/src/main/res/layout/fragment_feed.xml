@@ -59,7 +59,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="37dp"
         android:layout_marginTop="98dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/submitButton"
