@@ -91,6 +91,8 @@ public class GroceryItem {
 
     public double returnPriceAsFloat(){
         String thisPrice = this.price;
+        if(thisPrice.equals("N/A"))
+            thisPrice = "00.00"; // has to be 00.00 so the return statement will be the substring "0.00"
         Log.d("GroceryItem", thisPrice.substring(1));
         return Double.parseDouble(thisPrice.substring(1));
     }
