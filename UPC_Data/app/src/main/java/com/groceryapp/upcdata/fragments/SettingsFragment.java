@@ -201,10 +201,14 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
+            // THIS IS THE LISTENER FOR CLICKING ON THE GROUP TEXTVIEW
             tvEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new FriendListFragment();
+                    Bundle bundle = new Bundle();
+                    Fragment fragment = new GroupListFragment();
+                    bundle.putBoolean("fromProfile", false);
+                    fragment.setArguments(bundle);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                             .setCustomAnimations(
@@ -218,6 +222,8 @@ public class SettingsFragment extends Fragment {
                     fragmentTransaction.commit();
                 }
             });
+
+            // THIS IS THE LISTENER FOR CLICKING ON THE FRIENDS TEXTVIEW
             tvEmail2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
