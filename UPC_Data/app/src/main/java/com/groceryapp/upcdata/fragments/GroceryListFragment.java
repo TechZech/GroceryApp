@@ -110,8 +110,13 @@ public class GroceryListFragment extends Fragment {
                 priceAsDouble -= priceRemoved;
                 Log.d(TAG, priceAsDouble + "after");
                 CurrentPrice = formatPrice(priceAsDouble);
-                tvTotalPrice.setText(CurrentPrice);
-            }
+                if (priceAsDouble < 0){
+
+                }
+                else {
+                    tvTotalPrice.setText(CurrentPrice);
+                }
+                }
         };
 
         btnTripComplete.setOnClickListener(new View.OnClickListener() {

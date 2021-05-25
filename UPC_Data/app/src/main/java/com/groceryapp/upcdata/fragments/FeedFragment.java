@@ -36,6 +36,7 @@ public class FeedFragment extends Fragment {
     private RecyclerView rvFeed;
     private Button chooseItem;
     Button submitButton;
+    Button addItemButton;
     TextView itemName;
     GroceryItem groceryItem = new GroceryItem();
     protected GroceryPostAdapter adapter;
@@ -61,7 +62,7 @@ public class FeedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
+        addItemButton = view.findViewById(R.id.acceptButton);
         rvFeed = view.findViewById(R.id.rvFeed);
         itemName = view.findViewById(R.id.itemName);
         submitButton = view.findViewById(R.id.submitButton);
