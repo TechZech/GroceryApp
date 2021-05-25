@@ -47,7 +47,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="271dp"
         android:text="Choose Item" />
 
@@ -68,8 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="36dp"
-        android:text="Submit" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:text="Submit Post" />
 
 </RelativeLayout>
