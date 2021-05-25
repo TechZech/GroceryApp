@@ -26,6 +26,7 @@ import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.fragments.BarcodeFragment;
+import com.groceryapp.upcdata.fragments.ExploreFragment;
 import com.groceryapp.upcdata.fragments.FeedFragment;
 import com.groceryapp.upcdata.fragments.GroceryListFragment;
 import com.groceryapp.upcdata.fragments.InventoryFragment;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new BarcodeFragment();
                         break;
                     case R.id.action_groceryList:
-                        fragment = new GroceryListFragment();
+                        fragment = new ExploreFragment();
                         break;
                     case R.id.action_inventory:
                         fragment = new InventoryFragment();

@@ -38,7 +38,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/staggeredRV"
+        android:id="@+id/stagRV"
         android:layout_width="wrap_content"
         android:layout_height="684dp"
         android:layout_below="@+id/divider4"

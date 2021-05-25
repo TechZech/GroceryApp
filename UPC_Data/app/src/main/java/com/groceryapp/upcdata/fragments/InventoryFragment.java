@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class InventoryFragment extends Fragment {
     protected List<GroceryItem> allInventoryItems;
     private Button createGroupButton;
     private Button groupListButton;
+    private TextView tvShoppingListTitle;
     DBHelper dbHelper = new DBHelper();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     User User = new User(mAuth);
@@ -54,6 +56,19 @@ public class InventoryFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         createGroupButton = view.findViewById(R.id.createGroupButton);
         groupListButton = view.findViewById(R.id.viewGroupsButton);
+        tvShoppingListTitle = view.findViewById(R.id.tvShoppingListTitle);
+
+        tvShoppingListTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new GroceryListFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         GroceryItemAdapter.OnLongClickListener onLongClickListener = new GroceryItemAdapter.OnLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
