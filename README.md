@@ -33,7 +33,7 @@
 
 **Optional Nice-to-have Stories**
 
-* [ ] Grocery budget
+* [X] Grocery budget tracker
 * [ ] Healthy foods tracker
 * [X] Recommended Products
 * [X] Profile
@@ -151,7 +151,7 @@
 
 ### Important Links
 
-https://github.com/zxing/zxing
+https://github.com/zxing/zxing - Barcode Camera
 
 https://developers.google.com/ml-kit/vision/barcode-scanning/android - Google's ML library for scanning barcodes
 
