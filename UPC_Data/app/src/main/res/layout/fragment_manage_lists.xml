@@ -22,8 +22,8 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="250dp"
-        android:text="Clear Grocery List"
+        android:layout_marginTop="150dp"
+        android:text="Clear Shopping List"
         android:fontFamily="@font/robotolight"/>
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="220dp"
         android:text="Clear Inventory"
         android:fontFamily="@font/robotolight"/>
 
@@ -42,7 +42,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="290dp"
         android:text="Clear Shopping History"
         android:fontFamily="@font/robotolight"/>
 

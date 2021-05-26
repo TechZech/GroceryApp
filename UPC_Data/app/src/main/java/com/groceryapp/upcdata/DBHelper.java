@@ -33,6 +33,8 @@ import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -615,6 +617,24 @@ public class DBHelper {
                             for (DocumentSnapshot document : task.getResult()) {
                                 firestore.collection("users").document(User.getUserID())
                                         .collection("Grocery List").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    public void RemoveAllShoppingHistory(){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Shopping History")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Shopping History").document(document.getId()).delete();
                             }
                         } else
                             Log.d(TAG, "Error getting documents: ", task.getException());
