@@ -19,23 +19,20 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="598dp"
+        android:layout_height="530dp"
+        android:layout_marginTop="70dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:clickable="false">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
             android:layout_width="match_parent"
-            android:layout_height="580dp"
-            android:layout_below="@+id/chooseItemButton"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
+            android:layout_height="300dp"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="-1dp"
+            android:layout_marginTop="20dp"
             android:background="@null"
-            android:clickable="false" />
+            android:clickable="false"
+            android:overScrollMode="never"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button

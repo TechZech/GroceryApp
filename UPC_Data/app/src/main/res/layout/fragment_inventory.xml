@@ -43,7 +43,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvInventory"
         android:layout_width="match_parent"
-        android:layout_height="535dp"
+        android:layout_height="430dp"
         android:layout_marginTop="80dp"
         android:background="@null"
         android:overScrollMode="never"/>
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="100dp"
         android:text="View Your Groups"
         android:fontFamily="@font/robotolight"/>
 </RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.InnerSettingsFragments.ManageListsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Manage Lists"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:fontFamily="@font/robotolight"
+        android:textColor="@color/white"
+        android:background="@color/GroceryAppGreen_DARK"
+        />
+
+    <Button
+        android:id="@+id/btnClearGroceryList"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="250dp"
+        android:text="Clear Grocery List"
+        android:fontFamily="@font/robotolight"/>
+
+    <Button
+        android:id="@+id/btnClearInventory"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="350dp"
+        android:text="Clear Inventory"
+        android:fontFamily="@font/robotolight"/>
+
+    <Button
+        android:id="@+id/btnClearShoppingHistory"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="450dp"
+        android:text="Clear Shopping History"
+        android:fontFamily="@font/robotolight"/>
+
+    <Button
+        android:id="@+id/btnGoBack"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:drawableTop="@drawable/abc_vector_test"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"/>
+
+</RelativeLayout>

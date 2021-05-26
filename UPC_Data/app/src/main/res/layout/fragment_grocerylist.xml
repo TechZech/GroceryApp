@@ -46,7 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_marginTop="70dp"
-        android:background="@null" />
+        android:background="@null"
+        android:overScrollMode="never"/>
 
     <TextView
         android:layout_width="400dp"

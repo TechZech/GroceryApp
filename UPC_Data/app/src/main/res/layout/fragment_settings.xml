@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="530dp"
+        android:layout_marginTop="427dp"
         android:backgroundTint="@color/white"
         android:text="Sign Out"
         android:textColor="@color/Sign_Out_Red"
@@ -183,7 +183,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="152dp"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/robotolight"
         android:textOff="PUBLIC"
         android:textOn="PRIVATE" />
