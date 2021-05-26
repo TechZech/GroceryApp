@@ -39,7 +39,7 @@
         android:layout_marginTop="95dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="-2dp"
-        android:background="@color/white"
+        android:background="@null"
         android:overScrollMode="never"/>
 
     <TextView

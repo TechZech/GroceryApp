@@ -48,6 +48,7 @@ public class GroceryPost implements Comparable<GroceryPost>{
         this.user = user;
         this.groceryItem = groceryItem;
         this.whichList = whichList;
+        dateTime = new Date();
     }
 
     public GroceryPost(){

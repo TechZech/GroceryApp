@@ -25,12 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/imageView"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         android:fontFamily="@font/robotomedium"/>
 
     <de.hdodenhof.circleimageview.CircleImageView

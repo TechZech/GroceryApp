@@ -15,9 +15,9 @@
 
     <TableRow
         android:id="@+id/row1"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="160dp"
-        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="67dp"
@@ -41,7 +41,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="Item Title" />
+            android:text="Item Title"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvUPC1"
@@ -50,24 +52,26 @@
             android:layout_marginStart="-250dp"
             android:layout_marginTop="75dp"
             android:gravity="center"
-            android:text="UPC" />
+            android:text="UPC"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnAdd1"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="75dp"
-            android:text="Add" />
+            android:text="Add"
+            android:fontFamily="@font/robotolight"/>
     </TableRow>
 
     <TableRow
         android:id="@+id/row2"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="160dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="-1dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="0dp"
@@ -91,7 +95,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="1dp"
             android:gravity="center"
-            android:text="Item Title" />
+            android:text="Item Title"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvUPC2"
@@ -100,22 +106,25 @@
             android:layout_marginStart="-241dp"
             android:layout_marginTop="75dp"
             android:gravity="center"
-            android:text="UPC" />
+            android:text="UPC"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnAdd2"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="75dp"
-            android:text="Add" />
+            android:text="Add"
+            android:fontFamily="@font/robotolight"/>
     </TableRow>
 
     <TableRow
         android:id="@+id/row3"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="160dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="415dp"
@@ -139,7 +148,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="1dp"
             android:gravity="center"
-            android:text="Item Title" />
+            android:text="Item Title"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvUPC3"
@@ -148,15 +159,18 @@
             android:layout_marginStart="-241dp"
             android:layout_marginTop="75dp"
             android:gravity="center"
-            android:text="UPC" />
+            android:text="UPC"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnAdd3"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="75dp"
-            android:text="Add" />
+            android:text="Add"
+            android:fontFamily="@font/robotolight"/>
     </TableRow>
 
 

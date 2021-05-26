@@ -79,7 +79,10 @@ public class FriendDetailFragment extends Fragment {
 
         tvFriendName.setText(user.getUsername());
         tvFriendEmail.setText(user.getEmail());
-        Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
+        if (user.getProfilePhotoURL() != null)
+            Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
+        else
+            Glide.with(getContext()).load(R.drawable.download).into(ivFriendPic);
 
         btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
             @Override
