@@ -47,8 +47,8 @@ public class FriendDetailFragment extends Fragment {
     User user = new User();
     DBHelper dbHelper = new DBHelper();
     User myUser = new User(mAuth);
-Button plusButton;
-Button minusButton;
+    Button plusButton;
+    Button minusButton;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private List<User> retttUser;
 
@@ -79,7 +79,10 @@ Button minusButton;
 
         tvFriendName.setText(user.getUsername());
         tvFriendEmail.setText(user.getEmail());
-        Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
+        if (user.getProfilePhotoURL() != null)
+            Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
+        else
+            Glide.with(getContext()).load(R.drawable.download).into(ivFriendPic);
 
         btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
             @Override

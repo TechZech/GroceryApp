@@ -90,11 +90,13 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
       //  tvDetailPrice.setText(groceryItem.getPrice());
       //  tvDetailQuantity.setText(String.valueOf(groceryItem.getQuantity()));
 
-
-
-
-
-
+        ivDetailImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Detail photo clicked");
+                goToDetailFragment();
+            }
+        });
     }
 
     private void unpackBundle(){
@@ -107,6 +109,16 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
 
         Glide.with(getContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
 
+    }
+    private void goToDetailFragment(){
+        Bundle bundle = getArguments();
+        Fragment fragment = new DetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 

@@ -33,6 +33,8 @@ import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -622,6 +624,24 @@ public class DBHelper {
                 });
     }
 
+    public void RemoveAllShoppingHistory(){
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Shopping History")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                firestore.collection("users").document(User.getUserID())
+                                        .collection("Shopping History").document(document.getId()).delete();
+                            }
+                        } else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
     public void setGroupSetting(String query, Group g){
         if(query.equals("Public")) {
             DocumentReference docRef = firestore.collection("Groups").document(g.getGid());
@@ -890,6 +910,7 @@ public class DBHelper {
                 .document(User.getUserID()).delete();
     }
     public List<Group> queryGroupSearch(List<Group> groupSearchList, GroupAdapter adapter, String searchQuery, GroupSearchCallback myCallback) {
+        groupSearchList.clear();
         Log.d(TAG, "CALLING");
         firestore.collection("Groups")
                 .get()
@@ -924,6 +945,7 @@ public class DBHelper {
         return groupSearchList;
     }
     public List<User> queryUserSearch(List<User> userSearchList, UserAdapter adapter, String searchQuery, MyUserSearchCallback myCallback) {
+        userSearchList.clear();
         Log.d(TAG, "CALLING");
         firestore.collection("users")
                 .get()

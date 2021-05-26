@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/darker_green_fade">
+
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape"
+        android:layout_marginTop="230dp"/>
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="210dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tvDetailTitle"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_width="260dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="30dp"
         android:gravity="center"
-        android:text="Item Title" />
+        android:text="Item Title"
+        android:textColor="@color/black"
+        android:fontFamily="@font/robotolight"/>
+
+
 
     <ImageView
         android:id="@+id/ivDetailImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="48dp"
-        app:srcCompat="@drawable/download" />
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/download"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/tvDetailUpc"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="315dp"
         android:gravity="center"
-        android:text="UPC" />
+        android:text="UPC"
+        android:fontFamily="@font/robotolight"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tvDetailPrice"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="368dp"
         android:gravity="center"
-        android:text="Price" />
+        android:text="Price"
+        android:fontFamily="@font/robotolight"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tvDetailQuantity"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="425dp"
+        android:fontFamily="@font/robotolight"
         android:gravity="center"
-        android:text="Quantity" />
+        android:text="Quantity"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnGoBack"
@@ -64,86 +88,53 @@
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
+        android:layout_marginStart="49dp"
         android:layout_marginTop="245dp"
+        android:fontFamily="@font/robotolight"
+        android:gravity="center"
         android:text="TITLE"
         android:textColor="@color/black"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="315dp"
+        android:gravity="center"
         android:text="UPC"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="370dp"
+        android:gravity="center"
         android:text="PRICE"
-        android:textColor="@color/black"
-        android:gravity="center"/>
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="426dp"
+        android:gravity="center"
         android:text="QUANTITY"
-        android:textColor="@color/black"
-        android:gravity="center"/>
-
-    <View
-        android:id="@+id/divider1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="220dp"/>
-
-    <View
-        android:id="@+id/divider77"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="320dp"/>
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="370dp"/>
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="420dp"/>
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="470dp"/>
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/membersListButton"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="490dp"
         android:text="View nutrition Data" />
 
     <Button
@@ -154,6 +145,36 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:text="View similar products" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="313dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="365dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/black" />
 
 
 </RelativeLayout>
