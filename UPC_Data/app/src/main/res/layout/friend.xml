@@ -30,15 +30,16 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/robotomedium"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="86dp"
-        android:layout_height="75dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="9dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:srcCompat="@drawable/glistappicon"
         tools:srcCompat="@tools:sample/avatars" />
 

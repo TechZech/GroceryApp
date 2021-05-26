@@ -92,6 +92,11 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
         public void bind(Friend fr){
             frUser.setText(fr.getusername());
+            if (fr.getPhotoUrl() != null)
+                Glide.with(context).load(fr.getPhotoUrl()).into(frImage);
+            else
+                Glide.with(context).load(R.drawable.download).into(frImage);
+
             //     User u = dbHelper.getUser(fr.getUid());
             //      frUser.setText(u.getUsername());
             //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
@@ -100,7 +105,6 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 @Override
                 public void onCallback(String value, String photoUrl) {
                     frUser.setText(value);
-                    //Glide.with(context).load(photoUrl).into(frImage);
                 }
             });
 
