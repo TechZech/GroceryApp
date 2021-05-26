@@ -70,7 +70,7 @@ public class SimilarProductsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GroceryItem groceryItem = new GroceryItem();
-                groceryItem.setUpc((String) tvUPC1.getText());
+                groceryItem.setUpc(fixedBarcode((String) tvUPC1.getText()));
                 Log.i(TAG, "Add " + groceryItem.getUpc() + " to GList");
                 addToGList(groceryItem);
             }
@@ -80,7 +80,7 @@ public class SimilarProductsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GroceryItem groceryItem = new GroceryItem();
-                groceryItem.setUpc((String) tvUPC2.getText());
+                groceryItem.setUpc(fixedBarcode((String) tvUPC2.getText()));
                 Log.i(TAG, "Add " + groceryItem.getUpc() + " to GList");
                 addToGList(groceryItem);
             }
@@ -90,7 +90,7 @@ public class SimilarProductsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GroceryItem groceryItem = new GroceryItem();
-                groceryItem.setUpc((String) tvUPC3.getText());
+                groceryItem.setUpc(fixedBarcode((String) tvUPC3.getText()));
                 Log.i(TAG, "Add " + groceryItem.getUpc() + " to GList");
                 addToGList(groceryItem);
             }
@@ -106,9 +106,9 @@ public class SimilarProductsFragment extends Fragment {
         tvTitle1.setText(ArgData.getString("Title1"));
         tvTitle2.setText(ArgData.getString("Title2"));
         tvTitle3.setText(ArgData.getString("Title3"));
-        tvUPC1.setText("UPC: " + ArgData.getString("UPC1"));
-        tvUPC2.setText("UPC: " + ArgData.getString("UPC2"));
-        tvUPC3.setText("UPC: " + ArgData.getString("UPC3"));
+        tvUPC1.setText("UPC: " + ArgData.getString("UPC1"));    // NOTE: IF YOU ARE GOING TO TOUCH THESE LINES,
+        tvUPC2.setText("UPC: " + ArgData.getString("UPC2"));    // the function fixedBarcode relies off of them,
+        tvUPC3.setText("UPC: " + ArgData.getString("UPC3"));    // so if you change these it will cause adding an item to you list not to work
     }
 
     private void addToGList(GroceryItem groceryItem){
@@ -138,4 +138,10 @@ public class SimilarProductsFragment extends Fragment {
         });
         thread.start();
     }
+
+    private String fixedBarcode(String barcode){
+        barcode = barcode.substring(5);
+        return barcode;
+    }
+
 }

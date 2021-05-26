@@ -138,7 +138,7 @@ public class GroceryItemAdapter extends RecyclerView.Adapter<GroceryItemAdapter.
             item_grocery_container.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Toast.makeText(context, "OnLongClick", Toast.LENGTH_SHORT);
+                    //Toast.makeText(context, "OnLongClick", Toast.LENGTH_SHORT);
                     longClickListener.onItemLongClicked(getAdapterPosition());
                     return true;
                 }

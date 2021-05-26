@@ -140,7 +140,7 @@ public class BarcodeFragment extends Fragment{
                         thread.start();
 
                         // sends user back to home screen
-                        Fragment fragment = new GroceryListFragment();
+                        Fragment fragment = new InventoryFragment();
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.flContainer, fragment);

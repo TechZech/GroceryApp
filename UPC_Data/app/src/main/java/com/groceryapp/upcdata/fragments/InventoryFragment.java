@@ -101,7 +101,7 @@ public class InventoryFragment extends Fragment {
                     GroceryItem groceryItem = allInventoryItems.get(position);
                 if(groceryItem.getQuantity() == 1){
                     groceryItem.setInventory(false);
-                    Log.d(TAG, "groceryItem UPC to be removed" + groceryItem.getUpc());
+                    Log.d(TAG, "groceryItem UPC to be removed " + groceryItem.getUpc());
                     dbHelper.removeInventoryItem(groceryItem);
                     allInventoryItems.remove(position);
                     adapter.notifyItemRemoved(position);
