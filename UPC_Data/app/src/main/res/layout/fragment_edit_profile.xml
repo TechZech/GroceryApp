@@ -16,6 +16,14 @@
        android:background="@color/GroceryAppGreen_DARK"
        />
 
+   <Button
+       android:id="@+id/btnGoBackFromEditProfile"
+       android:layout_width="80dp"
+       android:layout_height="45dp"
+       android:layout_marginStart="10dp"
+       android:layout_marginTop="10dp"
+       android:drawableTop="@drawable/abc_vector_test" />
+
    <View
        android:id="@+id/dividerTop"
        android:layout_width="match_parent"

@@ -82,7 +82,16 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
    //     tvDetailPrice = view.findViewById(R.id.tvDetailPrice);
    //     tvDetailQuantity = view.findViewById(R.id.tvDetailQuantity);
 
-        btnGoBack = view.findViewById(R.id.btnGoBack);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromFeedDetail);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
+
         unpackBundle();
       //
        // tvDetailTitle.setText(groceryItem.getTitle());

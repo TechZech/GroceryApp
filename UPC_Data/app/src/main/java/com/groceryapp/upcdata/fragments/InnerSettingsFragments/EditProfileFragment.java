@@ -35,6 +35,7 @@ public class EditProfileFragment extends Fragment {
     Button btnSaveChanges;
     Button btnDeleteAccount;
     Button btnResetPassword;
+    Button btnGoBack;
     TextInputEditText etEditUsername;
     TextInputEditText etEditEmail;
 
@@ -56,11 +57,20 @@ public class EditProfileFragment extends Fragment {
         btnSaveChanges = view.findViewById(R.id.btnSaveChanges);
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
         btnResetPassword = view.findViewById(R.id.btnResetPassword);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromEditProfile);
 
         etEditUsername = view.findViewById(R.id.materialETUsername);
         etEditEmail = view.findViewById(R.id.materialETemail);
         etEditUsername.setText(Username);
         etEditEmail.setText(email);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,18 +149,8 @@ public class EditProfileFragment extends Fragment {
                         }
                     });
                 }
-                Fragment fragment = new SettingsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-
-                                R.anim.fade_in,
-                                R.anim.slide_out,
-                                R.anim.slide_in,
-                                R.anim.fade_out
-                        )
-                        .replace(R.id.flContainer, fragment);
-                fragmentTransaction.commit();
+                fragmentManager.popBackStack();
             }
         });
 

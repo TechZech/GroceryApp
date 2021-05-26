@@ -34,7 +34,7 @@ public class GroupListFragment extends Fragment {
     protected GroupAdapter adapter;
     protected List<Group> allFriends;
     TextView SearchText;
-    Button rvButton;
+    Button rvButton, btnGoBack;
     User us;
     DBHelper dbHelper;
 
@@ -68,12 +68,21 @@ public class GroupListFragment extends Fragment {
         rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText1);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromGroups);
         allFriends  = new ArrayList<>();
         adapter = new GroupAdapter(onClickListener, getContext(), allFriends);
 
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriends = dbHelper.getUserGroups(allFriends, adapter);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         Log.d(TAG, "ALL GROUPS SIZE IS" + allFriends.size());
 

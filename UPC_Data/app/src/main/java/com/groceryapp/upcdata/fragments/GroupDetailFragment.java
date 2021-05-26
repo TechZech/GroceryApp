@@ -43,6 +43,7 @@ public class GroupDetailFragment extends Fragment {
 Button addPostButton;
 Button settingsButton;
 Button memberListButton;
+Button btnGoBack;
 List<GroceryPost> allPostItems;
 RecyclerView recyclerView;
 
@@ -69,10 +70,20 @@ RecyclerView recyclerView;
         addPostButton = view.findViewById(R.id.addPostButton);
         settingsButton = view.findViewById(R.id.settingsButton);
         memberListButton = view.findViewById(R.id.membersListButton);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromGroup);
 
         tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
         GroceryItem groceryItem=new GroceryItem();
         GroceryPost gp = new GroceryPost(groceryItem, User);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

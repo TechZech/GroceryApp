@@ -5,23 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnGoBackFromFeedDetail"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableTop="@drawable/abc_vector_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="135dp"
         android:layout_height="135dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="215dp"
-        android:layout_height="0dp"
+        android:layout_height="30dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="65dp"
         android:text="Title"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -30,8 +40,8 @@
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="220dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
         android:text="Description"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -42,10 +52,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="342dp"
         android:layout_height="149dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:context=".MapsActivity" />
 
     <TextView

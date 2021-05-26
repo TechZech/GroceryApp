@@ -34,7 +34,7 @@
         android:text="UPC" />
 
     <Button
-        android:id="@+id/btnGoBack"
+        android:id="@+id/btnGoBackFromGroup"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:drawableTop="@drawable/abc_vector_test"

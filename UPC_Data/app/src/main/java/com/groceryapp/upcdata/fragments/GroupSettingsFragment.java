@@ -47,6 +47,7 @@ String userphotoUrl;
     DBHelper Dbhelper;
     Button kickButton;
     TextView tvGroupname;
+    Button btnGoBack;
     Button settingsButton;
     Group grr;
     @Nullable
@@ -70,11 +71,20 @@ String userphotoUrl;
         settingsButton = view.findViewById(R.id.visibilityButton);
         ivEditProfile = view.findViewById(R.id.ivEditProfile);
         ivProfile = view.findViewById(R.id.ivProfile);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromGroupSettings);
         ivEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent, 1000);
+            }
+        });
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
             }
         });
 

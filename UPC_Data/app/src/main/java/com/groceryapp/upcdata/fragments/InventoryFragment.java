@@ -146,6 +146,7 @@ public class InventoryFragment extends Fragment {
                 dbHelper.addGroceryItem(groceryItem);
             }
         }).attachToRecyclerView(rvInventory);
+
         groupListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -35,6 +35,7 @@ public class GroupMemberListFragment extends Fragment {
     Group grr;
     TextView SearchText;
     DBHelper dbHelper;
+    Button btnGoBack;
 
     @Nullable
     @Override
@@ -56,12 +57,19 @@ public class GroupMemberListFragment extends Fragment {
         boolean bund = unpackBundle();
         rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromGroupMembers);
         allFriends = new ArrayList<>();
         adapter = new UserAdapter(getContext(), allFriends, onClickListener);
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
 
-
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
     }
     private void goToDetailFragment(int position){

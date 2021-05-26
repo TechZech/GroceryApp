@@ -14,6 +14,14 @@
         android:layout_weight="1"
         android:background="@color/GroceryAppGreen_DARK">
 
+        <Button
+            android:id="@+id/btnGoBackFromGroupSettings"
+            android:layout_width="80dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableTop="@drawable/abc_vector_test" />
+
         <TextView
             android:id="@+id/tvGroupName"
             android:layout_width="241dp"
