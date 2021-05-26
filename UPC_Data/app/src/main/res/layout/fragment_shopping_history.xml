@@ -17,6 +17,14 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/btnGoBackFromShoppingHistory"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableTop="@drawable/abc_vector_test" />
+
     <TextView
         android:layout_width="400dp"
         android:layout_height="220dp"

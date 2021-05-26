@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -60,6 +61,7 @@ public class ShoppingHistoryFragment extends Fragment {
     protected ShoppingTripAdapter adapter;
     protected List<ShoppingTrip> allShoppingTrips;
     DBHelper dbHelper = new DBHelper();
+    Button btnGoBack;
     private TextView tvAvgCost;
 
 
@@ -84,6 +86,7 @@ public class ShoppingHistoryFragment extends Fragment {
 
         BarChart chart = view.findViewById(R.id.LineChart);
         rvShoppingHistory = view.findViewById(R.id.rvShoppingHistory);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromShoppingHistory);
         allShoppingTrips = new ArrayList<>();
         tvAvgCost = view.findViewById(R.id.tvAvgCost);
 
@@ -91,6 +94,14 @@ public class ShoppingHistoryFragment extends Fragment {
 
         rvShoppingHistory.setAdapter(adapter);
         rvShoppingHistory.setLayoutManager(linearLayoutManager);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
         dbHelper.queryShoppingTrips(allShoppingTrips, adapter, new DBHelper.ShoppingTripCallback() {
