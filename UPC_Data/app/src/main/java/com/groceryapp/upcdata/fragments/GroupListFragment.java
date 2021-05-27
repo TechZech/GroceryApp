@@ -71,34 +71,52 @@ public class GroupListFragment extends Fragment {
         rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText1);
-        btnGoBack = view.findViewById(R.id.btnGoBackFromGroups);
+        frCount = view.findViewById(R.id.frCounter);
         allFriends  = new ArrayList<>();
         adapter = new GroupAdapter(onClickListener, getContext(), allFriends);
 
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriends = dbHelper.getUserGroups(allFriends, adapter);
-        btnCreateNewGroup = view.findViewById(R.id.btnCreateNewGroup);
 
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+
+        frCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment = new GroupRequestFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out
+                        )
+                        .replace(R.id.flContainer, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
-        btnCreateNewGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Group g = new Group("Founders",User);
-                dbHelper.createNewGroup(g);
-            }
-        });
 
         Log.d(TAG, "ALL GROUPS SIZE IS" + allFriends.size());
 
+        dbHelper.grCountFunc(User, new DBHelper.GroupRequestCountCallback() {
+            @Override
+            public void OnCallback(int grs) {
+                if (grs == 0) {
+                    frCount.setVisibility(View.GONE);
+                    frTV.setVisibility(View.VISIBLE);
+                } else {
+                    frTV.setVisibility(View.GONE);
+                    frCount.setText(Integer.toString(grs));
+                    frCount.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+        });
     }
 
     private void goToDetailFragment(int position){

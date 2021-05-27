@@ -30,6 +30,7 @@ import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
 import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 import com.groceryapp.upcdata.adapters.GroupAdapter;
+import com.groceryapp.upcdata.adapters.GroupRequestAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
 
@@ -51,6 +52,7 @@ public class DBHelper {
     private Group retGroup = new Group();
     Boolean ret = Boolean.FALSE;
     int frccCount = 0;
+    int grccCount = 0;
     int gCount = 0;
     int friendsCount = 0;
     int count = 0;
@@ -102,6 +104,9 @@ public class DBHelper {
     }
     public interface FriendRequestCountCallback{
         void OnCallback(int frs);
+    }
+    public interface GroupRequestCountCallback{
+        void OnCallback(int grs);
     }
     public interface FriendCountCallback{
         void OnCallback(int frs);
@@ -869,6 +874,27 @@ public class DBHelper {
             }
         });
     }
+    public void addGroup(String uid, User grUser) {
+            getGroupById(uid, new GroupCallback() {
+                @Override
+                public void OnCallback(Group g) {
+                    g.getMembers().add(grUser);
+                    firestore.collection("users").document(User.getUserID()).collection("Groups").document(g.getGid())
+                            .set(g);
+                }
+
+            });
+
+            //  Friend f = new Friend(uid, getUserFromUid(uid, new ), "test");
+
+
+            //   Log.d(TAG, "PLEASE" + getUserFromUid("wDkK2ZYEM8Ob5iSQlNo27G4JKbt2"));
+
+    //        Friend ff = new Friend(User.getUserID(), User.getUsername(), User.getEmail(), User.getProfilePhotoURL());
+          //  firestore.collection("users").document(uid).collection("Pending Friend Requests").document(User.getUserID())
+            //        .set(ff);
+
+    }
     public void addFriend(String uid) {
         if(User.getUserID().equals(uid)){ //add yourself
             return;
@@ -986,6 +1012,30 @@ public class DBHelper {
 
         return userSearchList;
     }
+    public int grCountFunc(User usyy, GroupRequestCountCallback grcc){
+
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Pending Group Invites")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                frccCount+=1;
+
+                            }
+                            grcc.OnCallback(frccCount);
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+
+                });
+        //  grcc.OnCallback(frccCount);
+        return grccCount;
+    }
     public int frCountFunc(User usyy, FriendRequestCountCallback frcc){
 
         firestore.collection("users")
@@ -1079,6 +1129,31 @@ public class DBHelper {
 
         return allFriendRequests;
     }
+
+    public List<Group> queryGroupRequests(List<Group> allGroupRequests, GroupRequestAdapter adapter) {
+        firestore.collection("users")
+                .document(User.getUserID()).collection("Pending Group Invites")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (DocumentSnapshot document : task.getResult()){
+                                Log.d(TAG, document.getId() + "=> " + document.getData());
+                                allGroupRequests.add(document.toObject(Group.class));
+                                Log.d("GROUPS ARE: ", document.toObject(Group.class).toString());
+                            }
+                            adapter.notifyDataSetChanged();
+
+                        }
+                        else
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return allGroupRequests;
+    }
+
     public List<Friend> queryFriends(List<Friend> allFriends, FriendListAdapter adapter) {
         firestore.collection("users")
                 .document(User.getUserID()).collection("Friends")

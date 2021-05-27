@@ -91,6 +91,8 @@ public class FriendListFragment extends Fragment {
         });
 
         rvButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 /*
