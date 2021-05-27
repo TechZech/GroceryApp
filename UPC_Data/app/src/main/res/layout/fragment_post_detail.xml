@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/darker_green_fade">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="405dp"
+        android:layout_height="318dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        app:srcCompat="@drawable/shape" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="405dp"
+        android:layout_height="350dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/shape" />
+
     <Button
         android:id="@+id/btnGoBackFromFeedDetail"
         android:layout_width="80dp"
@@ -32,21 +52,22 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="215dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="65dp"
         android:text="Title"
-        android:textAlignment="center" />
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/descriptionText"
-        android:layout_width="220dp"
-        android:layout_height="55dp"
+        android:layout_width="250dp"
+        android:layout_height="73dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="120dp"
-        android:text="Description"
-        android:gravity="center"/>
+        android:layout_marginTop="107dp"
+        android:gravity="start"
+        android:text="Description" />
 
     <fragment
         android:id="@+id/mapView"
@@ -62,30 +83,36 @@
         android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_marginStart="270dp"
+        android:layout_below="@+id/descriptionText"
+        android:layout_marginStart="367dp"
+        android:layout_marginTop="5dp"
         android:text="Likes" />
 
     <Button
         android:id="@+id/likeButton"
-        android:layout_width="108dp"
+        android:layout_width="58dp"
         android:layout_height="48dp"
-        android:layout_marginTop="632dp"
-        android:layout_marginStart="150dp"
-        android:text="Like" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="390dp"
+        android:layout_marginEnd="29dp"
+        android:text="Like"
+        app:icon="@android:drawable/star_off" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="416dp"
-        android:layout_height="216dp"
-        android:layout_marginTop="400dp" />
+        android:layout_width="394dp"
+        android:layout_height="218dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="74dp" />
 
     <EditText
         android:id="@+id/commentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="632dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="390dp"
         android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
@@ -95,18 +122,22 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="632dp"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginEnd="97dp"
+        android:layout_toEndOf="@+id/commentText"
         android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/dateTimeInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="180dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="186dp"
         android:text="TextView" />
 
 </RelativeLayout>
