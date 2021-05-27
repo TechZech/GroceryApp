@@ -20,7 +20,16 @@
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/btnGoBackFromFriends"
+        android:id="@+id/btnCreateNewGroup"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Create New Group" />
+
+    <Button
+        android:id="@+id/btnGoBackFromGroups"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"

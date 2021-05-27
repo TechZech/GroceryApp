@@ -71,7 +71,9 @@ public class GroupListFragment extends Fragment {
         rvFriends = view.findViewById(R.id.staggeredRV);
         frTV = view.findViewById(R.id.FRLabel);
         SearchText = view.findViewById(R.id.searchText1);
+        btnCreateNewGroup = view.findViewById(R.id.btnCreateNewGroup);
         frCount = view.findViewById(R.id.frCounter);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromGroups);
         allFriends  = new ArrayList<>();
         adapter = new GroupAdapter(onClickListener, getContext(), allFriends);
 
@@ -79,6 +81,21 @@ public class GroupListFragment extends Fragment {
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriends = dbHelper.getUserGroups(allFriends, adapter);
 
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
+
+        btnCreateNewGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Group g = new Group("Founders",User);
+                dbHelper.createNewGroup(g);
+            }
+        });
 
         frCount.setOnClickListener(new View.OnClickListener() {
             @Override
