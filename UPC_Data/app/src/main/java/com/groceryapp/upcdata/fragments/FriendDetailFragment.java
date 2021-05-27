@@ -49,6 +49,7 @@ public class FriendDetailFragment extends Fragment {
     User myUser = new User(mAuth);
     Button plusButton;
     Button minusButton;
+    Button btnGoBack;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private List<User> retttUser;
 
@@ -69,6 +70,7 @@ public class FriendDetailFragment extends Fragment {
         btnRemoveFriend = view.findViewById(R.id.btnRemoveFriend);
         btnGroupInvite = view.findViewById(R.id.btnGroupInvite);
         rvFriendInv = view.findViewById(R.id.rvFriendItems);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromFriendProfile);
         final LayoutInflater factory = getLayoutInflater();
 
         final View itemGroceryView = factory.inflate(R.layout.item_grocery, null);
@@ -83,6 +85,14 @@ public class FriendDetailFragment extends Fragment {
             Glide.with(getContext()).load(user.getProfilePhotoURL()).into(ivFriendPic);
         else
             Glide.with(getContext()).load(R.drawable.download).into(ivFriendPic);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         btnRemoveFriend.setOnClickListener(new View.OnClickListener() {
             @Override
