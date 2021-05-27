@@ -25,7 +25,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:text="Create New Group" />
 
     <Button
@@ -47,7 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/staggeredRV"
         android:layout_width="411dp"
-        android:layout_height="450dp"
+        android:layout_height="380dp"
         android:layout_below="@+id/divider4"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
