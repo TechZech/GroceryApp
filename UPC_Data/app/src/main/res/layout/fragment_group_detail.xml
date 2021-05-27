@@ -5,42 +5,46 @@
     android:background="@drawable/darker_green_fade">
 
     <TextView
-        android:layout_width="400dp"
-        android:layout_height="210dp"
+        android:layout_width="303dp"
+        android:layout_height="59dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
-        android:background="@drawable/shape"/>
+        android:layout_marginTop="288dp"
+        android:background="@drawable/shape" />
 
     <TextView
         android:id="@+id/tvDetailTitle"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="85dp"
+        android:fontFamily="@font/robotolight"
         android:gravity="center"
         android:text="Item Title"
-        android:fontFamily="@font/robotolight"/>
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/ivDetailImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="7dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
         app:srcCompat="@drawable/download" />
 
     <TextView
         android:id="@+id/tvDetailUpc"
         android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="350dp"
-        android:gravity="center"
-        android:text="UPC"
-        android:fontFamily="@font/robotolight"/>
+        android:layout_height="45dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="295dp"
+        android:fontFamily="@font/robotolight"
+        android:gravity="start|center_vertical"
+        android:text="UPC" />
 
     <Button
         android:id="@+id/btnGoBackFromGroup"
@@ -50,55 +54,35 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="245dp"
-        android:gravity="center"
-        android:text="GROUP NAME"
-        android:textColor="@color/black"
-        android:fontFamily="@font/robotolight"/>
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="295dp"
+        android:fontFamily="@font/robotolight"
         android:gravity="center"
-        android:text="GROUP OWNER"
-        android:textColor="@color/black"
-        android:fontFamily="@font/robotolight"/>
-
-
-    <View
-        android:id="@+id/divider77"
-        android:layout_width="350dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="320dp"/>
+        android:text="GROUP OWNER:"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Group Settings"
-        android:layout_marginTop="450dp"/>
+        android:layout_marginTop="450dp"
+        android:text="Group Settings" />
 
     <Button
         android:id="@+id/addPostButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="149dp"
-        android:layout_marginTop="500dp"
-        android:text="Add Group Post"/>
+        android:text="Add Group Post" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupFeedRV"
