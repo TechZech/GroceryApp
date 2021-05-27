@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
@@ -37,7 +38,9 @@ public class GroupListFragment extends Fragment {
     Button rvButton, btnGoBack;
     User us;
     DBHelper dbHelper;
-
+    Button btnCreateNewGroup;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    User User = new User(mAuth);
 
     @Nullable
     @Override
@@ -75,12 +78,22 @@ public class GroupListFragment extends Fragment {
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriends = dbHelper.getUserGroups(allFriends, adapter);
+        btnCreateNewGroup = view.findViewById(R.id.btnCreateNewGroup);
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.popBackStack();
+            }
+        });
+
+        btnCreateNewGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Group g = new Group("Founders",User);
+                dbHelper.createNewGroup(g);
             }
         });
 

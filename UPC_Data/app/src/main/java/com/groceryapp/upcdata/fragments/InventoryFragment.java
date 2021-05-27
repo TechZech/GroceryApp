@@ -54,8 +54,6 @@ public class InventoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        createGroupButton = view.findViewById(R.id.createGroupButton);
-        groupListButton = view.findViewById(R.id.viewGroupsButton);
         tvShoppingListTitle = view.findViewById(R.id.tvShoppingListTitle);
 
         tvShoppingListTitle.setOnClickListener(new View.OnClickListener() {
@@ -80,14 +78,7 @@ public class InventoryFragment extends Fragment {
             }
         };
 
-        createGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Group g = new Group("Founders",User );
-                dbHelper.createNewGroup(g);
-            }
-        });
         GroceryItemAdapter.OnClickListener onClickListener = new GroceryItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
@@ -146,13 +137,6 @@ public class InventoryFragment extends Fragment {
                 dbHelper.addGroceryItem(groceryItem);
             }
         }).attachToRecyclerView(rvInventory);
-
-        groupListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             goToListFragment();
-            }
-        });
     }
 
     private void goToListFragment(){
