@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
@@ -103,6 +104,10 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
         public void bind(Friend fr){
             frUser.setText(fr.getusername());
+            if (fr.getPhotoUrl() != null)
+                Glide.with(context).load(fr.getPhotoUrl()).into(frImage);
+            else
+                Glide.with(context).load(R.drawable.download).into(frImage);
        //     User u = dbHelper.getUser(fr.getUid());
       //      frUser.setText(u.getUsername());
           //  tvItemName.setText(groceryPost.getGroceryItem().getTitle());
