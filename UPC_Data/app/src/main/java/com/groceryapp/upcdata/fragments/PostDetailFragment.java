@@ -45,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
 
     public static final String TAG = "DetailFragment";
@@ -55,6 +57,7 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     private PlacesClient placesClient;
     Place postPlace;
     ImageView ivDetailImage;
+    CircleImageView ivUserPhoto;
     TextView titleText;
     TextView dt;
     TextView tvDetailPrice;
@@ -76,6 +79,7 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
         ivDetailImage = view.findViewById(R.id.imageView);
         titleText = view.findViewById(R.id.titleText);
         dt =  view.findViewById(R.id.dateTimeInfo);
+        ivUserPhoto = view.findViewById(R.id.ivPostDetailUserPic);
    //     ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
     //    tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
      //   tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
@@ -106,6 +110,8 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
                 goToDetailFragment();
             }
         });
+
+
     }
 
     private void unpackBundle(){
@@ -117,7 +123,7 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
         myGroceryPost.setPlaceid(Args.getString("placeid"));
 
         Glide.with(getContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
-
+        Glide.with(getContext()).load(myGroceryPost.user.getProfilePhotoURL()).into(ivUserPhoto);
     }
     private void goToDetailFragment(){
         Bundle bundle = getArguments();
