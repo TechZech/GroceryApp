@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ public class FriendRequestFragment extends Fragment {
     protected FriendRequestAdapter adapter;
     protected List<Friend> allFriendRequests;
     Button addFriendButton;
+    Button btnGoBack;
     EditText friendName;
     DBHelper dbHelper;
 
@@ -41,8 +43,16 @@ public class FriendRequestFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         friendName = view.findViewById(R.id.searchText1);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromFriendRequests);
         dbHelper = new DBHelper();
 
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         rvFriends = view.findViewById(R.id.staggeredRV);
         allFriendRequests = new ArrayList<>();

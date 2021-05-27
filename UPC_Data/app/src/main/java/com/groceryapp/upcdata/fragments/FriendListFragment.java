@@ -43,6 +43,7 @@ public class FriendListFragment extends Fragment {
     TextView SearchText;
     DBHelper dbHelper;
     EditText rvSearchText;
+    Button btnGoBack;
     Button rvButton;
     @Nullable
     @Override
@@ -71,6 +72,7 @@ public class FriendListFragment extends Fragment {
         frTV = view.findViewById(R.id.FRLabel);
         rvSearchText = view.findViewById(R.id.searchText);
         frCount = view.findViewById(R.id.frCounter);
+        btnGoBack = view.findViewById(R.id.btnGoBackFromFriends);
         allFriends = new ArrayList<>();
         allUsers = new ArrayList<>();
         useradapter = new UserAdapter(getContext(), allUsers, onClickListener1);
@@ -79,6 +81,14 @@ public class FriendListFragment extends Fragment {
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(linearLayoutManager);
         allFriends = dbHelper.queryFriends(allFriends, adapter);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
 
         rvButton.setOnClickListener(new View.OnClickListener() {
             @Override
