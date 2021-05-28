@@ -79,6 +79,7 @@
         android:layout_marginEnd="32dp"
         tools:context=".MapsActivity" />
 
+
     <TextView
         android:id="@+id/likeCount"
         android:layout_width="wrap_content"

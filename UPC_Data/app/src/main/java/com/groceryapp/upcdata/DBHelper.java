@@ -25,6 +25,7 @@ import com.groceryapp.upcdata.DB.Friend.Friend;
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.ShoppingTrip.ShoppingTrip;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.DB.UserGroupItem.UserGroupItem;
 import com.groceryapp.upcdata.adapters.FriendItemAdapter;
 import com.groceryapp.upcdata.adapters.FriendListAdapter;
 import com.groceryapp.upcdata.adapters.FriendRequestAdapter;
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -119,6 +121,10 @@ public class DBHelper {
     public interface ShoppingTripCallback{
         void OnCallback(List<ShoppingTrip> trips);
     }
+    public interface UserGroupItemCallback{
+        void OnCallback(UserGroupItem userGroupItem);
+    }
+
 
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
         firestore.collection("users")
@@ -212,7 +218,7 @@ public class DBHelper {
                     }
                 });
     }
-    public User queryRandomUser(int index,  UserGroupItemAdapter adapter){
+    public User queryRandomUser(int index, ArrayList<UserGroupItem> uglist, UserGroupItemAdapter adapter, UserGroupItemCallback userGroupItemCallback){
         compareCount = 0;
         firestore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -221,6 +227,12 @@ public class DBHelper {
                     for (DocumentSnapshot document : task.getResult()){
                         if(compareCount==index){
                             userToReturn = document.toObject(User.class);
+                            UserGroupItem toAddItem = new UserGroupItem();
+                            toAddItem.setUgiUser(userToReturn);
+                            Log.d("RANDOM USER ", userToReturn.getUsername());
+                            userGroupItemCallback.OnCallback(toAddItem);
+
+                            break;
 
                         }
                         else{
@@ -237,7 +249,7 @@ public class DBHelper {
         compareCount = 0;
         return userToReturn;
     }
-    public Group queryRandomGroup(int index,  UserGroupItemAdapter adapter){
+    public Group queryRandomGroup(int index, ArrayList<UserGroupItem> uglist, UserGroupItemAdapter adapter, UserGroupItemCallback userGroupItemCallback){
         compareCount = 0;
         firestore.collection("Groups").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -246,7 +258,11 @@ public class DBHelper {
                     for (DocumentSnapshot document : task.getResult()){
                         if(compareCount==index){
                             groupToReturn = document.toObject(Group.class);
-
+                            UserGroupItem toAddItem = new UserGroupItem();
+                            toAddItem.setUgiGroup(groupToReturn);
+                            Log.d("RANDOM GROUP ", groupToReturn.getGroupname());
+                            userGroupItemCallback.OnCallback(toAddItem);
+                            break;
                         }
                         else{
                             compareCount += 1;
@@ -262,7 +278,7 @@ public class DBHelper {
         compareCount = 0;
         return groupToReturn;
     }
-    public GroceryPost queryRandomPost(int index,  UserGroupItemAdapter adapter){
+    public GroceryPost queryRandomPost(int index, ArrayList<UserGroupItem> uglist, UserGroupItemAdapter adapter, UserGroupItemCallback userGroupItemCallback){
         compareCount = 0;
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -271,7 +287,11 @@ public class DBHelper {
                     for (DocumentSnapshot document : task.getResult()){
                         if(compareCount==index){
                             postToReturn = document.toObject(GroceryPost.class);
-
+                            UserGroupItem toAddItem = new UserGroupItem();
+                            toAddItem.setUgiGP(postToReturn);
+                            Log.d("RANDOM POST ", postToReturn.groceryItem.getTitle());
+                            userGroupItemCallback.OnCallback(toAddItem);
+                            break;
                         }
                         else{
                             compareCount += 1;

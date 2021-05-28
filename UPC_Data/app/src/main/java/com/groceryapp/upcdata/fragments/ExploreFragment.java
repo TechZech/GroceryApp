@@ -33,6 +33,7 @@ public class ExploreFragment extends Fragment {
     public final String TAG = "ExploreFragment";
     private static final int NUM_COLUMNS = 2;
     private DBHelper dbHelper = new DBHelper();
+    private UserGroupItemAdapter.OnClickListener onClickListener;
     UserGroupItemAdapter staggeredRecyclerViewAdapter;
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
@@ -48,47 +49,82 @@ public class ExploreFragment extends Fragment {
 
         initImageBitmaps();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        GroupAdapter.OnClickListener onClickListener = new GroupAdapter.OnClickListener() {
+        onClickListener = new UserGroupItemAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                Log.d(TAG, "ITEM CLICKED HERE");
 
             }
         };
+
+        staggeredRecyclerViewAdapter = new UserGroupItemAdapter(getContext(), mUserGroupItems, onClickListener);
     }
     private void initImageBitmaps(){
         for(int kj = 0; kj<10; kj++){
+
             Random rand = new Random(); //instance of random class
-            int postUserGroup = rand.nextInt(2);
+
+            int postUserGroup = rand.nextInt(3);
+
             if(postUserGroup==0){ //get random post
                 Random postRand = new Random(); //instance of random class
+                Log.d("IN LOOP ", "KJ IS " +kj + " : " + postUserGroup);
+            dbHelper.queryRandomPost(postRand.nextInt(2), mUserGroupItems, staggeredRecyclerViewAdapter, new DBHelper.UserGroupItemCallback() {
+                @Override
+                public void OnCallback(UserGroupItem userGroupItem) {
 
-                UserGroupItem mAddGroupItem = new UserGroupItem();
-                mAddGroupItem.setUgiGP(dbHelper.queryRandomPost(postRand.nextInt(), staggeredRecyclerViewAdapter));
-                mUserGroupItems.add(mAddGroupItem);
+                    Log.d("IN CALLBACK", userGroupItem.getUgiGP().getUser().getUsername());
+                    mUserGroupItems.add(userGroupItem);
+                    staggeredRecyclerViewAdapter.notifyDataSetChanged();
+
+                }
+            });
+
             }
             else if(postUserGroup==1){ //get random user
                 Random userRand = new Random(); //instance of random class
-                UserGroupItem mAddGroupItem = new UserGroupItem();
-                mAddGroupItem.setUgiUser(dbHelper.queryRandomUser(userRand.nextInt(), staggeredRecyclerViewAdapter));
-                mUserGroupItems.add(mAddGroupItem);
+                Log.d("IN LOOP ", "KJ IS " +kj + " : " + postUserGroup);
+           dbHelper.queryRandomUser(userRand.nextInt(2), mUserGroupItems, staggeredRecyclerViewAdapter, new DBHelper.UserGroupItemCallback() {
+               @Override
+               public void OnCallback(UserGroupItem userGroupItem) {
+                   Log.d("IN CALLBACK", userGroupItem.getUgiUser().getUsername());
+                   mUserGroupItems.add(userGroupItem);
+                   staggeredRecyclerViewAdapter.notifyDataSetChanged();
+
+               }
+           });
+
             }
             else if(postUserGroup==2){ //get random group
                 Random groupRand = new Random(); //instance of random class
-                UserGroupItem mAddGroupItem = new UserGroupItem();
-                mAddGroupItem.setUgiGroup(dbHelper.queryRandomGroup(groupRand.nextInt(), staggeredRecyclerViewAdapter));
-                mUserGroupItems.add(mAddGroupItem);
+                Log.d("IN LOOP ", "KJ IS " +kj + " : " + postUserGroup);
+                dbHelper.queryRandomGroup(groupRand.nextInt(2), mUserGroupItems, staggeredRecyclerViewAdapter, new DBHelper.UserGroupItemCallback() {
+                    @Override
+                    public void OnCallback(UserGroupItem userGroupItem) {
+                        Log.d("IN CALLBACK", userGroupItem.getUgiGroup().getGroupname());
+                        mUserGroupItems.add(userGroupItem);
+                        staggeredRecyclerViewAdapter.notifyDataSetChanged();
+                    }
+                });
+
             }
             else{ // get random user just in case...
                 Random userRand = new Random(); //instance of random class
-                UserGroupItem mAddGroupItem = new UserGroupItem();
-                mAddGroupItem.setUgiUser(dbHelper.queryRandomUser(userRand.nextInt(), staggeredRecyclerViewAdapter));
-                mUserGroupItems.add(mAddGroupItem);
+                Log.d("IN LOOP ", "KJ IS " +kj + " : " + postUserGroup);
+                dbHelper.queryRandomUser(userRand.nextInt(2), mUserGroupItems, staggeredRecyclerViewAdapter, new DBHelper.UserGroupItemCallback() {
+                    @Override
+                    public void OnCallback(UserGroupItem userGroupItem) {
+                        Log.d("IN CALLBACK", userGroupItem.getUgiUser().getUsername());
+                        mUserGroupItems.add(userGroupItem);
+                        staggeredRecyclerViewAdapter.notifyDataSetChanged();
+
+                    }
+                });
+
             }
         }
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-/*
+
         mImageUrls.add("https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14112506/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall.jpg");
         mNames.add("Havasu Falls");
 
@@ -117,7 +153,7 @@ public class ExploreFragment extends Fragment {
 
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
-*/
+
         initRecyclerView();
 
     }
@@ -128,7 +164,7 @@ public class ExploreFragment extends Fragment {
 
         RecyclerView recyclerView = getView().findViewById(R.id.stagRV);
         staggeredRecyclerViewAdapter =
-                new UserGroupItemAdapter(getContext(), mUserGroupItems);
+                new UserGroupItemAdapter(getContext(), mUserGroupItems, onClickListener);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(staggeredRecyclerViewAdapter);

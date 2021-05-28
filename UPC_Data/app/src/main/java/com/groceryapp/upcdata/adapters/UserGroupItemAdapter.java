@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,7 +19,6 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DB.UserGroupItem.UserGroupItem;
 import com.groceryapp.upcdata.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -39,18 +37,28 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<UserGroupItem> mUserGroupItem = new ArrayList<>();
     private Context mContext;
-
-    public UserGroupItemAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
+/*
+    public UserGroupItemAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, OnClickListener onClickListener) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
-    }
-    public UserGroupItemAdapter(Context context, ArrayList<UserGroupItem> mUserGroupItem) {
+        this.onClickListener = onClickListener;
+    }*/
+    public UserGroupItemAdapter(Context context, ArrayList<UserGroupItem> mUserGroupItem, OnClickListener onClickListener) {
+        this.mContext = context;
         this.mUserGroupItem = mUserGroupItem;
-
+        this.onClickListener = onClickListener;
     }
 
-    public UserGroupItemAdapter(Context context, UserGroupItem userGroupItem) {
+
+
+    public interface OnClickListener {
+        void onItemClicked(int position);
+    }
+    private final OnClickListener onClickListener;
+/*
+    public UserGroupItemAdapter(Context context, UserGroupItem userGroupItem ) {
+        this.mContext = context;
         this.userGroupItem = userGroupItem;
         if(userGroupItem.getUgiUser()!=null){
             this.ugiaUser=this.userGroupItem.getUgiUser();
@@ -65,7 +73,7 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
             this.ugiaGroceryItem=this.userGroupItem.getUgiGI();
         }
     }
-
+*/
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

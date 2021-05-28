@@ -78,9 +78,11 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     DBHelper dbHelper;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     User currentUser;
+
     private RecyclerView rvComments;
     protected CommentsAdapter adapter;
     List<Comment> allComments = new ArrayList<>();
+
 
     @Nullable
     @Override
