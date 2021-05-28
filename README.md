@@ -22,7 +22,7 @@
 
 ## Product Spec
 
-### 1. User Stories (Required and Optional)
+### 1. User Stories
 
 **Required Must-have Stories**
 
@@ -34,10 +34,10 @@
 **Optional Nice-to-have Stories**
 
 * [X] Grocery budget tracker
-* [ ] Healthy foods tracker
+* [X] Nutrition Data
 * [X] Recommended Products
 * [X] Profile
-* [ ] Weigh food - package already has weight printed on it
+* [X] Friends and Groups
 * [X] Social media aspect
 
 ### 2. Screen Archetypes
@@ -62,8 +62,8 @@
 **Tab Navigation** (Tab to Screen)
 
 * Barcode Scanner
-* Grocery List
-* Inventory
+* Explore Page
+* Grocery List and Inventory
 * The Feed
 * Profile
 
@@ -150,13 +150,13 @@
 <img src='walkthroughWeek13.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Important Links
+	
+https://firebase.google.com/ - FireBase Database
 
-https://github.com/zxing/zxing - Barcode Camera
-
-https://developers.google.com/ml-kit/vision/barcode-scanning/android - Google's ML library for scanning barcodes
-
-https://barcodeapi.org/index.html#auto - Barcode Generator
+https://github.com/zxing/zxing - Barcode Scanner
+	
+https://jsoup.org/ - Java Web Scraping Library
+	
+https://weeklycoding.com/mpandroidchart-documentation/ - MPandroidChart (Graphs)
 
 https://www.barcodespider.com/ - Barcode Lookup API
-
-https://jsoup.org/ - Java web scraping library
