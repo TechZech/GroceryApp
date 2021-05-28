@@ -20,6 +20,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
@@ -33,14 +35,20 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.BuildConfig;
+import com.groceryapp.upcdata.DB.Friend.Comment;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
+import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.Scraper;
+import com.groceryapp.upcdata.adapters.CommentsAdapter;
+import com.groceryapp.upcdata.adapters.GroceryItemAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +76,11 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     Button btnGoBack;
     Button submitComment;
     DBHelper dbHelper;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    User currentUser;
+    private RecyclerView rvComments;
+    protected CommentsAdapter adapter;
+    List<Comment> allComments = new ArrayList<>();
 
     @Nullable
     @Override
@@ -78,8 +91,9 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         dbHelper = new DBHelper();
+        currentUser = new User(mAuth);
         ivDetailImage = view.findViewById(R.id.imageView);
         titleText = view.findViewById(R.id.titleText);
         dt =  view.findViewById(R.id.dateTimeInfo);
@@ -104,7 +118,8 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
         submitComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            dbHelper.addComment(myGroceryPost, commentText.getText().toString());
+            dbHelper.addComment(myGroceryPost, new Comment(commentText.getText().toString(), currentUser));
+            adapter.notifyDataSetChanged();
             }
         });
         unpackBundle();
@@ -122,7 +137,14 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        rvComments = view.findViewById(R.id.rvComments);
+        allComments = new ArrayList<>();
 
+        adapter = new CommentsAdapter(getContext(), allComments);
+
+        rvComments.setAdapter(adapter);
+        rvComments.setLayoutManager(linearLayoutManager);
+        allComments.addAll(myGroceryPost.getComments());
     }
 
     private void unpackBundle(){
@@ -133,6 +155,7 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
         myGroceryPost.groceryItem.setImageUrl(Args.getString("ImageUrl"));
         dt.setText(Args.getString("DateTime"));
         myGroceryPost.setPlaceid(Args.getString("placeid"));
+        myGroceryPost.setComments((ArrayList<Comment>) Args.getSerializable("Comments"));
 
         Glide.with(getContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
         Glide.with(getContext()).load(myGroceryPost.user.getProfilePhotoURL()).into(ivUserPhoto);

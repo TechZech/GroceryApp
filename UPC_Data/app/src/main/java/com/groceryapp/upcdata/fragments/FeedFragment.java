@@ -26,6 +26,7 @@ import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -157,6 +158,7 @@ public class FeedFragment extends Fragment {
         bundle.putString("ImageUrl", groceryPost.groceryItem.getImageUrl() );
         bundle.putString("DateTime", groceryPost.getDateTime().toString() );
         bundle.putString("Pid", groceryPost.getPid());
+        bundle.putSerializable("Comments", (Serializable) groceryPost.getComments());
       //  bundle.putBoolean("fromInventory", true);
         Fragment fragment = new PostDetailFragment();
         fragment.setArguments(bundle);

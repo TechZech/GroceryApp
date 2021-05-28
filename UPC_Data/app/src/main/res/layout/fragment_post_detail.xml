@@ -99,13 +99,11 @@
         app:icon="@android:drawable/star_off" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="394dp"
-        android:layout_height="218dp"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/rvComments"
+        android:layout_width="384dp"
+        android:layout_height="170dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:layout_marginBottom="74dp" />
+        android:layout_marginTop="440dp" />
 
     <EditText
         android:id="@+id/commentText"

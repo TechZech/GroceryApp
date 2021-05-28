@@ -18,6 +18,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.groceryapp.upcdata.DB.Friend.Comment;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.Friend.Friend;
@@ -1143,7 +1144,7 @@ public class DBHelper {
         ;
        //     likeGp.setNumLikes(likeGp.getNumLikes()+1);
     }
-    public void addGroupComment(Group commentGr, GroceryPost commentGp, String comment){
+    public void addGroupComment(Group commentGr, GroceryPost commentGp, Comment comment){
         DocumentReference docRef = firestore.collection("Groups").document(commentGr.getGid()).collection("Posts").document(commentGp.getPid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -1168,7 +1169,7 @@ public class DBHelper {
             }
         });
     }
-    public void addComment(GroceryPost commentGp, String comment){
+    public void addComment(GroceryPost commentGp, Comment comment){
         DocumentReference docRef = firestore.collection("Posts").document(commentGp.getPid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

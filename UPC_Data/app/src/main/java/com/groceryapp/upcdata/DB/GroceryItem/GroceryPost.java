@@ -1,6 +1,7 @@
 package com.groceryapp.upcdata.DB.GroceryItem;
 
 
+import com.groceryapp.upcdata.DB.Friend.Comment;
 import com.groceryapp.upcdata.DB.User.User;
 
 import java.util.ArrayList;
@@ -36,16 +37,16 @@ public class GroceryPost implements Comparable<GroceryPost>{
         this.numLikes = numLikes;
     }
 
-    public ArrayList<String> getComments() {
+    public ArrayList<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 
    public int numLikes = 0;
-    private ArrayList<String> comments = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
 
     public Date getDateTime() {
         return dateTime;
