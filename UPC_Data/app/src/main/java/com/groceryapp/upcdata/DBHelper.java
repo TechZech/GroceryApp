@@ -34,6 +34,7 @@ import com.groceryapp.upcdata.adapters.GroupAdapter;
 import com.groceryapp.upcdata.adapters.GroupRequestAdapter;
 import com.groceryapp.upcdata.adapters.ShoppingTripAdapter;
 import com.groceryapp.upcdata.adapters.UserAdapter;
+import com.groceryapp.upcdata.adapters.UserGroupItemAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -211,7 +212,7 @@ public class DBHelper {
                     }
                 });
     }
-    public User queryRandomUser(int index, UserAdapter adapter){
+    public User queryRandomUser(int index,  UserGroupItemAdapter adapter){
         compareCount = 0;
         firestore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -227,7 +228,7 @@ public class DBHelper {
                         }
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                     }
-                    adapter.notifyDataSetChanged();
+                    //adapter.notifyDataSetChanged();
                 }
                 else
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -236,7 +237,7 @@ public class DBHelper {
         compareCount = 0;
         return userToReturn;
     }
-    public Group queryRandomGroup(int index, GroupAdapter adapter){
+    public Group queryRandomGroup(int index,  UserGroupItemAdapter adapter){
         compareCount = 0;
         firestore.collection("Groups").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -252,7 +253,7 @@ public class DBHelper {
                         }
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                     }
-                    adapter.notifyDataSetChanged();
+                  //  adapter.notifyDataSetChanged();
                 }
                 else
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -261,7 +262,7 @@ public class DBHelper {
         compareCount = 0;
         return groupToReturn;
     }
-    public GroceryPost queryRandomPost(int index, GroceryPostAdapter adapter){
+    public GroceryPost queryRandomPost(int index,  UserGroupItemAdapter adapter){
         compareCount = 0;
         firestore.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -277,7 +278,7 @@ public class DBHelper {
                         }
                         Log.d(TAG, document.getId() + "=> " + document.getData());
                     }
-                    adapter.notifyDataSetChanged();
+                  //  adapter.notifyDataSetChanged();
                 }
                 else
                     Log.d(TAG, "Error getting documents: ", task.getException());

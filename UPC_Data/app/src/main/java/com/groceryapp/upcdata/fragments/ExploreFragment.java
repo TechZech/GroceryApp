@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.groceryapp.upcdata.DB.Group.Group;
 import com.groceryapp.upcdata.DB.User.User;
+import com.groceryapp.upcdata.DB.UserGroupItem.UserGroupItem;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroupAdapter;
@@ -31,9 +32,11 @@ import java.util.Random;
 public class ExploreFragment extends Fragment {
     public final String TAG = "ExploreFragment";
     private static final int NUM_COLUMNS = 2;
-
+    private DBHelper dbHelper = new DBHelper();
+    UserGroupItemAdapter staggeredRecyclerViewAdapter;
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<UserGroupItem> mUserGroupItems = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,19 +62,33 @@ public class ExploreFragment extends Fragment {
             int postUserGroup = rand.nextInt(2);
             if(postUserGroup==0){ //get random post
                 Random postRand = new Random(); //instance of random class
+
+                UserGroupItem mAddGroupItem = new UserGroupItem();
+                mAddGroupItem.setUgiGP(dbHelper.queryRandomPost(postRand.nextInt(), staggeredRecyclerViewAdapter));
+                mUserGroupItems.add(mAddGroupItem);
             }
             else if(postUserGroup==1){ //get random user
                 Random userRand = new Random(); //instance of random class
+                UserGroupItem mAddGroupItem = new UserGroupItem();
+                mAddGroupItem.setUgiUser(dbHelper.queryRandomUser(userRand.nextInt(), staggeredRecyclerViewAdapter));
+                mUserGroupItems.add(mAddGroupItem);
             }
             else if(postUserGroup==2){ //get random group
                 Random groupRand = new Random(); //instance of random class
+                UserGroupItem mAddGroupItem = new UserGroupItem();
+                mAddGroupItem.setUgiGroup(dbHelper.queryRandomGroup(groupRand.nextInt(), staggeredRecyclerViewAdapter));
+                mUserGroupItems.add(mAddGroupItem);
             }
             else{ // get random user just in case...
                 Random userRand = new Random(); //instance of random class
+                UserGroupItem mAddGroupItem = new UserGroupItem();
+                mAddGroupItem.setUgiUser(dbHelper.queryRandomUser(userRand.nextInt(), staggeredRecyclerViewAdapter));
+                mUserGroupItems.add(mAddGroupItem);
             }
         }
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
+/*
         mImageUrls.add("https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14112506/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall.jpg");
         mNames.add("Havasu Falls");
 
@@ -100,7 +117,7 @@ public class ExploreFragment extends Fragment {
 
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
-
+*/
         initRecyclerView();
 
     }
@@ -110,8 +127,8 @@ public class ExploreFragment extends Fragment {
         Log.d(TAG, "initRecyclerView: initializing staggered recyclerview.");
 
         RecyclerView recyclerView = getView().findViewById(R.id.stagRV);
-        UserGroupItemAdapter staggeredRecyclerViewAdapter =
-                new UserGroupItemAdapter(getContext(), mNames, mImageUrls);
+        staggeredRecyclerViewAdapter =
+                new UserGroupItemAdapter(getContext(), mUserGroupItems);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(staggeredRecyclerViewAdapter);

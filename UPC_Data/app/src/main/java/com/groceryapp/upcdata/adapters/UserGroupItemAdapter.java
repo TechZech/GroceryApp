@@ -37,6 +37,7 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
     private UserGroupItem userGroupItem = null;
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<UserGroupItem> mUserGroupItem = new ArrayList<>();
     private Context mContext;
 
     public UserGroupItemAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
@@ -44,6 +45,11 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         mImageUrls = imageUrls;
         mContext = context;
     }
+    public UserGroupItemAdapter(Context context, ArrayList<UserGroupItem> mUserGroupItem) {
+        this.mUserGroupItem = mUserGroupItem;
+
+    }
+
     public UserGroupItemAdapter(Context context, UserGroupItem userGroupItem) {
         this.userGroupItem = userGroupItem;
         if(userGroupItem.getUgiUser()!=null){
@@ -74,38 +80,23 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
-        if(this.userGroupItem.getUgiUser()!=null){
-            Glide.with(mContext)
-                    .load(mImageUrls.get(position))
-                    .apply(requestOptions)
-                    .into(holder.image);
-
-            holder.name.setText(mNames.get(position));
+        if(mUserGroupItem.get(position).getUgiUser()!=null){
+            holder.name.setText(mUserGroupItem.get(position).getUgiUser().getUsername());
         }
-        else if(this.userGroupItem.getUgiGroup()!=null){
-            Glide.with(mContext)
-                    .load(mImageUrls.get(position))
-                    .apply(requestOptions)
-                    .into(holder.image);
-
-            holder.name.setText(mNames.get(position));
+        else if(mUserGroupItem.get(position).getUgiGroup()!=null){
+            holder.name.setText(mUserGroupItem.get(position).getUgiGroup().getGroupname());
         }
-        else if(this.userGroupItem.getUgiGP()!=null){
-            Glide.with(mContext)
-                    .load(mImageUrls.get(position))
-                    .apply(requestOptions)
-                    .into(holder.image);
-
-            holder.name.setText(mNames.get(position));
+        else if(mUserGroupItem.get(position).getUgiGP()!=null){
+            holder.name.setText(mUserGroupItem.get(position).getUgiGP().getUser().getUsername());
         }
-        else if(this.userGroupItem.getUgiGI()!=null){
-            Glide.with(mContext)
-                    .load(mImageUrls.get(position))
-                    .apply(requestOptions)
-                    .into(holder.image);
-
-            holder.name.setText(mNames.get(position));
+        else if(mUserGroupItem.get(position).getUgiGI()!=null){
+            holder.name.setText(mUserGroupItem.get(position).getUgiGI().getTitle());;
         }
+
+        Glide.with(mContext)
+                .load(mImageUrls.get(position))
+                .apply(requestOptions)
+                .into(holder.image);
 
 
 
