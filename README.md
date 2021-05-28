@@ -157,6 +157,6 @@ https://github.com/zxing/zxing - Barcode Scanner
 	
 https://jsoup.org/ - Java Web Scraping Library
 	
-https://weeklycoding.com/mpandroidchart-documentation/ - MPandroidChart
+https://weeklycoding.com/mpandroidchart-documentation/ - MPandroidChart (Graphs)
 
 https://www.barcodespider.com/ - Barcode Lookup API
