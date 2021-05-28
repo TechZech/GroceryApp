@@ -22,7 +22,7 @@
 
 ## Product Spec
 
-### 1. User Stories (Required and Optional)
+### 1. User Stories
 
 **Required Must-have Stories**
 
@@ -34,10 +34,10 @@
 **Optional Nice-to-have Stories**
 
 * [X] Grocery budget tracker
-* [ ] Healthy foods tracker
+* [X] Nutrition Data
 * [X] Recommended Products
 * [X] Profile
-* [ ] Weigh food - package already has weight printed on it
+* [X] Groups and Friends
 * [X] Social media aspect
 
 ### 2. Screen Archetypes
