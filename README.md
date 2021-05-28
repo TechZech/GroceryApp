@@ -150,13 +150,13 @@
 <img src='walkthroughWeek13.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Important Links
+	
+https://firebase.google.com/ - FireBase Database
 
-https://github.com/zxing/zxing - Barcode Camera
-
-https://developers.google.com/ml-kit/vision/barcode-scanning/android - Google's ML library for scanning barcodes
-
-https://barcodeapi.org/index.html#auto - Barcode Generator
+https://github.com/zxing/zxing - Barcode Scanner
+	
+https://jsoup.org/ - Java Web Scraping Library
+	
+https://weeklycoding.com/mpandroidchart-documentation/ - MPandroidChart
 
 https://www.barcodespider.com/ - Barcode Lookup API
-
-https://jsoup.org/ - Java web scraping library
