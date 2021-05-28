@@ -62,8 +62,8 @@
 **Tab Navigation** (Tab to Screen)
 
 * Barcode Scanner
-* Grocery List
-* Inventory
+* Explore Page
+* Grocery List and Inventory
 * The Feed
 * Profile
 
