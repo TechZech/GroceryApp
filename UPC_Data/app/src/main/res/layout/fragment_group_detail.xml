@@ -69,29 +69,25 @@
 
     <Button
         android:id="@+id/settingsButton"
-        android:layout_width="200dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="350dp"
         android:text="Group Settings" />
 
     <Button
         android:id="@+id/addPostButton"
-        android:layout_width="200dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:layout_marginEnd="149dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="25dp"
         android:text="Add Group Post" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupFeedRV"
-        android:layout_width="412dp"
-        android:layout_height="220dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="373dp"
+        android:layout_width="match_parent"
+        android:layout_height="207dp"
+        android:layout_marginTop="400dp"
         android:visibility="gone"/>
 
 
