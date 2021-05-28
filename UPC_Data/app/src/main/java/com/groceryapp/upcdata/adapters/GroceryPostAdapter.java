@@ -78,13 +78,14 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
         private TextView tvListName;
         private TextView tvItemName;
         private Button addButton;
+        private Button likeButton;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             tvUser = itemView.findViewById(R.id.tvUser);
             tvListName = itemView.findViewById(R.id.tvListName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
             addButton = itemView.findViewById(R.id.acceptButton);
-
+            likeButton = itemView.findViewById(R.id.acceptButton2);
             ivGroceryItemImage = itemView.findViewById(R.id.imageView);
 
 
@@ -102,6 +103,12 @@ public class GroceryPostAdapter extends RecyclerView.Adapter<GroceryPostAdapter.
                 @Override
                 public void onClick(View v) {
                     onClickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+            likeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHelper.addLike(groceryPost);
                 }
             });
             addButton.setOnClickListener(new View.OnClickListener() {

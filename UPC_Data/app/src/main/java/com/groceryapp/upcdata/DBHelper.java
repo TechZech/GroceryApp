@@ -543,7 +543,10 @@ public class DBHelper {
 
 
         groceryPost.setDateTime(date);
-        firestore.collection("Posts").document().set(groceryPost);
+        DocumentReference postToPost = firestore.collection("Posts").document();
+        groceryPost.setPid(postToPost.getId());
+        postToPost.set(groceryPost);
+
     }
 
     public void addGroceryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
@@ -560,6 +563,7 @@ public class DBHelper {
     public void addInventoryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
         firestore.collection("users").document(User.getUserID()).collection("Inventory").document(UPC)
                 .set(new GroceryItem(itemName, UPC, url, quantity, price, isInventory));
+
 
         firestore.collection("Posts").document().set(new GroceryPost(User, new GroceryItem(itemName, UPC, url, quantity, price, isInventory), true ));
     }
@@ -868,8 +872,10 @@ public class DBHelper {
             @Override
             public void OnCallback(Boolean value) {
                 if(value==true){
-                    firestore.collection("Groups").document(g.getGid()).collection("Posts").document()
-                            .set(groceryPost);
+                    DocumentReference postToPost = firestore.collection("Groups").document(g.getGid()).collection("Posts").document();
+                    groceryPost.setPid(postToPost.getId());
+                    postToPost.set(groceryPost);
+
                 }
             }
         });
@@ -1083,6 +1089,35 @@ public class DBHelper {
                 });
         //  frcc.OnCallback(frccCount);
         return frccCount;
+    }
+    public void addLike(GroceryPost likeGp){
+        DocumentReference docRef = firestore.collection("Posts").document(likeGp.getPid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        GroceryPost lkGP = document.toObject(GroceryPost.class);
+                        lkGP.setNumLikes(lkGP.getNumLikes()+1);
+                        Log.d(TAG, "NUM LIKES " + lkGP.getNumLikes());
+                        docRef.set(lkGP);
+                   //     myCallback.onCallback(returnusername, returnphotoUrl);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        ;
+       //     likeGp.setNumLikes(likeGp.getNumLikes()+1);
+    }
+    public void addComment(GroceryPost commentGp, String comment){
+        commentGp.getComments().add(comment);
     }
     public int gCountFunc(GroupCountCallback frcc){
 

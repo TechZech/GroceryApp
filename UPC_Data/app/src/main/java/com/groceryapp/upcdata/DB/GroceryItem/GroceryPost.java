@@ -3,6 +3,7 @@ package com.groceryapp.upcdata.DB.GroceryItem;
 
 import com.groceryapp.upcdata.DB.User.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class GroceryPost implements Comparable<GroceryPost>{
@@ -27,6 +28,25 @@ public class GroceryPost implements Comparable<GroceryPost>{
     public GroceryItem groceryItem;
     private Boolean whichList;
 
+    public int getNumLikes() {
+        return numLikes;
+    }
+
+    public void setNumLikes(int numLikes) {
+        this.numLikes = numLikes;
+    }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> comments) {
+        this.comments = comments;
+    }
+
+   public int numLikes = 0;
+    private ArrayList<String> comments = new ArrayList<>();
+
     public Date getDateTime() {
         return dateTime;
     }
@@ -36,6 +56,20 @@ public class GroceryPost implements Comparable<GroceryPost>{
     }
 
     private Date dateTime;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    private String pid;
+    public GroceryPost(String pid) {
+
+        this.pid = pid;
+    }
 
     public GroceryPost(GroceryItem gp, User u) {
         this.user = u;
