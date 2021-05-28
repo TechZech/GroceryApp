@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import com.groceryapp.upcdata.BuildConfig;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DB.GroceryItem.NutritionData;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.EdamamService;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.Scraper;
@@ -60,10 +62,12 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     CircleImageView ivUserPhoto;
     TextView titleText;
     TextView dt;
+    EditText commentText;
     TextView tvDetailPrice;
     TextView tvDetailQuantity;
     Button btnGoBack;
-
+    Button submitComment;
+    DBHelper dbHelper;
 
     @Nullable
     @Override
@@ -75,11 +79,13 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        dbHelper = new DBHelper();
         ivDetailImage = view.findViewById(R.id.imageView);
         titleText = view.findViewById(R.id.titleText);
         dt =  view.findViewById(R.id.dateTimeInfo);
         ivUserPhoto = view.findViewById(R.id.ivPostDetailUserPic);
+        commentText = view.findViewById(R.id.commentText);
+        submitComment = view.findViewById(R.id.button2);
    //     ViewCompat.setTransitionName(ivDetailImage, "detail_item_image");
     //    tvDetailTitle = view.findViewById(R.id.tvDetailTitle);
      //   tvDetailUpc = view.findViewById(R.id.tvDetailUpc);
@@ -95,7 +101,12 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
                 fragmentManager.popBackStack();
             }
         });
-
+        submitComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            dbHelper.addComment(myGroceryPost, commentText.getText().toString());
+            }
+        });
         unpackBundle();
       //
        // tvDetailTitle.setText(groceryItem.getTitle());
@@ -116,6 +127,7 @@ public class PostDetailFragment extends Fragment implements OnMapReadyCallback {
 
     private void unpackBundle(){
         Bundle Args = getArguments();
+        myGroceryPost.setPid(Args.getString("Pid"));
         myGroceryPost.groceryItem.setTitle(Args.getString("Title"));
         titleText.setText(myGroceryPost.groceryItem.getTitle());
         myGroceryPost.groceryItem.setImageUrl(Args.getString("ImageUrl"));

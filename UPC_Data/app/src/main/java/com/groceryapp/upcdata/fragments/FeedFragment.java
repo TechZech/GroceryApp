@@ -156,7 +156,7 @@ public class FeedFragment extends Fragment {
         bundle.putString("Title", groceryPost.groceryItem.getTitle() );
         bundle.putString("ImageUrl", groceryPost.groceryItem.getImageUrl() );
         bundle.putString("DateTime", groceryPost.getDateTime().toString() );
-        
+        bundle.putString("Pid", groceryPost.getPid());
       //  bundle.putBoolean("fromInventory", true);
         Fragment fragment = new PostDetailFragment();
         fragment.setArguments(bundle);

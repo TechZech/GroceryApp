@@ -1090,6 +1090,33 @@ public class DBHelper {
         //  frcc.OnCallback(frccCount);
         return frccCount;
     }
+    public void addGroupLike(Group likeGr, GroceryPost likeGp){
+        DocumentReference docRef = firestore.collection("Groups").document(likeGr.getGid()).collection("Posts").document(likeGp.getPid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        GroceryPost lkGP = document.toObject(GroceryPost.class);
+                        lkGP.setNumLikes(lkGP.getNumLikes()+1);
+                        Log.d(TAG, "NUM LIKES " + lkGP.getNumLikes());
+                        docRef.set(lkGP);
+                        //     myCallback.onCallback(returnusername, returnphotoUrl);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        ;
+        //     likeGp.setNumLikes(likeGp.getNumLikes()+1);
+    }
+
     public void addLike(GroceryPost likeGp){
         DocumentReference docRef = firestore.collection("Posts").document(likeGp.getPid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -1117,8 +1144,31 @@ public class DBHelper {
        //     likeGp.setNumLikes(likeGp.getNumLikes()+1);
     }
     public void addComment(GroceryPost commentGp, String comment){
-        commentGp.getComments().add(comment);
+        DocumentReference docRef = firestore.collection("Posts").document(commentGp.getPid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        GroceryPost lkGP = document.toObject(GroceryPost.class);
+                        lkGP.getComments().add(comment);
+
+                        Log.d(TAG, "NUM LIKES " + lkGP.getNumLikes());
+                        docRef.set(lkGP);
+                        //     myCallback.onCallback(returnusername, returnphotoUrl);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
     }
+
     public int gCountFunc(GroupCountCallback frcc){
 
         firestore.collection("users")
