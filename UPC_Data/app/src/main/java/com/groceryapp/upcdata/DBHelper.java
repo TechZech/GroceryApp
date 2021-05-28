@@ -1143,6 +1143,31 @@ public class DBHelper {
         ;
        //     likeGp.setNumLikes(likeGp.getNumLikes()+1);
     }
+    public void addGroupComment(Group commentGr, GroceryPost commentGp, String comment){
+        DocumentReference docRef = firestore.collection("Groups").document(commentGr.getGid()).collection("Posts").document(commentGp.getPid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, document.getData().toString());
+                        GroceryPost lkGP = document.toObject(GroceryPost.class);
+                        lkGP.getComments().add(comment);
+
+                        Log.d(TAG, "NUM LIKES " + lkGP.getNumLikes());
+                        docRef.set(lkGP);
+                        //     myCallback.onCallback(returnusername, returnphotoUrl);
+                        //    this.Username = dbHelper.getUser(uid).getUsername();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
     public void addComment(GroceryPost commentGp, String comment){
         DocumentReference docRef = firestore.collection("Posts").document(commentGp.getPid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
