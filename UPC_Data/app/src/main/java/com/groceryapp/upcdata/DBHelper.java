@@ -546,7 +546,7 @@ public class DBHelper {
         DocumentReference postToPost = firestore.collection("Posts").document();
         groceryPost.setPid(postToPost.getId());
         postToPost.set(groceryPost);
-     
+
     }
 
     public void addGroceryItem(String itemName, String UPC, String url, int quantity, String price, boolean isInventory){
@@ -1101,7 +1101,8 @@ public class DBHelper {
                         Log.d(TAG, document.getData().toString());
                         GroceryPost lkGP = document.toObject(GroceryPost.class);
                         lkGP.setNumLikes(lkGP.getNumLikes()+1);
-                        Log.d(TAG, "IN getUserFromUid, photoUrl = " + returnphotoUrl);
+                        Log.d(TAG, "NUM LIKES " + lkGP.getNumLikes());
+                        docRef.set(lkGP);
                    //     myCallback.onCallback(returnusername, returnphotoUrl);
                         //    this.Username = dbHelper.getUser(uid).getUsername();
                     } else {
