@@ -10,14 +10,14 @@
 
 ## Overview
 ### Description
-*GroceryList* is the new, ideal app for keeping track of your stock of groceries at home, as well as keeping track of groceries when supplies run low. Our app allows you to scan the barcode on any grocery item you buy, and keeps an inventory of it in a database. With this database, users can keep track of their stock, as well as form a grocery list of items to buy when supplies run low for certain items.
+*GroceryList* is the new, ideal app for keeping track of your stock of groceries at home, as well as keeping track of groceries when supplies run low. Our app allows you to scan the barcode on any grocery item you buy, and keeps an inventory of it in a database. With this database, users can keep track of their stock, as well as form a grocery list of items to buy next time you go shopping.
 
 ### App Evaluation
 - **Category:** Productivity
 - **Mobile:** User can use their phone's camera to scan grocery barcodes
 - **Story:** User can easily keep track of their grocery list and inventory
 - **Market:** Targeted towards anyone who buys groceries, generally 18+
-- **Habit:** User updates the status of what's being consumed whenever they consume groceries, as well as when they buy more food
+- **Habit:** User updates the status of what grocery items they have, generally when consuming or buying more food
 - **Scope:** Would need to have access to a database of barcodes (Internet connection)
 
 ## Product Spec
@@ -45,7 +45,7 @@
 * Scanner
    * Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
 * Inventory
-   * Checklist of groceries you currently have
+   * RecyclerView of groceries you currently have
 * Grocery list
    * RecyclerView of groceries you want to buy
 * Profile
@@ -76,7 +76,7 @@
 * Inventory
    * Once you're logged in, you can switch tabs
 * Food description
-    * Click on a food item to learn more. Ex: bought date, initial size, how often bought
+    * Click on a food item to learn more. Ex: nutrition data, price, etc.
 
 ## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)

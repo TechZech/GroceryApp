@@ -126,7 +126,7 @@ public class GroceryListFragment extends Fragment {
                     dbHelper.moveGrocerytoInventory(adapter);
                     Double totalPrice = parseDouble(tvTotalPrice.getText().toString());
                     dbHelper.addShoppingTrip(new ShoppingTrip(totalPrice));
-                    tvTotalPrice.setText("0.0");
+                    tvTotalPrice.setText("0.00");
                 }
             }
         });
