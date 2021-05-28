@@ -127,7 +127,7 @@
         android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/imageView"
         android:textSize="10sp"
-        card_view:icon="@android:drawable/btn_star_big_off"
+        card_view:icon="@drawable/star"
         tools:text="Like" />
 
 </RelativeLayout>
