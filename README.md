@@ -37,7 +37,7 @@
 * [X] Nutrition Data
 * [X] Recommended Products
 * [X] Profile
-* [X] Groups and Friends
+* [X] Friends and Groups
 * [X] Social media aspect
 
 ### 2. Screen Archetypes
