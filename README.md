@@ -42,20 +42,12 @@
 
 ### 2. Screen Archetypes
 
-* Scanner
-   * Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
-* Inventory
-   * RecyclerView of groceries you currently have
-* Grocery list
-   * RecyclerView of groceries you want to buy
-* Profile
-   * User info and settings
-* Login Screen
-    * User can login to their account
-* Registration Screen
-    * Create a new account
-* The Feed
-   * Social Media tab that allows user to see what other grocery items friends have bought
+ - **Scanner:** Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
+ - **Inventory:** RecyclerView of groceries you currently have
+ - **Grocery List:** RecyclerView of groceries you want to buy
+ - **Profile:** User info and settings
+ - **Login Screen:** User can login to their account, or register for a new one
+ - **The Feed:** Social Media tab that allows users to see what other grocery items their friends have bought
 
 ### 3. Navigation
 
