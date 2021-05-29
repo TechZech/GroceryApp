@@ -138,7 +138,8 @@
 
 
 ## Gif Walkthroughs
-###Barcode Scanner
+	
+### Barcode Scanner
 <img src='BarcodeScanner.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 	
 ###Inventory and Grocery List
