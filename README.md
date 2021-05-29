@@ -140,25 +140,25 @@
 ## Gif Walkthroughs
 	
 ### Barcode Scanner
-<img src='BarcodeScanner.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='BarcodeScanner.gif' title='Barcode Scanner' width='' alt='Barcode Scanner GIF' />
 	
 ### Inventory and Grocery List
-<img src='Inventory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Inventory.gif' title='Inventory and Grocery List' width='' alt='Inventory and Grocery List GIF' />
 	
 ### The Feed
-<img src='Feed.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Feed.gif' title='Feed' width='' alt='Feed GIF' />
 	
 ### Explore
-<img src='Explore.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Explore.gif' title='Explore' width='' alt='Explore GIF' />
 	
 ### Profile
-<img src='Profile.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Profile.gif' title='Profile' width='' alt='Profile GIF' />
 	
 ### Friends
-<img src='Friends.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Friends.gif' title='Friends' width='' alt='Friends GIF' />
 	
 ### Shopping History
-<img src='ShoppingHistory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='ShoppingHistory.gif' title='Shopping History' width='' alt='Shopping History GIF' />
 	
 ## Old Walkthroughs
 
