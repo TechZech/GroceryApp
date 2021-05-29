@@ -26,6 +26,7 @@ import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.LoginStuff.LoginActivity;
 import com.groceryapp.upcdata.fragments.BarcodeFragment;
+import com.groceryapp.upcdata.fragments.DebugExploreFragment;
 import com.groceryapp.upcdata.fragments.ExploreFragment;
 import com.groceryapp.upcdata.fragments.FeedFragment;
 import com.groceryapp.upcdata.fragments.GroceryListFragment;

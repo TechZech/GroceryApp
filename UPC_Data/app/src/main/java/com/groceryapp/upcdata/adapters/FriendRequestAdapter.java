@@ -19,6 +19,8 @@ import com.groceryapp.upcdata.R;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder> {
 
     private Context context;
@@ -71,7 +73,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView frImage;
+        private CircleImageView frImage;
         private TextView frUser;
         private Button acceptButton;
         private DBHelper dbHelper;

@@ -59,6 +59,7 @@ public class ExploreFragment extends Fragment {
         staggeredRecyclerViewAdapter = new UserGroupItemAdapter(getContext(), mUserGroupItems, onClickListener);
     }
     private void initImageBitmaps(){
+        initRecyclerView();
         for(int kj = 0; kj<10; kj++){
 
             Random rand = new Random(); //instance of random class
@@ -78,7 +79,7 @@ public class ExploreFragment extends Fragment {
 
                 }
             });
-
+                staggeredRecyclerViewAdapter.notifyDataSetChanged();
             }
             else if(postUserGroup==1){ //get random user
                 Random userRand = new Random(); //instance of random class
@@ -91,8 +92,9 @@ public class ExploreFragment extends Fragment {
                    staggeredRecyclerViewAdapter.notifyDataSetChanged();
 
                }
-           });
 
+           });
+                staggeredRecyclerViewAdapter.notifyDataSetChanged();
             }
             else if(postUserGroup==2){ //get random group
                 Random groupRand = new Random(); //instance of random class
@@ -105,7 +107,7 @@ public class ExploreFragment extends Fragment {
                         staggeredRecyclerViewAdapter.notifyDataSetChanged();
                     }
                 });
-
+                staggeredRecyclerViewAdapter.notifyDataSetChanged();
             }
             else{ // get random user just in case...
                 Random userRand = new Random(); //instance of random class
@@ -119,7 +121,7 @@ public class ExploreFragment extends Fragment {
 
                     }
                 });
-
+staggeredRecyclerViewAdapter.notifyDataSetChanged();
             }
         }
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
@@ -154,7 +156,7 @@ public class ExploreFragment extends Fragment {
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
 
-        initRecyclerView();
+
 
     }
 

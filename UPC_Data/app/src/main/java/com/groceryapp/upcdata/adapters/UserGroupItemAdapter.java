@@ -33,10 +33,12 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
     private GroceryPost ugiaGroceryPost  = null;
     private GroceryItem ugiaGroceryItem  = null;
     private UserGroupItem userGroupItem = null;
+
+    private ArrayList<UserGroupItem> mUserGroupItem = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
-    private ArrayList<UserGroupItem> mUserGroupItem = new ArrayList<>();
     private Context mContext;
+
 /*
     public UserGroupItemAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, OnClickListener onClickListener) {
         mNames = names;
@@ -50,6 +52,12 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         this.onClickListener = onClickListener;
     }
 
+    public UserGroupItemAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, OnClickListener onClickListener1){
+        mNames = names;
+        mImageUrls = imageUrls;
+        mContext = context;
+        this.onClickListener = onClickListener1;
+    }
 
 
     public interface OnClickListener {
@@ -100,13 +108,16 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         else if(mUserGroupItem.get(position).getUgiGI()!=null){
             holder.name.setText(mUserGroupItem.get(position).getUgiGI().getTitle());;
         }
+        else{
+            Log.d("ALL NULL", "ALL NULL");
+        }
+
+       holder.name.setText(mNames.get(position));
 
         Glide.with(mContext)
                 .load(mImageUrls.get(position))
                 .apply(requestOptions)
                 .into(holder.image);
-
-
 
 /*
         holder.image.setOnClickListener(new View.OnClickListener() {
