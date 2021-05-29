@@ -113,8 +113,8 @@
         android:layout_marginTop="390dp"
         android:editable="false"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Comment" />
+        android:hint="Comment"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/button2"
