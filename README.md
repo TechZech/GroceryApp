@@ -78,8 +78,8 @@
    * Manually add items that may be unscannable
 * Inventory
    * Click on a food item to bring up details about it
-    * Nutrition Facts
-    * Similar Products
+      * Nutrition Facts
+      * Similar Products
 
 ## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
