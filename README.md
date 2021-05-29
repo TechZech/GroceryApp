@@ -137,6 +137,13 @@
 	* (Update/PUT) Update user profile image
 
 
+## Gif Walkthroughs
+###Barcode Scanner
+<img src='BarcodeScanner.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+###Inventory and Grocery List
+<img src='Inventory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ### Gif Walkthrough Week 10
 <img src='walkthroughWeek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
