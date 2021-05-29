@@ -3,47 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GroceryAppGreen_LIGHT"
+    android:background="@drawable/darker_green_fade"
     android:textAlignment="center"
     tools:context=".fragments.GroceryListFragment">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:text="Explore"
+    android:gravity="center"
+    android:fontFamily="@font/robotolight"
+    android:textSize="30dp"
+    android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/rvButton1"
         android:layout_width="167dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="10dp"
         android:text="Search" />
 
-    <EditText
-        android:id="@+id/searchText1"
-        android:layout_width="227dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:ems="10"
-        android:hint="Search User"
-        android:inputType="textPersonName" />
+    <com.google.android.material.textfield.TextInputLayout
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="70dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:padding="0dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchText1"
+            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:fontFamily="@font/robotolight"
+            android:textSize="18sp"
+            android:layout_margin="0dp"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:hint="Search User..."
+            android:background="@color/white"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stagRV"
         android:layout_width="match_parent"
-        android:layout_height="554dp"
-        android:layout_below="@+id/divider4"
+        android:layout_height="470dp"
         android:layout_marginStart="-1dp"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="135dp"
         android:layout_marginEnd="1dp" />
 
 </RelativeLayout>
