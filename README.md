@@ -175,13 +175,13 @@
 <img src='walkthroughWeek10.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 11
-<img src='walkthroughWeek11.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek11.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 12
-<img src='walkthroughWeek12.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek12.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 13
-<img src='walkthroughWeek13.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek13.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Important Links
 	
