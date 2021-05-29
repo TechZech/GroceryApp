@@ -70,11 +70,14 @@
 **Flow Navigation** (Screen to Screen)
 
 * Login Screen
+   * Register for a new account
    * Login to profile
-* Registration Screen
-   * Create a new account
+   * Register for a new account
+* Barcode scanner
+   * Tap To Scan brings up the barcode scanner
+   * Manually add items that may be unscannable
 * Inventory
-   * Once you're logged in, you can switch tabs
+   * Click on a food item to bring up [details](* Food description) about it
 * Food description
     * Click on a food item to learn more. Ex: nutrition data, price, etc.
 
