@@ -467,6 +467,7 @@ public class MapActivity extends AppCompatActivity
         resultIntent.putExtra("placeid", markerPlaceHashMap.get(marker).getId());
         resultIntent.putExtra("lat", markerPlaceHashMap.get(marker).getLatLng().latitude);
         resultIntent.putExtra("lon", markerPlaceHashMap.get(marker).getLatLng().longitude);
+        resultIntent.putExtra("placename", markerPlaceHashMap.get(marker).getName());
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
 

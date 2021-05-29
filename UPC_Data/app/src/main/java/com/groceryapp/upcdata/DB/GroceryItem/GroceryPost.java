@@ -44,6 +44,16 @@ public class GroceryPost implements Comparable<GroceryPost>{
 
     private double lat;
     private double lon;
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    private String placeName;
     public User user = new User("test","test","test");
     public GroceryItem groceryItem;
     private Boolean whichList;

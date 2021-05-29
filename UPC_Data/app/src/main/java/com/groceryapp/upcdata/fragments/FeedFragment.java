@@ -166,6 +166,7 @@ public class FeedFragment extends Fragment {
         intent.putExtra("Pid", groceryPost.getPid());
         intent.putExtra("lat", groceryPost.getLat());
         intent.putExtra("lon", groceryPost.getLon());
+        intent.putExtra("placename", groceryPost.getPlaceName());
         intent.putExtra("Comments", (Serializable) groceryPost.getComments());
         startActivityForResult(intent,1000);
 

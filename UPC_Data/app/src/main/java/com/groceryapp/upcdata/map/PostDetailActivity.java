@@ -183,6 +183,7 @@ public class PostDetailActivity extends AppCompatActivity
         myGroceryPost.setPlaceid(Args.getString("placeid"));
         myGroceryPost.setLat(Args.getDouble("lat"));
         myGroceryPost.setLon(Args.getDouble("lon"));
+        myGroceryPost.setPlaceName(Args.getString("placename"));
         myGroceryPost.setComments((ArrayList<Comment>) Args.getSerializable("Comments"));
 
         Glide.with(getApplicationContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
@@ -281,9 +282,10 @@ public class PostDetailActivity extends AppCompatActivity
                                         new LatLng(myGroceryPost.getLat(),
                                                 myGroceryPost.getLon()), DEFAULT_ZOOM));
                                 LatLng tLatLng = new LatLng(myGroceryPost.getLat(), myGroceryPost.getLon());
-                                map.addMarker(new MarkerOptions()
-                                        .title(myGroceryPost.groceryItem.getTitle())
+                                Marker myMark = map.addMarker(new MarkerOptions()
+                                        .title(myGroceryPost.getPlaceName())
                                         .position(tLatLng));
+                                myMark.showInfoWindow();
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
