@@ -21,6 +21,8 @@ import com.groceryapp.upcdata.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by User on 1/17/2018.
  */
@@ -95,7 +97,7 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
-
+/*
         if(mUserGroupItem.get(position).getUgiUser()!=null){
             holder.name.setText(mUserGroupItem.get(position).getUgiUser().getUsername());
         }
@@ -111,7 +113,7 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         else{
             Log.d("ALL NULL", "ALL NULL");
         }
-
+*/
        holder.name.setText(mNames.get(position));
 
         Glide.with(mContext)

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new BarcodeFragment();
                         break;
                     case R.id.action_groceryList:
-                        fragment = new ExploreFragment();
+                        fragment = new DebugExploreFragment();
                         break;
                     case R.id.action_inventory:
                         fragment = new InventoryFragment();
