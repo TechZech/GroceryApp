@@ -149,7 +149,7 @@
 ## Gif Walkthroughs
 	
 ### Barcode Scanner
-<img src='BarcodeScanner.gif' title='Barcode Scanner' width='' alt='Barcode Scanner GIF' />
+<img src='BarcodeScanner.gif' title='Barcode Scanner' width='50' alt='Barcode Scanner GIF' />
 	
 ### Inventory and Grocery List
 <img src='Inventory.gif' title='Inventory and Grocery List' width='' alt='Inventory and Grocery List GIF' />
