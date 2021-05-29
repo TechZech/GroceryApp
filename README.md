@@ -49,6 +49,7 @@
  - **Profile:** User info and settings
  - **Login Screen:** User can login to their account, or register for a new one
  - **The Feed:** Social Media tab that allows users to see what other grocery items their friends have bought
+ - **Explore:** Allows the user to search for other users, groups, posts, and even food items, all from a centralized location
 
 ### 3. Navigation
 
@@ -92,20 +93,20 @@
 
 ## Schema
 ### Models
-#### User
+#### Users
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
    | username      | String   | username for login |
    | password      | String   | password for login |
+   | email       | String     | email |
    | iD            | Int      | Primary key for user |
-   | dateOB        | Date     | Birthday date |
-   | pic       | Image     | Profile Picture |
-   | inventoryList | List<GroceryItem> | List of grocery Objects for inventory |
-   | groceryList   | List<GroceryItem> | List of grocery Objects to buy |
+   | photoURL       | Image     | Profile Picture |
+   | visibility       | String     | Public vs Private profiles |
+   | Friends       | List< iD >     | List of Friends the user has added |
    
    
-   #### Grocery List
+   #### Groups
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
@@ -116,7 +117,7 @@
    | createdAt   | Date | date the list was created |
    
    
-   #### Grocery Item
+   #### Posts
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
@@ -149,7 +150,7 @@
 ## Gif Walkthroughs
 	
 ### Barcode Scanner
-<img src='BarcodeScanner.gif' title='Barcode Scanner' width='50' alt='Barcode Scanner GIF' />
+<img src='BarcodeScanner.gif' title='Barcode Scanner' width='' alt='Barcode Scanner GIF' />
 	
 ### Inventory and Grocery List
 <img src='Inventory.gif' title='Inventory and Grocery List' width='' alt='Inventory and Grocery List GIF' />
@@ -172,16 +173,16 @@
 ## Old Walkthroughs
 
 ### Gif Walkthrough Week 10
-<img src='walkthroughWeek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek10.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 11
-<img src='walkthroughWeek11.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek11.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 12
-<img src='walkthroughWeek12.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek12.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 13
-<img src='walkthroughWeek13.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek13.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Important Links
 	
