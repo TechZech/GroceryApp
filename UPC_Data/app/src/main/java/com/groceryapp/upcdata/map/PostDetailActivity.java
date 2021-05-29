@@ -24,13 +24,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,20 +60,32 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.groceryapp.upcdata.BuildConfig;
+import com.groceryapp.upcdata.DB.Friend.Comment;
+import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.fragments.DetailFragment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * An activity that displays a map showing the place at the device's current location.
  */
-public class MapActivity extends AppCompatActivity
+public class PostDetailActivity extends AppCompatActivity
         implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final String TAG = MapActivity.class.getSimpleName();
     private GoogleMap map;
+    Place postPlace;
+    GroceryPost myGroceryPost = new GroceryPost();
+    ImageView ivDetailImage;
+    CircleImageView ivUserPhoto;
+    TextView titleText;
+    TextView dt;
     private CameraPosition cameraPosition;
     HashMap<Marker, Place> markerPlaceHashMap = new HashMap<>();
 
@@ -117,10 +135,15 @@ public class MapActivity extends AppCompatActivity
         // [END_EXCLUDE]
 
         // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.fragment_post_detail);
+        ivDetailImage = findViewById(R.id.imageView);
+        ivUserPhoto = findViewById(R.id.ivPostDetailUserPic);
+        titleText = findViewById(R.id.titleText);
+        dt =  findViewById(R.id.dateTimeInfo);
 
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
+        unpackBundle();
         Places.initialize(getApplicationContext(), BuildConfig.PLACES_KEY);
         placesClient = Places.createClient(this);
 
@@ -149,6 +172,34 @@ public class MapActivity extends AppCompatActivity
         }
         super.onSaveInstanceState(outState);
     }
+    private void unpackBundle(){
+        Intent ArgsI = getIntent();
+        Bundle Args = ArgsI.getExtras();
+        myGroceryPost.setPid(Args.getString("Pid"));
+        myGroceryPost.groceryItem.setTitle(Args.getString("Title"));
+        titleText.setText(myGroceryPost.groceryItem.getTitle());
+        myGroceryPost.groceryItem.setImageUrl(Args.getString("ImageUrl"));
+        dt.setText(Args.getString("DateTime"));
+        myGroceryPost.setPlaceid(Args.getString("placeid"));
+        myGroceryPost.setLat(Args.getDouble("lat"));
+        myGroceryPost.setLon(Args.getDouble("lon"));
+        myGroceryPost.setComments((ArrayList<Comment>) Args.getSerializable("Comments"));
+
+        Glide.with(getApplicationContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
+        Glide.with(getApplicationContext()).load(myGroceryPost.user.getProfilePhotoURL()).into(ivUserPhoto);
+    }
+    private void goToDetailFragment(){
+        /*
+        Bundle bundle = getArguments();
+        Fragment fragment = new DetailFragment();
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();*/
+    }
+
     // [END maps_current_place_on_save_instance_state]
 
     /**
@@ -158,7 +209,7 @@ public class MapActivity extends AppCompatActivity
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-     //   getMenuInflater().inflate(R.menu.current_place_menu, menu);
+        //   getMenuInflater().inflate(R.menu.current_place_menu, menu);
         return true;
     }
 
@@ -170,9 +221,9 @@ public class MapActivity extends AppCompatActivity
     // [START maps_current_place_on_options_item_selected]
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-     //   if (item.getItemId() == R.id.option_get_place) {
-       //     showCurrentPlace();
-      //  }
+        //   if (item.getItemId() == R.id.option_get_place) {
+        //     showCurrentPlace();
+        //  }
         return true;
     }
     // [END maps_current_place_on_options_item_selected]
@@ -186,7 +237,7 @@ public class MapActivity extends AppCompatActivity
     public void onMapReady(GoogleMap map) {
         this.map = map;
         this.map.setOnMarkerClickListener(this);
-        initPlaces();
+      //  initPlaces();
         // [START_EXCLUDE]
         // [START map_current_place_set_info_window_adapter]
         // Use a custom info window adapter to handle multiple lines of text in the
@@ -225,15 +276,21 @@ public class MapActivity extends AppCompatActivity
                             // Set the map's camera position to the current location of the device.
                             lastKnownLocation = task.getResult();
                             if (lastKnownLocation != null) {
+
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(lastKnownLocation.getLatitude(),
-                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                        new LatLng(myGroceryPost.getLat(),
+                                                myGroceryPost.getLon()), DEFAULT_ZOOM));
+                                LatLng tLatLng = new LatLng(myGroceryPost.getLat(), myGroceryPost.getLon());
+                                map.addMarker(new MarkerOptions()
+                                        .title(myGroceryPost.groceryItem.getTitle())
+                                        .position(tLatLng));
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             map.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+
                             map.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
@@ -349,7 +406,7 @@ public class MapActivity extends AppCompatActivity
 
                         // Show a dialog offering the user the list of likely places, and add a
                         // marker at the selected place.
-                        MapActivity.this.openPlacesDialog();
+                        PostDetailActivity  .this.openPlacesDialog();
                     }
                     else {
                         Log.e(TAG, "Exception: %s", task.getException());
@@ -432,31 +489,6 @@ public class MapActivity extends AppCompatActivity
 
     void initPlaces(){
         // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
-
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId() + place.getLatLng());
-                Marker newMarker = map.addMarker(new MarkerOptions()
-                        .title(place.getName())
-                        .position(place.getLatLng()));
-               markerPlaceHashMap.put(newMarker,place);
-            }
-
-
-            @Override
-            public void onError(@NonNull Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
 
     }
 
@@ -465,8 +497,6 @@ public class MapActivity extends AppCompatActivity
         Log.d(TAG, marker.getTitle());
         Intent resultIntent = new Intent();
         resultIntent.putExtra("placeid", markerPlaceHashMap.get(marker).getId());
-        resultIntent.putExtra("lat", markerPlaceHashMap.get(marker).getLatLng().latitude);
-        resultIntent.putExtra("lon", markerPlaceHashMap.get(marker).getLatLng().longitude);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
 

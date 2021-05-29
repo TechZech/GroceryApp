@@ -57,6 +57,8 @@ public class PostFragment extends DialogFragment {
     Scraper myScrap;
     TextView placeButton;
     Place postPlace;
+    Double lat = 0.0;
+    Double lon = 0.0;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     com.groceryapp.upcdata.DB.User.User user = new User(mAuth);
     private PlacesClient placesClient;
@@ -127,6 +129,8 @@ public class PostFragment extends DialogFragment {
                             myGP.setGroceryItem(gi);
                             myGP.setUser(user);
                             myGP.setPlaceid(postPlace.getId());
+                            myGP.setLat(lat);
+                            myGP.setLon(lon);
                             dbhelper.addPostItem(myGP); //if user setting for adding to feed automatically is off then you don't want to do this..
                             dismiss();
                         } catch (IOException e) {
@@ -170,6 +174,9 @@ public class PostFragment extends DialogFragment {
                 Bundle Args = data.getExtras();
                 // Define a Place ID.
                 String placeid = Args.getString("placeid");
+               lat = Args.getDouble("lat");
+                lon = Args.getDouble("lon");
+
                 Log.d(TAG, placeid);
                 Places.initialize(getContext(), BuildConfig.PLACES_KEY);
                 placesClient = Places.createClient(getContext());

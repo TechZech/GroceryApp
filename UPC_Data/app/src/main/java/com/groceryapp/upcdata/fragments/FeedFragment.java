@@ -1,5 +1,6 @@
 package com.groceryapp.upcdata.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ import com.groceryapp.upcdata.DB.User.User;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.adapters.GroceryPostAdapter;
+import com.groceryapp.upcdata.map.MapActivity;
+import com.groceryapp.upcdata.map.PostDetailActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -153,20 +156,26 @@ public class FeedFragment extends Fragment {
         GroceryPost groceryPost = FeedItems.get(position);
         Bundle bundle = new Bundle();
        String placeidString = groceryPost.getPlaceid();
-        bundle.putString("placeid", placeidString );
-        bundle.putString("Title", groceryPost.groceryItem.getTitle() );
-        bundle.putString("ImageUrl", groceryPost.groceryItem.getImageUrl() );
-        bundle.putString("DateTime", groceryPost.getDateTime().toString() );
-        bundle.putString("Pid", groceryPost.getPid());
-        bundle.putSerializable("Comments", (Serializable) groceryPost.getComments());
+
       //  bundle.putBoolean("fromInventory", true);
-        Fragment fragment = new PostDetailFragment();
+        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+        intent.putExtra("placeid", placeidString );
+        intent.putExtra("Title", groceryPost.groceryItem.getTitle() );
+        intent.putExtra("ImageUrl", groceryPost.groceryItem.getImageUrl() );
+        intent.putExtra("DateTime", groceryPost.getDateTime().toString() );
+        intent.putExtra("Pid", groceryPost.getPid());
+        intent.putExtra("lat", groceryPost.getLat());
+        intent.putExtra("lon", groceryPost.getLon());
+        intent.putExtra("Comments", (Serializable) groceryPost.getComments());
+        startActivityForResult(intent,1000);
+
+        /*Fragment fragment = new PostDetailFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                 .replace(R.id.flContainer, fragment);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
 }
