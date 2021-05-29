@@ -80,6 +80,19 @@
    * Click on a food item to bring up details about it
       * Nutrition Facts
       * Similar Products
+* Explore
+   * View details about posts, users, and groups when clicked
+* Feed
+   * Click on an item in the Feed to view the full post (Location bought, number of likes, comments)
+* Profile
+   * Edit Profile
+   * Shopping History
+   * Manage Lists
+   * Groups
+      * View Specific Groups you are in
+   * Friends
+      * Friends' Profiles
+      * Friend Requests
 
 ## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
