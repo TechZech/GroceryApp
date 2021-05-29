@@ -7,6 +7,7 @@
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
+3. [GIF Walkthroughs](#Gif-Walkthroughs)
 
 ## Overview
 ### Description
@@ -42,20 +43,12 @@
 
 ### 2. Screen Archetypes
 
-* Scanner
-   * Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
-* Inventory
-   * RecyclerView of groceries you currently have
-* Grocery list
-   * RecyclerView of groceries you want to buy
-* Profile
-   * User info and settings
-* Login Screen
-    * User can login to their account
-* Registration Screen
-    * Create a new account
-* The Feed
-   * Social Media tab that allows user to see what other grocery items friends have bought
+ - **Scanner:** Utilizes camera to scan any barcode, sends the barcode to a scraper to retrieve item information, and then adds that item to your inventory
+ - **Inventory:** RecyclerView of groceries you currently have
+ - **Grocery List:** RecyclerView of groceries you want to buy
+ - **Profile:** User info and settings
+ - **Login Screen:** User can login to their account, or register for a new one
+ - **The Feed:** Social Media tab that allows users to see what other grocery items their friends have bought
 
 ### 3. Navigation
 
@@ -70,13 +63,29 @@
 **Flow Navigation** (Screen to Screen)
 
 * Login Screen
+   * Register for a new account
    * Login to profile
-* Registration Screen
-   * Create a new account
+   * Register for a new account
+* Barcode scanner
+   * Tap To Scan brings up the barcode scanner
+   * Manually add items that may be unscannable
 * Inventory
-   * Once you're logged in, you can switch tabs
-* Food description
-    * Click on a food item to learn more. Ex: nutrition data, price, etc.
+   * Click on a food item to bring up details about it
+      * Nutrition Facts
+      * Similar Products
+* Explore
+   * View details about posts, users, and groups when clicked
+* Feed
+   * Click on an item in the Feed to view the full post (Location bought, number of likes, comments)
+* Profile
+   * Edit Profile
+   * Shopping History
+   * Manage Lists
+   * Groups
+      * View Specific Groups you are in
+   * Friends
+      * Friends' Profiles
+      * Friend Requests
 
 ## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
@@ -140,25 +149,25 @@
 ## Gif Walkthroughs
 	
 ### Barcode Scanner
-<img src='BarcodeScanner.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='BarcodeScanner.gif' title='Barcode Scanner' width='' alt='Barcode Scanner GIF' />
 	
 ### Inventory and Grocery List
-<img src='Inventory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Inventory.gif' title='Inventory and Grocery List' width='' alt='Inventory and Grocery List GIF' />
 	
 ### The Feed
-<img src='Feed.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Feed.gif' title='Feed' width='' alt='Feed GIF' />
 	
 ### Explore
-<img src='Explore.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Explore.gif' title='Explore' width='' alt='Explore GIF' />
 	
 ### Profile
-<img src='Profile.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Profile.gif' title='Profile' width='' alt='Profile GIF' />
 	
 ### Friends
-<img src='Friends.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Friends.gif' title='Friends' width='' alt='Friends GIF' />
 	
 ### Shopping History
-<img src='ShoppingHistory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='ShoppingHistory.gif' title='Shopping History' width='' alt='Shopping History GIF' />
 	
 ## Old Walkthroughs
 

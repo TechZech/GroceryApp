@@ -185,6 +185,8 @@
         android:layout_marginStart="152dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/robotolight"
+        android:textColor="@color/white"
+        android:background="@color/GroceryAppGreen_DARK"
         android:textOff="PUBLIC"
         android:textOn="PRIVATE" />
 
