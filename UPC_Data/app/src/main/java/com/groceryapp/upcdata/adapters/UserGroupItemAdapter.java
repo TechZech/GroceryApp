@@ -108,13 +108,16 @@ public class UserGroupItemAdapter extends RecyclerView.Adapter<UserGroupItemAdap
         else if(mUserGroupItem.get(position).getUgiGI()!=null){
             holder.name.setText(mUserGroupItem.get(position).getUgiGI().getTitle());;
         }
+        else{
+            Log.d("ALL NULL", "ALL NULL");
+        }
+
+       holder.name.setText(mNames.get(position));
 
         Glide.with(mContext)
                 .load(mImageUrls.get(position))
                 .apply(requestOptions)
                 .into(holder.image);
-
-
 
 /*
         holder.image.setOnClickListener(new View.OnClickListener() {
