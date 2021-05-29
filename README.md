@@ -142,8 +142,25 @@
 ### Barcode Scanner
 <img src='BarcodeScanner.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 	
-###Inventory and Grocery List
+### Inventory and Grocery List
 <img src='Inventory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+### The Feed
+<img src='Feed.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+### Explore
+<img src='Explore.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+### Profile
+<img src='Profile.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+### Friends
+<img src='Friends.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+### Shopping History
+<img src='ShoppingHistory.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+	
+## Old Walkthroughs
 
 ### Gif Walkthrough Week 10
 <img src='walkthroughWeek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
