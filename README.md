@@ -149,7 +149,7 @@
 ## Gif Walkthroughs
 	
 ### Barcode Scanner
-<img src='BarcodeScanner.gif' title='Barcode Scanner' width='50' alt='Barcode Scanner GIF' />
+<img src='BarcodeScanner.gif' title='Barcode Scanner' width='' alt='Barcode Scanner GIF' />
 	
 ### Inventory and Grocery List
 <img src='Inventory.gif' title='Inventory and Grocery List' width='' alt='Inventory and Grocery List GIF' />
@@ -172,7 +172,7 @@
 ## Old Walkthroughs
 
 ### Gif Walkthrough Week 10
-<img src='walkthroughWeek10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='walkthroughWeek10.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
 
 ### Gif Walkthrough Week 11
 <img src='walkthroughWeek11.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
