@@ -77,9 +77,9 @@
    * Tap To Scan brings up the barcode scanner
    * Manually add items that may be unscannable
 * Inventory
-   * Click on a food item to bring up [details](* Food description) about it
-* Food description
-    * Click on a food item to learn more. Ex: nutrition data, price, etc.
+   * Click on a food item to bring up details about it
+    * Nutrition Facts
+    * Similar Products
 
 ## Initial Wireframe
 ![Our Wireframe](https://github.com/TechZech/GroceryApp/blob/master/UPC_Data/app/src/main/assets/wireframe.jpg?raw=true)
