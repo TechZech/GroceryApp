@@ -142,23 +142,36 @@
    
    
 ### Networking
-* Registration Screen
-	* (Create) Create a new account
 
 * Login Screen
-	* (Read/GET) Query all user information 
+	* (Read/GET) Query all user information
+	* (Create) Create a new account
+
+* Barcode Scanner Screen
+	* (Read/GET) Scrape item information using barcode UPC
+	* (Create) Create a new food item object
+
+* Explore Screen
+	* (Read/GET) Query all user, groups, and food posts that are tagged as 'visible'
 
 * Inventory Screen
-	* (Read/GET) Query inventory list of a user
+	* (Read/GET) Query inventory list of a user's food items
 	* (Update) Update Grocery Items within inventory
+	* (Read/GET) Food item information / similar products when clicked
  
 * Grocery List Screen
-	* (Read/GET) Query Grocery list of a user
+	* (Read/GET) Query grocery list of a user's food items
 	* (Update) Update Grocery Items within Grocery List
+	* (Read/GET) Food item information / similar products when clicked
+
+* Feed Screen
+	* (Read/GET) Query all food posts that are tagged as 'visible'
 
 * Profile Screen 
 	* (Read/GET) Query logged in user object
 	* (Update/PUT) Update user profile image
+	* (Update) Clear a user's list
+	* (Read/GET) Query shopping history
 
 
 ## Gif Walkthroughs
