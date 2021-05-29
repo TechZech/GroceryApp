@@ -24,6 +24,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,6 +65,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.groceryapp.upcdata.BuildConfig;
 import com.groceryapp.upcdata.DB.Friend.Comment;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
+import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
 import com.groceryapp.upcdata.fragments.DetailFragment;
 
@@ -85,7 +89,10 @@ public class PostDetailActivity extends AppCompatActivity
     ImageView ivDetailImage;
     CircleImageView ivUserPhoto;
     TextView titleText;
+    EditText commentText;
     TextView dt;
+    Button btnGoBack;
+    Button submitComment;
     private CameraPosition cameraPosition;
     HashMap<Marker, Place> markerPlaceHashMap = new HashMap<>();
 
@@ -139,8 +146,24 @@ public class PostDetailActivity extends AppCompatActivity
         ivDetailImage = findViewById(R.id.imageView);
         ivUserPhoto = findViewById(R.id.ivPostDetailUserPic);
         titleText = findViewById(R.id.titleText);
+        btnGoBack = findViewById(R.id.btnGoBackFromFeedDetail);
+        submitComment = findViewById(R.id.button2);
+        commentText = findViewById(R.id.commentText);
         dt =  findViewById(R.id.dateTimeInfo);
-
+        submitComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper db = new DBHelper();
+                Comment addComment = new Comment(commentText.getText().toString(), myGroceryPost.getUser());
+                db.addComment(myGroceryPost, addComment);
+            }
+        });
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
         unpackBundle();
