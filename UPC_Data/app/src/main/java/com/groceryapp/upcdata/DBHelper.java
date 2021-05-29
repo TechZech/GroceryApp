@@ -124,6 +124,9 @@ public class DBHelper {
     public interface UserGroupItemCallback{
         void OnCallback(UserGroupItem userGroupItem);
     }
+    public interface likeCallback{
+        void OnCallback(int i);
+    }
 
 
     public void queryGroceryItems(List<GroceryItem> allGroceryItems, GroceryItemAdapter adapter, GroceryItemQueryCallback callback){
@@ -217,6 +220,25 @@ public class DBHelper {
                         }
                     }
                 });
+    }
+    public void queryPostLikes(GroceryPost groceryPost, likeCallback likeCallback){
+        DocumentReference docRef = firestore.collection("Posts").document(groceryPost.getPid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    GroceryPost likeGP = document.toObject(GroceryPost.class);
+                    likeCallback.OnCallback(likeGP.getNumLikes());
+
+                }
+                else
+                    Log.d(TAG, "get failed with ", task.getException());
+            }
+
+
+        });
+
     }
     public User queryRandomUser(int index, ArrayList<UserGroupItem> uglist, UserGroupItemAdapter adapter, UserGroupItemCallback userGroupItemCallback){
         compareCount = 0;

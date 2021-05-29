@@ -159,16 +159,23 @@ public class FeedFragment extends Fragment {
 
       //  bundle.putBoolean("fromInventory", true);
         Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-        intent.putExtra("placeid", placeidString );
-        intent.putExtra("Title", groceryPost.groceryItem.getTitle() );
-        intent.putExtra("ImageUrl", groceryPost.groceryItem.getImageUrl() );
-        intent.putExtra("DateTime", groceryPost.getDateTime().toString() );
-        intent.putExtra("Pid", groceryPost.getPid());
-        intent.putExtra("lat", groceryPost.getLat());
-        intent.putExtra("lon", groceryPost.getLon());
-        intent.putExtra("placename", groceryPost.getPlaceName());
-        intent.putExtra("Comments", (Serializable) groceryPost.getComments());
-        startActivityForResult(intent,1000);
+        dbHelper.queryPostLikes(groceryPost, new DBHelper.likeCallback() {
+            @Override
+            public void OnCallback(int i) {
+                intent.putExtra("placeid", placeidString );
+                intent.putExtra("Title", groceryPost.groceryItem.getTitle() );
+                intent.putExtra("ImageUrl", groceryPost.groceryItem.getImageUrl() );
+                intent.putExtra("DateTime", groceryPost.getDateTime().toString() );
+                intent.putExtra("Pid", groceryPost.getPid());
+                intent.putExtra("lat", groceryPost.getLat());
+                intent.putExtra("lon", groceryPost.getLon());
+                intent.putExtra("placename", groceryPost.getPlaceName());
+                intent.putExtra("Comments", (Serializable) groceryPost.getComments());
+                intent.putExtra("likes", i);
+                startActivityForResult(intent,1000);
+            }
+        });
+
 
         /*Fragment fragment = new PostDetailFragment();
         fragment.setArguments(bundle);

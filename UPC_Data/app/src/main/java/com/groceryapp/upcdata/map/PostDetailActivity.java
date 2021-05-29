@@ -96,6 +96,7 @@ public class PostDetailActivity extends AppCompatActivity
     TextView dt;
     Button btnGoBack;
     Button submitComment;
+    TextView likeCount;
     private CameraPosition cameraPosition;
     HashMap<Marker, Place> markerPlaceHashMap = new HashMap<>();
     private RecyclerView rvComments;
@@ -156,6 +157,7 @@ public class PostDetailActivity extends AppCompatActivity
         submitComment = findViewById(R.id.button2);
         commentText = findViewById(R.id.commentText);
         dt =  findViewById(R.id.dateTimeInfo);
+        likeCount = findViewById(R.id.likeCount);
         submitComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,8 +225,8 @@ public class PostDetailActivity extends AppCompatActivity
         myGroceryPost.setPlaceName(Args.getString("placename"));
         myGroceryPost.setComments((ArrayList<Comment>) Args.getSerializable("Comments"));
         allComments.addAll((ArrayList<Comment>) Args.getSerializable("Comments"));
-
-
+        myGroceryPost.setNumLikes(Args.getInt("likes"));
+        likeCount.setText(Integer.toString(myGroceryPost.getNumLikes()) + " Likes");
         Glide.with(getApplicationContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
         Glide.with(getApplicationContext()).load(myGroceryPost.user.getProfilePhotoURL()).into(ivUserPhoto);
     }

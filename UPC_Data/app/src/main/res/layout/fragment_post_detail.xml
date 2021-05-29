@@ -85,9 +85,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/descriptionText"
-        android:layout_marginStart="367dp"
-        android:layout_marginTop="5dp"
-        android:text="Likes" />
+        android:layout_marginStart="347dp"
+        android:layout_marginTop="5dp" />
 
     <Button
         android:id="@+id/likeButton"
