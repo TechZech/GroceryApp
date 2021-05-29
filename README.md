@@ -100,31 +100,45 @@
    | username      | String   | username for login |
    | password      | String   | password for login |
    | email       | String     | email |
-   | iD            | Int      | Primary key for user |
-   | photoURL       | Image     | Profile Picture |
+   | userID            | String      | Primary key for user |
+   | photoUrl       | String     | URL for Profile Picture |
    | visibility       | String     | Public vs Private profiles |
    | Friends       | List< iD >     | List of Friends the user has added |
+   | SentFriendRequests       | List< userID >     | List of Friends the user has sent friend requests to |
    
    
    #### Groups
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
-   | item      | int   | foreign key to grocery item |
-   | userID            | Int      | used to identify user who created the list |
-   | listID            | Int      | primary key for list |
-   | itemCount | Int | number of items on the list |
-   | createdAt   | Date | date the list was created |
+   | gid      | String   | ID Primary Key for a group |
+   | visibility       | String     | Public vs Private groups |
+   | whoCanPost      | String   | Determines which users can post in the group |
+   | groupname       | String     | Name of group |
+   | members       | List< userID >     | List of current memebers in the group |
+   | owner       | userID     | User who created the group |
+   | photoUrl       | String     | URL for Group Picture |
    
    
-   #### Posts
+   #### Posts(Food Items)
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
-   | barcode      | Barcode   | Barcode object, primary key |
-   | barcodeType    | BarcodeFormat   | specific type of barcode |
-   | quantity            | Int      | how many servings of the item left |
-   | dateAdded        | Date     | date the item was added to the list |
+   | pid       | String     | ID Primary Key for Post |
+   | dateTime       | timestamp     | Date when post was made |
+   | imageUrl       | String     | URL for Food Image |
+   | inventory       | boolean     | true if in inventory, false if in grocery list |
+   | price       | String     | Price of food item |
+   | quantity       | int     | How many of a food item |
+   | title       | String     | Name of the food item |
+   | upc       | String     | UPC code for the food item |
+   | user       | user     | User who owns the food item |
+   | lat       | double     | latitude |
+   | lon       | double     | longitude |
+   | numLikes       | int     | Number of likes a post has |
+   | placeName       | String     | Name of store food item was bought from |
+   | placeid       | String     | ID for placeName |
+   | comments       | List< comment >     | Comments on a post |
    
    
 ### Networking
