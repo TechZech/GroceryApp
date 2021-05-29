@@ -4,10 +4,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryItem;
 import com.groceryapp.upcdata.DB.Group.Settings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     private String userID;
     private String Username;

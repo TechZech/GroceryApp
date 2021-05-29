@@ -38,6 +38,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
@@ -67,6 +69,7 @@ import com.groceryapp.upcdata.DB.Friend.Comment;
 import com.groceryapp.upcdata.DB.GroceryItem.GroceryPost;
 import com.groceryapp.upcdata.DBHelper;
 import com.groceryapp.upcdata.R;
+import com.groceryapp.upcdata.adapters.CommentsAdapter;
 import com.groceryapp.upcdata.fragments.DetailFragment;
 
 import java.util.ArrayList;
@@ -95,7 +98,9 @@ public class PostDetailActivity extends AppCompatActivity
     Button submitComment;
     private CameraPosition cameraPosition;
     HashMap<Marker, Place> markerPlaceHashMap = new HashMap<>();
-
+    private RecyclerView rvComments;
+    protected CommentsAdapter adapter;
+    List<Comment> allComments = new ArrayList<>();
     // The entry point to the Places API.
     private PlacesClient placesClient;
 
@@ -130,6 +135,7 @@ public class PostDetailActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         // [START_EXCLUDE silent]
         // [START maps_current_place_on_create_save_instance_state]
@@ -166,6 +172,14 @@ public class PostDetailActivity extends AppCompatActivity
         });
         // [START_EXCLUDE silent]
         // Construct a PlacesClient
+        rvComments = findViewById(R.id.rvComments);
+        allComments = new ArrayList<>();
+
+        adapter = new CommentsAdapter(getApplicationContext(), allComments);
+
+        rvComments.setAdapter(adapter);
+        rvComments.setLayoutManager(linearLayoutManager);
+
         unpackBundle();
         Places.initialize(getApplicationContext(), BuildConfig.PLACES_KEY);
         placesClient = Places.createClient(this);
@@ -208,6 +222,8 @@ public class PostDetailActivity extends AppCompatActivity
         myGroceryPost.setLon(Args.getDouble("lon"));
         myGroceryPost.setPlaceName(Args.getString("placename"));
         myGroceryPost.setComments((ArrayList<Comment>) Args.getSerializable("Comments"));
+        allComments.addAll((ArrayList<Comment>) Args.getSerializable("Comments"));
+
 
         Glide.with(getApplicationContext()).load(myGroceryPost.groceryItem.getImageUrl()).into(ivDetailImage);
         Glide.with(getApplicationContext()).load(myGroceryPost.user.getProfilePhotoURL()).into(ivUserPhoto);

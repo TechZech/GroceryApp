@@ -2,7 +2,9 @@ package com.groceryapp.upcdata.DB.User;
 
 import com.groceryapp.upcdata.DB.Group.Settings;
 
-public class UserSettings implements Settings {
+import java.io.Serializable;
+
+public class UserSettings implements Settings, Serializable {
     public String getVisibility() {
         return visibility;
     }
